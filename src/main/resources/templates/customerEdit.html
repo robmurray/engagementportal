@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Customer</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/css/eportal.css" rel="stylesheet" media="screen" th:href="@{/css/eportal.css}" />
+<!--    <script src="/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script> -->
+</head>
+
+<!-- TODO externalize layout -->
+
+<body>
+
+
+<div th:replace="fragments/header :: header"/>
+
+
+<div th:replace="fragments/leftnav :: leftnav"/>
+
+<div id="content">
+    <h1>Customer Information</h1>
+    <form action="#" th:action="@{/customeredit}" th:object="${customer}" method="post">
+        <p>first name: <input type="text" th:field="*{firstName}" /></p>
+        <p>last name: <input type="text" th:field="*{lastName}" /></p>
+        <p><input type="submit" value="Save" /> <input type="reset" value="Reset" /></p>
+    </form>
+</div>
+
+<div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
+
+
+</body>
+
+
+
+</html>

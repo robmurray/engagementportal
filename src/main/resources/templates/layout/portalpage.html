@@ -1,0 +1,142 @@
+<html xmlns="http://www.w3.org/1999/xhtml"  xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+
+<head>
+    <meta charset="utf-8"/>
+    <title layout:title-pattern="$CONTENT_TITLE">layout</title>
+
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content=""/>
+    <meta name="author" content=""/>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="assets/css/fonts.css"/>
+    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css"/>
+
+    <!-- PAGE LEVEL PLUGINS STYLES -->
+    <!-- REQUIRE FOR SPEECH COMMANDS -->
+    <link rel="stylesheet" type="text/css" href="assets/css/plugins/gritter/jquery.gritter.css" />
+
+    <!-- Tc core CSS -->
+    <link id="qstyle" rel="stylesheet" href="assets/css/themes/style.css"/>
+
+
+    <!-- Add custom CSS here -->
+
+    <!-- End custom CSS here -->
+
+    <!--[if lt IE 9]>
+    <script src="assets/js/html5shiv.js"></script>
+    <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+<div id="wrapper">
+    <div id="main-container">
+        <!-- BEGIN TOP NAVIGATION -->
+        <div th:replace="fragments/header :: header"/>
+        <!-- END TOP NAVIGATION -->
+
+        <!-- BEGIN SIDE NAVIGATION -->
+        <div th:replace="fragments/leftnav :: leftnav"/>
+        <!-- END SIDE NAVIGATION -->
+        <!-- BEGIN MAIN PAGE CONTENT -->
+        <div id="page-wrapper">
+
+            <!-- BEGIN PAGE HEADING ROW -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <!-- BEGIN BREADCRUMB -->
+                    <div class="breadcrumbs">
+                        <ul class="breadcrumb">
+                            <li>
+                                <a href="#">Customer</a>
+                            </li>
+                            <li class="active">new</li>
+                        </ul>
+
+                    </div>
+                    <!-- END BREADCRUMB -->
+                    <div class="page-header title">
+                        <!-- PAGE TITLE ROW -->
+                        <h1 th:text="${pageName}"></h1>
+                    </div>
+
+                    <!-- /#ek-layout-button -->
+
+                    <!-- /#ek-layout-button -->
+
+                </div><!-- /.col-lg-12 -->
+            </div><!-- /.row -->
+            <!-- END PAGE HEADING ROW -->
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <!-- START YOUR CONTENT HERE -->
+
+                    <div layout:fragment="content">
+                       <!-- content -->
+                    </div>
+
+                    <!-- END YOUR CONTENT HERE -->
+
+                </div>
+            </div>
+            <!-- BEGIN FOOTER CONTENT -->
+            <div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
+            <!-- END FOOTER CONTENT -->
+
+        </div><!-- /#page-wrapper -->
+        <!-- END MAIN PAGE CONTENT -->
+    </div><!-- main container -->
+</div><!-- wrapper -->
+
+<!-- core JavaScript -->
+<script src="assets/js/jquery.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/js/plugins/pace/pace.min.js"></script>
+
+<!-- PAGE LEVEL PLUGINS JS -->
+
+<!-- Themes Core Scripts -->
+<script src="assets/js/main.js"></script>
+
+<!-- REQUIRE FOR SPEECH COMMANDS -->
+<script src="assets/js/speech-commands.js"></script>
+<script src="assets/js/plugins/gritter/jquery.gritter.min.js"></script>
+
+<!-- initial page level scripts for examples -->
+<script src="assets/js/plugins/slimscroll/jquery.slimscroll.init.js"></script>
+<script type="text/javascript">
+
+		// Custome File Input
+		$(document).on('change', '.btn-file :file', function() {
+			var input = $(this),
+			numFiles = input.get(0).files ? input.get(0).files.length : 1,
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+			input.trigger('fileselect', [numFiles, label]);
+		});
+
+		$(document).ready( function() {
+			$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+
+				var input = $(this).parents('.input-group').find(':text'),
+				log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+				if( input.length ) {
+					input.val(log);
+				} else {
+					if( log ) alert(log);
+				}
+
+			});
+		});
+	</script>
+
+</body>
+</html>

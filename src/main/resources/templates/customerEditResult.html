@@ -1,0 +1,29 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/css/eportal.css" rel="stylesheet" media="screen" th:href="@{/css/eportal.css}" />
+</head>
+<body>
+
+<div th:replace="fragments/header :: header"/>
+
+
+<div th:replace="fragments/leftnav :: leftnav"/>
+
+
+<div id="content">
+        <h1>Customer Information</h1>
+        <p th:text="'id: ' + ${customer.customerId}" />
+        <p th:text="'First Name: ' + ${customer.firstName}" />
+        <p th:text="'Last Name: ' + ${customer.lastName}" />
+        <a href="customeredit">edit</a>
+
+</div>
+
+<div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
+
+
+</body>
+</html>

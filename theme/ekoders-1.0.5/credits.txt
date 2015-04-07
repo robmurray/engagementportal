@@ -1,0 +1,68 @@
+  Bootstrap
+    * http://getbootstrap.com
+  jQuery
+    * http://jqueryui.com/
+  Google Fonts "Open Sans"
+    * http://www.google.com/fonts#UsePlace:use/Collection:Open+Sans	
+  Font Awesome
+    * http://fontawesome.io/
+	
+	
+  jQuery slimScroll
+    * http://rocha.la/jQuery-slimScroll
+  Select2
+    * http://ivaynberg.github.io/select2/
+  Date Range Picker
+    * https://github.com/dangrossman/bootstrap-daterangepicker   
+  morris.js
+    * http://morrisjs.github.io/morris.js/
+  EasyPieChart
+    * http://rendro.github.io/easy-pie-chart/ 
+  Bootbox.js	
+	* http://bootboxjs.com/
+  Gritter Notifications	
+	* http://boedesign.com/blog/2009/07/11/growl-for-jquery-gritter/
+  FooTables	
+	* https://github.com/bradvin/FooTable/	
+  jQuery DataTables	
+	* https://datatables.net/
+  Datatables Responsive	
+	* https://github.com/Comanche/datatables-responsive
+  Bootstrap Select	
+	* http://silviomoreto.github.io/bootstrap-select/
+  Bootstrap MaxLength	
+	* http://mimo84.github.io/bootstrap-maxlength/
+  Fuelux	
+	* http://exacttarget.github.io/fuelux/
+  Bootstrap TouchSpin	
+	* http://www.virtuosoft.eu/code/bootstrap-touchspin/
+  Bootstrap Tags Input	
+	* http://timschlechter.github.io/bootstrap-tagsinput/examples/bootstrap3/
+  Bootstrap Form Wizard	
+	* https://github.com/VinceG/twitter-bootstrap-wizard
+  Masked Input	
+	* http://digitalbush.com/projects/masked-input-plugin/
+  jQuery Sparklines	
+	* http://omnipotent.net/jquery.sparkline/
+  Bootstrap-wysihtml5	
+	* https://github.com/jhollingworth/bootstrap-wysihtml5/
+  Bootstrap Markdown	
+	* http://toopay.github.io/bootstrap-markdown/
+  X-editable	
+	* http://vitalets.github.io/x-editable/index.html
+  Bootstrap DatePicker	
+	* http://www.eyecon.ro/bootstrap-datepicker/
+  Datetime Picker	
+	* http://www.malot.fr/bootstrap-datetimepicker/
+  Colorbox	
+	* http://www.jacklmoore.com/colorbox/
+  PACE	
+	* http://github.hubspot.com/pace/docs/welcome/	
+  OWL Carousel	
+	* http://owlgraphic.com/owlcarousel/
+  Flot Charts	
+	* http://www.flotcharts.org/
+  Jvectormap	
+	* http://jvectormap.com/	
+  Bootstrap Rating Input
+	* https://github.com/javiertoledo/bootstrap-rating-input	

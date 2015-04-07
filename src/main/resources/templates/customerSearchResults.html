@@ -1,0 +1,50 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Search results</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link href="/css/eportal.css" rel="stylesheet" media="screen" th:href="@{/css/eportal.css}" />
+    <!--    <script src="/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script> -->
+</head>
+
+<body>
+
+<div th:replace="fragments/header :: header"/>
+<div th:replace="fragments/leftnav :: leftnav"/>
+
+<div id="content">
+    <div id="searchfilter">
+        <h1>Search for a Customer</h1>
+        <form action="#" th:action="@{/customersearch}" th:object="${customersearch}" method="post">
+            <p>customer Id: <input type="text" th:field="*{customerId}" /></p>
+            <p>first name: <input type="text" th:field="*{firstName}" /></p>
+            <p>last name: <input type="text" th:field="*{lastName}" /></p>
+            <p><input type="submit" value="Search" /> <input type="reset" value="Clear" /></p>
+        </form>
+    </div>
+    <div id="searchresult">
+        <table>
+            <tr>
+                <th>Customer ID</th>
+                <th>First Name</th>
+                <th>Last Name</th>
+            </tr>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.customerId}">Onions</td>
+                <td th:text="${customer.firstName}">2.41</td>
+                <td th:text="${customer.lastName}">2.41</td>
+            </tr>
+        </table>
+
+    </div>
+
+</div>
+
+<div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
+
+
+</body>
+
+
+
+</html>

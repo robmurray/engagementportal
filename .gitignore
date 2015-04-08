@@ -41,3 +41,6 @@ build/
 accessingdataneo4j.db
 dependency-reduced-pom.xml
 out
+
+.~lock.*
+.~lock.*

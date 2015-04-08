@@ -1,0 +1,318 @@
+Class Reg Sent	reported Rev Rec	Credits	Customer 	SO	Status	Date Booked	Ship Date	Internal Planning  Meeting	Customer Kick off Meeting	OnSite Start Date	"OnSite
+End DateOnSite
+End Date"	Release for Rev Rec	Wait Time	Booked to Kick off	Days to close	 $$ SO Amount 	Notes	Location	Region	Model Grp	Service	Account Team	Remote 	Onsite	Equiptment List Quick View	Shadow				Wait Time	Model Grp	Status	Region
+	ü	190	State of Co, Judicial 	5673907	Complete	9/8/14			9/18/14	01/08/14	1/16/14	1/20/15	Standard	10	134	$19,000		CO		WLAN										Shipping	VPM	Proposed	US
+		250	Cisco | Ingram Micro	5662175	Scheduled	7/17/14	12/1/14	8/14/14	8/14/14	9/30/14			Customer	28	-41837	$25,500	check in with Ronnie and Jon		other	VPM										Standard		Booked	
+	ü	HI HOLD	AG Interactive | American Greetings	5688734	Complete	10/31/14			10/27/14	11/11/14	2/23/15	2/23/15	Standard	-4	115	$9,960				WLAN			Chris G							Customer	PNA	Scheduled	EMEA
+NA	NA	HI HOLD	"AT&T CORPORATION 
+Cushman WakefieldAT&T CORPORATION 
+Cushman Wakefield"	5668150	Complete	8/13/14	12/1/14	8/29/14	9/22/14	12/1/14	3/30/15	4/2/15	Customer	40	232	$11,050	"in process
+HK upgraded, UK upgraded, US needs cabeling
+2/20: all CW open items cleared, HK on 2/25 w/Cindy, then Dennis will be back on next weekin process
+HK upgraded, UK upgraded, US needs cabeling
+2/20: all CW open items cleared, HK on 2/25 w/Cindy, then Dennis will be back on next week"	remote	US	VPM	QS Remote		Dennis	na						Resource	CSN	Complete	AsiaPac
+	ü	220	XO communications	5676180	Complete	9/16/14		9/22/14	9/22/14	1/12/15	1/14/15	1/15/15	Standard	6	121	$22,000			US	VPM			Chris G								WLAN	In Process	other
+	ü	75	Baptist Medical	5702170	Complete	12/19/14			1/19/15	01/19/15	1/22/15	2/5/15	Standard	31	48	 $7,500.00 	"12/19: Sent Proposal
+report closure12/19: Sent Proposal
+report closure"			WLAN	Network/Traffic Analysis	"Dana
+David PDana
+David P"	Chris G								ASPRO	R&D Support	
+2/5	ü	180	NASSAU COUNTY NY	5697915	Complete	12/10/14		12/12/14	12/15/14	1/20/15	1/23/15	1/23/15	Standard	5	44	$18,000	"1/27; sent registration
+Ongoing remote support 1/27; sent registration
+Ongoing remote support "	NY	US	VPM	QS OS	"Kevin A
+Ed Canfield
+Carl HKevin A
+Ed Canfield
+Carl H"	Cindy	Paul J								Post support	
+2/6	ü	180	Dechert	5698248	Complete	12/11/14		12/12/14	12/16/14	1/27/15	1/30/15	1/31/15	Standard	5	51	$18,000	"1/27; sent registration
+Ongoing remote support 1/27; sent registration
+Ongoing remote support "	Il	US	VPM	QS OS	"Kevin A
+Carl HKevin A
+Carl H"	"Cindy
+Sam OCindy
+Sam O"	"Paul J
+Paul J
+"									
+	ü	180	ASPEN INSURANCE US SERVICES INC	30674393	R&D Support	12/4/14		1/5/15	1/14/15	2/3/15	2/5/15	3/2/15	Standard	41	88	$18,000	"2/5: Frank/RD involvement - Active Directory Server issue
+2/12: sent out registration
+QS complete w/ongoing R&D support through Frank2/5: Frank/RD involvement - Active Directory Server issue
+2/12: sent out registration
+QS complete w/ongoing R&D support through Frank"		US	VPM	QS OS	Ed Canfield	Alan Fogerty	Paul J	continued R&D support								
+private	ü	180	ACXIOM CORPORATION	5700758	Complete	12/23/14		1/5/15	1/5/15	2/3/15	2/5/15	3/2/15	Standard	13	69	$18,000	WS complete, waiting PO for TV OS class		US	VPM	QS OS	"David P
+Carl H
+KevinDavid P
+Carl H
+Kevin"	Brent	"Brent
+Sam OBrent
+Sam O"									
+NA	ü	"HI HOLD
+MlanevilHI HOLD
+Mlanevil"	FCCI Services	"5699861
+5699871CR5699861
+5699871CR"	Complete	12/19/14		11/12/14	1/15/15	2/10/15	2/12/15	3/2/15	Shipping	27	73	$18,000	"customer ordering Dell equiptment, proposed wk 2/9 and 3/23. Follow up on Friday 1/16
+1/19: Overnight TVC. Need to confirm delivery and set up
+send out registrationcustomer ordering Dell equiptment, proposed wk 2/9 and 3/23. Follow up on Friday 1/16
+1/19: Overnight TVC. Need to confirm delivery and set up
+send out registration"	Fla	US	VPM	QS OS	"Adam
+JasonAdam
+Jason"	Dennis	Dennis									
+3/23	ü	180	"SCOTTSDALE HEALTHCARE
+INGRAMSCOTTSDALE HEALTHCARE
+INGRAM"	5687353 & 5687357	Complete	10/25/14		1/5/15	1/14/15	2/17/15	2/20/15	3/2/15	Customer	81	128	$18,000	"1/5: requested KO call
+1/12: mike sent follow up
+2/6: check in on deliverables1/5: requested KO call
+1/12: mike sent follow up
+2/6: check in on deliverables"	AZ	US	VPM	QS OS	"Mike Jett
+Trish GundyMike Jett
+Trish Gundy"	"Brent
+Sam OBrent
+Sam O"	Paul J									
+	ü	75	Serta Simmons 	5712277	Complete	2/20/15		2/15	2/16/15	2/19/15	2/27/15	3/2/15	Standard	-4	10	 $7,500.00 	"Douglas quoted - survey, audit, remediation report, and travel. Lisa will schedule a report review
+2/19: close out call scheduled for 2/27
+releasedDouglas quoted - survey, audit, remediation report, and travel. Lisa will schedule a report review
+2/19: close out call scheduled for 2/27
+released"			WLAN	1-day	Douglas Jones											
+		130	BERKLEY TECHNOLOGY SERVICES (Phase II)	5700446	In Process	12/22/14		1/10/15	1/14/15	2/23/15		3/4/15	Standard	23	72	$13,000	"Frank to update Project Plan accordingly
+1/14: Frank set up a webex for 1/22 start
+2/9: FranK will get started week of 2/23Frank to update Project Plan accordingly
+1/14: Frank set up a webex for 1/22 start
+2/9: FranK will get started week of 2/23"	remote	US	VPM	QS Remote	"Carl
+KevinCarl
+Kevin"	Frank	na									
+		HI HOLD	"STATE OF NEW YORK, Courts
+AnixterSTATE OF NEW YORK, Courts
+Anixter"	5700991	In Process	12/26/14	1/16/15		2/10/15	2/23/15			Standard	46	-41999	$15,000	"1/6: sent shipping info 
+2/9: FranK will get started week of 2/231/6: sent shipping info 
+2/9: FranK will get started week of 2/23"	remote	US	VPM	QS Remote	"Carl
+KevinCarl
+Kevin"	Frank	na									
+	ü	160	"COMPUCOM SYSTEMS INC
+Hertz"	5700749	Complete	12/23/14				2/23/15	3/15/15		Standard	-41996	-41996		"1/12: KO call, have tentative dates. Will follow up on 1/15
+1/16: left VM for customer to confirm today date Feb 9 or 16 for survey or loose  
+close out"	OK	US	WLAN	Site Survey	Chris Wilson											
+3/31		150	"JOSTENS
+iNGRAM"	5706886	In Process	1/22/15	1/28/15		2/13/15	2/23/15			Standard	22	-42026	$15,000	"customer contacted us, ready to get started. Sent video
+2/23 webex 1
+2/27 webex 2
+3/16: requested update 
+3/23: requested update
+3/24: should close this week, Sam will update with project plan
+"	MI	US	VPM	QS Remote	"GeoffreyPaul
+Stephen Davis"	Sam O	NA									
+		HI HOLD	Cenovus | Empowered Networks	TF117643-7-731150	Complete	11/16/14		11/12/14	11/13/14	2/24/15	2/26/15	2/27/15	Customer	-3	103			Calgary, Alberta	Canada	VPM	QS OS	Arne	Brent	Paul J									
+			Owens & Minor		Complete					02/25/15				0	0		"2/17: 50+ASE's. Emailed Robert for PO or SO#
+still not clear if they purchased services.
+Barry T and Paul Z will support
+2/23: customer did not include services with initial PO, account team is working with the customer 
+2/27: Working with Paul Z he was able to get the customers TVC up and running.
+
+At this time, that was all the customer was asking for. We did discuss upgrade paths for their ASE’s but they could not provide any info on a plan for this today.
+"		US	VPM	ASE Installation	"Kevin
+Carl
+Robert Holly"											
+3/23	ü	110	"PROGRESS FINANCIAL 
+Ingram"	"5694074
+5694072"	Complete	11/21/14		1/10/15	1/13/15	03/03/15	3/6/15	3/9/15	Customer	53	108	$11,000	"date tentative: confirm on 1/29
+1/30 Confirmed"	CA	US	VPM	QS OS	"Ronnie
+John Giles"	"Sheldon
+Sam O"	Paul J									
+3/26	ü	150	"SEMCO ENERGY GAS COMPANY
+INGRAM MICRO"	5700365	Complete	12/22/14		2/17/15	2/17/15	3/9/15	3/12/15	3/12/15	Resource	57	80	$15,000	"TV4400 -consider onste. 
+have not gotten started on this yet, will contact the customer this week (2/12)
+Webex 1 is scheduled for 3/9"	MARYSVILLE MI	US	VPM	QS Remote	"Stephen Davis
+David Parker"	Jerome	NA									
+3/23	ü	180	TRANSFIRST LLC	5699403	Complete	12/16/14			1/14/15	03/10/15	3/13/15	3/27/15	Resource	29	101	$18,000	"2/23: customer was non responsive, until today. Requested a delay, but decided to keep the 3/10 date when the next avail was May. Follow up tomorrow 2/25 with deliverables request
+3/18: Sent Project completion form (3/27 close out)
+3/23: sent registration"	CO	US	VPM	QS OS	"Mike Jett
+Trish Gundy"	Sam O	Paul J									
+	ü		Bob - government	5720155	Complete					03/16/15	3/20/15	4/2/15					"AME 5 day training 
+2/18: checked with Steph for a PO"			WLAN		Stephanie Walker											
+NA	ü	150	GEORGIA COLLEGE	5714231	Complete	2/12/15			2/20/15	03/16/15	3/20/15	3/26/15	Standard	8	42	 $15,000.00 	"Lisa will condirm the date and schedule a KO call 
+confirmed, good to go"			WLAN		Lavonne											
+3/26	ü	180	CARDTRONICS	5696285	Post support	12/2/14		1/9/15	1/29/15	03/17/15	3/23/15	3/26/15	Resource	58	114	$18,000	"1/12: sent request for KO call
+no reply NEED TO FOLLOW UP
+1/31: webex schedule, will follow up with onsite resource and date 3/17-3/19
+2/6: deliverables due, reminder sent
+2/26: Ready for Dennis onsite
+3/23: waiting for the final project plan to close out"	TX	US	VPM	QS OS	"Matt Marchbanks
+Bill Wells"	Paul Z	Dennis									
+		180	"ADP
+Ingram"	5696340	Scheduled	12/10/14				05/11/15	5/15/15		Standard	-41983	-41983		"AIRMAGNET WIFI ANALYZER & SURVEY BUNDLE 
+Scott will have call w/customer
+1/26: discovery call
+2/11: Lisa: DCW, kick off call and confirm date
+Lisa will call to confirm dates, and set up kick off call early March
+3/11: check in with the customer sent, looking to schedule 
+3/23: customer responded, working to determine dates"	NJ	US	WLAN	OJT?	Jorge Valez											
+4/2	ü	180	LOCKHEED KY	5699776	Complete	12/19/14			1/16/15	03/24/15	3/27/15	4/2/15	Resource	28	104	$18,000	"Frank in process
+3/25: Jasina on site…"	Kentucky	US	VPM	QS OS	"Trey O'Banion
+David P"	Frank	Paul J									S. America
+NA	NA	HI HOLD	"Avis Budget Group
+presidio"	5699872	Complete	12/19/14	1/20/15	1/20/15	1/23/15	03/24/15	3/27/15	4/2/15	Customer	35	104	$18,000	"taps ship 1/20
+1/16: requested KO call wk 1/20 - waiting for customer reply
+Dennis will modify the PP
+1/23: customer will confirm 3/24 or 3/31
+2/2: locked in - sent updated Project Plan for approval"	NJ	US	VPM	QS OS	"Carl
+Kevin"	Dennis	Dennis									
+4/2	ü	180	REPUBLIC NATIONAL DISTRIBUTING CO LLC	5699882	Complete	12/19/14		1/16/15	1/16/15	03/30/15	3/31/15	4/2/15	Resource	28	104	$18,000	1/12: requested KO call	Atlanta	US	VPM	QS OS	"Douglas Jones
+Jason C"	Alan Fogerty	Paul J									Canada
+			Boca Raton Regional Hospital	5642173	In Process	4/25/14	11/1/14		5/12/14	04/07/15			Customer	17	-41754	$13,000	"1/12: trying to get wbex set up, will follow up for onsite date
+1/16: offered Feb 11 or Apr 6 OS"	Fla	US	VPM	QS OS		cindy	Paul J									
+		180	MANHATTAN-OGDEN PUBLIC SCHOOLS	5705380	Scheduled	1/16/15		2/4/15	2/6/15	04/14/15			Resource	21	-42020		"2/3: intro email sent 
+2/6: scheduled
+"	Manhattan, Ks 	US	VPM	QS OS	"Geoffrey Paul
+David O
+bill Wells"	Cindy	Paul J									
+			Zebra		Scheduled					"4/7
+4/14"			Standard				"tentative AM-216 4/14 - approved 15% discount, no additional 
+Peter schedule a meeting with Vangie
+AM-214 proposed 4/7
+3/18: need PO by 3/20 & 3/23 "			WLAN		Vangie											
+		HI HOLD	G6 HOSPITALITY LLC	5701555	Scheduled	12/31/14	1/15/15	2/11/15	2/18/15	04/21/15			Standard	49	-42004	$18,000	5200	TX	US	VPM	QS OS	Matt Marchbanks	Jerome	Paul J									
+			State of Alabama / Alabama ISD 	"5687380
+5687383 VSS"	Scheduled	10/21/14		11/12/14	"11/13/14
+2/23/15"	04/28/15			Customer	#VALUE!	-41933	$15,300	"building DC, check in mid-Feb
+2/18: customer is ready to restart, requested call for 2/23: reset call, Cindy will get them going "	AL	US	VPM	QS OS	"Adam Kurtz
+Douglas Jones
+Ray Feldman"	Cindy	Paul J									
+private	ü		LAUSD	"5698456
+5699085"	Complete	12/15/14		12/15/14	1/7/15	"1/9/15
+2/27/15"	2/28/15	2/28/15	Standard	23	75	$135,000	in process. 2 onsite visits scheduled  26-30-Jan and 23-27 Feb. 2-day Mar 23/24	LA	US	VPM	QS OS	"Mike Jett
+Trish Gundy"	Dennis	Dennis									
+		Free	Teleus		Complete					2/10 & 2/13							remote training for free	CA	US	WLAN		Arne Lepp											
+		500	Austal USA	5696765	In Process	12/4/14			12/4/14	"3/09
+3/16"			Customer	0	-41977	$50,000	"1/12: (NDA Douglas), Insurance (Scott)
+1/21: checkin today
+2/6: contractor training tues 530-830 will allow wits to not require an escort. Monday start. Graham will confirm dates with Jeff and Brice Monday (2/9) morning
+Dates confirmed
+2/18: service agreement went to MK on the 9th, Wendy & Matt
+3/25: waiting for report review date
+4/1: reviewed 1st report. Revisions will be ready 4/6 as well as remaining reports. Schedule for next review is Tuesday 4/7"			WLAN													
+			Central Intelligence Agency	5633554	Booked 	3/18/14	11/1/14						Customer	-41716	-41716	$8,840	Sent information to Stephanie			WLAN													
+		rebooked	INGRAM MICRO (NESTLE USA)	5614568	Booked 	12/23/13	12/1/14						Customer	-41631	-41631	$14,658	"1/5: followed up w/customer 
+3/25: debooked"			WLAN													
+		switched to credits 139	TIME WARNER CABLE INC	5679452	Booked	6/27/14	6/27/15		2/25/15	05/19/15	5/21/15		Customer	243	-41817	$13,883	"9/23/14: closed HI HOLD/switched to credits. 
+1st or 2nd week of May - waiting to hear back from Gordon"	TX		WLAN	AM214 w/exam												
+na	na	HI HOLD	Mary Kay	5687831	Complete	10/28/14		10/25/14	11/4/14	03/24/15		4/3/15	Customer	7	157	$16,500	"Pending second PO
+1/14 follow up call
+2/2: confirmation call
+• 3/24-3/26 - AM-214 3day training
+•TBD – 5day OJT (waiting PO and service agreement closure)
+2/6: service agreement to be finalized with Anixter
+3/24 scheduled for site survey"			WLAN		Matt											
+		HI HOLD	"NETCOM G5 OED
+IRON BOW TECHNOLOGIES"	5677423	Complete	9/19/14				2/26/15	2/28/15	2/24/15	Standard	-41901	158	$7,000				CSN			Uta	Pinacchi									
+	ü	52	Macys Rogue	5700776	Complete	12/23/14					12/10/14	12/10/15	Standard	-41996	352	$5,200		remote	US	WLAN		Lavonne		WITS									
+			TEKTRONIX S.A. DE C.V.	30686789	Complete	12/19/15		1/21/15						-42357	-42357	 $74,442.00 	"1/14: contacted Jim Davis
+Francisco will deliver in 2 phases, brent is available to support if needed"	Mexico	S. America	VPM	"2d CSN
+ASE
+Custom GEN (SOW)
+QS OS"	 Francisco Tarasuk,											
+		150	CETRA TECHNOLOGY INC | FIDELITY CAPITAL	5650425	Booked	5/23/14	5/23/15	8/25/14					Standard	-41782	-41782	$15,000	2/2: cetra reached out to Dennis with an odd problem, requested feedback from Chris Greer	HI	US	VPM	QS Remote	Linda Ta	Dennis	na									
+		debooked	VERIZON COMMUNICATIONS INC	5577778	Complete	7/9/13								-41464	-41464	$35,000	Dave B, Jeff J and Peter need to close		other	VPM													
+		150	"LSU HEALTH SCIENCES 
+PRESIDIO NETWORKED SOLUTIONSCENTER"	5687192	Booked	10/25/14			12/9/14				Customer	45	-41937	$15,000	"10/27: requested info from David Oliver
+11/12: email to customer
+12/5: email to customer
+12/9: contact them in mid-January"	LO	US	VPM	QS Remote	David Oliver	Paul Z	na									
+		140	"NV ENERGY
+Greybar"	5700406	Booked	12/23/14							Standard	-41996	-41996				US	CSN													
+		110	"SUMMIT MEDICAL GROUP PLLC
+AT&T CORPORATION"	5700417	Booked	12/22/14	12/29/15						Standard	-41995	-41995	$11,000	1/15: David O sent intro, NEED TO FOLLOW UP	TN 	US	VPM	QS Lite	"David O
+Bill Wells"	Sheldon		4400-P								
+		150	"SAFEWAY INC
+Accuvant"	5700988	In Process	12/26/14		1/9/15	1/10/15	1/15/15			Standard	15	-41999	$150,000		remote	US	VPM	QS Remote		Frank	na									
+		70	FIRST NATIONAL BANK OF FORT SMITH	5700744	Booked	12/23/14			1/23/15				Customer	31	-41996	$7,000	"1/22: requested KO call 1/23?
+Follow up with Phil regarding OS
+2/6: sent updated PP w/Brent as DP engineer. Requested follow call with customer to get QS going
+2/12: no response from the customer to get started
+3/26: RESTART - PAUL Z IS GETTING NOT RESPONSE"	AK	US	VPM	2day OS (?)	"Matt
+David O
+Bill W"	Paul Z	Brent									
+		70	"NYSIF
+Anixter"	5703697	In Process	1/14/15	"1/23
+2/3"		1/23/15	1/28/15			Customer	9	-42018	$7,000	"1/21: requested KO call
+Barry install on 1/26-1/27
+Sheldon provision 1/28
+onsite not yet scheduled
+3/26: checking in with Sheldon, the customer is moving really slowly. Estimated 2nd week of April "	NY	US	VPM	"QS Lite
+ASE install"	"Carl
+Kevin"	"Barry 
+Sheldon"										
+			Delta		Proposed				1/19/15					42023	0		discovery call 1/12 & 1/16		US	WLAN		Joe Woodwell											
+		HI HOLD	USAF Lockheed CO	5705199	Booked	1/15/15	1/20/15							-42019	-42019		"1/15: Rick will send intro email to customer
+2/3: followed up w/Rick"	CO	US	VPM	QS OS	"Rick Slominski
+Zack Belcher"	Brent		4800 w/XG								
+			Providence Health		Proposed									0	0		"1/21: discovery call
+AM-215-day OJT in Seattle 4-6 people
+AM-214 3-day open enrollment"			WLAN													
+		150	FMC TECHNOLOGIES INC	5709048	Scheduled	1/31/15		2/20/15	2/27/15	4/20/15	25-Apr		Standard	27	-42035	 $15,000.00 	"5-day XG training - checking with Peter to determine who can deliver
+Lisa will set up a kick off call about 3 weeks in advance of the class"	Houston TX	US	WLAN	AM-211 OJT TRNPNA	Todd Davis?											
+		180	VON MAUR INC	5708410	Scheduled	1/29/15		2/26/15	2/26/15	5/5/15				28	-42033		"verify location
+will contact customer this week (2/12)
+2/26:scheduled"	IA 	US	VPM	QS OS	"GeoffreyPaul
+Stephen Davis"	Sam O	Paul J									
+			IBM CANADA	"3541392
+3541419"	Complete									0	0	 $5,101.00 	Canada to deliver			WLAN	"AM/S9200 
+AM/S9210"												
+		260	Honeywell	5724531	Booked	4/2/15				05/01/15				-42096	-42096		"update SOW, need PO#
+3/11: checked in w/Chris for status
+3/26: PO in hand, lisa will schedule a planning meeting"			WLAN		Chris Wilson											
+			Hawaii Health		Proposed									0	0		"Pending Tax registration - HOLD off for merger or use a reseller.
+Scott to go direct, waiting to hear back from Linda Ta"			WLAN		Linda Ta											
+		150	LIBERTY UNIVERSITY	5712281	Scheduled	2/12/15	"2/27
+3/15"	3/9	3/11/15	03/24/15				27	-42047	 $15,000.00 	"2/17: emailed Chuck and Jason for contact information and intro
+2/23: contacted customer with welcome. Will send tracking information on 3/1
+3/11: Chris Daniel will provide VOIP support. First Webext session scheduled to start 3/24"	VA	US	VPM	QS Remote	"Chuck Smith
+Jason Cornwell"	Sam O		VOIP								
+		56	LaSalle Solutions	5722868	Booked	3/27/15				04/08/15				-42090	-42090		"2/24: SOW proposed
+3/11: followed/up
+3/signed the SOW with added fee for LT travel"			WLAN		Todd Davis?											
+		180	CENTER FOR DIAGNOSTIC IMAGING	5717472	In Process	3/4/15	3/20/15		4/7/15					34	-42067	 $18,000.00 	"5775 Wayzata Blvd Ste 190
+ST LOUIS PARK, MN 55416
+US"	MN	US	VPM	QS OS	"Steven Davis
+David Parker"			5200 w/taps								
+completed			AGILITY HOLDINGS INC	5678192	In Process	9/23/14			9/30/14	10/15/15			Customer	7	-41905		"global distributed system first went to Irvin, CA for config then they shipped (Kuwait, Singapor, others) 
+Phil had me close the QS  in 2014. keep open for class registration for Vincent. He will let me know when they are ready
+3/20: this is still in process"		US	VPM	4 seats to TV training 	Michael Jett	Frank										
+		44	ST MARY'S UNIVERSITY	5718959	Booked	3/11/15										 $4,400.00 	"44 Training Credits to be used for these classes and secure AirMagnet Training Certification: 
+AM-101 (18 credits) 
+AM-214 (26 credits) "			WLAN		Chris Wilson											
+		140	ACXIOM CORPORATION	5718433	Scheduled	3/10/15				04/27/15				-42073	-42073	 $14,000.00 				VPM	TV Class												
+		180	Bay District Schools	5719583	Scheduled	3/13/15	"3/20
+3/27"		4/1/15	04/28/15				19	-42076		webex 1 4/14	Fla	US	VPM	QS OS	"Dave B
+Chuck
+Ray"	Sam O	"Dennis
+WiTs shadow"	6200 w/taps	"Tom Molczynski                                                                               
+tomm@wirelesstrainingsolutions.com
+(973) 531-7627
+
+Jesse Hunton
+(404) 247-1352
+jhunton@wirelesstrainingsolutions.com
+"							
+			Canada Blood Services	30744263	Scheduled	3/16/15	3/27/15		3/20/15	05/12/15				4	-42079		"3/16: PO in hand, with OE
+webex scheduled for 3/30 & 3/31"	Canada	US	VPM	QS OS	Arne	Sam O	Paul J	distributed								
+		180	State of Arizona Department of Economic Security	5721337	In Process	3/20/15	"3/30
+4/17"	4/2	4/8/15					19	-42083		"PO in hand
+3/25: contacted with shipping and request for KO call"	Az	US	VPM	"QS OS
+VSS"	"Mike Jett
+Trish Gundy"			6200 w/XG								
+		70	SEATTLE CHILDREN'S HOSPITAL	5719579	Booked	3/16/15											I will ping Bonnie			WLAN		Bonnie											
+		200	TIME WARNER CABLE INC	5723118	Booked	3/31/15				04/28/15	4/30/15					 $15,000.00 	3-day onsite	NY	US	WLAN	AM-214	Matt											
+			BERKLEY TECHNOLOGY SERVICES (Phase III) UK Install	"30746821
+7082616 (-)"	In Process	3/19/15	4/10/15		4/7/15					19	-42082		UK installation		EMEA	VPM	QS Remote	"Carl
+Kevin"	Frank										
+			BURLINGTON NORTHERN & SANTA FE RAILWAY COMPANY	5722423	Scheduled	3/25/15		3/31	4/2/15	05/19/15				8	-42088		QuickStart is to address support for customization. They have 2 6200's and 2 4800's already installed	Fort Worth TX	US	VPM	QS OS	"Matt
+Bill
+David O"		Paul J	QuickStart is to address support for customization. They have 2 6200's and 2 4800's already installed								
+		258	Georgia Pacific	5714231	Complete	2/19/15				03/09/15	3/15/15			-42054	-42054		"3/27: working to schedule a report date
+close out today . 4/2"			WLAN		Vangie											
+		28	Hillenbrand | Batesville Services | Batesville?	5723011	Booked	3/27/15											PO received 3/26.			VPM	2 seats	david P											
+		292	Charles Schwab		Proposed												27-Mar			WLAN	AM211 OJT	Chris Wilson											
+		70	CARNIVAL CRUISE LINE	5642240	Booked	3/26/15											2day?			CSN													
+		180	TRANSFIRST LLC	5723113	Booked	3/26/15										 $18,000.00 		Irvine CA or CO	US	VPM	QS OS	"Michael Jett
+Trish Gundy"			6200 (2)								
+			Parker.com		Proposed												1-Apr			WLAN		David Walker											
+		375	State of Arizona Department of Economic Security	5721337	In Process	3/20/15		4/2	4/8/15									Az	US	VPM	1/4ly health checks	"Michael Jett
+Trish Gundy"											

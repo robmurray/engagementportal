@@ -1,0 +1,102 @@
+
+# where do these belong
+Class Reg Sent
+reported Rev Rec
+
+#customrr
+Credits
+Customer
+
+
+# Service order
+SO
+Status
+Date Booked
+Ship Date
+Internal Planning  Meeting
+Customer Kick off Meeting
+OnSite Start Date
+OnSite End Date
+Release for Rev rec
+Wait Time
+Booked to Kick off
+Days to close
+$$ SO Amount
+Notes
+Location
+Region
+Model Grp
+Service
+Account Team
+Remote
+Onsite
+Equiptment List Quick View
+
+Shadow
+
+# it appears these are unused columns
+Wait Time
+Model Grp
+Status
+Region
+
+
+# oracle import file
+FNET Region 1
+Sales Agent Name
+ST Sales Agent Name
+Activity Yr
+Activity Mo No
+Activity Date
+ST Customer Name
+ST Channel Name
+BT Customer Name
+Order No
+Product Family Code
+Model Group Code
+Forecast Group Code
+Ordered Qty
+Net USD
+
+Contract Status Code
+End User Name
+
+
+
+# orginal list order
+# where do these belong
+Class Reg Sent
+reported Rev Rec
+
+#customrr
+Credits
+Customer
+SO
+Status
+Date Booked
+Ship Date
+Internal Planning  Meeting
+Customer Kick off Meeting
+OnSite Start Date
+OnSite End DateOnSite End Date
+Release for Rev
+Rec	Wait Time
+Booked to Kick off
+Days to close
+$$ SO Amount
+Notes
+Location
+Region
+Model Grp
+Service
+Account Team
+Remote
+Onsite
+Equiptment List Quick View
+Shadow
+
+# it appears these are unused columns
+Wait Time
+Model Grp
+Status
+Region

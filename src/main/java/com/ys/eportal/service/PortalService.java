@@ -1,7 +1,9 @@
 package com.ys.eportal.service;
 
+import com.ys.eportal.infra.repository.CustomerRepository;
 import com.ys.eportal.model.Customer;
 import com.ys.eportal.model.Project;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -15,6 +17,8 @@ import java.util.Set;
 @Service
 public class PortalService {
 
+    @Autowired
+    private CustomerRepository customerRepository;
 
     public Customer findCustomerByID(long customerID){
 

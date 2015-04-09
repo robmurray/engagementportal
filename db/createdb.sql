@@ -13,6 +13,7 @@ CREATE TABLE `ep_Customer` (
   UNIQUE KEY `name_UNIQUE` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 DROP TABLE IF EXISTS `ep_SalesOrder`;
+
 CREATE TABLE `ep_SalesOrder` (
   `salesOrderId` int(11) NOT NULL AUTO_INCREMENT,
   `customerId` int(11) NOT NULL,
@@ -45,7 +46,7 @@ CREATE TABLE `ep_SalesOrder` (
   `modifiedDate` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`salesOrderId`,`customerId`),
   KEY `_idx` (`customerId`),
-  CONSTRAINT `FK_SalesOrderCustomer` FOREIGN KEY (`customerId`) REFERENCES `ep_SalesOrder` (`salesOrderId`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  CONSTRAINT `FK_SalesOrderCustomer` FOREIGN KEY (`customerId`) REFERENCES `ep_Customer` (`customerId`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 CREATE TABLE `ep_SalesOrderStatus` (

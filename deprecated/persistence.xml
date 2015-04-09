@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="NewPersistenceUnit">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
+        <class>com.ys.eportal.infra.domain.Customer</class>
+        <class>com.ys.eportal.infra.domain.SalesOrder</class>
+        <class>com.ys.eportal.infra.domain.SalesOrderStatus</class>
+        <class>com.ys.eportal.infra.domain.ImportMaster</class>
+        <class>com.ys.eportal.infra.domain.ImportOracleObi</class>
+        <class>com.ys.eportal.infra.domain.ImportSalesforce</class>
+        <class>com.ys.eportal.infra.domain.ImportSharePoint</class>
+        <properties>
+            <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/engagementportal"/>
+            <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>
+            <property name="hibernate.connection.username"/>
+            <property name="hibernate.connection.password"/>
+            <property name="hibernate.archive.autodetection" value="class"/>
+            <property name="hibernate.show_sql" value="true"/>
+            <property name="hibernate.format_sql" value="true"/>
+            <property name="hbm2ddl.auto" value="update"/>
+        </properties>
+    </persistence-unit>
+</persistence>

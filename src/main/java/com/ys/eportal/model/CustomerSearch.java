@@ -5,8 +5,7 @@ package com.ys.eportal.model;
  */
 public class CustomerSearch {
     private long customerId;
-    private String firstName;
-    private String lastName;
+    private String name;
 
     public CustomerSearch() {
     }
@@ -19,20 +18,11 @@ public class CustomerSearch {
         this.customerId = customerId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
 }

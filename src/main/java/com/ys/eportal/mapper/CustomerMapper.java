@@ -7,6 +7,9 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.stereotype.Component;
 
+import java.util.Collection;
+import java.util.HashSet;
+
 /**
  * Created by rob on 4/9/15.
  */
@@ -20,7 +23,7 @@ public class CustomerMapper {
     }
 
     private void register(){
-        MapperFactory mapperFactory = new DefaultMapperFactory.Builder().build();
+        mapperFactory = new DefaultMapperFactory.Builder().build();
         // map to/from
         mapperFactory.classMap(CustomerEntity.class, Customer.class)
                 .field("customerId", "customerId")
@@ -65,8 +68,23 @@ public class CustomerMapper {
         }
 
         MapperFacade mapper = mapperFactory.getMapperFacade();
-        customer = mapper.map(customerEntity, Customer.class);
+        customerEntity = mapper.map(customer, CustomerEntity.class);
 
         return customerEntity;
+    }
+
+
+    public Iterable<Customer> convert(Iterable<CustomerEntity> customerEntities){
+        if(customerEntities== null){
+            return null;
+        }
+
+        Collection<Customer> customers = new HashSet<Customer>();
+        MapperFacade mapper = mapperFactory.getMapperFacade();
+
+       mapper.mapAsCollection(customerEntities, customers, Customer.class);
+
+        return customers;
+
     }
 }

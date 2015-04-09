@@ -16,6 +16,10 @@
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css"/>
 
     <!-- PAGE LEVEL PLUGINS STYLES -->
+    <link href="assets/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/plugins/footable/footable.min.css"/>
+    <link href="assets/css/plugins/morris/morris.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/plugins/bootstrap-datepicker/datepicker.css"/>
     <!-- REQUIRE FOR SPEECH COMMANDS -->
     <link rel="stylesheet" type="text/css" href="assets/css/plugins/gritter/jquery.gritter.css" />
 
@@ -24,12 +28,16 @@
 
 
     <!-- Add custom CSS here -->
-
+    <link rel="stylesheet" href="assets/css/only-for-demos.css"/>
     <!-- End custom CSS here -->
 
     <!--[if lt IE 9]>
     <script src="assets/js/html5shiv.js"></script>
     <script src="assets/js/respond.min.js"></script>
+    <![endif]-->
+
+    <!--[if lte IE 8]>
+    <script src="assets/js/plugins/easypiechart/easypiechart.ie-fix.js"></script>
     <![endif]-->
 
 </head>
@@ -102,7 +110,11 @@
 <script src="assets/js/plugins/pace/pace.min.js"></script>
 
 <!-- PAGE LEVEL PLUGINS JS -->
+<script src="assets/js/plugins/footable/footable.min.js"></script>
 
+<script src="assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
+<script src="assets/js/plugins/datatables/datatables.js"></script>
+<script src="assets/js/plugins/datatables/datatables.responsive.js"></script>
 <!-- Themes Core Scripts -->
 <script src="assets/js/main.js"></script>
 
@@ -112,6 +124,8 @@
 
 <!-- initial page level scripts for examples -->
 <script src="assets/js/plugins/slimscroll/jquery.slimscroll.init.js"></script>
+<script src="assets/js/plugins/footable/footable.init.js"></script>
+<script src="assets/js/plugins/datatables/datatables.init.js"></script>
 <script type="text/javascript">
 
 		// Custome File Input
@@ -133,6 +147,19 @@
 				} else {
 					if( log ) alert(log);
 				}
+
+			});
+		});
+
+		//for tables checkbox demo
+		jQuery(function($) {
+			$('table th input:checkbox').on('click' , function(){
+					var that = this;
+					$(this).closest('table').find('tr > td:first-child input:checkbox')
+					.each(function(){
+						this.checked = that.checked;
+						$(this).closest('tr').toggleClass('selected');
+					});
 
 			});
 		});

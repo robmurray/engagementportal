@@ -1,8 +1,6 @@
 package com.ys.eportal.infra.domain;
 
 import javax.persistence.*;
-import java.io.Serializable;
-import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,9 +9,10 @@ import java.util.Set;
  */
 @Entity
 @Table(name = "ep_Customer")
-public class Customer extends AbstractDomainBase {
+public class CustomerEntity extends AbstractDomainBase {
 
-    @Id @GeneratedValue(strategy=GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
     @Column(name = "customerId")
     private int customerId;
 
@@ -30,7 +29,10 @@ public class Customer extends AbstractDomainBase {
      */
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "customerId")
-    private Set<SalesOrder> salesOrders = new HashSet<SalesOrder>();
+    private Set<SalesOrderEntity> salesOrders = new HashSet<SalesOrderEntity>();
+
+    private String contact;
+
 
     public int getCustomerId() {
         return customerId;
@@ -58,21 +60,28 @@ public class Customer extends AbstractDomainBase {
         this.credits = credits;
     }
 
-    public Set<SalesOrder> getSalesOrders() {
+    public Set<SalesOrderEntity> getSalesOrders() {
         return salesOrders;
     }
 
-    public void setSalesOrders(Set<SalesOrder> salesOrders) {
+    public void setSalesOrders(Set<SalesOrderEntity> salesOrders) {
         this.salesOrders = salesOrders;
     }
 
+    public String getContact() {
+        return contact;
+    }
+
+    public void setContact(String contact) {
+        this.contact = contact;
+    }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof Customer)) return false;
+        if (!(o instanceof CustomerEntity)) return false;
 
-        Customer customer = (Customer) o;
+        CustomerEntity customer = (CustomerEntity) o;
 
         if (customerId != customer.customerId) return false;
 

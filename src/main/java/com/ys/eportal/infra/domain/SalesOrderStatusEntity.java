@@ -1,14 +1,13 @@
 package com.ys.eportal.infra.domain;
 
-import javax.persistence.*;
 import java.io.Serializable;
-
+import javax.persistence.*;
 /**
  * Created by rob on 4/8/15.
  */
 @Entity
 @Table(name = "ep_SalesOrderStatus", schema = "", catalog = "engagementportal")
-public class SalesOrderStatus implements Serializable {
+public class SalesOrderStatusEntity implements Serializable {
 
     @Id
     @Column(name = "statusCode")
@@ -28,7 +27,7 @@ public class SalesOrderStatus implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        SalesOrderStatus that = (SalesOrderStatus) o;
+        SalesOrderStatusEntity that = (SalesOrderStatusEntity) o;
 
         if (statusCode != null ? !statusCode.equals(that.statusCode) : that.statusCode != null) return false;
 

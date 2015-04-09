@@ -1,8 +1,8 @@
-        package com.ys.eportal.infra.domain;
-        import javax.persistence.*;
-        import java.io.Serializable;
-        import java.util.Date;
+package com.ys.eportal.infra.domain;
 
+import java.io.Serializable;
+import java.util.Date;
+import javax.persistence.*;
 /**
  * Created by rob on 4/8/15.
  */
@@ -19,6 +19,22 @@ public class AbstractDomainBase  implements Serializable{
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "modifiedDate", nullable = false)
     private Date modifiedDate;
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public Date getModifiedDate() {
+        return modifiedDate;
+    }
+
+    public void setModifiedDate(Date modifiedDate) {
+        this.modifiedDate = modifiedDate;
+    }
 
     @PrePersist
     protected void onCreate() {

@@ -1,14 +1,9 @@
 package com.ys.eportal.service;
 
+import com.ys.eportal.infra.domain.CustomerEntity;
 import com.ys.eportal.infra.repository.CustomerRepository;
-import com.ys.eportal.model.Customer;
-import com.ys.eportal.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Created by rob on 4/4/15.
@@ -20,17 +15,23 @@ public class PortalService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public Customer findCustomerByID(long customerID){
+    public CustomerEntity findCustomerByID(int customerId){
 
-        return PortalService.loadTestCustomer(1,"John","Smith");
+        return this.customerRepository.findOne(customerId);
     }
 
 
-    public Set<Customer> findAllCustomers(){
-        return PortalService.loadTestCustomerList();
+    public Iterable<CustomerEntity> findAllCustomers(){
+       return this.customerRepository.findAll();
     }
 
 
+    public void saveCustomer(CustomerEntity customer){
+        this.customerRepository.save(customer);
+
+    }
+
+/*
     public Project findProjectById(long projectId){
         return PortalService.loadTestProject(1);
     }
@@ -85,4 +86,6 @@ public class PortalService {
         return set;
 
     }
+
+    */
 }

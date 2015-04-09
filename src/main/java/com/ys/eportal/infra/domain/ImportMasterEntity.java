@@ -1,7 +1,6 @@
 package com.ys.eportal.infra.domain;
 
 import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
@@ -10,7 +9,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @javax.persistence.Table(name = "import_Master")
-public class ImportMaster  extends AbstractDomainBase {
+public class ImportMasterEntity extends AbstractDomainBase {
 
     @Id @GeneratedValue
     private long ImportMasterId;
@@ -371,7 +370,7 @@ public class ImportMaster  extends AbstractDomainBase {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ImportMaster that = (ImportMaster) o;
+        ImportMasterEntity that = (ImportMasterEntity) o;
 
         if (accountTeam != null ? !accountTeam.equals(that.accountTeam) : that.accountTeam != null) return false;
         if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;

@@ -1,7 +1,6 @@
 package com.ys.eportal.controller;
 
 import com.ys.eportal.model.Project;
-import com.ys.eportal.model.Project;
 import com.ys.eportal.service.PortalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -44,10 +43,10 @@ public class ProjectController {
 
         long projectId = 1;
 
-        Project project = this.portalService.findProjectById(projectId);
+      //  Project project = this.portalService.findProjectById(projectId);
 
         model.addAttribute("pageName", "Edit Project");
-        model.addAttribute("project",project);
+        model.addAttribute("project",new Project());
         return "projectEdit";
     }
 

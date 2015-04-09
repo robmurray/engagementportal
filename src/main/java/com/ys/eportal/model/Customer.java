@@ -3,63 +3,42 @@ package com.ys.eportal.model;
 /**
  * Created by rob on 4/4/15.
  */
-public class Customer {
+public class Customer extends AbstractModelBase{
 
-    private long customerId;
-    private String firstName;
-    private String lastName;
-    private double creditsAvailable;
+    private int customerId;
+    private String name;
+    private int credits;
     private String contact;
 
     public Customer() {
-
     }
 
-    /**
-     * for test purpose only
-     * @TODO remove
-     */
-    public Customer(long customerId, String firstName, String lastName) {
-        this.customerId = customerId;
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public Customer(String name) {
+        this.name = name;
     }
 
-    public Customer(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public long getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(long customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public int getCredits() {
+        return credits;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public double getCreditsAvailable() {
-        return creditsAvailable;
-    }
-
-    public void setCreditsAvailable(double creditsAvailable) {
-        this.creditsAvailable = creditsAvailable;
+    public void setCredits(int credits) {
+        this.credits = credits;
     }
 
     public String getContact() {
@@ -84,6 +63,6 @@ public class Customer {
 
     @Override
     public int hashCode() {
-        return (int) (customerId ^ (customerId >>> 32));
+        return customerId;
     }
 }

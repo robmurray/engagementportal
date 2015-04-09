@@ -1,6 +1,5 @@
 package com.ys.eportal.controller;
 
-import com.ys.eportal.model.Customer;
 import com.ys.eportal.model.CustomerSearch;
 import com.ys.eportal.service.PortalService;
 import org.springframework.beans.factory.annotation.Autowired;

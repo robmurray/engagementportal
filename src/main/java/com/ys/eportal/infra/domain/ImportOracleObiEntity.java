@@ -4,7 +4,6 @@ import javax.persistence.Basic;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 
@@ -13,7 +12,7 @@ import java.sql.Timestamp;
  */
 @Entity
 @javax.persistence.Table(name = "import_OracleOBI", schema = "", catalog = "engagementportal")
-public class ImportOracleObi   extends AbstractDomainBase {
+public class ImportOracleObiEntity extends AbstractDomainBase {
     @Id @GeneratedValue
     private long ImportOracleObiID;
 
@@ -262,7 +261,7 @@ public class ImportOracleObi   extends AbstractDomainBase {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ImportOracleObi that = (ImportOracleObi) o;
+        ImportOracleObiEntity that = (ImportOracleObiEntity) o;
 
         if (activityDate != null ? !activityDate.equals(that.activityDate) : that.activityDate != null) return false;
         if (activityMonth != null ? !activityMonth.equals(that.activityMonth) : that.activityMonth != null)

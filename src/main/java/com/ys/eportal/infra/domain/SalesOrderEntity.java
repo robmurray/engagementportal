@@ -1,16 +1,15 @@
 package com.ys.eportal.infra.domain;
 
-import javax.persistence.*;
-import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import javax.persistence.*;
 
 /**
  * Created by rob on 4/8/15.
  */
 @Entity
 @javax.persistence.Table(name = "ep_SalesOrder", schema = "", catalog = "engagementportal")
-public class SalesOrder  extends AbstractDomainBase{
+public class SalesOrderEntity extends AbstractDomainBase{
 
 
     @Id @GeneratedValue
@@ -316,9 +315,9 @@ public class SalesOrder  extends AbstractDomainBase{
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SalesOrder)) return false;
+        if (!(o instanceof SalesOrderEntity)) return false;
 
-        SalesOrder that = (SalesOrder) o;
+        SalesOrderEntity that = (SalesOrderEntity) o;
 
         if (customerId != that.customerId) return false;
         if (salesOrderId != that.salesOrderId) return false;

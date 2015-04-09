@@ -28,19 +28,11 @@
                 <form class="form-horizontal" role="form" action="#" th:action="@{/customernew}" th:object="${customer}"
                       method="post">
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">First Name</label>
+                        <label class="col-sm-2 control-label">Name</label>
 
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" th:field="*{firstName}"
+                            <input type="text" class="form-control" th:field="*{name}"
                                    placeholder="enter the first name"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Last Name</label>
-
-                        <div class="col-sm-10">
-                            <input type="text" class="form-control" th:field="*{lastName}"
-                                   placeholder="enter the last name"/>
                         </div>
                     </div>
                     <div class="form-group">

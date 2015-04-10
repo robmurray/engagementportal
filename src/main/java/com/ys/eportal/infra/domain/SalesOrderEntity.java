@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by rob on 4/8/15.
  */
 @Entity
-@javax.persistence.Table(name = "ep_SalesOrder", schema = "", catalog = "engagementportal")
+@javax.persistence.Table(name = "ep_SalesOrder")
 public class SalesOrderEntity extends AbstractDomainBase{
 
 

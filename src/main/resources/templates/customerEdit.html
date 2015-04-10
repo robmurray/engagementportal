@@ -1,36 +1,79 @@
-<!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/portalpage">
 <head>
-    <title>Add Customer</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <link href="/css/eportal.css" rel="stylesheet" media="screen" th:href="@{/css/eportal.css}" />
-<!--    <script src="/js/bootstrap.js" th:src="@{/js/bootstrap.js}"></script> -->
+    <meta charset="utf-8"/>
+    <title>Edit Customer</title>
 </head>
-
-<!-- TODO externalize layout -->
-
 <body>
 
+<div layout:fragment="content">
 
-<div th:replace="fragments/header :: header"/>
+
+    <!-- START YOUR CONTENT HERE -->
+
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>Customer Information</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#f-3"><i class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="f-3" class="panel-collapse collapse in">
+            <div class="portlet-body">
+                <form class="form-horizontal" role="form" action="#" th:action="@{/customeredit}" th:object="${customer}"
+                      method="post">
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{customerId}"
+                                   placeholder="customer Id" readonly="readonly"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Name</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{name}"
+                                   placeholder="enter the customer name"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Contact</label>
+
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" th:field="*{contact}"
+                                   placeholder="enter the contact information"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">Credits</label>
+
+                        <div class="col-sm-10">
+                            <input type="number" class="form-control" th:field="*{credits}"
+                                   placeholder="enter credits"/>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary">Save</button>
+                                <button type="reset" class="btn">reset</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
 
 
-<div th:replace="fragments/leftnav :: leftnav"/>
+            </div>
+        </div>
+    </div>
 
-<div id="content">
-    <h1>Customer Information</h1>
-    <form action="#" th:action="@{/customeredit}" th:object="${customer}" method="post">
-        <p>first name: <input type="text" th:field="*{firstName}" /></p>
-        <p>last name: <input type="text" th:field="*{lastName}" /></p>
-        <p><input type="submit" value="Save" /> <input type="reset" value="Reset" /></p>
-    </form>
+
+    <!-- END YOUR CONTENT HERE -->
 </div>
-
-<div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
-
-
 </body>
-
-
-
 </html>

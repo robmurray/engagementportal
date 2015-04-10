@@ -4,17 +4,17 @@ package com.ys.eportal.model;
  * Created by rob on 4/5/15.
  */
 public class CustomerSearch {
-    private long customerId;
+    private int customerId;
     private String name;
 
     public CustomerSearch() {
     }
 
-    public long getCustomerId() {
+    public int getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(long customerId) {
+    public void setCustomerId(int customerId) {
         this.customerId = customerId;
     }
 

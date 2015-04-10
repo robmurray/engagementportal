@@ -2,6 +2,7 @@ package com.ys.eportal.controller;
 
 import com.ys.eportal.infra.domain.CustomerEntity;
 import com.ys.eportal.mapper.CustomerMapper;
+import com.ys.eportal.mapper.CustomerSearchMapper;
 import com.ys.eportal.model.Customer;
 import com.ys.eportal.model.CustomerSearch;
 import com.ys.eportal.service.PortalService;
@@ -26,6 +27,10 @@ public class CustomerSearchController {
     @Autowired
     private CustomerMapper customerMapper;
 
+    @Autowired
+    private CustomerSearchMapper customerSearchMapper;
+
+
     @RequestMapping(value="/customersearch", method= RequestMethod.GET)
     public String customerForm(Model model) {
 
@@ -39,9 +44,10 @@ public class CustomerSearchController {
         model.addAttribute("pageName", "Customer Search");
         model.addAttribute("customersearch", search);
 
-        Iterable<CustomerEntity> list = portalService.findAllCustomers();
+        Iterable<CustomerEntity> wrkList = this.portalService.find(this.customerSearchMapper.convert(search));
 
-        Iterable<Customer> returnList = this.customerMapper.convert(list);
+
+        Iterable<Customer> returnList = this.customerMapper.convert(wrkList);
 
         model.addAttribute("customers", returnList);
 

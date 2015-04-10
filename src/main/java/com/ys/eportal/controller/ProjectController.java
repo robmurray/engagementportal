@@ -30,9 +30,6 @@ public class ProjectController {
     @RequestMapping(value="/projectnew", method=RequestMethod.POST)
     public String projectSubmit(@ModelAttribute Project project, Model model) {
 
-        //Project = portalService.findProjectByID(1);
-        // for now
-        project.setProjectId(1);
         model.addAttribute("pageName", "Save Project");
         model.addAttribute("Project", project);
         return "ProjectNewResult";

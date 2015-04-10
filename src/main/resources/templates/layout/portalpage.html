@@ -19,9 +19,14 @@
     <link href="assets/css/plugins/daterangepicker/daterangepicker-bs3.css" rel="stylesheet"/>
     <link rel="stylesheet" href="assets/css/plugins/footable/footable.min.css"/>
     <link href="assets/css/plugins/morris/morris.css" rel="stylesheet"/>
+
+    <link rel="stylesheet" href="assets/css/plugins/duallistbox/bootstrap-duallistbox.min.css"/>
+    <link href="assets/css/plugins/select2/select2.css" rel="stylesheet"/>
+    <link href="assets/css/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="assets/css/plugins/bootstrap-wysihtml/bootstrap-wysihtml5.css"/>
+    <link rel="stylesheet" href="assets/css/plugins/datetime/bootstrap-datetimepicker.min.css"/>
     <link rel="stylesheet" href="assets/css/plugins/bootstrap-datepicker/datepicker.css"/>
-    <!-- REQUIRE FOR SPEECH COMMANDS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/plugins/gritter/jquery.gritter.css" />
+
 
     <!-- Tc core CSS -->
     <link id="qstyle" rel="stylesheet" href="assets/css/themes/style.css"/>
@@ -115,18 +120,220 @@
 <script src="assets/js/plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="assets/js/plugins/datatables/datatables.js"></script>
 <script src="assets/js/plugins/datatables/datatables.responsive.js"></script>
+
+<script src="assets/js/plugins/duallistbox/jquery.bootstrap-duallistbox.min.js"></script>
+<script src="assets/js/plugins/select2/select2.min.js"></script>
+<script src="assets/js/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script src="assets/js/plugins/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+<script src="assets/js/plugins/masked-input/jquery.maskedinput.min.js"></script>
+<script src="assets/js/plugins/bootstrap-wysihtml/wysihtml.min.js"></script>
+<script src="assets/js/plugins/bootstrap-wysihtml/bootstrap-wysihtml.js"></script>
+<script src="assets/js/plugins/bootstrap-markdown/markdown.js"></script>
+<script src="assets/js/plugins/bootstrap-markdown/bootstrap-markdown.js"></script>
+<script src="assets/js/plugins/bootbox/bootbox.min.js"></script>
+<script src="assets/js/plugins/bootstrap-wysiwyg/jquery.hotkeys.js"></script>
+<script src="assets/js/plugins/bootstrap-wysiwyg/bootstrap-wysiwyg.js"></script>
+<script src="assets/js/plugins/bootstrap-wysiwyg/ek-wysiwyg.js"></script>
+<script src="assets/js/plugins/datetime/bootstrap-datetimepicker.min.js"></script>
+<script src="assets/js/plugins/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+<script src="assets/js/plugins/fuelux/spinner.min.js"></script>
+<script src="assets/js/plugins/bootstrap-touchspin/bootstrap.touchspin.js"></script>
+<script src="assets/js/plugins/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
+<script src="assets/js/plugins/jquery-knob/jquery.knob.min.js"></script>
+<script src="assets/js/plugins/colorpickers/bootstrap-colorpicker.js"></script>
+<script src="assets/js/plugins/colorpickers/ek-colorpicker.js"></script>
+
+
+
+
+
 <!-- Themes Core Scripts -->
 <script src="assets/js/main.js"></script>
-
-<!-- REQUIRE FOR SPEECH COMMANDS -->
-<script src="assets/js/speech-commands.js"></script>
-<script src="assets/js/plugins/gritter/jquery.gritter.min.js"></script>
 
 <!-- initial page level scripts for examples -->
 <script src="assets/js/plugins/slimscroll/jquery.slimscroll.init.js"></script>
 <script src="assets/js/plugins/footable/footable.init.js"></script>
 <script src="assets/js/plugins/datatables/datatables.init.js"></script>
-<script type="text/javascript">
+
+
+
+<script>
+//
+//		$(document).ready( function() {
+//			$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+//
+//				var input = $(this).parents('.input-group').find(':text'),
+//				log = numFiles > 1 ? numFiles + ' files selected' : label;
+//
+///				if( input.length ) {
+//					input.val(log);
+//				} else {
+//					if( log ) alert(log);
+//				}
+//
+//			});
+//		});
+
+
+        $(document).ready(function() {
+			//Dual listbox examples  for more information and options please visit http://www.virtuosoft.eu/code/bootstrap-duallistbox/
+			var demo1 = $('select[name="duallistbox_demo1[]"]').bootstrapDualListbox({infoTextFiltered: '<span class="label label-primary label-lg">Filtered</span>'});
+			var container1 = demo1.bootstrapDualListbox('getContainer');
+
+			//Select2 examples
+			$("#e1, #e2, #e3").select2({
+				width: 175
+			});
+			$("#e4").select2({
+				placeholder: "Select a Option",
+				width: 375,
+				allowClear: true
+			});
+			$("#e5").select2({tags:["red", "green", "blue"]});
+
+			//Bootstrap Select enable
+			$('.selectpicker').selectpicker('show');
+
+			//Maxilength
+			$('input[maxlength]').maxlength();
+
+			$('input.maxL-1').maxlength({
+				threshold: 17
+			});
+
+			$('input.maxL-2').maxlength({
+				alwaysShow: true,
+				warningClass: "label label-primary",
+				limitReachedClass: "label label-danger",
+				separator: ' of ',
+				preText: 'You have ',
+				postText: ' chars remaining.',
+				validate: true,
+				threshold: 10
+			});
+
+			$('textarea#maxL-3').maxlength({
+				alwaysShow: true
+			});
+
+			$('input#maxL-4').maxlength({
+				alwaysShow: true,
+				placement: 'top-left'
+			});
+
+			//Masked Input Uses http://digitalbush.com/projects/masked-input-plugin/
+			$.mask.definitions['~']='[+-]';
+			$('.input-date').mask('99/99/9999');
+			$('.input-phone').mask('(999) 999-9999');
+			$(".input-key").mask("a*-999-a999",{placeholder:" ",completed:function(){alert("You typed the following: "+this.val());}});
+			$('.input-eyescript').mask('~9.99 ~9.99 999');
+
+			//Bootstrap Datetimepicker
+			$('.form_datetime').datetimepicker({
+				//language:  'fr',
+				weekStart: 1,
+				todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 2,
+				forceParse: 0,
+				showMeridian: 1
+			});
+			$('.form_date').datetimepicker({
+				weekStart: 1,
+				todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 2,
+				minView: 2,
+				forceParse: 0
+			});
+			$('.form_time').datetimepicker({
+				weekStart: 1,
+				todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 1,
+				minView: 0,
+				maxView: 1,
+				forceParse: 0
+			});
+
+			//Bootstrap Datepicker
+			$('.datepicker').datepicker();
+
+			//Wysihtml Editor
+			$('#editor1').wysihtml5();
+
+			//Bootstrap Wysiwyg Editor
+			$('#editor-2').ek_wysiwyg({
+				toolbar:
+					[
+						'font',
+						null,
+						'fontSize',
+						null,
+						'bold',
+						'italic',
+						'strikethrough',
+						'underline',
+						null,
+						'justifyleft',
+						'justifycenter',
+						'justifyright',
+						null,
+						'createLink',
+						'unlink',
+						null,
+						'insertImage',
+						null,
+						'undo',
+						'redo'
+					]
+				}).prev().addClass('editor-style1 text-center');
+
+
+			// Spinners
+			$('#MySpinner-1').spinner();
+			$('#MySpinner-2').spinner({disabled: true});
+			$('#MySpinner-3').spinner({value:0, min: 0, max: 10});
+			$('#MySpinner-4').spinner({value:0, step: 5, min: 0, max: 200});
+
+			// Touchspinners
+			$("#touchspin-demo1").TouchSpin({
+				min: 0,
+				max: 100,
+				step: 1,
+				decimals: 0,
+				boostat: 5,
+				maxboostedstep: 10,
+				postfix: '$'
+			});
+
+			 $("#touchspin-demo2").TouchSpin({
+				min: 0,
+				max: 100,
+				step: 0.1,
+				decimals: 2,
+				boostat: 5,
+				maxboostedstep: 10,
+				buttonup_class: 'btn btn-primary',
+				buttondown_class: 'btn btn-primary',
+				postfix: '%'
+			});
+
+			//jQuery knob for more option/help please visit https://github.com/aterrien/jQuery-Knob
+			$(function() {
+				$(".knob").knob();
+			});
+
+			//Color Picker
+			$('#colorpicker1').colorpicker();
+
+			//Custom Color Picker
+			$('#ek-colorpicker').ek_colorpicker();
+		});
+
 
 		// Custome File Input
 		$(document).on('change', '.btn-file :file', function() {
@@ -136,20 +343,7 @@
 			input.trigger('fileselect', [numFiles, label]);
 		});
 
-		$(document).ready( function() {
-			$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
 
-				var input = $(this).parents('.input-group').find(':text'),
-				log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-				if( input.length ) {
-					input.val(log);
-				} else {
-					if( log ) alert(log);
-				}
-
-			});
-		});
 
 		//for tables checkbox demo
 		jQuery(function($) {

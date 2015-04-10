@@ -1,5 +1,7 @@
 package com.ys.eportal.model;
 
+import java.util.List;
+
 /**
  * Created by rob on 4/4/15.
  */
@@ -9,6 +11,7 @@ public class Customer extends AbstractModelBase{
     private String name;
     private int credits;
     private String contact;
+    private List<Project> projects;
 
     public Customer() {
     }
@@ -47,6 +50,14 @@ public class Customer extends AbstractModelBase{
 
     public void setContact(String contact) {
         this.contact = contact;
+    }
+
+    public List<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(List<Project> projects) {
+        this.projects = projects;
     }
 
     @Override

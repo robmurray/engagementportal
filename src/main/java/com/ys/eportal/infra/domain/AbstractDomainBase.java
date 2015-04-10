@@ -12,7 +12,7 @@ public class AbstractDomainBase  implements Serializable{
 
     @Temporal(TemporalType.TIMESTAMP)
     @Basic(fetch = FetchType.EAGER)
-    @Column(name = "createDate", nullable = false)
+    @Column(name = "createDate", nullable = false, updatable=false)
     private Date createDate;
 
     @Temporal(TemporalType.TIMESTAMP)

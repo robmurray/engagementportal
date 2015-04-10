@@ -1,0 +1,76 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+    <div id="leftnav" th:fragment="leftnav">
+        <nav class="navbar-side" role="navigation">
+            <div class="navbar-collapse sidebar-collapse collapse">
+
+                <!-- BEGIN FIND MENU ITEM INPUT -->
+                <div class="media-search">
+                    <input type="text" class="input-menu" id="input-items" placeholder="Find..."/>
+                </div>
+                <!-- END FIND MENU ITEM INPUT -->
+
+                <ul id="side" class="nav navbar-nav side-nav">
+                    <!-- BEGIN SIDE NAV MENU -->
+                    <!-- Navigation category -->
+                    <li>
+                        <h4>Navigation</h4>
+                    </li>
+                    <!-- END Navigation category -->
+
+                    <li>
+                        <a href="dashboard">
+                            <i class="fa fa-dashboard"></i> Dashboard
+                        </a>
+                    </li>
+                    <!-- BEGIN COMPONENTS DROPDOWN -->
+                    <li class="panel">
+                        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#components">
+                            <i class="fa fa-cogs"></i> Customer <span class="fa arrow"></span>
+                        </a>
+                        <ul class="collapse nav" id="components">
+                            <li>
+                                <a href="customersearch">
+                                    <i class="fa fa-angle-double-right"></i> Search
+                                </a>
+                            </li>
+                            <li>
+                                <a href="customernew">
+                                    <i class="fa fa-angle-double-right"></i> Add
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+                    <li class="panel">
+                        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#components">
+                            <i class="fa fa-cogs"></i> Project <span class="fa arrow"></span>
+                        </a>
+                        <ul class="collapse nav" id="components">
+                            <li>
+                                <a href="projectsearch">
+                                    <i class="fa fa-angle-double-right"></i> Search
+                                </a>
+                            </li>
+                            <li>
+                                <a href="projectnew">
+                                    <i class="fa fa-angle-double-right"></i> Add
+                                </a>
+                            </li>
+
+                        </ul>
+                    </li>
+
+
+                </ul><!-- /.side-nav -->
+
+
+            </div><!-- /.navbar-collapse -->
+        </nav><!-- /.navbar-side -->
+    </div>
+</body>
+</html>

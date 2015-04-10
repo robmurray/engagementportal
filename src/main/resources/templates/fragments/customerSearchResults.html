@@ -31,11 +31,11 @@
                             <tbody>
                             <tr th:each="customer : ${customers}">
                                 <td class="col-small center"><label><input type="checkbox" class="tc"/><span class="labels"></span></label></td>
-                                <td th:text="${customer.customerId}">Onions</td>
-                                <td th:text="${customer.name}">2.41</td>
+                                <td th:text="${customer.customerId}"></td>
+                                <td th:text="${customer.name}"></td>
                                 <td class="col-small center">
                                     <div class="action-buttons">
-                                        <a href="#" data-placement="left" data-rel="tooltip" title="View"><i class="fa fa-search-plus bigger-130"></i></a>
+                                        <a href="" th:href="'customeredit?customerId='+${customer.customerId}" data-placement="left" data-rel="tooltip" title="View"><i class="fa fa-search-plus bigger-130"></i></a>
                                     </div>
                                 </td>
                             </tr>

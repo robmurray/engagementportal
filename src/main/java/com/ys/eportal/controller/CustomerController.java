@@ -13,6 +13,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Created by rob on 4/4/15.
@@ -46,14 +47,22 @@ public class CustomerController {
         model.addAttribute("pageName", "Save Customer");
         addPageAttributes(model,"Save Customer", "Save new Customer");
         model.addAttribute("customer", customer);
-        return "customerNewResult";
+        return "customeredit?customerId="+customer.getCustomerId();
     }
 
+
+
+/*
+    public ModelAndView editProfileContact(@RequestParam(value="locale", required=false) String localeAsString,
+                                           @RequestParam(value="type", required=false) String userType,
+                                           @ModelAttribute("contact") UpdateContactPageModel pageModel,
+                                           BindingResult result,
+                                           HttpServletRequest request) {
+
+*/
     @RequestMapping(value="/customeredit", method= RequestMethod.GET)
-    public String customerEditForm(Model model) {
-
-        int customerId = 1;
-
+    public String customerEditForm(@RequestParam(value="customerId", required=true) Integer customerId,
+                                   @RequestParam(value="msgtype", required=false) String messageType, Model model) {
         CustomerEntity customer = this.portalService.findCustomerByID(customerId);
 
         Customer c = this.customerMapper.convert(customer);
@@ -66,12 +75,13 @@ public class CustomerController {
     @RequestMapping(value="/customeredit", method=RequestMethod.POST)
     public String customerEditSubmit(@ModelAttribute Customer customer, Model model) {
 
-        //customer = portalService.findCustomerByID(1);
-        // for now
-        customer.setCustomerId(1);
+        CustomerEntity c = this.customerMapper.convert(customer);
+        portalService.saveCustomer(c);
+        customer = this.customerMapper.convert(c);
+
         model.addAttribute("customer", customer);
         addPageAttributes(model, "Save Customer", "Save Customer update");
-        return "customerEditResult";
+        return "customerEdit";
     }
 
     protected void addPageAttributes(Model model, String pageName, String subTitle){

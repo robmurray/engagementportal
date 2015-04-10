@@ -23,4 +23,11 @@ public class DashboardController {
         return "dashboard";
     }
 
+    @RequestMapping(value="/blank", method= RequestMethod.GET)
+    public String blankPage(Model model) {
+        model.addAttribute("pageName", "Dashboard");
+
+        return "blank";
+    }
+
 }

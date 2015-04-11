@@ -3,17 +3,18 @@ package com.ys.eportal.model;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
  * Created by rob on 4/5/15.
  */
 public class Project {
-    private int projectId;
-    private Customer customer;
-    private String classRegSent;
-    private String reportedRevRec;
+
     private int salesOrderNumber;
+    private Customer customer;
+    private Date classRegSent;
+    private String reportedRevRec;
 
 
     private List<String> statusValues = new ArrayList<String>() {
@@ -29,13 +30,13 @@ public class Project {
     };
 
     private String status;
-    private Timestamp bookDate;
-    private Timestamp shipDate;
-    private Timestamp planningMeetingDate;
-    private Timestamp kickoffMeetingDate;
-    private Timestamp onSiteStartDate;
-    private Timestamp onSiteEndDate;
-    private Timestamp releaseForRevenueRecDate;
+    private Date bookDate;
+    private Date shipDate;
+    private Date planningMeetingDate;
+    private Date kickoffMeetingDate;
+    private Date onSiteStartDate;
+    private Date onSiteEndDate;
+    private Date releaseForRevenueRecDate;
 
     private List<String> waitTimeValues = new ArrayList<String>() {{
         add("standard");
@@ -74,12 +75,8 @@ public class Project {
     public Project() {
     }
 
-    public int getProjectId() {
-        return projectId;
-    }
-
-    public void setProjectId(int projectId) {
-        this.projectId = projectId;
+    public Project(Customer customer) {
+        this.customer = customer;
     }
 
     public Customer getCustomer() {
@@ -114,11 +111,11 @@ public class Project {
         this.waitTimeValues = waitTimeValues;
     }
 
-    public String getClassRegSent() {
+    public Date getClassRegSent() {
         return classRegSent;
     }
 
-    public void setClassRegSent(String classRegSent) {
+    public void setClassRegSent(Date classRegSent) {
         this.classRegSent = classRegSent;
     }
 
@@ -146,56 +143,60 @@ public class Project {
         this.status = status;
     }
 
-    public Timestamp getBookDate() {
+    public Date getBookDate() {
         return bookDate;
     }
 
-    public void setBookDate(Timestamp bookDate) {
+    public void setBookDate(Date bookDate) {
         this.bookDate = bookDate;
     }
 
-    public Timestamp getShipDate() {
+    public Date getShipDate() {
         return shipDate;
     }
 
-    public void setShipDate(Timestamp shipDate) {
+    public void setShipDate(Date shipDate) {
         this.shipDate = shipDate;
     }
 
-    public Timestamp getPlanningMeetingDate() {
+    public Date getPlanningMeetingDate() {
         return planningMeetingDate;
     }
 
-    public void setPlanningMeetingDate(Timestamp planningMeetingDate) {
+    public void setPlanningMeetingDate(Date planningMeetingDate) {
         this.planningMeetingDate = planningMeetingDate;
     }
 
-    public Timestamp getKickoffMeetingDate() {
+    public Date getKickoffMeetingDate() {
         return kickoffMeetingDate;
     }
 
-    public void setKickoffMeetingDate(Timestamp kickoffMeetingDate) {
+    public void setKickoffMeetingDate(Date kickoffMeetingDate) {
         this.kickoffMeetingDate = kickoffMeetingDate;
     }
 
-    public Timestamp getOnSiteStartDate() {
+    public Date getOnSiteStartDate() {
         return onSiteStartDate;
     }
 
-    public void setOnSiteStartDate(Timestamp onSiteStartDate) {
+    public void setOnSiteStartDate(Date onSiteStartDate) {
         this.onSiteStartDate = onSiteStartDate;
     }
 
-    public Timestamp getOnSiteEndDate() {
+    public Date getOnSiteEndDate() {
         return onSiteEndDate;
     }
 
-    public void setOnSiteEndDate(Timestamp onSiteEndDate) {
+    public void setOnSiteEndDate(Date onSiteEndDate) {
         this.onSiteEndDate = onSiteEndDate;
     }
 
-    public Timestamp getReleaseForRevenueRecDate() {
+    public Date getReleaseForRevenueRecDate() {
         return releaseForRevenueRecDate;
+    }
+
+    public void setReleaseForRevenueRecDate(Date releaseForRevenueRecDate) {
+        this.releaseForRevenueRecDate = releaseForRevenueRecDate;
     }
 
     public void setReleaseForRevenueRecDate(Timestamp releaseForRevenueRecDate) {
@@ -321,13 +322,16 @@ public class Project {
 
         Project project = (Project) o;
 
-        if (projectId != project.projectId) return false;
+        if (salesOrderNumber != project.salesOrderNumber) return false;
+        if (!customer.equals(project.customer)) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return projectId;
+        int result = salesOrderNumber;
+        result = 31 * result + customer.hashCode();
+        return result;
     }
 }

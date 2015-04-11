@@ -23,7 +23,7 @@
         </div>
         <div id="projectinfo" class="panel-collapse collapse in">
             <div class="portlet-body">
-                <form class="form-horizontal" role="form" action="#" th:action="@{/projectNew}" th:object="${project}"
+                <form class="form-horizontal" role="form" action="#" th:action="@{/projectEdit}" th:object="${project}"
                       method="post">
                     <!-- <div class="note"></div>-->
 
@@ -31,14 +31,14 @@
                         <label class="col-sm-2 control-label">sales Order Number</label>
                         <div class="col-sm-3">
                             <input type="text" class="form-control" th:field="*{salesOrderNumber}"
-                                   placeholder="enter the sales order number"/>
+                                   placeholder="enter the sales order number" readonly="readonly"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Customer Name</label>
                         <div class="col-sm-5">
                             <input type="text" class="form-control" th:field="*{customer.name}"
-                                   placeholder="enter the customer name"/>
+                                   placeholder="enter the customer name" readonly="readonly"/>
                         </div>
                     </div>
                     <div class="form-group">
@@ -56,7 +56,7 @@
                         </div>
                     </div>
 
-
+                    <!--
                     <div class="form-group">
                         <label class="col-sm-2 control-label">status</label>
                         <div class="col-sm-2">
@@ -79,7 +79,7 @@
                             </div>
                         </div>
                     </div>
-<!--
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label">ship date</label>
                         <div class="col-sm-2">
@@ -292,7 +292,7 @@
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">
                                 <button type="submit" class="btn btn-primary">Save</button>
-                                <button type="reset" class="btn">Clear</button>
+                                <button type="reset" class="btn">Reset</button>
                             </div>
                         </div>
                     </div>

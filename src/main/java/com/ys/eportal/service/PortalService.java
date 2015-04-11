@@ -1,8 +1,6 @@
 package com.ys.eportal.service;
 
-import com.ys.eportal.infra.domain.CustomerEntity;
-import com.ys.eportal.infra.domain.CustomerSearchSupport;
-import com.ys.eportal.infra.domain.SalesOrderEntity;
+import com.ys.eportal.infra.domain.*;
 import com.ys.eportal.infra.repository.CustomerRepository;
 import com.ys.eportal.infra.repository.SalesOrderRepository;
 import com.ys.eportal.model.Project;
@@ -56,13 +54,37 @@ public class PortalService {
     }
 
 
-    public void saveCustomer(CustomerEntity customer){
-        this.customerRepository.save(customer);
-
+    public CustomerEntity saveCustomer(CustomerEntity customer){
+        return this.customerRepository.save(customer);
     }
+
 
     public void saveProject(SalesOrderEntity salesOrderEntity) {
         this.salesOrderRepository.save(salesOrderEntity);
     }
 
+    public SalesOrderEntity findSalesOrderEntityById(int salesOrderId){
+
+        return this.salesOrderRepository.findOne(salesOrderId);
+    }
+    public List<SalesOrderEntity> findAllSalesOrders(){
+        return (List)this.salesOrderRepository.findAll();
+    }
+
+    public Iterable<SalesOrderEntity> find(ProjectSearchSupport search){
+        List<SalesOrderEntity> results = null;
+
+        if(search.getSalesOrderNumber()>0){
+            SalesOrderEntity soe =this.salesOrderRepository.findOne(search.getSalesOrderNumber());
+            results = new ArrayList<SalesOrderEntity>();
+            results.add(soe);
+        }else if(search.getCustomerName()!=null&& !search.getCustomerName().trim().equals("")){
+            //results = this.findCustomerByName(search.getName());
+            results = this.findAllSalesOrders();
+        }else{
+            results = this.findAllSalesOrders();
+        }
+
+        return results;
+    }
 }

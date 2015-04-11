@@ -27,27 +27,28 @@ public class CustomerController {
     @Autowired
     private CustomerMapper customerMapper;
 
-    @RequestMapping(value="/customernew", method= RequestMethod.GET)
+    @RequestMapping(value="/customerNew", method= RequestMethod.GET)
     public String customerForm(Model model) {
 
         Customer customer = new Customer();
         addPageAttributes(model,"Create Customer", "Create new Customer");
         model.addAttribute("customer", customer);
-        return "customernew";
+        return "customerNew";
     }
 
-    @RequestMapping(value="/customernew", method=RequestMethod.POST)
+    @RequestMapping(value="/customerNew", method=RequestMethod.POST)
     public String customerSubmit(@ModelAttribute Customer customer, Model model) {
 
         CustomerEntity c = this.customerMapper.convert(customer);
-        this.portalService.saveCustomer(c);
-
+        c = this.portalService.saveCustomer(c);
+        customer = this.customerMapper.convert(c);
 
         model.addAttribute("subTitle", "Create a new customer");
         model.addAttribute("pageName", "Save Customer");
         addPageAttributes(model,"Save Customer", "Save new Customer");
         model.addAttribute("customer", customer);
-        return "customeredit?customerId="+customer.getCustomerId();
+
+        return customerEditForm(customer.getCustomerId(),"",model); //"customerEdit?customerId="+customer.getCustomerId();
     }
 
 
@@ -60,7 +61,7 @@ public class CustomerController {
                                            HttpServletRequest request) {
 
 */
-    @RequestMapping(value="/customeredit", method= RequestMethod.GET)
+    @RequestMapping(value="/customerEdit", method= RequestMethod.GET)
     public String customerEditForm(@RequestParam(value="customerId", required=true) Integer customerId,
                                    @RequestParam(value="msgtype", required=false) String messageType, Model model) {
         CustomerEntity customer = this.portalService.findCustomerByID(customerId);
@@ -72,7 +73,7 @@ public class CustomerController {
         return "customerEdit";
     }
 
-    @RequestMapping(value="/customeredit", method=RequestMethod.POST)
+    @RequestMapping(value="/customerEdit", method=RequestMethod.POST)
     public String customerEditSubmit(@ModelAttribute Customer customer, Model model) {
 
         CustomerEntity c = this.customerMapper.convert(customer);

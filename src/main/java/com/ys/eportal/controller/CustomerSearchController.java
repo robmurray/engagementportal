@@ -31,7 +31,7 @@ public class CustomerSearchController {
     private CustomerSearchMapper customerSearchMapper;
 
 
-    @RequestMapping(value="/customersearch", method= RequestMethod.GET)
+    @RequestMapping(value="/customerSearch", method= RequestMethod.GET)
     public String customerForm(Model model) {
 
         model.addAttribute("pageName", "Customer Search");
@@ -39,7 +39,7 @@ public class CustomerSearchController {
         return "customerSearch";
     }
 
-    @RequestMapping(value="/customersearch", method=RequestMethod.POST)
+    @RequestMapping(value="/customerSearch", method=RequestMethod.POST)
     public String customerSubmit(@ModelAttribute CustomerSearch search, Model model) {
         model.addAttribute("pageName", "Customer Search");
         model.addAttribute("customersearch", search);

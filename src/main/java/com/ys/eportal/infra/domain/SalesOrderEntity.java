@@ -2,6 +2,7 @@ package com.ys.eportal.infra.domain;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 import javax.persistence.*;
 
 /**
@@ -11,7 +12,8 @@ import javax.persistence.*;
 @javax.persistence.Table(name = "ep_SalesOrder")
 public class SalesOrderEntity extends AbstractDomainBase{
 
-    @Id @GeneratedValue
+
+    @Id
     @Column(name = "salesOrderId")
     private int salesOrderId;
 
@@ -19,17 +21,17 @@ public class SalesOrderEntity extends AbstractDomainBase{
     @Column(name = "customerId")
     private int customerId;
 
-    private String classRegSent;
+    private Date classRegSent;
     private String reportedRevRec;
     private int salesOrderNumber;
     private String status;
-    private Timestamp bookDate;
-    private Timestamp shipDate;
-    private Timestamp planningMeetingDate;
-    private Timestamp kickoffMeetingDate;
-    private Timestamp onSiteStartDate;
-    private Timestamp onSiteEndDate;
-    private Timestamp releaseForRevenueRecDate;
+    private Date bookDate;
+    private Date shipDate;
+    private Date planningMeetingDate;
+    private Date kickoffMeetingDate;
+    private Date onSiteStartDate;
+    private Date onSiteEndDate;
+    private Date releaseForRevenueRecDate;
     private String waitTime;
     private Integer bookedToKickOff;
     private Integer daysToClose;
@@ -63,11 +65,11 @@ public class SalesOrderEntity extends AbstractDomainBase{
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "classRegSent")
-    public String getClassRegSent() {
+    public Date getClassRegSent() {
         return classRegSent;
     }
 
-    public void setClassRegSent(String classRegSent) {
+    public void setClassRegSent(Date classRegSent) {
         this.classRegSent = classRegSent;
     }
 
@@ -103,71 +105,71 @@ public class SalesOrderEntity extends AbstractDomainBase{
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "bookDate")
-    public Timestamp getBookDate() {
+    public Date getBookDate() {
         return bookDate;
     }
 
-    public void setBookDate(Timestamp bookDate) {
+    public void setBookDate(Date bookDate) {
         this.bookDate = bookDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "shipDate")
-    public Timestamp getShipDate() {
+    public Date getShipDate() {
         return shipDate;
     }
 
-    public void setShipDate(Timestamp shipDate) {
+    public void setShipDate(Date shipDate) {
         this.shipDate = shipDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "planningMeetingDate")
-    public Timestamp getPlanningMeetingDate() {
+    public Date getPlanningMeetingDate() {
         return planningMeetingDate;
     }
 
-    public void setPlanningMeetingDate(Timestamp planningMeetingDate) {
+    public void setPlanningMeetingDate(Date planningMeetingDate) {
         this.planningMeetingDate = planningMeetingDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "kickoffMeetingDate")
-    public Timestamp getKickoffMeetingDate() {
+    public Date getKickoffMeetingDate() {
         return kickoffMeetingDate;
     }
 
-    public void setKickoffMeetingDate(Timestamp kickoffMeetingDate) {
+    public void setKickoffMeetingDate(Date kickoffMeetingDate) {
         this.kickoffMeetingDate = kickoffMeetingDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "onSiteStartDate")
-    public Timestamp getOnSiteStartDate() {
+    public Date getOnSiteStartDate() {
         return onSiteStartDate;
     }
 
-    public void setOnSiteStartDate(Timestamp onSiteStartDate) {
+    public void setOnSiteStartDate(Date onSiteStartDate) {
         this.onSiteStartDate = onSiteStartDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "OnSiteEndDate")
-    public Timestamp getOnSiteEndDate() {
+    public Date getOnSiteEndDate() {
         return onSiteEndDate;
     }
 
-    public void setOnSiteEndDate(Timestamp onSiteEndDate) {
+    public void setOnSiteEndDate(Date onSiteEndDate) {
         this.onSiteEndDate = onSiteEndDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "releaseForRevenueRecDate")
-    public Timestamp getReleaseForRevenueRecDate() {
+    public Date getReleaseForRevenueRecDate() {
         return releaseForRevenueRecDate;
     }
 
-    public void setReleaseForRevenueRecDate(Timestamp releaseForRevenueRecDate) {
+    public void setReleaseForRevenueRecDate(Date releaseForRevenueRecDate) {
         this.releaseForRevenueRecDate = releaseForRevenueRecDate;
     }
 

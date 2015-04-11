@@ -7,7 +7,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 
-public interface SalesOrderRepository extends CrudRepository<SalesOrderEntity, SalesOrderEntityId> {
+public interface SalesOrderRepository extends CrudRepository<SalesOrderEntity, Integer> {
 
 
 

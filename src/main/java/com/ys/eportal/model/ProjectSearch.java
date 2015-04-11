@@ -4,7 +4,7 @@ package com.ys.eportal.model;
  * Created by rob on 4/5/15.
  */
 public class ProjectSearch {
-    private int saleOrderNumber;
+    private int salesOrderNumber;
     private String customerName;
 
     public ProjectSearch() {
@@ -14,21 +14,21 @@ public class ProjectSearch {
         this.customerName = customerName;
     }
 
-    public ProjectSearch(int saleOrderNumber) {
-        this.saleOrderNumber = saleOrderNumber;
+    public ProjectSearch(int salesOrderNumber) {
+        this.salesOrderNumber = salesOrderNumber;
     }
 
-    public ProjectSearch(int saleOrderNumber, String customerName) {
-        this.saleOrderNumber = saleOrderNumber;
+    public ProjectSearch(int salesOrderNumber, String customerName) {
+        this.salesOrderNumber = salesOrderNumber;
         this.customerName = customerName;
     }
 
-    public int getSaleOrderNumber() {
-        return saleOrderNumber;
+    public int getSalesOrderNumber() {
+        return salesOrderNumber;
     }
 
-    public void setSaleOrderNumber(int saleOrderNumber) {
-        this.saleOrderNumber = saleOrderNumber;
+    public void setSalesOrderNumber(int salesOrderNumber) {
+        this.salesOrderNumber = salesOrderNumber;
     }
 
     public String getCustomerName() {
@@ -46,7 +46,7 @@ public class ProjectSearch {
 
         ProjectSearch that = (ProjectSearch) o;
 
-        if (saleOrderNumber != that.saleOrderNumber) return false;
+        if (salesOrderNumber != that.salesOrderNumber) return false;
         if (customerName != null ? !customerName.equals(that.customerName) : that.customerName != null) return false;
 
         return true;
@@ -54,7 +54,7 @@ public class ProjectSearch {
 
     @Override
     public int hashCode() {
-        int result = saleOrderNumber;
+        int result = salesOrderNumber;
         result = 31 * result + (customerName != null ? customerName.hashCode() : 0);
         return result;
     }

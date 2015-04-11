@@ -64,8 +64,12 @@ public class PortalService {
     }
 
     public SalesOrderEntity findSalesOrderEntityById(int salesOrderId){
-
-        return this.salesOrderRepository.findOne(salesOrderId);
+        List<SalesOrderEntity> list = this.salesOrderRepository.findBySalesOrderId(salesOrderId);
+        SalesOrderEntity soe = null;
+        if(list!=null && list.size()>0){
+            soe = list.get(0);
+        }
+        return soe;
     }
     public List<SalesOrderEntity> findAllSalesOrders(){
         return (List)this.salesOrderRepository.findAll();
@@ -75,7 +79,7 @@ public class PortalService {
         List<SalesOrderEntity> results = null;
 
         if(search.getSalesOrderNumber()>0){
-            SalesOrderEntity soe =this.salesOrderRepository.findOne(search.getSalesOrderNumber());
+            SalesOrderEntity soe =this. findSalesOrderEntityById(search.getSalesOrderNumber());
             results = new ArrayList<SalesOrderEntity>();
             results.add(soe);
         }else if(search.getCustomerName()!=null&& !search.getCustomerName().trim().equals("")){

@@ -9,7 +9,7 @@ import javax.persistence.*;
  * Created by rob on 4/8/15.
  */
 @Entity @IdClass(SalesOrderEntityId.class)
-@javax.persistence.Table(name = "ep_SalesOrder")
+@Table(name = "ep_SalesOrder")
 public class SalesOrderEntity extends AbstractDomainBase{
 
 

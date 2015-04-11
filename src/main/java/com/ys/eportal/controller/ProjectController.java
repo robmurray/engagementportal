@@ -50,7 +50,7 @@ public class ProjectController {
         return this.projectEditForm(so.getSalesOrderNumber(),"",model);//"projectEdit";
     }
 
-    @RequestMapping(value="/projectedit", method= RequestMethod.GET)
+    @RequestMapping(value="/projectEdit", method= RequestMethod.GET)
     public String projectEditForm(@RequestParam(value="salesOrderNumber", required=true) Integer salesOrderNumber,
                                   @RequestParam(value="msgtype", required=false) String messageType,Model model) {
 
@@ -59,7 +59,7 @@ public class ProjectController {
         SalesOrderEntity so = this.portalService.findSalesOrderEntityById(salesOrderNumber);
         Project project = this.projectMapper.convert(so);
         model.addAttribute("pageName", "Edit Project");
-        model.addAttribute("project",new Project());
+        model.addAttribute("project",project);
         return "projectEdit";
     }
 

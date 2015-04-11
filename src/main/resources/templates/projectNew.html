@@ -41,6 +41,7 @@
                                    placeholder="enter the customer name"/>
                         </div>
                     </div>
+                    <!--
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Class Reg Sent</label>
                         <div class="col-sm-2">
@@ -48,6 +49,7 @@
                                    placeholder="enter class reg sent"/>
                         </div>
                     </div>
+                    -->
                     <div class="form-group">
                         <label class="col-sm-2 control-label">reported Rev Rec</label>
                         <div class="col-sm-2">
@@ -67,99 +69,99 @@
                             </select>
                         </div>
                     </div>
+                    <!--
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">book date</label>
+                                            <div class="col-sm-2">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                    <input class="datepicker form-control" value="" th:field="*{bookDate}" data-date-format="mm/dd/yy" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">book date</label>
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-                                <input class="datepicker form-control" value="" th:field="*{bookDate}" data-date-format="mm/dd/yy" />
-                            </div>
-                        </div>
-                    </div>
-<!--
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">ship date</label>
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-                                <input class="datepicker form-control" value="" th:field="*{shipDate}" data-date-format="mm/dd/yy" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">planning meeting date</label>
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-                                <input class="datepicker form-control" value="" th:field="*{planningMeetingDate}" data-date-format="mm/dd/yy" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">kickoff meeting date</label>
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-                                <input class="datepicker form-control" value="" th:field="*{kickoffMeetingDate}" data-date-format="mm/dd/yy" />
-                            </div>
-                        </div>
-                    </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">ship date</label>
+                                            <div class="col-sm-2">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                    <input class="datepicker form-control" value="" th:field="*{shipDate}" data-date-format="mm/dd/yy" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">planning meeting date</label>
+                                            <div class="col-sm-2">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                    <input class="datepicker form-control" value="" th:field="*{planningMeetingDate}" data-date-format="mm/dd/yy" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">kickoff meeting date</label>
+                                            <div class="col-sm-2">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                    <input class="datepicker form-control" value="" th:field="*{kickoffMeetingDate}" data-date-format="mm/dd/yy" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">onsite start date</label>
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-                                <input class="datepicker form-control" value="" th:field="*{onSiteStartDate}" data-date-format="mm/dd/yy" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">onsite end date</label>
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-                                <input class="datepicker form-control" value="" th:field="*{onSiteEndDate}" data-date-format="mm/dd/yy" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">release for revenue rec date</label>
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <i class="glyphicon glyphicon-calendar"></i>
-                                </span>
-                                <input class="datepicker form-control" value="" th:field="*{releaseForRevenueRecDate}" data-date-format="mm/dd/yy" />
-                            </div>
-                        </div>
-                    </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">onsite start date</label>
+                                            <div class="col-sm-2">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                    <input class="datepicker form-control" value="" th:field="*{onSiteStartDate}" data-date-format="mm/dd/yy" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">onsite end date</label>
+                                            <div class="col-sm-2">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                    <input class="datepicker form-control" value="" th:field="*{onSiteEndDate}" data-date-format="mm/dd/yy" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-sm-2 control-label">release for revenue rec date</label>
+                                            <div class="col-sm-2">
+                                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                                    <input class="datepicker form-control" value="" th:field="*{releaseForRevenueRecDate}" data-date-format="mm/dd/yy" />
+                                                </div>
+                                            </div>
+                                        </div>
 
-                        <div class="form-group">
-                            <label class="col-sm-2 control-label">wait time</label>
-                            <div class="col-sm-2">
-                                <select class="form-control selectpicker" th:field="*{waitTime}">
+                                            <div class="form-group">
+                                                <label class="col-sm-2 control-label">wait time</label>
+                                                <div class="col-sm-2">
+                                                    <select class="form-control selectpicker" th:field="*{waitTime}">
 
-                                    <option th:each="type : *{waitTimeValues}"
-                                            th:value="${type}"
-                                            th:text="${type}"></option>
-                                </select>
-                            </div>
-                        </div>
-
+                                                        <option th:each="type : *{waitTimeValues}"
+                                                                th:value="${type}"
+                                                                th:text="${type}"></option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                    -->
                     <div class="form-group">
                         <label class="col-sm-2 control-label">days to close</label>
                         <div class="col-sm-10">
@@ -287,7 +289,7 @@
                             <textarea class="form-control" id="maxL-3" maxlength="300" rows="2" placeholder="enter shawdow notes" th:field="*{shawdow}"></textarea>
                         </div>
                     </div>
- -->
+
                     <div class="form-actions">
                         <div class="form-group">
                             <div class="col-sm-offset-2 col-sm-10">

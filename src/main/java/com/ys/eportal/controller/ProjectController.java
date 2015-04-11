@@ -8,12 +8,15 @@ import com.ys.eportal.model.Customer;
 import com.ys.eportal.model.Project;
 import com.ys.eportal.service.PortalService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by rob on 4/4/15.
@@ -26,6 +29,13 @@ public class ProjectController {
 
     @Autowired
     private ProjectMapper projectMapper;
+
+    @InitBinder
+    protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yy");
+        CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
+        binder.registerCustomEditor(Date.class, editor);
+    }
 
     @RequestMapping(value="/projectNew", method= RequestMethod.GET)
     public String ProjectForm(Model model) {

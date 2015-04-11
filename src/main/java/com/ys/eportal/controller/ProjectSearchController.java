@@ -38,7 +38,7 @@ public class ProjectSearchController {
     public String projectSearchForm(Model model) {
 
         model.addAttribute("pageName", "Project Search");
-        model.addAttribute("projectsearch", new CustomerSearch());
+        model.addAttribute("projectsearch", new ProjectSearch());
         return "projectSearch";
     }
 

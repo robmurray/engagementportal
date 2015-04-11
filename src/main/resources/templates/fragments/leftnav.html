@@ -1,76 +1,110 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
 <div id="leftnav" th:fragment="leftnav">
-<!-- BEGIN SIDE NAVIGATION -->
-<nav class="navbar-side" role="navigation">
-    <div class="navbar-collapse sidebar-collapse collapse">
+    <!-- BEGIN SIDE NAVIGATION -->
+    <nav class="navbar-side" role="navigation">
+        <div class="navbar-collapse sidebar-collapse collapse">
 
-        <!-- BEGIN FIND MENU ITEM INPUT -->
-        <div class="media-search">
-            <input type="text" class="input-menu" id="input-items" placeholder="Find..."/>
+            <!-- BEGIN FIND MENU ITEM INPUT -->
+            <div class="media-search">
+                <input type="text" class="input-menu" id="input-items" placeholder="Find..."/>
+            </div>
+            <!-- END FIND MENU ITEM INPUT -->
+
+            <ul id="side" class="nav navbar-nav side-nav">
+                <!-- BEGIN SIDE NAV MENU -->
+                <!-- Navigation category -->
+                <li>
+                    <h4>Navigation</h4>
+                </li>
+                <li>
+                    <a  href="dashboard">
+                        <i class="fa fa-dashboard"></i> Dashboard
+                    </a>
+                </li>
+                <!-- BEGIN DROPDOWN -->
+                <li class="panel open">
+                    <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
+                       data-target="#import">
+                        <i class="fa fa-cogs"></i> import/export <span class="fa arrow"></span>
+                    </a>
+                    <ul class="collapse nav" id="import">
+                        <li>
+                            <a href="uploadSalesOrder">
+                                <i class="fa fa-angle-double-right"></i> upload sales orders
+                            </a>
+                        </li>
+                        <li>
+                            <a href="importSalesOrders">
+                                <i class="fa fa-angle-double-right"></i> import sales orders
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="importSalesOrders">
+                                <i class="fa fa-angle-double-right"></i>** import master spreadsheet ** Dev only
+                            </a>
+                        </li>
+                        <li>
+                            <a href="exportSalesOrders">
+                                <i class="fa fa-angle-double-right"></i> export sales orders
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="panel open">
+                    <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
+                       data-target="#customer">
+                        <i class="fa fa-cogs"></i> Customer <span class="fa arrow"></span>
+                    </a>
+                    <ul class="collapse nav" id="customer">
+                        <li>
+                            <a href="customerSearch">
+                                <i class="fa fa-angle-double-right"></i> search
+                            </a>
+                        </li>
+                        <li>
+                            <a href="customerNew">
+                                <i class="fa fa-angle-double-right"></i> create
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <li class="panel open">
+                    <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
+                       data-target="#project">
+                        <i class="fa fa-cogs"></i> Project <span class="fa arrow"></span>
+                    </a>
+                    <ul class="collapse nav" id="project">
+                        <li>
+                            <!--class="active"-->
+                            <a href="projectSearch">
+                                <i class="fa fa-angle-double-right"></i> search
+                            </a>
+                        </li>
+                        <li>
+                            <a href="projectNew">
+                                <i class="fa fa-angle-double-right"></i> create
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+                <!-- END DROPDOWN -->
+            </ul>
+            <!-- /.side-nav -->
+
         </div>
-        <!-- END FIND MENU ITEM INPUT -->
-
-        <ul id="side" class="nav navbar-nav side-nav">
-            <!-- BEGIN SIDE NAV MENU -->
-            <!-- Navigation category -->
-            <li>
-                <h4>Navigation</h4>
-            </li>
-            <!-- END Navigation category -->
-
-            <li>
-                <a class="active" href="dashboard">
-                    <i class="fa fa-dashboard"></i> Dashboard
-                </a>
-            </li>
-            <!-- BEGIN DROPDOWN -->
-            <li class="panel">
-                <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#customer">
-                    <i class="fa fa-cogs"></i> Customer <span class="fa arrow"></span>
-                </a>
-                <ul class="collapse nav" id="customer">
-                    <li>
-                        <a href="customerSearch">
-                            <i class="fa fa-angle-double-right"></i> search
-                        </a>
-                    </li>
-                    <li>
-                        <a href="customerNew">
-                            <i class="fa fa-angle-double-right"></i> create
-                        </a>
-                    </li>
-
-                </ul>
-            </li>
-            <li class="panel">
-                <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle" data-target="#project">
-                    <i class="fa fa-cogs"></i> Project <span class="fa arrow"></span>
-                </a>
-                <ul class="collapse nav" id="project">
-                    <li>
-                        <a href="projectSearch">
-                            <i class="fa fa-angle-double-right"></i> search
-                        </a>
-                    </li>
-                    <li>
-                        <a href="projectNew">
-                            <i class="fa fa-angle-double-right"></i> create
-                        </a>
-                    </li>
-
-                </ul>
-            </li>
-            <!-- END DROPDOWN -->
-        </ul><!-- /.side-nav -->
-
-    </div><!-- /.navbar-collapse -->
-</nav><!-- /.navbar-side -->
-<!-- END SIDE NAVIGATION -->
+        <!-- /.navbar-collapse -->
+    </nav>
+    <!-- /.navbar-side -->
+    <!-- END SIDE NAVIGATION -->
 
 </div>
 </body>

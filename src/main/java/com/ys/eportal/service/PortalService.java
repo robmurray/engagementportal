@@ -2,7 +2,9 @@ package com.ys.eportal.service;
 
 import com.ys.eportal.infra.domain.CustomerEntity;
 import com.ys.eportal.infra.domain.CustomerSearchSupport;
+import com.ys.eportal.infra.domain.SalesOrderEntity;
 import com.ys.eportal.infra.repository.CustomerRepository;
+import com.ys.eportal.model.Project;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -52,6 +54,10 @@ public class PortalService {
 
     public void saveCustomer(CustomerEntity customer){
         this.customerRepository.save(customer);
+
+    }
+
+    public void saveProject(SalesOrderEntity salesOrderEntity) {
 
     }
 

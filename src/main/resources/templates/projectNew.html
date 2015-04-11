@@ -17,7 +17,7 @@
                 <h4>Project Information</h4>
             </div>
             <div class="portlet-widgets">
-                <a data-toggle="collapse" data-parent="#accordion" href="#prijectinfo"><i class="fa fa-chevron-down"></i></a>
+                <a data-toggle="collapse" data-parent="#accordion" href="#projectinfo"><i class="fa fa-chevron-down"></i></a>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -25,37 +25,39 @@
             <div class="portlet-body">
                 <form class="form-horizontal" role="form" action="#" th:action="@{/pojectnew}" th:object="${project}"
                       method="post">
+                    <!-- <div class="note"></div>-->
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Project Id</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-2">
                             <input type="text" class="form-control" th:field="*{projectId}"
                                    placeholder="enter the project Id" readonly="readonly"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Customer Name</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-5">
                             <input type="text" class="form-control" th:field="*{customer.name}"
                                    placeholder="enter the customer name"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Class Reg Sent</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-2">
                             <input type="text" class="form-control" th:field="*{classRegSent}"
-                                   placeholder="enter the class reg sent"/>
+                                   placeholder="enter class reg sent"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">reported Rev Rec</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-2">
                             <input type="text" class="form-control" th:field="*{reportedRevRec}"
-                                   placeholder="enter the reported Rev Rec"/>
+                                   placeholder="enter reported RevRec"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">sales Order Number</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-3">
                             <input type="text" class="form-control" th:field="*{salesOrderNumber}"
                                    placeholder="enter the sales order number"/>
                         </div>
@@ -63,7 +65,7 @@
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">status</label>
-                        <div class="col-sm-3">
+                        <div class="col-sm-2">
                             <select class="form-control selectpicker" th:field="*{status}">
                                 <option th:each="type : *{statusValues}"
                                         th:value="${type}"
@@ -71,9 +73,10 @@
                             </select>
                         </div>
                     </div>
+
                     <div class="form-group">
                         <label class="col-sm-2 control-label">book date</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-2">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
@@ -85,7 +88,7 @@
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">ship date</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-2">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
@@ -96,7 +99,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">planning meeting date</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-2">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
@@ -107,7 +110,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">kickoff meeting date</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-2">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
@@ -119,7 +122,7 @@
 
                     <div class="form-group">
                         <label class="col-sm-2 control-label">onsite start date</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-2">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
@@ -130,7 +133,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">onsite end date</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-2">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
@@ -141,7 +144,7 @@
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">release for revenue rec date</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-2">
                             <div class="input-group">
                                 <span class="input-group-addon">
                                     <i class="glyphicon glyphicon-calendar"></i>
@@ -153,7 +156,7 @@
 
                         <div class="form-group">
                             <label class="col-sm-2 control-label">wait time</label>
-                            <div class="col-sm-3">
+                            <div class="col-sm-2">
                                 <select class="form-control selectpicker" th:field="*{waitTime}">
 
                                     <option th:each="type : *{waitTimeValues}"
@@ -162,6 +165,25 @@
                                 </select>
                             </div>
                         </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">days to close</label>
+                        <div class="col-sm-10">
+                            <div id="daysToCloseSpinner" class="spinner">
+                                <div class="input-group input-small">
+                                    <input th:field="*{daysToClose}" class="spinner-input form-control"/>
+                                    <div class="spinner-buttons input-group-btn btn-group-vertical">
+                                        <button type="button" class="btn spinner-up btn-xs">
+                                            <i class="fa fa-chevron-up icon-only"></i>
+                                        </button>
+                                        <button type="button" class="btn spinner-down btn-xs">
+                                            <i class="fa fa-chevron-down icon-only"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
 
                     <div class="form-group">
@@ -184,27 +206,8 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">days to close</label>
-                        <div class="col-sm-10">
-                            <div id="MySpinner-2" class="spinner">
-                                <div class="input-group input-small">
-                                    <input th:field="*{daysToClose}" class="spinner-input form-control"/>
-                                    <div class="spinner-buttons input-group-btn btn-group-vertical">
-                                        <button type="button" class="btn spinner-up btn-xs">
-                                            <i class="fa fa-chevron-up icon-only"></i>
-                                        </button>
-                                        <button type="button" class="btn spinner-down btn-xs">
-                                            <i class="fa fa-chevron-down icon-only"></i>
-                                        </button>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
                         <label class="col-sm-2 control-label">amount</label>
-                        <div class="col-sm-10">
+                        <div class="col-sm-2">
                             <div class="input-group">
                                 <span class="input-group-addon"><i class="fa fa-usd"></i></span>
                                 <input type="text" class="form-control" th:field="*{amount}"
@@ -215,28 +218,81 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-2 control-label">Textarea</label>
-                        <div class="col-sm-8">
-                            <textarea class="form-control" id="maxL-3" maxlength="225" rows="2" placeholder="This textarea has a limit of 225 chars."></textarea>
-														<span class="help-block">
-															Bootstrap maxlength supports textarea as well as inputs. Even on old IE.
-														</span>
+                        <label class="col-sm-2 control-label">notes</label>
+                        <div class="col-sm-5">
+                            <textarea class="form-control" id="maxL-3" maxlength="225" rows="2" placeholder="enter project notes" th:field="*{notes}"></textarea>
                         </div>
                     </div>
-<!--
 
-                                        private String notes;
-                                        private String location;
-                                        private String region;
-                                        private String modelGroup;
-                                        private String service;
-                                        private String accountTeam;
-                                        private String remote;
-                                        private String onsite;
-                                        private String equipmentList;
-                                        private String shawdow;
 
-                    -->
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">location</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control" th:field="*{location}"
+                                   placeholder="location"/>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">region</label>
+                        <div class="col-sm-1">
+                            <input type="text" class="form-control" th:field="*{region}"
+                                   placeholder="region"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">wait time</label>
+                        <div class="col-sm-2">
+                            <select class="form-control selectpicker" th:field="*{modelGroup}">
+
+                                <option th:each="type : *{modelGroupValues}"
+                                        th:value="${type}"
+                                        th:text="${type}"></option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">service</label>
+                        <div class="col-sm-5">
+                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2" placeholder="enter service notes" th:field="*{service}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">accountTeam</label>
+                        <div class="col-sm-5">
+                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2" placeholder="enter account team" th:field="*{accountTeam}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">remote</label>
+                        <div class="col-sm-5">
+                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2" placeholder="enter remote notes" th:field="*{remote}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">onsite</label>
+                        <div class="col-sm-5">
+                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2" placeholder="enter onsite notes" th:field="*{onsite}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">equipmentList</label>
+                        <div class="col-sm-5">
+                            <textarea class="form-control" id="maxL-5" maxlength="500" rows="2" placeholder="enter equipmentList" th:field="*{equipmentList}"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">shawdow</label>
+                        <div class="col-sm-5">
+                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2" placeholder="enter shawdow notes" th:field="*{shawdow}"></textarea>
+                        </div>
+                    </div>
 
                     <div class="form-actions">
                         <div class="form-group">

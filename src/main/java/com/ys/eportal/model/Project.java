@@ -52,7 +52,18 @@ public class Project {
     private String location;
     private String region;
     private String modelGroup;
+
+    private List<String> modelGroupValues = new ArrayList<String>() {{
+        add("WLAN");
+        add("VPM");
+        add("CSN");
+    }};
+
+
     private String service;
+
+
+
     private String accountTeam;
     private String remote;
     private String onsite;
@@ -89,6 +100,14 @@ public class Project {
 
     public List<String> getWaitTimeValues() {
         return waitTimeValues;
+    }
+
+    public List<String> getModelGroupValues() {
+        return modelGroupValues;
+    }
+
+    public void setModelGroupValues(List<String> modelGroupValues) {
+        this.modelGroupValues = modelGroupValues;
     }
 
     public void setWaitTimeValues(List<String> waitTimeValues) {

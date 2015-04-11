@@ -1,5 +1,9 @@
 package com.ys.eportal.controller;
 
+import com.ys.eportal.infra.domain.CustomerEntity;
+import com.ys.eportal.infra.domain.SalesOrderEntity;
+import com.ys.eportal.mapper.CustomerMapper;
+import com.ys.eportal.mapper.ProjectMapper;
 import com.ys.eportal.model.Project;
 import com.ys.eportal.service.PortalService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +22,9 @@ public class ProjectController {
     @Autowired
     private PortalService portalService;
 
+    @Autowired
+    private ProjectMapper projectMapper;
+
     @RequestMapping(value="/projectnew", method= RequestMethod.GET)
     public String ProjectForm(Model model) {
 
@@ -30,9 +37,13 @@ public class ProjectController {
     @RequestMapping(value="/projectnew", method=RequestMethod.POST)
     public String projectSubmit(@ModelAttribute Project project, Model model) {
 
+        SalesOrderEntity so = this.projectMapper.convert(project);
+        this.portalService.saveProject(so);
+
+        project = this.projectMapper.convert(so);
         model.addAttribute("pageName", "Save Project");
-        model.addAttribute("Project", project);
-        return "ProjectNewResult";
+        model.addAttribute("Project", so);
+        return "projectEdit";
     }
 
     @RequestMapping(value="/projectedit", method= RequestMethod.GET)

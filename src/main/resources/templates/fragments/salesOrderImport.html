@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="salesOrderImport" th:fragment="salesOrderImport">
+
+    <div class="portlet">
+        <div class="portlet-heading inverse">
+            <div class="portlet-title">
+                <h4><i class="fa fa-edit"></i> Sales Orders Available for Import</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a href="#" class="tooltip-primary" data-placement="left" data-rel="tooltip" title=""
+                   data-original-title="Add product" data-toggle="modal" data-target="#add-products"><i
+                        class="fa fa-plus"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="portlet-body no-padding-top no-padding-bottom">
+            <table id="products" class="datatable table table-hover table-striped table-bordered tc-table">
+                <thead>
+                <!--
+
+                FNET Region 1	Sales Agent Name	ST Sales Agent Name	Activity Yr	Activity Mo No	Activity Date	ST Customer Name	ST Channel Name	BT Customer Name	Order No	Product Family Code	Model Group Code	Forecast Group Code	Ordered Qty	Net USD	Contract Status Code	End User Name
+
+                -->
+                <tr>
+                    <th><label><input type="checkbox" class="tc"/><span class="labels"></span></label></th>
+                    <th data-hide="phone,tablet">sales order number</th>
+                    <th data-class="expand">ST Customer Name</th>
+                    <th data-hide="phone,tablet">Model Group Code</th>
+                    <th data-hide="phone,tablet">Ordered Qty</th>
+                    <th data-hide="phone,tablet">Net USD</th>
+                    <th data-hide="phone">Activity Date</th>
+                    <th data-hide="phone">Contract Status Code</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td></td>
+                    <td>1</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>179</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-active">Active</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>2</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>197</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-pending">Pending</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>3</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>124</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-success">Publish</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>4</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>234</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-danger">Deleted</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>5</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>175</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-active">Active</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>6</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>139</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-active">Active</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>7</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>133</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-active">Active</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>8</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>127</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-inverse">Disabled</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>9</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>187</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-active">Active</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>10</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>147</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-danger">Deleted</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>11</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>190</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-inverse">Disabled</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>12</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>157</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-inverse">Disabled</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>13</td>
+                    <td>Brown Boot</td>
+                    <td>Shoes</td>
+                    <td>$45</td>
+                    <td>177</td>
+                    <td>22/12/2014</td>
+                    <td><span class="label label-inverse">Disabled</span></td>
+                    <td>
+                        <div class="btn-group btn-group-xs ">
+                            <a href="" class="btn btn-inverse"><i class="fa fa-pencil icon-only"></i></a>
+                            <a href="" class="btn btn-danger"><i class="fa fa-times icon-only"></i></a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr>
+                    <td colspan="9">
+                        <div class="btn-group pull-left">
+                            <button class="btn btn-primary dropdown-toggle hidden-xs" data-toggle="dropdown">
+                                with Selected <span class="caret"></span>
+                            </button>
+                            <button class="btn btn-primary dropdown-toggle visible-xs" data-toggle="dropdown">
+                                <i class="fa fa-cog icon-only"></i>
+                            </button>
+                            <ul class="dropdown-menu dropdown-primary" role="menu">
+                                <li><a href="#">Action</a></li>
+                                <li><a href="#">Another action</a></li>
+                                <li class="divider"></li>
+                                <li><a href="#">Separated link</a></li>
+                            </ul>
+                        </div>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+
+        </div>
+    </div>
+    <!-- END YOUR CONTENT HERE -->
+</div>
+
+</body>
+</html>

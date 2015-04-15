@@ -33,6 +33,8 @@ public class CustomerController {
         Customer customer = new Customer();
         addPageAttributes(model,"Create Customer", "Create new Customer");
         model.addAttribute("customer", customer);
+        model.addAttribute("pageGroup", "customer");
+        model.addAttribute("pageId", "createCustomer");
         return "customerNew";
     }
 
@@ -47,6 +49,9 @@ public class CustomerController {
         model.addAttribute("pageName", "Save Customer");
         addPageAttributes(model,"Save Customer", "Save new Customer");
         model.addAttribute("customer", customer);
+
+        model.addAttribute("pageGroup", "customer");
+        model.addAttribute("pageId", "createCustomer");
 
         return customerEditForm(customer.getCustomerId(),"",model); //"customerEdit?customerId="+customer.getCustomerId();
     }
@@ -70,6 +75,8 @@ public class CustomerController {
 
         addPageAttributes(model, "Edit Customer", "Edit the Customer ");
         model.addAttribute("customer", c);
+        model.addAttribute("pageGroup", "customer");
+        model.addAttribute("pageId", "searchCustomer");
         return "customerEdit";
     }
 
@@ -82,6 +89,8 @@ public class CustomerController {
 
         model.addAttribute("customer", customer);
         addPageAttributes(model, "Save Customer", "Save Customer update");
+        model.addAttribute("pageGroup", "customer");
+        model.addAttribute("pageId", "searchCustomer");
         return "customerEdit";
     }
 

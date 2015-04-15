@@ -1,197 +1,134 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/portalpage">
 <head>
     <meta charset="utf-8"/>
-    <title>Add Customer</title>
-
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <meta name="description" content=""/>
-    <meta name="author" content=""/>
-
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
-    <link rel="stylesheet" href="assets/css/fonts.css"/>
-    <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css"/>
-
-    <!-- PAGE LEVEL PLUGINS STYLES -->
-    <!-- REQUIRE FOR SPEECH COMMANDS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/plugins/gritter/jquery.gritter.css" />
-
-    <!-- Tc core CSS -->
-    <link id="qstyle" rel="stylesheet" href="assets/css/themes/style.css"/>
-
-
-    <!-- Add custom CSS here -->
-
-    <!-- End custom CSS here -->
-
-    <!--[if lt IE 9]>
-    <script src="assets/js/html5shiv.js"></script>
-    <script src="assets/js/respond.min.js"></script>
-    <![endif]-->
-
+    <title>dashBoard</title>
 </head>
-
 <body>
-<div id="wrapper">
-    <div id="main-container">
-        <!-- BEGIN TOP NAVIGATION -->
-        <div th:replace="fragments/header :: header"/>
-        <!-- END TOP NAVIGATION -->
+<!--<h1>Dashboard<span class="sub-title">engagement statistics and alerts</span></h1>-->
+<div layout:fragment="content">
+
+    <!-- START YOUR CONTENT HERE -->
+
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>Projects by status</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#projectinfo"><i
+                        class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
 
 
-        <!-- BEGIN SIDE NAVIGATION -->
-        <div th:replace="fragments/leftnav :: leftnav"/>
-        <!-- END SIDE NAVIGATION -->
+        <div class="row">
+            <div class="col-lg-9 col-sm-12">
 
-        <!-- BEGIN MAIN PAGE CONTENT -->
-        <div id="page-wrapper">
-            <!-- BEGIN PAGE HEADING ROW -->
-            <div class="row">
-                <div class="col-lg-12">
-                    <!-- BEGIN BREADCRUMB -->
-                    <div class="breadcrumbs">
-                        <ul class="breadcrumb">
-                            <li class="active">Dashboard</li>
-                        </ul>
+                <div class="row">
 
-                    </div>
-                    <!-- END BREADCRUMB -->
+                    <div class="col-lg-4 col-sm-4">
+                        <a href="#" class="tile-button btn btn-primary">
+                            <div class="tile-content-wrapper">
+                                <i class="fa fa-users"></i>
 
-                    <div class="page-header title">
-                        <!-- PAGE TITLE ROW -->
-                        <h1>Dashboard<span class="sub-title">engagement statistics and alerts</span></h1>
-                    </div>
-
-                    <!-- /#ek-layout-button -->
-
-                    <!-- /#ek-layout-button -->
-
-                </div><!-- /.col-lg-12 -->
-            </div><!-- /.row -->
-            <!-- END PAGE HEADING ROW -->
-            <div class="row">
-                <div class="col-lg-12">
-
-                    <!-- START YOUR CONTENT HERE -->
-
-
-                    <div class="row">
-                        <div class="col-lg-9 col-sm-12">
-
-                            <div class="row">
-
-                                <div class="col-lg-4 col-sm-4">
-                                    <a href="#" class="tile-button btn btn-primary">
-                                        <div class="tile-content-wrapper">
-                                            <i class="fa fa-users"></i>
-                                            <div class="tile-content">
-                                                50
-                                            </div>
-                                            <small>
-                                                Active Project
-                                            </small>
-                                        </div>
-                                    </a>
+                                <div class="tile-content">
+                                    50
                                 </div>
-
-                                <div class="col-lg-4 col-sm-4">
-                                    <a href="#" class="tile-button btn btn-inverse">
-                                        <div class="tile-content-wrapper">
-                                            <i class="glyphicon glyphicon-gift"></i>
-                                            <div class="tile-content">
-                                                300
-                                            </div>
-                                            <small>
-                                                completed projects this month
-                                            </small>
-                                        </div>
-                                    </a>
-                                </div>
-
-
-                                <div class="col-lg-4 col-sm-4">
-                                    <a href="#" class="tile-button btn btn-white">
-                                        <div class="tile-content-wrapper">
-                                            <i class="fa fa-warning text-primary"></i>
-                                            <div class="tile-content text-primary">
-                                                <span></span>3
-                                            </div>
-                                            <small>
-                                                blocked projects
-                                            </small>
-                                        </div>
-                                    </a>
-                                </div>
+                                <small>
+                                    Active Project
+                                </small>
                             </div>
+                        </a>
+                    </div>
 
+                    <div class="col-lg-4 col-sm-4">
+                        <a href="#" class="tile-button btn btn-inverse">
+                            <div class="tile-content-wrapper">
+                                <i class="glyphicon glyphicon-gift"></i>
 
-
-                        </div>
-
-
+                                <div class="tile-content">
+                                    300
+                                </div>
+                                <small>
+                                    completed projects this month
+                                </small>
+                            </div>
+                        </a>
                     </div>
 
 
+                    <div class="col-lg-4 col-sm-4">
+                        <a href="#" class="tile-button btn btn-white">
+                            <div class="tile-content-wrapper">
+                                <i class="fa fa-warning text-primary"></i>
 
-
-
-                    <!-- END YOUR CONTENT HERE -->
-
+                                <div class="tile-content text-primary">
+                                    <span></span>3
+                                </div>
+                                <small>
+                                    blocked projects
+                                </small>
+                            </div>
+                        </a>
+                    </div>
                 </div>
+
+
             </div>
 
-            <!-- BEGIN FOOTER CONTENT -->
-            <div th:replace="fragments/footer :: footer">&copy; 2013 The Static Templates</div>
-            <!-- END FOOTER CONTENT -->
 
-        </div><!-- /#page-wrapper -->
-        <!-- END MAIN PAGE CONTENT -->
+        </div>
+
+
+        <div class="row">
+            <div class="col-lg-12">
+
+                <div class="portlet">
+                    <div class="portlet-heading inverse">
+                        <div class="portlet-title">
+                            <h4>Bar Chart</h4>
+                        </div>
+                        <div class="portlet-widgets">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#chart-1"><i
+                                    class="fa fa-chevron-down"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="chart-1" class="panel-collapse collapse in">
+                        <div class="portlet-body">
+                            <div class="chart-holder" id="morris-chart-1"
+                                 style="height: 220px!important; min-height:220px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="portlet">
+                    <div class="portlet-heading inverse">
+                        <div class="portlet-title">
+                            <h4>Area Chart</h4>
+                        </div>
+                        <div class="portlet-widgets">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#chart-2"><i
+                                    class="fa fa-chevron-down"></i></a>
+                        </div>
+                        <div class="clearfix"></div>
+                    </div>
+                    <div id="chart-2" class="panel-collapse collapse in">
+                        <div class="portlet-body">
+                            <div class="chart-holder" id="morris-chart-2"
+                                 style="height: 220px!important; min-height:220px;"></div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+
+        </div>
     </div>
 </div>
-
-<!-- core JavaScript -->
-<script src="assets/js/jquery.min.js"></script>
-<script src="assets/js/bootstrap.min.js"></script>
-<script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="assets/js/plugins/pace/pace.min.js"></script>
-
-<!-- PAGE LEVEL PLUGINS JS -->
-
-<!-- Themes Core Scripts -->
-<script src="assets/js/main.js"></script>
-
-<!-- REQUIRE FOR SPEECH COMMANDS -->
-<script src="assets/js/speech-commands.js"></script>
-<script src="assets/js/plugins/gritter/jquery.gritter.min.js"></script>
-
-<!-- initial page level scripts for examples -->
-<script src="assets/js/plugins/slimscroll/jquery.slimscroll.init.js"></script>
-
-<script type="text/javascript">
-
-		// Custome File Input
-		$(document).on('change', '.btn-file :file', function() {
-			var input = $(this),
-			numFiles = input.get(0).files ? input.get(0).files.length : 1,
-			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
-			input.trigger('fileselect', [numFiles, label]);
-		});
-
-		$(document).ready( function() {
-			$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
-
-				var input = $(this).parents('.input-group').find(':text'),
-				log = numFiles > 1 ? numFiles + ' files selected' : label;
-
-				if( input.length ) {
-					input.val(log);
-				} else {
-					if( log ) alert(log);
-				}
-
-			});
-		});
-	</script>
 </body>
-</html>
+</html>>

@@ -44,6 +44,8 @@ public class ProjectController {
 
         model.addAttribute("pageName", "New Project");
         model.addAttribute("project", project);
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "createProject");
         return "projectNew";
     }
 
@@ -57,19 +59,22 @@ public class ProjectController {
         project = this.projectMapper.convert(so);
         model.addAttribute("pageName", "Save Project");
         model.addAttribute("Project", so);
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "createProject");
+
         return this.projectEditForm(so.getSalesOrderNumber(),"",model);//"projectEdit";
     }
 
     @RequestMapping(value="/projectEdit", method= RequestMethod.GET)
     public String projectEditForm(@RequestParam(value="salesOrderNumber", required=true) Integer salesOrderNumber,
                                   @RequestParam(value="msgtype", required=false) String messageType,Model model) {
-
-
-
-        SalesOrderEntity so = this.portalService.findSalesOrderEntityById(salesOrderNumber);
+SalesOrderEntity so = this.portalService.findSalesOrderEntityById(salesOrderNumber);
         Project project = this.projectMapper.convert(so);
         model.addAttribute("pageName", "Edit Project");
         model.addAttribute("project",project);
+
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "searchProject");
         return "projectEdit";
     }
 
@@ -81,6 +86,8 @@ public class ProjectController {
 
         model.addAttribute("pageName", "Save Project");
         model.addAttribute("project", project);
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "searchProject");
         return "projectEdit";
     }
 

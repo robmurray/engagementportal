@@ -36,6 +36,8 @@ public class CustomerSearchController {
 
         model.addAttribute("pageName", "Customer Search");
         model.addAttribute("customersearch", new CustomerSearch());
+        model.addAttribute("pageGroup", "customer");
+        model.addAttribute("pageId", "searchCustomer");
         return "customerSearch";
     }
 
@@ -50,6 +52,8 @@ public class CustomerSearchController {
         Iterable<Customer> returnList = this.customerMapper.convert(wrkList);
 
         model.addAttribute("customers", returnList);
+        model.addAttribute("pageGroup", "customer");
+        model.addAttribute("pageId", "searchCustomer");
 
         return "customerSearchResults";
     }

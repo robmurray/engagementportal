@@ -1,11 +1,15 @@
 package com.ys.eportal.model;
 
+import java.util.List;
+
 /**
  * Created by rob on 4/5/15.
  */
 public class ProjectSearch {
     private int salesOrderNumber;
     private String customerName;
+    private List<String> statusValues = ModelConstants.statusValues;
+    private String status;
 
     public ProjectSearch() {
     }
@@ -37,6 +41,22 @@ public class ProjectSearch {
 
     public void setCustomerName(String customerName) {
         this.customerName = customerName;
+    }
+
+    public List<String> getStatusValues() {
+        return statusValues;
+    }
+
+    public void setStatusValues(List<String> statusValues) {
+        this.statusValues = statusValues;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     @Override

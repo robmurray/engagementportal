@@ -5,7 +5,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import java.math.BigDecimal;
-import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by rob on 4/8/15.
@@ -13,17 +13,20 @@ import java.sql.Timestamp;
 @Entity
 @javax.persistence.Table(name = "import_OracleOBI", schema = "", catalog = "engagementportal")
 public class ImportOracleObiEntity extends AbstractDomainBase {
-    @Id @GeneratedValue
+    @Id
+    @GeneratedValue
     private long ImportOracleObiID;
+    private long importControlId;
 
     private String fnetRegion1;
     private String salesAgentName;
+    private String stAgentName;
     private Integer activityYear;
     private Integer activityMonth;
-    private Timestamp activityDate;
-    private Timestamp shipDate;
-    private Timestamp planningMeetingDate;
-    private Timestamp kickoffMeetingDate;
+    private Date activityDate;
+    private Date shipDate;
+    private Date planningMeetingDate;
+    private Date kickoffMeetingDate;
     private String stCustomerName;
     private String stChannelName;
     private String btCustomerName;
@@ -35,7 +38,7 @@ public class ImportOracleObiEntity extends AbstractDomainBase {
     private BigDecimal netUsd;
     private String contractStatusCode;
     private String endUserName;
-    private Timestamp importProcessedDate;
+    private Date importProcessedDate;
     private String importStatus;
 
     public long getImportOracleObiID() {
@@ -44,6 +47,22 @@ public class ImportOracleObiEntity extends AbstractDomainBase {
 
     public void setImportOracleObiID(long importOracleObiID) {
         ImportOracleObiID = importOracleObiID;
+    }
+
+    public String getStAgentName() {
+        return stAgentName;
+    }
+
+    public long getImportControlId() {
+        return importControlId;
+    }
+
+    public void setImportControlId(long importControlId) {
+        this.importControlId = importControlId;
+    }
+
+    public void setStAgentName(String stAgentName) {
+        this.stAgentName = stAgentName;
     }
 
     @Basic
@@ -88,41 +107,41 @@ public class ImportOracleObiEntity extends AbstractDomainBase {
 
     @Basic
     @javax.persistence.Column(name = "activityDate")
-    public Timestamp getActivityDate() {
+    public Date getActivityDate() {
         return activityDate;
     }
 
-    public void setActivityDate(Timestamp activityDate) {
+    public void setActivityDate(Date activityDate) {
         this.activityDate = activityDate;
     }
 
     @Basic
     @javax.persistence.Column(name = "shipDate")
-    public Timestamp getShipDate() {
+    public Date getShipDate() {
         return shipDate;
     }
 
-    public void setShipDate(Timestamp shipDate) {
+    public void setShipDate(Date shipDate) {
         this.shipDate = shipDate;
     }
 
     @Basic
     @javax.persistence.Column(name = "planningMeetingDate")
-    public Timestamp getPlanningMeetingDate() {
+    public Date getPlanningMeetingDate() {
         return planningMeetingDate;
     }
 
-    public void setPlanningMeetingDate(Timestamp planningMeetingDate) {
+    public void setPlanningMeetingDate(Date planningMeetingDate) {
         this.planningMeetingDate = planningMeetingDate;
     }
 
     @Basic
     @javax.persistence.Column(name = "kickoffMeetingDate")
-    public Timestamp getKickoffMeetingDate() {
+    public Date getKickoffMeetingDate() {
         return kickoffMeetingDate;
     }
 
-    public void setKickoffMeetingDate(Timestamp kickoffMeetingDate) {
+    public void setKickoffMeetingDate(Date kickoffMeetingDate) {
         this.kickoffMeetingDate = kickoffMeetingDate;
     }
 
@@ -238,11 +257,11 @@ public class ImportOracleObiEntity extends AbstractDomainBase {
 
     @Basic
     @javax.persistence.Column(name = "importProcessedDate")
-    public Timestamp getImportProcessedDate() {
+    public Date getImportProcessedDate() {
         return importProcessedDate;
     }
 
-    public void setImportProcessedDate(Timestamp importProcessedDate) {
+    public void setImportProcessedDate(Date importProcessedDate) {
         this.importProcessedDate = importProcessedDate;
     }
 

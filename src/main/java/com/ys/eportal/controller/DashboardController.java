@@ -20,14 +20,11 @@ public class DashboardController {
     public String customerForm(Model model) {
         model.addAttribute("pageName", "Dashboard");
 
+        model.addAttribute("pageGroup", "dashboard");
+        model.addAttribute("pageId", "dashboard");
+
         return "dashboard";
     }
 
-    @RequestMapping(value="/blank", method= RequestMethod.GET)
-    public String blankPage(Model model) {
-        model.addAttribute("pageName", "Dashboard");
-
-        return "blank";
-    }
 
 }

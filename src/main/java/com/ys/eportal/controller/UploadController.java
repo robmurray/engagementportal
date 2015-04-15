@@ -15,10 +15,6 @@ import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 
-/**
- * Created by rob on 4/4/15.
- */
-@Controller
 public class UploadController {
 
     @Autowired

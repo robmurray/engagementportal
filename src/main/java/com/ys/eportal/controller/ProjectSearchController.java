@@ -39,6 +39,8 @@ public class ProjectSearchController {
 
         model.addAttribute("pageName", "Project Search");
         model.addAttribute("projectsearch", new ProjectSearch());
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "searchProject");
         return "projectSearch";
     }
 
@@ -53,7 +55,8 @@ public class ProjectSearchController {
         Iterable<Project> returnList = this.projectMapper.convert(wrkList);
 
         model.addAttribute("projects", returnList);
-
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "searchProject");
         return "projectSearchResults";
     }
 

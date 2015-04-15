@@ -1,0 +1,9 @@
+http://eportal-dev.elasticbeanstalk.com
+
+schema: aa1wf6rrveehebn
+wmbadmin/aPples13!
+
+
+zelda:~ rob$ mysql -h aa1wf6rrveehebn.clykwawdd2ek.us-west-2.rds.amazonaws.com -P 3306 -u wmbadmin -p
+
+nc -zv aa1wf6rrveehebn.clykwawdd2ek.us-west-2.rds.amazonaws.com 3306

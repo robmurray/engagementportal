@@ -17,17 +17,7 @@ public class Project {
     private String reportedRevRec;
 
 
-    private List<String> statusValues = new ArrayList<String>() {
-        {
-            add("Complete");
-            add("Scheduled");
-            add("R&D Support");
-            add("In Process");
-            add("Post support");
-            add("Booked");
-            add("Proposed");
-        }
-    };
+    private List<String> statusValues = ModelConstants.statusValues;
 
     private String status;
     private Date bookDate;

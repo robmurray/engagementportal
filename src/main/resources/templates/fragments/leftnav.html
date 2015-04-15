@@ -21,75 +21,75 @@
                 <li>
                     <h4>Navigation</h4>
                 </li>
-                <li>
+                <li class="panel" th:class="${pageGroup}=='dashboard'? 'panel open' : 'panel'">
                     <a  href="dashboard">
                         <i class="fa fa-dashboard"></i> Dashboard
                     </a>
                 </li>
                 <!-- BEGIN DROPDOWN -->
-                <li class="panel open">
+                <li class="panel" th:class="${pageGroup}=='importExport'? 'panel open' : 'panel'">
                     <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
                        data-target="#import">
                         <i class="fa fa-cogs"></i> import/export <span class="fa arrow"></span>
                     </a>
                     <ul class="collapse nav" id="import">
                         <li>
-                            <a href="uploadSalesOrder">
+                            <a class="" th:class="${pageId}=='uploadSalesOrder'? 'active' : ''" href="uploadSalesOrder">
                                 <i class="fa fa-angle-double-right"></i> upload sales orders
                             </a>
                         </li>
                         <li>
-                            <a href="importSalesOrders">
+                            <a class="" th:class="${pageId}=='importSalesOrder'? 'active' : ''" href="importSalesOrders">
                                 <i class="fa fa-angle-double-right"></i> import sales orders
                             </a>
                         </li>
 
                         <li>
-                            <a href="importSalesOrders">
-                                <i class="fa fa-angle-double-right"></i>** import master spreadsheet ** Dev only
+                            <a class="" th:class="${pageId}=='importMaster'? 'active' : ''" href="importMaster">
+                                <i class="fa fa-angle-double-right"></i>**master import***
                             </a>
                         </li>
                         <li>
-                            <a href="exportSalesOrders">
+                            <a class="" th:class="${pageId}=='exportSalesOrders'? 'active' : ''" href="exportSalesOrders">
                                 <i class="fa fa-angle-double-right"></i> export sales orders
                             </a>
                         </li>
 
                     </ul>
                 </li>
-                <li class="panel open">
+                <li class="panel" th:class="${pageGroup}=='customer'? 'panel open' : 'panel'">
                     <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
                        data-target="#customer">
                         <i class="fa fa-cogs"></i> Customer <span class="fa arrow"></span>
                     </a>
                     <ul class="collapse nav" id="customer">
                         <li>
-                            <a href="customerSearch">
+                            <a class="" th:class="${pageId}=='searchCustomer'? 'active' : ''" href="customerSearch">
                                 <i class="fa fa-angle-double-right"></i> search
                             </a>
                         </li>
                         <li>
-                            <a href="customerNew">
+                            <a class="" th:class="${pageId}=='createCustomer'? 'active' : ''" href="customerNew">
                                 <i class="fa fa-angle-double-right"></i> create
                             </a>
                         </li>
 
                     </ul>
                 </li>
-                <li class="panel open">
+
+                <li class="panel" th:class="${pageGroup}=='project'? 'panel open' : 'panel'">
                     <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
                        data-target="#project">
                         <i class="fa fa-cogs"></i> Project <span class="fa arrow"></span>
                     </a>
                     <ul class="collapse nav" id="project">
                         <li>
-                            <!--class="active"-->
-                            <a href="projectSearch">
+                            <a class="" th:class="${pageId}=='searchProject'? 'active' : ''" href="projectSearch">
                                 <i class="fa fa-angle-double-right"></i> search
                             </a>
                         </li>
                         <li>
-                            <a href="projectNew">
+                            <a class="" th:class="${pageId}=='createProject'? 'active' : ''" href="projectNew">
                                 <i class="fa fa-angle-double-right"></i> create
                             </a>
                         </li>

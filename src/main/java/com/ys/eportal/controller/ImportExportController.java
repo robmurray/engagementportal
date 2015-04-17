@@ -61,7 +61,7 @@ public class ImportExportController {
 
 
 
-        return "importSalesOrders";
+        return "projectSearch";
     }
 
     @RequestMapping(value = "/importSalesOrders", method = RequestMethod.GET)

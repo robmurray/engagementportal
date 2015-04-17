@@ -1,19 +1,21 @@
 package com.ys.eportal.infra.domain;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import javax.persistence.*;
-import java.io.File;
+
 
 @Entity
 @Table(name = "import_control")
-public class ImportControl extends AbstractDomainBase{
+public class ImportControlEntity extends AbstractDomainBase{
     @Id
     @GeneratedValue
     private long importControlId;
     private int numberOfRecords;
     private String fileName;
-    private File importFile;
+    private MultipartFile importFile;
     private String encoding;
-    private String status;
+    private ImportControlStatus status;
 
 
     public long getImportControlId() {
@@ -40,11 +42,11 @@ public class ImportControl extends AbstractDomainBase{
         this.fileName = fileName;
     }
 
-    public File getImportFile() {
+    public MultipartFile getImportFile() {
         return importFile;
     }
 
-    public void setImportFile(File importFile) {
+    public void setImportFile(MultipartFile importFile) {
         this.importFile = importFile;
     }
 
@@ -56,20 +58,20 @@ public class ImportControl extends AbstractDomainBase{
         this.encoding = encoding;
     }
 
-    public String getStatus() {
+    public ImportControlStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(ImportControlStatus status) {
         this.status = status;
     }
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof ImportControl)) return false;
+        if (!(o instanceof ImportControlEntity)) return false;
 
-        ImportControl that = (ImportControl) o;
+        ImportControlEntity that = (ImportControlEntity) o;
 
         if (importControlId != that.importControlId) return false;
 

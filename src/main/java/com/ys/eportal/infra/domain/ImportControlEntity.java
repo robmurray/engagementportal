@@ -13,6 +13,8 @@ public class ImportControlEntity extends AbstractDomainBase{
     private long importControlId;
     private int numberOfRecords;
     private String fileName;
+
+    @Lob
     private MultipartFile importFile;
     private String encoding;
     private ImportControlStatus status;

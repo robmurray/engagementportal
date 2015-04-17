@@ -8,6 +8,7 @@
     <artifactId>eportal</artifactId>
     <version>1.0-SNAPSHOT</version>
     <!--<packaging>war</packaging>-->
+    <packaging>jar</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -82,7 +83,7 @@
 
     <build>
         <plugins>
-
+<!--
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
@@ -97,11 +98,13 @@
                     </archive>
                 </configuration>
             </plugin>
-            <!--
+-->
                         <plugin>
                             <groupId>org.springframework.boot</groupId>
                             <artifactId>spring-boot-maven-plugin</artifactId>
+                            
                         </plugin>
+            <!--
                         <plugin>
                             <groupId>org.apache.tomcat.maven</groupId>
                             <artifactId>tomcat7-maven-plugin</artifactId>

@@ -4,7 +4,7 @@ import com.ys.eportal.infra.domain.ImportControlEntity;
 import org.springframework.data.repository.CrudRepository;
 
 
-public abstract class ImportControlRepository implements CrudRepository<ImportControlEntity, Long> {
+public interface ImportControlRepository extends CrudRepository<ImportControlEntity, Long> {
 
 
 }

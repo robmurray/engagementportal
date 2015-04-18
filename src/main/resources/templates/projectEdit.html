@@ -24,325 +24,341 @@
         </div>
         <div id="projectinfo" class="panel-collapse collapse in">
             <div class="portlet-body">
-                <form class="form-horizontal" role="form" action="#" th:action="@{/projectEdit}" th:object="${project}"
+                <form role="form" action="#" th:action="@{/projectEdit}" th:object="${project}"
                       method="post">
-                    <!-- <div class="note"></div>-->
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">sales Order Number</label>
+                    <div class="col-md-3  widget bg-gray">
 
-                        <div class="col-sm-3">
+                        <div class="form-group">
+                            <label class="control-label">sales Order Number</label>
                             <input type="text" class="form-control" th:field="*{salesOrderNumber}"
                                    placeholder="enter the sales order number" readonly="readonly"/>
                         </div>
+
+
                     </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">Customer Name</label>
+                    <div class="row bg-light">
+                        <div class="col-md-3 widget bg-gray">
+                            <div class="form-group">
+                                <label class="control-label">Customer Name</label>
 
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" th:field="*{customer.name}"
-                                   placeholder="enter the customer name" readonly="readonly"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">class Reg sent date</label>
+                                <div class="input-group">
 
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="glyphicon glyphicon-calendar"></i>
-                                                    </span>
-                                <input class="datepicker form-control" value="" th:field="*{classRegSent}"
-                                       data-date-format="mm/dd/yy"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">reported Rev Rec</label>
+                                    <span class="input-group-btn">
+                                        <button class="btn" type="button">Edit</button>
+                                    </span>
 
-                        <div class="col-sm-2">
-                            <input type="text" class="form-control" th:field="*{reportedRevRec}"
-                                   placeholder="enter reported RevRec"/>
-                        </div>
-                    </div>
-
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">status</label>
-
-                        <div class="col-sm-2">
-                            <select class="form-control selectpicker" th:field="*{status}">
-                                <option th:each="type : *{statusValues}"
-                                        th:value="${type}"
-                                        th:text="${type}"></option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">book date</label>
-
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="glyphicon glyphicon-calendar"></i>
-                                                    </span>
-                                <input class="datepicker form-control" value="" th:field="*{bookDate}"
-                                       data-date-format="mm/dd/yy"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">ship date</label>
-
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="glyphicon glyphicon-calendar"></i>
-                                                    </span>
-                                <input class="datepicker form-control" value="" th:field="*{shipDate}"
-                                       data-date-format="mm/dd/yy"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">planning meeting date</label>
-
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="glyphicon glyphicon-calendar"></i>
-                                                    </span>
-                                <input class="datepicker form-control" value="" th:field="*{planningMeetingDate}"
-                                       data-date-format="mm/dd/yy"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">kickoff meeting date</label>
-
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="glyphicon glyphicon-calendar"></i>
-                                                    </span>
-                                <input class="datepicker form-control" value="" th:field="*{kickoffMeetingDate}"
-                                       data-date-format="mm/dd/yy"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">onsite start date</label>
-
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="glyphicon glyphicon-calendar"></i>
-                                                    </span>
-                                <input class="datepicker form-control" value="" th:field="*{onSiteStartDate}"
-                                       data-date-format="mm/dd/yy"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">onsite end date</label>
-
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="glyphicon glyphicon-calendar"></i>
-                                                    </span>
-                                <input class="datepicker form-control" value="" th:field="*{onSiteEndDate}"
-                                       data-date-format="mm/dd/yy"/>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">release for revenue rec date</label>
-
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="glyphicon glyphicon-calendar"></i>
-                                                    </span>
-                                <input class="datepicker form-control" value="" th:field="*{releaseForRevenueRecDate}"
-                                       data-date-format="mm/dd/yy"/>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">wait time</label>
-
-                        <div class="col-sm-2">
-                            <select class="form-control selectpicker" th:field="*{waitTime}">
-
-                                <option th:each="type : *{waitTimeValues}"
-                                        th:value="${type}"
-                                        th:text="${type}"></option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">days to close</label>
-
-                        <div class="col-sm-10">
-                            <div id="daysToCloseSpinner" class="spinner">
-                                <div class="input-group input-small">
-                                    <input th:field="*{daysToClose}" class="spinner-input form-control"/>
-
-                                    <div class="spinner-buttons input-group-btn btn-group-vertical">
-                                        <button type="button" class="btn spinner-up btn-xs">
-                                            <i class="fa fa-chevron-up icon-only"></i>
-                                        </button>
-                                        <button type="button" class="btn spinner-down btn-xs">
-                                            <i class="fa fa-chevron-down icon-only"></i>
-                                        </button>
-                                    </div>
+                                    <input type="text" class="form-control" th:field="*{customer.name}"
+                                           placeholder="enter the customer name" readonly="readonly"/>
                                 </div>
                             </div>
                         </div>
+                        <div class="col-md-3 widget bg-gray">
+                            <div class="form-group">
+                                <label class="control-label">amount</label>
+
+                                <div class="input-group">
+                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                    <input type="text" class="form-control" th:field="*{amount}"
+                                           placeholder="enter the amount"/>
+                                </div>
+
+                            </div>
+                        </div>
+
+
                     </div>
+                    <div class="row">
+
+                        <div class="col-md-2 widget">
+
+                            <div class="form-group">
+                                <label class="control-label">status</label>
+                                <select class="form-control selectpicker" th:field="*{status}">
+                                    <option th:each="type : *{statusValues}"
+                                            th:value="${type}"
+                                            th:text="${type}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label class="control-label">Model Group</label>
 
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">booked to kickoff</label>
+                                <select class="form-control selectpicker" th:field="*{modelGroup}">
 
-                        <div class="col-sm-10">
-                            <div id="MySpinner-1" class="spinner">
-                                <div class="input-group input-small">
-                                    <input th:field="*{bookedToKickOff}" class="spinner-input form-control"/>
+                                    <option th:each="type : *{modelGroupValues}"
+                                            th:value="${type}"
+                                            th:text="${type}"></option>
+                                </select>
 
-                                    <div class="spinner-buttons input-group-btn btn-group-vertical">
-                                        <button type="button" class="btn spinner-up btn-xs">
-                                            <i class="fa fa-chevron-up icon-only"></i>
-                                        </button>
-                                        <button type="button" class="btn spinner-down btn-xs">
-                                            <i class="fa fa-chevron-down icon-only"></i>
-                                        </button>
-                                    </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">wait time</label>
+
+                                <select class="form-control selectpicker" th:field="*{waitTime}">
+
+                                    <option th:each="type : *{waitTimeValues}"
+                                            th:value="${type}"
+                                            th:text="${type}"></option>
+                                </select>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">location</label>
+
+
+                                <input type="text" class="form-control" th:field="*{location}"
+                                       placeholder="location"/>
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+
+                            <div class="form-group">
+                                <label class="control-label">region</label>
+
+
+                                <input type="text" class="form-control" th:field="*{region}"
+                                       placeholder="region"/>
+
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">days to close</label>
+                                <input th:field="*{daysToClose}" class="form-control" readonly="readonly"/>
+
+                            </div>
+
+                        </div>
+
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <label class="control-label">booked to kickoff</label>
+                                <input th:field="*{bookedToKickOff}" class="form-control" readonly="readonly"/>
+                            </div>
+                        </div>
+
+
+                    </div>
+                    <hr class="hr-30"/>
+                    <div class="row bg-light">
+
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">class Reg sent date</label>
+
+
+                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                    <input class="datepicker form-control" value="" th:field="*{classRegSent}"
+                                           data-date-format="mm/dd/yy"/>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">reported Rev Rec</label>
+                                <input type="text" class="form-control" th:field="*{reportedRevRec}"
+                                       placeholder="enter reported RevRec"/>
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="hr-30"/>
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">book date</label>
+
+                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                    <input class="datepicker form-control" value="" th:field="*{bookDate}"
+                                           data-date-format="mm/dd/yy"/>
+
                                 </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">ship date</label>
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">amount</label>
+                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                    <input class="datepicker form-control" value="" th:field="*{shipDate}"
+                                           data-date-format="mm/dd/yy"/>
+                                </div>
 
-                        <div class="col-sm-2">
-                            <div class="input-group">
-                                <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                <input type="text" class="form-control" th:field="*{amount}"
-                                       placeholder="enter the amount"/>
                             </div>
+                        </div>
+                    </div>
+                    <hr class="hr-30"/>
+                    <div class="row">
 
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">planning meeting date</label>
+
+                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                    <input class="datepicker form-control" value="" th:field="*{planningMeetingDate}"
+                                           data-date-format="mm/dd/yy"/>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">kickoff meeting date</label>
+
+
+                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                    <input class="datepicker form-control" value="" th:field="*{kickoffMeetingDate}"
+                                           data-date-format="mm/dd/yy"/>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">onsite start date</label>
+
+
+                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                    <input class="datepicker form-control" value="" th:field="*{onSiteStartDate}"
+                                           data-date-format="mm/dd/yy"/>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="hr-30"/>
+                    <div class="row">
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">onsite end date</label>
+
+                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                    <input class="datepicker form-control" value="" th:field="*{onSiteEndDate}"
+                                           data-date-format="mm/dd/yy"/>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">release for revenue rec date</label>
+
+
+                                <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                    <input class="datepicker form-control" value=""
+                                           th:field="*{releaseForRevenueRecDate}"
+                                           data-date-format="mm/dd/yy"/>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">notes</label>
+                    <hr class="hr-30"/>
 
-                        <div class="col-sm-5">
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label class="control-label">notes</label>
                             <textarea class="form-control" id="maxL-3" maxlength="225" rows="2"
                                       placeholder="enter project notes" th:field="*{notes}"></textarea>
-                        </div>
-                    </div>
 
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">location</label>
-
-                        <div class="col-sm-1">
-                            <input type="text" class="form-control" th:field="*{location}"
-                                   placeholder="location"/>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">region</label>
-
-                        <div class="col-sm-1">
-                            <input type="text" class="form-control" th:field="*{region}"
-                                   placeholder="region"/>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">wait time</label>
-
-                        <div class="col-sm-2">
-                            <select class="form-control selectpicker" th:field="*{modelGroup}">
-
-                                <option th:each="type : *{modelGroupValues}"
-                                        th:value="${type}"
-                                        th:text="${type}"></option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">service</label>
-
-                        <div class="col-sm-5">
-                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2"
-                                      placeholder="enter service notes" th:field="*{service}"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">accountTeam</label>
-
-                        <div class="col-sm-5">
-                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2"
-                                      placeholder="enter account team" th:field="*{accountTeam}"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">remote</label>
-
-                        <div class="col-sm-5">
-                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2"
-                                      placeholder="enter remote notes" th:field="*{remote}"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">onsite</label>
-
-                        <div class="col-sm-5">
-                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2"
-                                      placeholder="enter onsite notes" th:field="*{onsite}"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">equipmentList</label>
-
-                        <div class="col-sm-5">
-                            <textarea class="form-control" id="maxL-5" maxlength="500" rows="2"
-                                      placeholder="enter equipmentList" th:field="*{equipmentList}"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="col-sm-2 control-label">shawdow</label>
-
-                        <div class="col-sm-5">
-                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2"
-                                      placeholder="enter shawdow notes" th:field="*{shawdow}"></textarea>
-                        </div>
-                    </div>
-
-                    <div class="form-actions">
-                        <div class="form-group">
-                            <div class="col-sm-offset-2 col-sm-10">
-                                <button type="submit" class="btn btn-primary">Save</button>
-                                <button type="reset" class="btn">Reset</button>
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">service</label>
+
+
+                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2"
+                                      placeholder="enter service notes" th:field="*{service}"></textarea>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="hr-30"/>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">accountTeam</label>
+
+
+                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2"
+                                      placeholder="enter account team" th:field="*{accountTeam}"></textarea>
+
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">remote</label>
+
+
+                            <textarea class="form-control" id="maxL-3" maxlength="300" rows="2"
+                                      placeholder="enter remote notes" th:field="*{remote}"></textarea>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">onsite</label>
+                                 <textarea class="form-control" id="maxL-3" maxlength="300" rows="2"
+                                           placeholder="enter onsite notes" th:field="*{onsite}"></textarea>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="reset" class="btn">Reset</button>
+
                     </div>
 
                 </form>

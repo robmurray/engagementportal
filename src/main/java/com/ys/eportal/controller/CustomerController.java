@@ -91,6 +91,7 @@ public class CustomerController {
         addPageAttributes(model, "Save Customer", "Save Customer update");
         model.addAttribute("pageGroup", "customer");
         model.addAttribute("pageId", "searchCustomer");
+        model.addAttribute("projects",customer.getProjects());
         return "customerEdit";
     }
 

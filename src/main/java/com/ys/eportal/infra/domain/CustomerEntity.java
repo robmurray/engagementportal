@@ -12,7 +12,7 @@ import java.util.Set;
 public class CustomerEntity extends AbstractDomainBase {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "customerId")
     private int customerId;
 
@@ -21,8 +21,9 @@ public class CustomerEntity extends AbstractDomainBase {
     private String name;
 
     @Basic(fetch = FetchType.EAGER)
-    @Column(name = "credits")
-    private int credits;
+    @Column(name = "notes", unique = true)
+    private String notes;
+
 
     /*
         @TODO need to think about how cascade deletes are handled
@@ -51,13 +52,12 @@ public class CustomerEntity extends AbstractDomainBase {
         this.name = name;
     }
 
-
-    public int getCredits() {
-        return credits;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setCredits(int credits) {
-        this.credits = credits;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public Set<SalesOrderEntity> getSalesOrders() {

@@ -16,14 +16,19 @@ public class DashboardController {
     @Autowired
     private PortalService portalService;
 
-    @RequestMapping(value="/dashboard", method= RequestMethod.GET)
+    @RequestMapping("/")
+    public String stdRedirect(){
+        return "redirect:/index";
+    }
+
+    @RequestMapping(value="/index", method= RequestMethod.GET)
     public String customerForm(Model model) {
         model.addAttribute("pageName", "Dashboard");
 
         model.addAttribute("pageGroup", "dashboard");
         model.addAttribute("pageId", "dashboard");
 
-        return "dashboard";
+        return "index";
     }
 
 

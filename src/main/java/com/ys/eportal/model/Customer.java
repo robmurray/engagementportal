@@ -9,8 +9,7 @@ public class Customer extends AbstractModelBase{
 
     private int customerId;
     private String name;
-    private int credits;
-    private String contact;
+    private String notes;
     private List<Project> projects;
 
     public Customer() {
@@ -36,20 +35,12 @@ public class Customer extends AbstractModelBase{
         this.name = name;
     }
 
-    public int getCredits() {
-        return credits;
+    public String getNotes() {
+        return notes;
     }
 
-    public void setCredits(int credits) {
-        this.credits = credits;
-    }
-
-    public String getContact() {
-        return contact;
-    }
-
-    public void setContact(String contact) {
-        this.contact = contact;
+    public void setNotes(String notes) {
+        this.notes = notes;
     }
 
     public List<Project> getProjects() {

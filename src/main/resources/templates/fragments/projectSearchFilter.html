@@ -20,24 +20,24 @@
                 <div class="portlet-body">
                     <form class="form-horizontal" role="form" action="#" th:action="@{/projectSearch}" th:object="${projectsearch}" method="post">
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">sales order number</label>
-                            <div class="col-sm-2">
+                            <label class="col-sm-1 control-label">sales order number</label>
+                            <div class="col-sm-1">
                                 <input type="text" class="form-control" th:field="*{salesOrderNumber}"
                                        placeholder="enter the sales order number"/>
                             </div>
                         </div>
 
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">customer name</label>
-                            <div class="col-sm-2">
+                            <label class="col-sm-1 control-label">customer name</label>
+                            <div class="col-sm-1">
                                 <input type="text" class="form-control" th:field="*{customerName}"
                                        placeholder="enter the customer name"/>
                             </div>
                         </div>
                         <div class="form-group">
-                            <label class="col-sm-2 control-label">status</label>
+                            <label class="col-sm-1 control-label">status</label>
 
-                            <div class="col-sm-2">
+                            <div class="col-sm-1">
                                 <select class="form-control selectpicker" th:field="*{status}">
                                     <option th:each="type : *{statusValues}"
                                             th:value="${type}"

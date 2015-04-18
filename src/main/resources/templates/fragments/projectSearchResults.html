@@ -7,9 +7,9 @@
 <div id="projectSearchResults" th:fragment="projectSearchResults">
 
     <div class="portlet">
-        <div class="portlet-heading dark default-bg">
+        <div class="portlet-heading default-bg">
             <div class="portlet-title">
-                <h4>Search Results</h4>
+                <h4>projects</h4>
             </div>
             <div class="portlet-widgets">
                 <a data-toggle="collapse" data-parent="#accordion" href="#projectSearchResultsPanel"><i
@@ -23,22 +23,17 @@
                 <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="3">
                     <thead>
                     <tr>
-                        <th class="col-small center" data-sort-ignore="true"><label><input type="checkbox"
-                                                                                           class="tc"/><span
-                                class="labels"></span></label></th>
-                        <th data-toggle="true">sales Order Number</th>
-                        <th data-hide="phone,tablet">customer name</th>
-                        <th data-hide="phone,tablet">status</th>
-                        <th data-sort-ignore="true">action</th>
+                        <th  class="col-sm-1" data-toggle="true">sales order number</th>
+                        <th  class="col-sm-1" data-hide="phone,tablet">customer name</th>
+                        <th  class="col-sm-1" data-hide="phone,tablet">status</th>
+                        <th  class="col-sm-1" data-sort-ignore="true">action</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr th:each="project : ${projects}">
-                        <td class="col-small center"><label><input type="checkbox" class="tc"/><span
-                                class="labels"></span></label></td>
-                        <td th:text="${project.salesOrderNumber}"></td>
-                        <td th:text="${project.customer.name}"></td>
-                        <td><span class="label label-active"  th:text="${project.status}"></span></td>
+                    <tr th:each="project : ${projects}" th:if="${projects != null}">
+                        <td  class="col-sm-1" th:text="${project.salesOrderNumber}"></td>
+                        <td  class="col-sm-1" th:text="${project.customer.name}"></td>
+                        <td class="col-sm-1"><span class="label label-active"  th:text="${project.status}"></span></td>
                         <td>
                             <div class="btn-group btn-group-xs ">
                                 <a href="" th:href="'projectEdit?salesOrderNumber='+${project.salesOrderNumber}"
@@ -51,20 +46,6 @@
                     <tfoot>
                     <tr>
                         <td colspan="7">
-                            <div class="btn-group btn-group-sm pull-left">
-                                <button class="btn btn-primary dropdown-toggle hidden-xs" data-toggle="dropdown">
-                                    with Selected <span class="caret"></span>
-                                </button>
-                                <button class="btn btn-primary dropdown-toggle visible-xs" data-toggle="dropdown">
-                                    <i class="fa fa-cog icon-only"></i>
-                                </button>
-                                <ul class="dropdown-menu dropdown-primary" role="menu">
-                                    <li><a href="#">Action</a></li>
-                                    <li><a href="#">Another action</a></li>
-                                    <li class="divider"></li>
-                                    <li><a href="#">Separated link</a></li>
-                                </ul>
-                            </div>
                             <ul class="hide-if-no-paging pagination pagination-centered pull-right"></ul>
                             <div class="clearfix"></div>
                         </td>

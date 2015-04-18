@@ -26,51 +26,52 @@
             <div class="portlet-body">
                 <form role="form" action="#" th:action="@{/projectEdit}" th:object="${project}"
                       method="post">
+                    <div class="row">
+                        <div class="col-md-3  widget bg-primary">
 
-                    <div class="col-md-3  widget bg-gray">
-
-                        <div class="form-group">
-                            <label class="control-label">sales Order Number</label>
-                            <input type="text" class="form-control" th:field="*{salesOrderNumber}"
-                                   placeholder="enter the sales order number" readonly="readonly"/>
-                        </div>
-
-
-                    </div>
-                    <div class="row bg-light">
-                        <div class="col-md-3 widget bg-gray">
                             <div class="form-group">
-                                <label class="control-label">Customer Name</label>
+                                <label class="control-label">sales Order Number</label>
+                                <input type="text" class="form-control" th:field="*{salesOrderNumber}"
+                                       placeholder="enter the sales order number" readonly="readonly"/>
+                            </div>
 
-                                <div class="input-group">
+
+                        </div>
+                        <div class="row bg-light">
+                            <div class="col-md-3 widget bg-gray">
+                                <div class="form-group">
+                                    <label class="control-label">Customer Name</label>
+
+                                    <div class="input-group">
 
                                     <span class="input-group-btn">
                                         <button class="btn" type="button">Edit</button>
                                     </span>
 
-                                    <input type="text" class="form-control" th:field="*{customer.name}"
-                                           placeholder="enter the customer name" readonly="readonly"/>
+                                        <input type="text" class="form-control" th:field="*{customer.name}"
+                                               placeholder="enter the customer name" readonly="readonly"/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="col-md-3 widget bg-gray">
-                            <div class="form-group">
-                                <label class="control-label">amount</label>
+                            <div class="col-md-3 widget bg-gray">
+                                <div class="form-group">
+                                    <label class="control-label">amount</label>
 
-                                <div class="input-group">
-                                    <span class="input-group-addon"><i class="fa fa-usd"></i></span>
-                                    <input type="text" class="form-control" th:field="*{amount}"
-                                           placeholder="enter the amount"/>
+                                    <div class="input-group">
+                                        <span class="input-group-addon"><i class="fa fa-usd"></i></span>
+                                        <input type="text" class="form-control" th:field="*{amount}"
+                                               placeholder="enter the amount"/>
+                                    </div>
+
                                 </div>
-
                             </div>
+
+
                         </div>
-
-
                     </div>
                     <div class="row">
 
-                        <div class="col-md-2 widget">
+                        <div class="col-md-2 widget bg-success">
 
                             <div class="form-group">
                                 <label class="control-label">status</label>

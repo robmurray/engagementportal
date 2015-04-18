@@ -133,6 +133,10 @@ public class PortalService {
             ice.setFileName(file.getName());
             ice.setStatus(ImportControlStatus.BEGIN);
             ice.setEncoding(salesOrderConverter.getEncoding());
+
+            store byte[] instead
+            byte[] fileBytes = file.getBytes();
+
             ice.setImportFile(file);
             importControlRepository.save(ice);
 

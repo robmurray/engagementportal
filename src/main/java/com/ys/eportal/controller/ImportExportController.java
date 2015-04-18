@@ -2,7 +2,10 @@ package com.ys.eportal.controller;
 
 
 import com.ys.eportal.infra.domain.ImportOracleObiStage;
+import com.ys.eportal.model.CustomerSearch;
+import com.ys.eportal.model.FileUpload;
 import com.ys.eportal.model.ImportOracleObi;
+import com.ys.eportal.model.UploadSalesOrder;
 import com.ys.eportal.service.PortalService;
 import com.ys.eportal.service.converter.CSV2SalesOrderConverter;
 import com.ys.eportal.service.converter.ConversionResults;
@@ -11,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -34,17 +38,18 @@ public class ImportExportController {
     public String uploadSalesOrderForm(Model model) {
 
 
-        addPageAttributes(model, "Upload Sales Order ", "upload a sales order");
+        addPageAttributes(model, "Import Sales Order ", "import a sales order");
 
-        //model.addAttribute("fileUpload",new FileUpload());
+        model.addAttribute("uploadSalesOrder",new UploadSalesOrder());
         model.addAttribute("pageGroup", "importExport");
         model.addAttribute("pageId", "uploadSalesOrder");
         return "uploadSalesOrder";
     }
 
-    @RequestMapping(value = "/uploadSalesOrder", method = RequestMethod.POST)
-    public String soHandleFileUpload(@RequestParam("file") MultipartFile file) {
 
+    // public String soHandleFileUpload(@RequestParam("file") MultipartFile file) {
+    @RequestMapping(value = "/uploadSalesOrder", method = RequestMethod.POST)
+    public String soHandleFileUpload(@RequestParam("file") MultipartFile file,@ModelAttribute UploadSalesOrder uploadSalesOrder, Model model){
         ConversionResults<String,ImportOracleObiStage> results = null;
         try {
 
@@ -63,28 +68,6 @@ public class ImportExportController {
 
         return "projectSearch";
     }
-
-    @RequestMapping(value = "/importSalesOrders", method = RequestMethod.GET)
-    public String importSalesOrdersForm(Model model) {
-
-
-        addPageAttributes(model, "import Sales Order ", "import a sales order");
-
-        model.addAttribute("pageGroup", "importExport");
-        model.addAttribute("pageId", "importSalesOrders");
-        return "importSalesOrders";
-    }
-
-    @RequestMapping(value = "/exportSalesOrders", method = RequestMethod.GET)
-    public String exportSalesOrdersForm(Model model) {
-
-        addPageAttributes(model, "Export Sales Orders", "export sales orders");
-
-        model.addAttribute("pageGroup", "importExport");
-        model.addAttribute("pageId", "exportSalesOrders");
-        return "exportSalesOrders";
-    }
-
 
     @RequestMapping(value = "/importMaster", method = RequestMethod.GET)
     public String importMasterForm(Model model) {

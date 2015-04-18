@@ -9,30 +9,57 @@
 
     <div class="portlet-body">
 
-        <form class="form-horizontal" enctype="multipart/form-data" action="#" th:action="${actionVar}" role="form" method="post">
+        <form enctype="multipart/form-data" action="#" th:action="${actionVar}" th:object="${uploadSalesOrder}" role="form" method="post">
+            <div class="row">
+                <div class="col-md-5">
+                    <div class="input-group">
+                        <label class="control-label">model groups</label>
+                        <input type="text" class="form-control" th:value="${uploadSalesOrder.modelgroups}" data-role="tagsinput"
+                               readonly="readonly"/>
 
-            <div class="input-group">
-                <span class="input-group-btn">
-                    <span class="btn btn-file">
-                        Browse <input type="file" name="file" />
-                    </span>
-                </span>
-
-                <div class="col-sm-3">
-                    <input type="text" class="form-control" readonly="readonly"/>
-                </div>
-            </div>
-            <div class="form-actions">
-                <div class="form-group">
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-primary">upload</button>
-                        <button type="reset" class="btn">Clear</button>
                     </div>
                 </div>
             </div>
+
+            <div class="row bg-light">
+                <div class="col-md-7">
+                    <div class="well white">
+                        <dl class="no-margin-bottom">
+                            <dt>Select an Orcale OBI file upload and import.</dt>
+                        </dl>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row bg-light">
+                <div class="col-md-3">
+                    <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-file">
+                                    Browse <input type="file" name="file"/>
+                                </span>
+                            </span>
+                        <input type="text" class="form-control" readonly="readonly"/>
+                    </div>
+                </div>
+            </div>
+            <div class="row bg-light">
+                <div class="col-md-3">
+
+                    <div class="form-actions">
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-primary">import</button>
+                                <button type="reset" class="btn">Clear</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </form>
     </div>
-        <script type="text/javascript">
+    <script type="text/javascript">
 
 
 		// Custome File Input
@@ -57,7 +84,16 @@
 
 			});
 		});
-	</script>
+
+
+
+
+
+
+
+
+
+    </script>
 
 </div>
 </body>

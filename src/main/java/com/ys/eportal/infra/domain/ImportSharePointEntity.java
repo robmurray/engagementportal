@@ -8,7 +8,7 @@ import javax.persistence.*;
  * Created by rob on 4/8/15.
  */
 @Entity
-@Table(name = "import_SharePoint", schema = "", catalog = "engagementportal")
+@Table(name = "import_SharePoint")
 public class ImportSharePointEntity implements Serializable {
 
     @Id @GeneratedValue

@@ -8,7 +8,7 @@ import java.sql.Timestamp;
  * Created by rob on 4/8/15.
  */
 @Entity
-@Table(name = "import_Salesforce", schema = "", catalog = "engagementportal")
+@Table(name = "import_Salesforce")
 public class ImportSalesforceEntity implements Serializable {
 
     @Id

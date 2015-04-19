@@ -11,7 +11,7 @@ import java.util.Date;
  * Created by rob on 4/8/15.
  */
 @Entity
-@javax.persistence.Table(name = "import_OracleOBI", schema = "", catalog = "engagementportal")
+@javax.persistence.Table(name = "import_OracleOBI")
 public class ImportOracleObiEntity extends AbstractDomainBase {
     @Id
     @GeneratedValue

@@ -6,7 +6,7 @@ import javax.persistence.*;
  * Created by rob on 4/8/15.
  */
 @Entity
-@Table(name = "ep_SalesOrderStatus", schema = "", catalog = "engagementportal")
+@Table(name = "ep_SalesOrderStatus")
 public class SalesOrderStatusEntity implements Serializable {
 
     @Id

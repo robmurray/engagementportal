@@ -21,6 +21,8 @@ public class SalesOrderEntity extends AbstractDomainBase{
     @Column(name = "customerId")
     private int customerId;
 
+    private long importControlId;
+
     private Date classRegSent;
     private String reportedRevRec;
     private int salesOrderNumber;
@@ -61,6 +63,14 @@ public class SalesOrderEntity extends AbstractDomainBase{
 
     public void setCustomerId(int customerId) {
         this.customerId = customerId;
+    }
+
+    public long getImportControlId() {
+        return importControlId;
+    }
+
+    public void setImportControlId(long importControlId) {
+        this.importControlId = importControlId;
     }
 
     @Basic(fetch = FetchType.EAGER)

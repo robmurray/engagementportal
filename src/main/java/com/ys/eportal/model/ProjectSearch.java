@@ -8,6 +8,7 @@ import java.util.List;
 public class ProjectSearch {
     private int salesOrderNumber;
     private String customerName;
+    private long importControlId;
     private List<String> statusValues = ModelConstants.statusValues;
     private String status;
 
@@ -25,6 +26,14 @@ public class ProjectSearch {
     public ProjectSearch(int salesOrderNumber, String customerName) {
         this.salesOrderNumber = salesOrderNumber;
         this.customerName = customerName;
+    }
+
+    public long getImportControlId() {
+        return importControlId;
+    }
+
+    public void setImportControlId(long importControlId) {
+        this.importControlId = importControlId;
     }
 
     public int getSalesOrderNumber() {

@@ -46,8 +46,6 @@ public class ImportExportController {
         return "uploadSalesOrder";
     }
 
-
-    // public String soHandleFileUpload(@RequestParam("file") MultipartFile file) {
     @RequestMapping(value = "/uploadSalesOrder", method = RequestMethod.POST)
     public String soHandleFileUpload(@RequestParam("file") MultipartFile file,@ModelAttribute UploadSalesOrder uploadSalesOrder, Model model){
         ConversionResults<String,ImportOracleObiStage> results = null;
@@ -65,8 +63,8 @@ public class ImportExportController {
         }
 
 
-
-        return "projectSearch";
+        model.addAttribute("importResults",results);
+        return "redirect:projectSearch";
     }
 
     @RequestMapping(value = "/importMaster", method = RequestMethod.GET)

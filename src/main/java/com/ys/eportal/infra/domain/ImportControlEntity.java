@@ -13,9 +13,8 @@ public class ImportControlEntity extends AbstractDomainBase{
     private long importControlId;
     private int numberOfRecords;
     private String fileName;
-
     @Lob
-    private MultipartFile importFile;
+    private byte[] importFile;
     private String encoding;
     private ImportControlStatus status;
 
@@ -44,11 +43,11 @@ public class ImportControlEntity extends AbstractDomainBase{
         this.fileName = fileName;
     }
 
-    public MultipartFile getImportFile() {
+    public byte[] getImportFile() {
         return importFile;
     }
 
-    public void setImportFile(MultipartFile importFile) {
+    public void setImportFile(byte[] importFile) {
         this.importFile = importFile;
     }
 

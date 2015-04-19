@@ -35,8 +35,19 @@ public class CSV2SalesOrderConverter {
     private int expectedTokens;
     private String encoding=DEFAULT_ENCODING;
 
+    private long importControlId;
+
     public CSV2SalesOrderConverter() {
     }
+
+    public long getImportControlId() {
+        return importControlId;
+    }
+
+    public void setImportControlId(long importControlId) {
+        this.importControlId = importControlId;
+    }
+
     public boolean isSkipHeaderRow() {
         return skipHeaderRow;
     }
@@ -195,7 +206,7 @@ public class CSV2SalesOrderConverter {
         oracleObi.setStAgentName(stAgentName);
         oracleObi.setStChannelName(stChannelName);
         oracleObi.setStCustomerName(stCustomerName);
-
+        oracleObi.setImportControlId(this.importControlId);
         return oracleObi;
     }
 

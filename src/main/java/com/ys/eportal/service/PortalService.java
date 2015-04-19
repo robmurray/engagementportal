@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -126,6 +127,7 @@ public class PortalService {
         ConversionResults<String, ImportOracleObiStage> results = null;
         CSV2SalesOrderConverter salesOrderConverter = new CSV2SalesOrderConverter();
 
+
         try {
             // step 0 create import Control record
 
@@ -134,21 +136,29 @@ public class PortalService {
             ice.setStatus(ImportControlStatus.BEGIN);
             ice.setEncoding(salesOrderConverter.getEncoding());
 
-         //   store byte[] instead
-          //  byte[] fileBytes = file.getBytes();
 
-            ice.setImportFile(file);
+            try {
+                ice.setImportFile(file.getBytes());
+            } catch (IOException e) {
+                // if there was an issue with the file we would never get this far
+                logger.error("unable to save csv file to stage", e);
+                ice.setStatus(ImportControlStatus.ERROR);
+                importControlRepository.save(ice);
+                throw new CSVConversionFailureException("unable to save csv file to stage",e);
+            }
+
             importControlRepository.save(ice);
 
-
+            // set the import control id
+            salesOrderConverter.setImportControlId(ice.getImportControlId());
             // step 1 csv to staging
 
             try {
                 results = salesOrderConverter.convert(file);
-            }catch(Exception e){
+            } catch (Exception e) {
                 ice.setStatus(ImportControlStatus.ERROR);
                 importControlRepository.save(ice);
-                 throw e;
+                throw e;
 
             }
 
@@ -198,6 +208,7 @@ public class PortalService {
                     entity.setStAgentName(stage.getStAgentName());
                     entity.setStChannelName(stage.getStChannelName());
                     entity.setStCustomerName(stage.getStCustomerName());
+                    entity.setImportOracleObiID(stage.getImportControlId());
                     resultList.add(entity);
                 } catch (Exception e) {
 
@@ -222,7 +233,7 @@ public class PortalService {
                 // @TODO add in filter
                 //entity.getModelGroupCode()
 
-                 // create or find customer
+                // create or find customer
                 // @TODO which name to use st or bt
                 String customerName = entity.getBtCustomerName();
 
@@ -261,7 +272,7 @@ public class PortalService {
                 //entity.getStChannelName();
 
                 wrkProject.setCustomerId(wrkCustomer.getCustomerId()); //entity.getStCustomerName();
-
+                wrkProject.setImportControlId(entity.getImportControlId());
                 soList.add(wrkProject);
             }
 

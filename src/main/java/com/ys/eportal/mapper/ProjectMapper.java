@@ -31,12 +31,12 @@ public class ProjectMapper {
     private void register(){
         mapperFactory = new DefaultMapperFactory.Builder().build();
         // map to/from
-        mapperFactory.classMap(SalesOrderEntity.class,Project.class)
+        mapperFactory.classMap(SalesOrderEntity.class, Project.class)
                 .field("salesOrderId", "salesOrderNumber")
                 .field("customerId", "customer.customerId")
+                .field("importControlId", "importControlId")
                 .field("classRegSent", "classRegSent")
                 .field("reportedRevRec", "reportedRevRec")
-                .field("salesOrderNumber","salesOrderNumber")
                 .field("status", "status")
                 .field("bookDate", "bookDate")
                 .field("shipDate", "shipDate")
@@ -57,8 +57,6 @@ public class ProjectMapper {
                 .field("accountTeam", "accountTeam")
                 .field("remote", "remote")
                 .field("onsite", "onsite")
-                .field("equipmentList", "equipmentList")
-                .field("shawdow", "shawdow")
                 .byDefault()
                 .register();
 
@@ -66,9 +64,9 @@ public class ProjectMapper {
         mapperFactory.classMap(Project.class, SalesOrderEntity.class)
                 .field("salesOrderNumber", "salesOrderId")
                 .field("customer.customerId", "customerId")
+                .field("importControlId", "importControlId")
                 .field("classRegSent", "classRegSent")
                 .field("reportedRevRec", "reportedRevRec")
-                .field("salesOrderNumber","salesOrderNumber")
                 .field("status", "status")
                 .field("bookDate", "bookDate")
                 .field("shipDate", "shipDate")
@@ -89,8 +87,6 @@ public class ProjectMapper {
                 .field("accountTeam", "accountTeam")
                 .field("remote", "remote")
                 .field("onsite", "onsite")
-                .field("equipmentList", "equipmentList")
-                .field("shawdow", "shawdow")
                 .byDefault()
                 .register();
 

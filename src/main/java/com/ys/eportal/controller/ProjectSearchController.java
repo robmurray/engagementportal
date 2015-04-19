@@ -53,7 +53,9 @@ public class ProjectSearchController {
 
 
         Iterable<Project> returnList = this.projectMapper.convert(wrkList);
-
+        if(returnList !=null && !returnList.iterator().hasNext()){
+            returnList =null;
+        }
         model.addAttribute("projects", returnList);
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");

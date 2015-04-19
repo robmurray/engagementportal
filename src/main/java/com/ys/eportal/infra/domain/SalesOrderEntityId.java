@@ -6,22 +6,22 @@ import java.io.Serializable;
  * Created by rob on 4/10/15.
  */
 public class SalesOrderEntityId  implements Serializable {
-    private int salesOrderId;
+    private String salesOrderId;
     private int customerId;
 
     public SalesOrderEntityId() {
     }
 
-    public SalesOrderEntityId(int salesOrderId, int customerId) {
+    public SalesOrderEntityId(String salesOrderId, int customerId) {
         this.salesOrderId = salesOrderId;
         this.customerId = customerId;
     }
 
-    public int getSalesOrderId() {
+    public String getSalesOrderId() {
         return salesOrderId;
     }
 
-    public void setSalesOrderId(int salesOrderId) {
+    public void setSalesOrderId(String salesOrderId) {
         this.salesOrderId = salesOrderId;
     }
 
@@ -40,16 +40,13 @@ public class SalesOrderEntityId  implements Serializable {
 
         SalesOrderEntityId that = (SalesOrderEntityId) o;
 
-        if (customerId != that.customerId) return false;
-        if (salesOrderId != that.salesOrderId) return false;
+        if (salesOrderId != null ? !salesOrderId.equals(that.salesOrderId) : that.salesOrderId != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = salesOrderId;
-        result = 31 * result + customerId;
-        return result;
+        return salesOrderId != null ? salesOrderId.hashCode() : 0;
     }
 }

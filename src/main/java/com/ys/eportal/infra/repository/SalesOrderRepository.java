@@ -11,8 +11,9 @@ import java.util.List;
 
 public interface SalesOrderRepository extends CrudRepository<SalesOrderEntity, SalesOrderEntityId> {
 
-    public List<SalesOrderEntity> findBySalesOrderId(int salesOrderNumber);
+    public List<SalesOrderEntity> findBySalesOrderId(String salesOrderNumber);
 
-
+    public List<SalesOrderEntity> findByimportControlId(long importControlId);
+    public List<SalesOrderEntity> findByStatus(String status);
 
 }

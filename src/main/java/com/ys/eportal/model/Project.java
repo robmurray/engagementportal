@@ -11,8 +11,9 @@ import java.util.List;
  */
 public class Project {
 
-    private int salesOrderNumber;
+    private String salesOrderNumber;
     private Customer customer;
+    private long importControlId;
     private Date classRegSent;
     private String reportedRevRec;
 
@@ -58,11 +59,13 @@ public class Project {
     private String accountTeam;
     private String remote;
     private String onsite;
-    private String equipmentList;
-    private String shawdow;
 
 
     public Project() {
+    }
+
+    public String getSalesOrderNumber() {
+        return salesOrderNumber;
     }
 
     public Project(Customer customer) {
@@ -75,6 +78,14 @@ public class Project {
 
     public void setCustomer(Customer customer) {
         this.customer = customer;
+    }
+
+    public long getImportControlId() {
+        return importControlId;
+    }
+
+    public void setImportControlId(long importControlId) {
+        this.importControlId = importControlId;
     }
 
     public List<String> getStatusValues() {
@@ -117,13 +128,6 @@ public class Project {
         this.reportedRevRec = reportedRevRec;
     }
 
-    public int getSalesOrderNumber() {
-        return salesOrderNumber;
-    }
-
-    public void setSalesOrderNumber(int salesOrderNumber) {
-        this.salesOrderNumber = salesOrderNumber;
-    }
 
     public String getStatus() {
         return status;
@@ -289,20 +293,8 @@ public class Project {
         this.onsite = onsite;
     }
 
-    public String getEquipmentList() {
-        return equipmentList;
-    }
-
-    public void setEquipmentList(String equipmentList) {
-        this.equipmentList = equipmentList;
-    }
-
-    public String getShawdow() {
-        return shawdow;
-    }
-
-    public void setShawdow(String shawdow) {
-        this.shawdow = shawdow;
+    public void setSalesOrderNumber(String salesOrderNumber) {
+        this.salesOrderNumber = salesOrderNumber;
     }
 
     @Override
@@ -312,16 +304,14 @@ public class Project {
 
         Project project = (Project) o;
 
-        if (salesOrderNumber != project.salesOrderNumber) return false;
-        if (!customer.equals(project.customer)) return false;
+        if (salesOrderNumber != null ? !salesOrderNumber.equals(project.salesOrderNumber) : project.salesOrderNumber != null)
+            return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = salesOrderNumber;
-        result = 31 * result + customer.hashCode();
-        return result;
+        return salesOrderNumber != null ? salesOrderNumber.hashCode() : 0;
     }
 }

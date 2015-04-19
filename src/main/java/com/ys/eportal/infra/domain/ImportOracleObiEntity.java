@@ -30,7 +30,7 @@ public class ImportOracleObiEntity extends AbstractDomainBase {
     private String stCustomerName;
     private String stChannelName;
     private String btCustomerName;
-    private Integer orderNumber;
+    private String orderNumber;
     private String productFamilyCode;
     private String modelGroupCode;
     private String forecastGroupCode;
@@ -177,11 +177,11 @@ public class ImportOracleObiEntity extends AbstractDomainBase {
 
     @Basic
     @javax.persistence.Column(name = "orderNumber")
-    public Integer getOrderNumber() {
+    public String getOrderNumber() {
         return orderNumber;
     }
 
-    public void setOrderNumber(Integer orderNumber) {
+    public void setOrderNumber(String orderNumber) {
         this.orderNumber = orderNumber;
     }
 

@@ -27,6 +27,8 @@ public class ProjectSearchMapper {
         mapperFactory.classMap(ProjectSearchSupport.class, ProjectSearch.class)
                 .field("salesOrderNumber", "salesOrderNumber")
                 .field("customerName", "customerName")
+                .field("importControlId", "importControlId")
+                .field("status", "status")
                 .byDefault()
                 .register();
 
@@ -34,6 +36,8 @@ public class ProjectSearchMapper {
         mapperFactory.classMap(ProjectSearch.class, ProjectSearchSupport.class)
                 .field("salesOrderNumber", "salesOrderNumber")
                 .field("customerName", "customerName")
+                .field("importControlId", "importControlId")
+                .field("status", "status")
                 .byDefault()
                 .register();
 

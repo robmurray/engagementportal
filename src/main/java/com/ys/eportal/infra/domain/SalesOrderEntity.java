@@ -10,12 +10,12 @@ import javax.persistence.*;
  */
 @Entity @IdClass(SalesOrderEntityId.class)
 @Table(name = "ep_SalesOrder")
-public class SalesOrderEntity extends AbstractDomainBase{
+public class SalesOrderEntity extends AbstractDomainBase {
 
 
     @Id
     @Column(name = "salesOrderId")
-    private int salesOrderId;
+    private String salesOrderId;
 
     @Id
     @Column(name = "customerId")
@@ -25,7 +25,7 @@ public class SalesOrderEntity extends AbstractDomainBase{
 
     private Date classRegSent;
     private String reportedRevRec;
-    private int salesOrderNumber;
+
     private String status;
     private Date bookDate;
     private Date shipDate;
@@ -46,14 +46,12 @@ public class SalesOrderEntity extends AbstractDomainBase{
     private String accountTeam;
     private String remote;
     private String onsite;
-    private String equipmentList;
-    private String shawdow;
 
-    public int getSalesOrderId() {
+    public String getSalesOrderId() {
         return salesOrderId;
     }
 
-    public void setSalesOrderId(int salesOrderId) {
+    public void setSalesOrderId(String salesOrderId) {
         this.salesOrderId = salesOrderId;
     }
 
@@ -93,15 +91,7 @@ public class SalesOrderEntity extends AbstractDomainBase{
         this.reportedRevRec = reportedRevRec;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "salesOrderNumber")
-    public int getSalesOrderNumber() {
-        return salesOrderNumber;
-    }
 
-    public void setSalesOrderNumber(int salesOrderNumber) {
-        this.salesOrderNumber = salesOrderNumber;
-    }
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "status")
@@ -303,26 +293,6 @@ public class SalesOrderEntity extends AbstractDomainBase{
         this.onsite = onsite;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "equipmentList")
-    public String getEquipmentList() {
-        return equipmentList;
-    }
-
-    public void setEquipmentList(String equipmentList) {
-        this.equipmentList = equipmentList;
-    }
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "shawdow")
-    public String getShawdow() {
-        return shawdow;
-    }
-
-    public void setShawdow(String shawdow) {
-        this.shawdow = shawdow;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -330,16 +300,13 @@ public class SalesOrderEntity extends AbstractDomainBase{
 
         SalesOrderEntity that = (SalesOrderEntity) o;
 
-        if (customerId != that.customerId) return false;
-        if (salesOrderId != that.salesOrderId) return false;
+        if (salesOrderId != null ? !salesOrderId.equals(that.salesOrderId) : that.salesOrderId != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = salesOrderId;
-        result = 31 * result + customerId;
-        return result;
+        return salesOrderId != null ? salesOrderId.hashCode() : 0;
     }
 }

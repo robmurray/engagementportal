@@ -6,7 +6,7 @@ import java.util.List;
  * Created by rob on 4/5/15.
  */
 public class ProjectSearch {
-    private int salesOrderNumber;
+    private String salesOrderNumber;
     private String customerName;
     private long importControlId;
     private List<String> statusValues = ModelConstants.statusValues;
@@ -19,13 +19,8 @@ public class ProjectSearch {
         this.customerName = customerName;
     }
 
-    public ProjectSearch(int salesOrderNumber) {
+    public void setSalesOrderNumber(String salesOrderNumber) {
         this.salesOrderNumber = salesOrderNumber;
-    }
-
-    public ProjectSearch(int salesOrderNumber, String customerName) {
-        this.salesOrderNumber = salesOrderNumber;
-        this.customerName = customerName;
     }
 
     public long getImportControlId() {
@@ -36,12 +31,8 @@ public class ProjectSearch {
         this.importControlId = importControlId;
     }
 
-    public int getSalesOrderNumber() {
+    public String getSalesOrderNumber() {
         return salesOrderNumber;
-    }
-
-    public void setSalesOrderNumber(int salesOrderNumber) {
-        this.salesOrderNumber = salesOrderNumber;
     }
 
     public String getCustomerName() {
@@ -75,16 +66,14 @@ public class ProjectSearch {
 
         ProjectSearch that = (ProjectSearch) o;
 
-        if (salesOrderNumber != that.salesOrderNumber) return false;
-        if (customerName != null ? !customerName.equals(that.customerName) : that.customerName != null) return false;
+        if (salesOrderNumber != null ? !salesOrderNumber.equals(that.salesOrderNumber) : that.salesOrderNumber != null)
+            return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = salesOrderNumber;
-        result = 31 * result + (customerName != null ? customerName.hashCode() : 0);
-        return result;
+        return salesOrderNumber != null ? salesOrderNumber.hashCode() : 0;
     }
 }

@@ -5,32 +5,41 @@ package com.ys.eportal.infra.domain;
  */
 public class ProjectSearchSupport {
 
-    private int salesOrderNumber;
+    private String salesOrderNumber;
     private String customerName;
-
+    private long importControlId;
+    private String status;
 
     public ProjectSearchSupport() {
     }
 
-    public ProjectSearchSupport(int salesOrderNumber) {
-        this.salesOrderNumber = salesOrderNumber;
-    }
+
 
     public ProjectSearchSupport(String customerName) {
         this.customerName = customerName;
     }
 
-    public ProjectSearchSupport(int salesOrderNumber, String customerName) {
-        this.salesOrderNumber = salesOrderNumber;
-        this.customerName = customerName;
-    }
-
-
-    public int getSalesOrderNumber() {
+    public String getSalesOrderNumber() {
         return salesOrderNumber;
     }
 
-    public void setSalesOrderNumber(int salesOrderNumber) {
+    public long getImportControlId() {
+        return importControlId;
+    }
+
+    public void setImportControlId(long importControlId) {
+        this.importControlId = importControlId;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public void setSalesOrderNumber(String salesOrderNumber) {
         this.salesOrderNumber = salesOrderNumber;
     }
 
@@ -49,16 +58,14 @@ public class ProjectSearchSupport {
 
         ProjectSearchSupport that = (ProjectSearchSupport) o;
 
-        if (salesOrderNumber != that.salesOrderNumber) return false;
-        if (customerName != null ? !customerName.equals(that.customerName) : that.customerName != null) return false;
+        if (salesOrderNumber != null ? !salesOrderNumber.equals(that.salesOrderNumber) : that.salesOrderNumber != null)
+            return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = salesOrderNumber;
-        result = 31 * result + (customerName != null ? customerName.hashCode() : 0);
-        return result;
+        return salesOrderNumber != null ? salesOrderNumber.hashCode() : 0;
     }
 }

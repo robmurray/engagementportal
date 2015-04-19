@@ -62,13 +62,14 @@ public class ProjectController {
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "createProject");
 
-        return this.projectEditForm(so.getSalesOrderNumber(),"",model);//"projectEdit";
+        return this.projectEditForm(so.getSalesOrderId(),"",model);//"projectEdit";
     }
 
     @RequestMapping(value="/projectEdit", method= RequestMethod.GET)
-    public String projectEditForm(@RequestParam(value="salesOrderNumber", required=true) Integer salesOrderNumber,
+    public String projectEditForm(@RequestParam(value="salesOrderNumber", required=true) String salesOrderNumber,
                                   @RequestParam(value="msgtype", required=false) String messageType,Model model) {
-SalesOrderEntity so = this.portalService.findSalesOrderEntityById(salesOrderNumber);
+
+        SalesOrderEntity so = this.portalService.findSalesOrderEntityById(salesOrderNumber);
         Project project = this.projectMapper.convert(so);
         model.addAttribute("pageName", "Edit Project");
         model.addAttribute("project",project);

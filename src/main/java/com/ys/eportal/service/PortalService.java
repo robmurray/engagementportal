@@ -81,7 +81,7 @@ public class PortalService {
         this.salesOrderRepository.save(salesOrderEntity);
     }
 
-    public SalesOrderEntity findSalesOrderEntityById(int salesOrderId) {
+    public SalesOrderEntity findSalesOrderEntityById(String salesOrderId) {
         List<SalesOrderEntity> list = this.salesOrderRepository.findBySalesOrderId(salesOrderId);
         SalesOrderEntity soe = null;
         if (list != null && list.size() > 0) {
@@ -90,6 +90,17 @@ public class PortalService {
         return soe;
     }
 
+    public List<SalesOrderEntity> findByImportControlId(long importControlId) {
+        List<SalesOrderEntity> list = this.salesOrderRepository.findByimportControlId(importControlId);
+
+        return list;
+    }
+
+    public List<SalesOrderEntity> findByStatus(String status) {
+        List<SalesOrderEntity> list = this.salesOrderRepository.findByStatus(status);
+
+        return list;
+    }
     public List<SalesOrderEntity> findAllSalesOrders() {
         return (List) this.salesOrderRepository.findAll();
     }
@@ -97,14 +108,19 @@ public class PortalService {
     public Iterable<SalesOrderEntity> find(ProjectSearchSupport search) {
         List<SalesOrderEntity> results = null;
 
-        if (search.getSalesOrderNumber() > 0) {
+        if (search.getSalesOrderNumber()!= null && !search.getSalesOrderNumber().trim().equals("")){
             SalesOrderEntity soe = this.findSalesOrderEntityById(search.getSalesOrderNumber());
             results = new ArrayList<SalesOrderEntity>();
             results.add(soe);
         } else if (search.getCustomerName() != null && !search.getCustomerName().trim().equals("")) {
             //results = this.findCustomerByName(search.getName());
             results = this.findAllSalesOrders();
-        } else {
+        } else if (search.getImportControlId() > 0) {
+            results = this.findByImportControlId(search.getImportControlId());
+
+        } else if (search.getStatus() != null && !search.getStatus().trim().equals("")){
+            results = this.findByStatus(search.getStatus());
+        }else {
             results = this.findAllSalesOrders();
         }
 
@@ -202,13 +218,13 @@ public class PortalService {
                     entity.setModelGroupCode(stage.getModelGroupCode());
                     entity.setNetUsd(ConversionUtils.convertToBigDecimal(stage.getNetUsd()));
                     entity.setOrderedQuantity(ConversionUtils.convertToInt(stage.getOrderedQuantity()));
-                    entity.setOrderNumber(ConversionUtils.convertToInt(stage.getOrderNumber()));
+                    entity.setOrderNumber(stage.getOrderNumber());
                     entity.setProductFamilyCode(stage.getProductFamilyCode());
                     entity.setSalesAgentName(stage.getSalesAgentName());
                     entity.setStAgentName(stage.getStAgentName());
                     entity.setStChannelName(stage.getStChannelName());
                     entity.setStCustomerName(stage.getStCustomerName());
-                    entity.setImportOracleObiID(stage.getImportControlId());
+                    entity.setImportControlId(stage.getImportControlId());
                     resultList.add(entity);
                 } catch (Exception e) {
 
@@ -264,7 +280,7 @@ public class PortalService {
                 wrkProject.setModelGroup(entity.getModelGroupCode());
                 wrkProject.setAmount(entity.getNetUsd());
                 //entity.getOrderedQuantity();
-                wrkProject.setSalesOrderNumber(entity.getOrderNumber());
+                wrkProject.setSalesOrderId(entity.getOrderNumber());
 
                 //entity.getProductFamilyCode();
                 //entity.getSalesAgentName();

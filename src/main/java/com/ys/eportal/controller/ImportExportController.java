@@ -77,6 +77,16 @@ public class ImportExportController {
         return "importMaster";
     }
 
+    @RequestMapping(value = "/exportSalesOrders", method = RequestMethod.GET)
+    public String exportSalesordersForm(Model model) {
+
+        addPageAttributes(model, "Import Master", "import master spreadsheet admin only");
+
+        model.addAttribute("pageGroup", "importExport");
+        model.addAttribute("pageId", "exportSalesOrders");
+        return "exportSalesOrders";
+    }
+
 
     protected void addPageAttributes(Model model, String pageName, String subTitle) {
         model.addAttribute("subTitle", subTitle);

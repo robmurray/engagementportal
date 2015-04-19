@@ -33,6 +33,6 @@ public class SpringMVCConfig extends WebSecurityConfigurerAdapter {
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
-                .withUser("user").password("password").roles("USER");
+                .withUser("flukeadmin").password("portal").roles("USER");
     }
 }

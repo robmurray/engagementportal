@@ -1,5 +1,4 @@
 package com.ys.eportal.infra.domain;
-
 import java.io.Serializable;
 
 /**
@@ -12,10 +11,6 @@ public class SalesOrderEntityId  implements Serializable {
     public SalesOrderEntityId() {
     }
 
-    public SalesOrderEntityId(String salesOrderId, int customerId) {
-        this.salesOrderId = salesOrderId;
-        this.customerId = customerId;
-    }
 
     public String getSalesOrderId() {
         return salesOrderId;
@@ -40,6 +35,7 @@ public class SalesOrderEntityId  implements Serializable {
 
         SalesOrderEntityId that = (SalesOrderEntityId) o;
 
+        if (customerId != that.customerId) return false;
         if (salesOrderId != null ? !salesOrderId.equals(that.salesOrderId) : that.salesOrderId != null) return false;
 
         return true;
@@ -47,6 +43,8 @@ public class SalesOrderEntityId  implements Serializable {
 
     @Override
     public int hashCode() {
-        return salesOrderId != null ? salesOrderId.hashCode() : 0;
+        int result = salesOrderId != null ? salesOrderId.hashCode() : 0;
+        result = 31 * result + customerId;
+        return result;
     }
 }

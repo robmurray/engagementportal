@@ -48,7 +48,7 @@ public class PortalService {
             results = new ArrayList<CustomerEntity>();
             results.add(c);
         } else if (search.getName() != null && !search.getName().trim().equals("")) {
-            results = this.findCustomerByName(search.getName());
+            results = this.searchByCustomerName(search.getName());
         } else {
             results = this.findAllCustomers();
         }
@@ -62,9 +62,21 @@ public class PortalService {
     }
 
 
-    public List<CustomerEntity> findCustomerByName(String name) {
-        return this.customerRepository.findByName(name);
+    public CustomerEntity findCustomerByName(String name) {
+        CustomerEntity customer = null;
+        List<CustomerEntity> list = this.customerRepository.findByName(name);
+        if(list!=null && list.size()>0){
+            customer= list.get(0);
+        }
+        return customer;
     }
+
+    public List<CustomerEntity> searchByCustomerName(String name) {
+
+        return this.customerRepository.findByNameLike(this.processWildCards(name));
+
+    }
+
 
 
     public List<CustomerEntity> findAllCustomers() {
@@ -253,10 +265,8 @@ public class PortalService {
                 // @TODO which name to use st or bt
                 String customerName = entity.getBtCustomerName();
 
-                List<CustomerEntity> ce = this.findCustomerByName(customerName);
-                if (ce != null && ce.size() > 0) {
-                    wrkCustomer = ce.get(0);
-                } else {
+                wrkCustomer = this.findCustomerByName(customerName);
+                if (wrkCustomer == null){
                     wrkCustomer = new CustomerEntity();
                     wrkCustomer.setName(customerName);
                     this.customerRepository.save(wrkCustomer);
@@ -287,7 +297,8 @@ public class PortalService {
                 //entity.getStAgentName();
                 //entity.getStChannelName();
 
-                wrkProject.setCustomerId(wrkCustomer.getCustomerId()); //entity.getStCustomerName();
+                wrkProject.setCustomer(new CustomerEntity(wrkCustomer.getCustomerId())); //entity.getStCustomerName();
+
                 wrkProject.setImportControlId(entity.getImportControlId());
                 soList.add(wrkProject);
             }
@@ -315,5 +326,15 @@ public class PortalService {
         importControlRepository.save(ice);
 
         return results;
+    }
+
+    protected String processWildCards(String value){
+
+        if(value==null)
+            value ="";
+        value = value.replaceAll("%", "");
+        value = value.replaceAll("\\*", "");
+        value = value+"%";
+        return value;
     }
 }

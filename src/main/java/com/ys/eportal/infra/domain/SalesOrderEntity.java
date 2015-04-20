@@ -1,5 +1,6 @@
 package com.ys.eportal.infra.domain;
 
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.Date;
@@ -8,7 +9,7 @@ import javax.persistence.*;
 /**
  * Created by rob on 4/8/15.
  */
-@Entity @IdClass(SalesOrderEntityId.class)
+@Entity
 @Table(name = "ep_SalesOrder")
 public class SalesOrderEntity extends AbstractDomainBase {
 
@@ -17,9 +18,9 @@ public class SalesOrderEntity extends AbstractDomainBase {
     @Column(name = "salesOrderId")
     private String salesOrderId;
 
-    @Id
-    @Column(name = "customerId")
-    private int customerId;
+    @ManyToOne
+    @JoinColumn(name="customer_id", nullable=false)
+    private CustomerEntity customer;
 
     private long importControlId;
 
@@ -47,6 +48,13 @@ public class SalesOrderEntity extends AbstractDomainBase {
     private String remote;
     private String onsite;
 
+    public SalesOrderEntity() {
+
+
+    }
+
+
+
     public String getSalesOrderId() {
         return salesOrderId;
     }
@@ -55,12 +63,12 @@ public class SalesOrderEntity extends AbstractDomainBase {
         this.salesOrderId = salesOrderId;
     }
 
-    public int getCustomerId() {
-        return customerId;
+    public CustomerEntity getCustomer() {
+        return customer;
     }
 
-    public void setCustomerId(int customerId) {
-        this.customerId = customerId;
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
     }
 
     public long getImportControlId() {

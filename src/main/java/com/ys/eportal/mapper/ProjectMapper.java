@@ -2,19 +2,14 @@ package com.ys.eportal.mapper;
 
 import com.ys.eportal.infra.domain.CustomerEntity;
 import com.ys.eportal.infra.domain.SalesOrderEntity;
-import com.ys.eportal.model.Customer;
 import com.ys.eportal.model.Project;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.stereotype.Component;
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 /**
  * Created by rob on 4/9/15.
@@ -28,12 +23,12 @@ public class ProjectMapper {
         this.register();
     }
 
-    private void register(){
+    private void register() {
         mapperFactory = new DefaultMapperFactory.Builder().build();
         // map to/from
         mapperFactory.classMap(SalesOrderEntity.class, Project.class)
                 .field("salesOrderId", "salesOrderNumber")
-                .field("customerId", "customerId")
+                .field("customer.customerId", "customerId")
                 .field("importControlId", "importControlId")
                 .field("classRegSent", "classRegSent")
                 .field("reportedRevRec", "reportedRevRec")
@@ -63,7 +58,7 @@ public class ProjectMapper {
         // map from/to
         mapperFactory.classMap(Project.class, SalesOrderEntity.class)
                 .field("salesOrderNumber", "salesOrderId")
-                .field("customerId", "customerId")
+                .field("customerId", "customer.customerId")
                 .field("importControlId", "importControlId")
                 .field("classRegSent", "classRegSent")
                 .field("reportedRevRec", "reportedRevRec")
@@ -95,7 +90,7 @@ public class ProjectMapper {
     public Project convert(SalesOrderEntity salesOrderEntity) {
         Project project = null;
 
-        if(salesOrderEntity== null){
+        if (salesOrderEntity == null) {
             return null;
         }
 
@@ -107,28 +102,39 @@ public class ProjectMapper {
     public SalesOrderEntity convert(Project project) {
         SalesOrderEntity salesOrderEntity = null;
 
-        if(project== null){
+        if (project == null) {
             return null;
         }
 
         MapperFacade mapper = mapperFactory.getMapperFacade();
-        salesOrderEntity= mapper.map(project, SalesOrderEntity.class);
+        salesOrderEntity = mapper.map(project, SalesOrderEntity.class);
 
         return salesOrderEntity;
     }
 
 
-    public Iterable<Project> convert(Iterable<SalesOrderEntity> salesOrderEntities){
-        if(salesOrderEntities== null){
+    public Iterable<Project> convert(Iterable<SalesOrderEntity> salesOrderEntities) {
+        if (salesOrderEntities == null) {
             return null;
         }
 
         Collection<Project> projects = new HashSet<Project>();
         MapperFacade mapper = mapperFactory.getMapperFacade();
 
-       mapper.mapAsCollection(salesOrderEntities, projects, Project.class);
+        mapper.mapAsCollection(salesOrderEntities, projects, Project.class);
 
         return projects;
 
     }
+/*
+   class SalesOrderFactory implements ObjectFactory<SalesOrderEntity> {
+
+        public Person create(Object source, Type<Person> destinationType) {
+            Person person = new Person();
+            // set the default address
+            person.setAdress(new Address("Morocco", "Casablanca"));
+            return person;
+        }
+    }
+*/
 }

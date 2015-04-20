@@ -45,11 +45,13 @@
                                     <div class="input-group">
 
                                     <span class="input-group-btn">
-                                        <button class="btn" type="button">Edit</button>
+                                        <button class="btn" type="button" disabled="disabled">Edit</button>
                                     </span>
 
                                         <input type="text" class="form-control" th:field="*{customer.name}"
                                                placeholder="enter the customer name" readonly="readonly"/>
+                                        <input type="hidden" th:field="*{customer.customerId}"/>
+
                                     </div>
                                 </div>
                             </div>

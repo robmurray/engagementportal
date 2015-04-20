@@ -81,7 +81,7 @@ public class ProjectController {
 
 
         SalesOrderEntity so = this.projectMapper.convert(project);
-
+        so.setCustomer(new CustomerEntity(project.getCustomerId()));
         this.portalService.saveProject(so);
 
         project = this.projectMapper.convert(so);
@@ -110,9 +110,7 @@ public class ProjectController {
     @RequestMapping(value="/projectEdit", method=RequestMethod.POST)
     public String projectEditSubmit(@ModelAttribute Project project, Model model) {
 
-        //project = portalService.findProjectByID(1);
-        // for now
-
+        this.portalService.saveProject(this.projectMapper.convert(project));
         model.addAttribute("pageName", "Save Project");
         model.addAttribute("project", project);
         model.addAttribute("pageGroup", "project");

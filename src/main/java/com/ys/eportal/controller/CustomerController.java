@@ -52,8 +52,8 @@ public class CustomerController {
         // look for dup
         if (customer != null && StringUtils.isNotEmpty(customer.getName())) {
 
-            List<CustomerEntity> list = this.portalService.findCustomerByName(customer.getName());
-            if (list != null && list.size() > 0) {
+            CustomerEntity wrkCustomer = this.portalService.findCustomerByName(customer.getName());
+            if (wrkCustomer != null){
                 logger.debug("duplicate name error");
                 bindingResult.rejectValue("name","duplicate_name", "duplicate name");
             }
@@ -99,6 +99,7 @@ public class CustomerController {
 
         addPageAttributes(model, "Edit Customer", "Edit the Customer ");
         model.addAttribute("customer", c);
+        model.addAttribute("projects", c.getProjects());
         model.addAttribute("pageGroup", "customer");
         model.addAttribute("pageId", "searchCustomer");
         return "customerEdit";
@@ -120,6 +121,7 @@ public class CustomerController {
         customer = this.customerMapper.convert(c);
 
         model.addAttribute("customer", customer);
+        model.addAttribute("projects", customer.getProjects());
         addPageAttributes(model, "Save Customer", "Save Customer update");
         model.addAttribute("pageGroup", "customer");
         model.addAttribute("pageId", "searchCustomer");

@@ -2,6 +2,7 @@ package com.ys.eportal.service;
 
 import com.ys.eportal.infra.domain.*;
 import com.ys.eportal.infra.repository.*;
+import com.ys.eportal.model.ProjectStats;
 import com.ys.eportal.service.converter.CSV2SalesOrderConverter;
 import com.ys.eportal.service.converter.ConversionResults;
 import com.ys.eportal.service.converter.ConversionUtils;
@@ -11,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -40,6 +40,20 @@ public class PortalService {
     @Autowired
     private ImportControlRepository importControlRepository;
 
+    public ProjectStats retrieveProjectStatus() {
+        ProjectStats proj = new ProjectStats();
+        proj.setNumBookedStatus(1);
+        proj.setNumCompleteStatus(2);
+        proj.setNumInprocessStatus(3);
+        proj.setNumNotdefinedStatus(4);
+        proj.setNumPostSupportStatus(5);
+        proj.setNumBookedStatus(6);
+        proj.setNumRandSupportStatus(7);
+        proj.setNumScheduledStatus(8);
+
+        return proj;
+    }
+
     public Iterable<CustomerEntity> find(CustomerSearchSupport search) {
         List<CustomerEntity> results = null;
 
@@ -65,8 +79,8 @@ public class PortalService {
     public CustomerEntity findCustomerByName(String name) {
         CustomerEntity customer = null;
         List<CustomerEntity> list = this.customerRepository.findByName(name);
-        if(list!=null && list.size()>0){
-            customer= list.get(0);
+        if (list != null && list.size() > 0) {
+            customer = list.get(0);
         }
         return customer;
     }
@@ -76,7 +90,6 @@ public class PortalService {
         return this.customerRepository.findByNameLike(this.processWildCards(name));
 
     }
-
 
 
     public List<CustomerEntity> findAllCustomers() {
@@ -113,6 +126,7 @@ public class PortalService {
 
         return list;
     }
+
     public List<SalesOrderEntity> findAllSalesOrders() {
         return (List) this.salesOrderRepository.findAll();
     }
@@ -120,7 +134,7 @@ public class PortalService {
     public Iterable<SalesOrderEntity> find(ProjectSearchSupport search) {
         List<SalesOrderEntity> results = null;
 
-        if (search.getSalesOrderNumber()!= null && !search.getSalesOrderNumber().trim().equals("")){
+        if (search.getSalesOrderNumber() != null && !search.getSalesOrderNumber().trim().equals("")) {
             SalesOrderEntity soe = this.findSalesOrderEntityById(search.getSalesOrderNumber());
             results = new ArrayList<SalesOrderEntity>();
             results.add(soe);
@@ -130,9 +144,9 @@ public class PortalService {
         } else if (search.getImportControlId() > 0) {
             results = this.findByImportControlId(search.getImportControlId());
 
-        } else if (search.getStatus() != null && !search.getStatus().trim().equals("")){
+        } else if (search.getStatus() != null && !search.getStatus().trim().equals("")) {
             results = this.findByStatus(search.getStatus());
-        }else {
+        } else {
             results = this.findAllSalesOrders();
         }
 
@@ -266,7 +280,7 @@ public class PortalService {
                 String customerName = entity.getBtCustomerName();
 
                 wrkCustomer = this.findCustomerByName(customerName);
-                if (wrkCustomer == null){
+                if (wrkCustomer == null) {
                     wrkCustomer = new CustomerEntity();
                     wrkCustomer.setName(customerName);
                     this.customerRepository.save(wrkCustomer);
@@ -328,13 +342,13 @@ public class PortalService {
         return results;
     }
 
-    protected String processWildCards(String value){
+    protected String processWildCards(String value) {
 
-        if(value==null)
-            value ="";
+        if (value == null)
+            value = "";
         value = value.replaceAll("%", "");
         value = value.replaceAll("\\*", "");
-        value = value+"%";
+        value = value + "%";
         return value;
     }
 }

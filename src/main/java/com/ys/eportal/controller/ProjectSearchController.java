@@ -14,9 +14,7 @@ import com.ys.eportal.service.PortalService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * Created by rob on 4/4/15.
@@ -33,6 +31,12 @@ public class ProjectSearchController {
     @Autowired
     private ProjectSearchMapper projectSearchMapper;
 
+    @RequestMapping(value="/projectstatus", method= RequestMethod.GET)
+    public String projectSearchForm2(@RequestParam(value="status", required=true) String status, Model model) {
+        ProjectSearch search = new ProjectSearch();
+        search.setStatus(status);
+        return this.customerSubmit(search,model);
+    }
 
     @RequestMapping(value="/projectSearch", method= RequestMethod.GET)
     public String projectSearchForm(Model model) {
@@ -43,6 +47,7 @@ public class ProjectSearchController {
         model.addAttribute("pageId", "searchProject");
         return "projectSearch";
     }
+
 
     @RequestMapping(value="/projectSearch", method=RequestMethod.POST)
     public String customerSubmit(@ModelAttribute ProjectSearch search, Model model) {

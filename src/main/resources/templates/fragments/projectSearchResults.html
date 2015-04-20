@@ -20,20 +20,20 @@
         <div id="projectSearchResultsPanel" class="panel-collapse collapse in">
             <div class="portlet-body">
 
-                <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="3">
+                <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="10">
                     <thead>
                     <tr>
-                        <th  class="col-sm-1" data-toggle="true">sales order number</th>
-                        <th  class="col-sm-1" data-hide="phone,tablet">customer name</th>
-                        <th  class="col-sm-1" data-hide="phone,tablet">status</th>
-                        <th  class="col-sm-1" data-sort-ignore="true">action</th>
+                        <th   data-toggle="true">sales order number</th>
+                        <th   data-hide="phone,tablet">customer name</th>
+                        <th   data-hide="phone,tablet">status</th>
+                        <th   data-sort-ignore="true">action</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="project : ${projects}" th:if="${projects != null}">
-                        <td  class="col-sm-1" th:text="${project.salesOrderNumber}"></td>
-                        <td  class="col-sm-1" th:text="${project.customerId}"></td>
-                        <td class="col-sm-1"><span class="label label-active"  th:text="${project.status}"></span></td>
+                        <td   th:text="${project.salesOrderNumber}"></td>
+                        <td   th:text="${project.customerId}"></td>
+                        <td><span class="label label-active"  th:text="${project.status}"></span></td>
                         <td>
                             <div class="btn-group btn-group-xs ">
                                 <a href="" th:href="'projectEdit?salesOrderNumber='+${project.salesOrderNumber}"

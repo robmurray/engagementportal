@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/portalpage">
 <head>
     <meta charset="utf-8"/>
@@ -27,108 +27,139 @@
         <div class="row">
             <div class="col-lg-9 col-sm-12">
 
-                <div class="row">
+                <div class="col-lg-4 col-sm-4">
 
-                    <div class="col-lg-4 col-sm-4">
-                        <a href="#" class="tile-button btn btn-primary">
-                            <div class="tile-content-wrapper">
-                                <i class="fa fa-users"></i>
+                    <a href="" th:href="'projectstatus?status='+ ${dashboard.completeStatus}"
+                       class="tile-button btn btn-primary">
+                        <div class="tile-content-wrapper">
+                            <i class="fa fa-users"></i>
 
-                                <div class="tile-content">
-                                    50
-                                </div>
-                                <small>
-                                    Active Project
-                                </small>
-                            </div>
-                        </a>
-                    </div>
-
-                    <div class="col-lg-4 col-sm-4">
-                        <a href="#" class="tile-button btn btn-inverse">
-                            <div class="tile-content-wrapper">
-                                <i class="glyphicon glyphicon-gift"></i>
-
-                                <div class="tile-content">
-                                    300
-                                </div>
-                                <small>
-                                    completed projects this month
-                                </small>
-                            </div>
-                        </a>
-                    </div>
-
-
-                    <div class="col-lg-4 col-sm-4">
-                        <a href="#" class="tile-button btn btn-white">
-                            <div class="tile-content-wrapper">
-                                <i class="fa fa-warning text-primary"></i>
-
-                                <div class="tile-content text-primary">
-                                    <span></span>3
-                                </div>
-                                <small>
-                                    blocked projects
-                                </small>
-                            </div>
-                        </a>
-                    </div>
+                            <div class="tile-content" th:text="${stats.numCompleteStatus}"></div>
+                            <small>
+                                Completed projects
+                            </small>
+                        </div>
+                    </a>
                 </div>
+                <div class="col-lg-4 col-sm-4">
 
+                    <a href="" th:href="'projectstatus?status='+ ${dashboard.scheduledStatus}"
+                       class="tile-button btn btn-primary">
+                        <div class="tile-content-wrapper">
+                            <i class="fa fa-users"></i>
 
+                            <div class="tile-content" th:text="${stats.numScheduledStatus}"></div>
+                            <small>
+                                Scheduled projects
+                            </small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+
+                    <a href="" th:href="'projectstatus?status='+ ${dashboard.inprocessStatus}"
+                       class="tile-button btn btn-primary">
+                        <div class="tile-content-wrapper">
+                            <i class="fa fa-users"></i>
+
+                            <div class="tile-content" th:text="${stats.numInprocessStatus}"></div>
+                            <small>
+                                in process projects
+                            </small>
+                        </div>
+                    </a>
+
+                </div>
             </div>
-
-
         </div>
-
-
         <div class="row">
-            <div class="col-lg-12">
+            <div class="col-lg-9 col-sm-12">
 
-                <div class="portlet">
-                    <div class="portlet-heading inverse">
-                        <div class="portlet-title">
-                            <h4>Bar Chart</h4>
+                <div class="col-lg-4 col-sm-4">
+
+                    <a href="" th:href="'projectstatus?status='+ ${dashboard.bookedStatus}"
+                       class="tile-button btn btn-primary">
+                        <div class="tile-content-wrapper">
+                            <i class="fa fa-users"></i>
+                            <div class="tile-content" th:text="${stats.numBookedStatus}"></div>
+                            <small>
+                                Booked Projects
+                            </small>
                         </div>
-                        <div class="portlet-widgets">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#chart-1"><i
-                                    class="fa fa-chevron-down"></i></a>
-                        </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div id="chart-1" class="panel-collapse collapse in">
-                        <div class="portlet-body">
-                            <div class="chart-holder" id="morris-chart-1"
-                                 style="height: 220px!important; min-height:220px;"></div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
+                <div class="col-lg-4 col-sm-4">
 
-                <div class="portlet">
-                    <div class="portlet-heading inverse">
-                        <div class="portlet-title">
-                            <h4>Area Chart</h4>
+                    <a href="" th:href="'projectstatus?status='+ ${dashboard.randSupportStatus}"
+                       class="tile-button btn btn-primary">
+                        <div class="tile-content-wrapper">
+                            <i class="fa fa-users"></i>
+                            <div class="tile-content" th:text="${stats.numRandSupportStatus}"></div>
+                            <small>
+                                R and D support projects
+                            </small>
                         </div>
-                        <div class="portlet-widgets">
-                            <a data-toggle="collapse" data-parent="#accordion" href="#chart-2"><i
-                                    class="fa fa-chevron-down"></i></a>
+                    </a>
+
+                </div>
+                <div class="col-lg-4 col-sm-4">
+
+                    <a href="" th:href="'projectstatus?status='+ ${dashboard.postSupportStatus}"
+                       class="tile-button btn btn-info">
+                        <div class="tile-content-wrapper">
+                            <i class="fa fa-users"></i>
+                            <div class="tile-content" th:text="${stats.numPostSupportStatus}"></div>
+                            <small>
+                                post support projects
+                            </small>
                         </div>
-                        <div class="clearfix"></div>
-                    </div>
-                    <div id="chart-2" class="panel-collapse collapse in">
-                        <div class="portlet-body">
-                            <div class="chart-holder" id="morris-chart-2"
-                                 style="height: 220px!important; min-height:220px;"></div>
-                        </div>
-                    </div>
+                    </a>
                 </div>
 
             </div>
-
-
         </div>
+        <div class="row">
+            <div class="col-lg-9 col-sm-12">
+
+
+                <div class="col-lg-4 col-sm-4">
+
+                    <a href="" th:href="'projectstatus?status='+ ${dashboard.proposedStatus}"
+                       class="tile-button btn btn-info">
+                        <div class="tile-content-wrapper">
+                            <i class="fa fa-users"></i>
+                            <div class="tile-content" th:text="${stats.numProposedStatus}"></div>
+                            <small>
+                                proposed Projects
+                            </small>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-lg-4 col-sm-4">
+
+                    <a href="" th:href="'projectstatus?status='+ ${dashboard.notdefinedStatus}"
+                       class="tile-button btn btn-danger">
+                        <div class="tile-content-wrapper">
+                            <i class="fa fa-users"></i>
+                            <div class="tile-content" th:text="${stats.numNotdefinedStatus}"></div>
+                            <small>
+                                no status specified
+                            </small>
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+
+
     </div>
+
+
 </div>
+
+
+
+
 </body>
 </html>>

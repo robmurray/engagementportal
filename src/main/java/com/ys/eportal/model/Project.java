@@ -13,6 +13,8 @@ public class Project {
 
     private String salesOrderNumber;
     private Customer customer;
+    private Integer customerId;
+
     private long importControlId;
     private Date classRegSent;
     private String reportedRevRec;
@@ -66,6 +68,15 @@ public class Project {
 
     public String getSalesOrderNumber() {
         return salesOrderNumber;
+    }
+
+
+    public Integer getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(Integer customerId) {
+        this.customerId = customerId;
     }
 
     public Project(Customer customer) {

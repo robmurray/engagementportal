@@ -42,6 +42,8 @@ public class ProjectController {
 
         Project project = new Project(new Customer());
 
+        model.addAttribute("customers",this.portalService.findAllCustomers());
+
         model.addAttribute("pageName", "New Project");
         model.addAttribute("project", project);
         model.addAttribute("pageGroup", "project");

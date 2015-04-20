@@ -1,5 +1,6 @@
 package com.ys.eportal.model;
 
+import javax.validation.constraints.Size;
 import java.util.List;
 
 /**
@@ -8,6 +9,7 @@ import java.util.List;
 public class Customer extends AbstractModelBase{
 
     private int customerId;
+    @Size(min=2, max=30)
     private String name;
     private String notes;
     private List<Project> projects;

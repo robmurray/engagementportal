@@ -2,10 +2,7 @@ package com.ys.eportal.controller;
 
 
 import com.ys.eportal.infra.domain.ImportOracleObiStage;
-import com.ys.eportal.model.CustomerSearch;
-import com.ys.eportal.model.FileUpload;
-import com.ys.eportal.model.ImportOracleObi;
-import com.ys.eportal.model.UploadSalesOrder;
+import com.ys.eportal.model.*;
 import com.ys.eportal.service.PortalService;
 import com.ys.eportal.service.converter.CSV2SalesOrderConverter;
 import com.ys.eportal.service.converter.ConversionResults;
@@ -14,12 +11,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.validation.Valid;
 import java.util.TreeMap;
 
 /**
@@ -47,9 +46,25 @@ public class ImportExportController {
     }
 
     @RequestMapping(value = "/uploadSalesOrder", method = RequestMethod.POST)
-    public String soHandleFileUpload(@RequestParam("file") MultipartFile file,@ModelAttribute UploadSalesOrder uploadSalesOrder, Model model){
+
+    public String soHandleFileUpload(@RequestParam("file") MultipartFile file,@ModelAttribute UploadSalesOrder uploadSalesOrder,BindingResult bindingResult, Model model){
         ConversionResults<String,ImportOracleObiStage> results = null;
         try {
+
+            if(file == null){
+                logger.debug("file not specified");
+                bindingResult.rejectValue("fileData", "required_file", "file was not specified");
+
+            }
+            if(file != null&&file.isEmpty()){
+                logger.debug("file empty");
+                bindingResult.rejectValue("fileData", "required_file", "file is empty");
+
+            }
+            if (bindingResult.hasErrors()) {
+                logger.debug("validation errors");
+                return "uploadSalesOrder";
+            }
 
             results = this.portalService.importOracleOBICSVSalesOrder(file);
 

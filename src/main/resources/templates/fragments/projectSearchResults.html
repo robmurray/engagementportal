@@ -32,12 +32,12 @@
                     <tbody>
                     <tr th:each="project : ${projects}" th:if="${projects != null}">
                         <td  class="col-sm-1" th:text="${project.salesOrderNumber}"></td>
-                        <td  class="col-sm-1" th:text="${project.customer.name}"></td>
+                        <td  class="col-sm-1" th:text="${project.customerId}"></td>
                         <td class="col-sm-1"><span class="label label-active"  th:text="${project.status}"></span></td>
                         <td>
                             <div class="btn-group btn-group-xs ">
                                 <a href="" th:href="'projectEdit?salesOrderNumber='+${project.salesOrderNumber}"
-                                   data-placement="left" data-rel="tooltip" title="View"><i
+                                   data-placement="left" data-rel="tooltip" title="edit"><i
                                         class="fa fa-pencil icon-only"></i></a>
                             </div>
                         </td>
@@ -45,7 +45,7 @@
                     </tbody>
                     <tfoot>
                     <tr>
-                        <td colspan="7">
+                        <td colspan="4">
                             <ul class="hide-if-no-paging pagination pagination-centered pull-right"></ul>
                             <div class="clearfix"></div>
                         </td>

@@ -34,7 +34,9 @@
                         <div class="col-sm-3">
                             <input type="text" class="form-control" th:field="*{salesOrderNumber}"
                                    placeholder="enter the sales order number"/>
+                            <div class="has-error" th:if="${#fields.hasErrors('salesOrderNumber')}" th:errors="*{salesOrderNumber}">SO Error</div>
                         </div>
+
                     </div>
                     <div class="form-group">
                         <label class="col-sm-2 control-label">Customer Name</label>
@@ -44,7 +46,7 @@
 
                                 <option th:each="customer : ${customers}"
                                         th:value="${customer.customerId}"
-                                        th:text="${customer.customerId}"></option>
+                                        th:text="${customer.name}"></option>
                             </select>
                         </div>
 

@@ -7,23 +7,29 @@ import com.ys.eportal.mapper.ProjectMapper;
 import com.ys.eportal.model.Customer;
 import com.ys.eportal.model.Project;
 import com.ys.eportal.service.PortalService;
+import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * Created by rob on 4/4/15.
  */
 @Controller
 public class ProjectController {
-
+    private static Logger logger = LoggerFactory.getLogger(ProjectController.class);
     @Autowired
     private PortalService portalService;
 
@@ -38,11 +44,11 @@ public class ProjectController {
     }
 
     @RequestMapping(value="/projectNew", method= RequestMethod.GET)
-    public String ProjectForm(Model model) {
+    public String projectForm(Model model) {
 
         Project project = new Project(new Customer());
 
-        model.addAttribute("customers",this.portalService.findAllCustomers());
+        model.addAttribute("customers", this.portalService.findAllCustomers());
 
         model.addAttribute("pageName", "New Project");
         model.addAttribute("project", project);
@@ -52,10 +58,30 @@ public class ProjectController {
     }
 
     @RequestMapping(value="/projectNew", method=RequestMethod.POST)
-    public String projectSubmit(@ModelAttribute Project project, Model model) {
+    public String projectSubmit(@Valid Project project,BindingResult bindingResult, Model model) {
+
+
+        // look for dup
+        if (project != null && StringUtils.isNotEmpty(project.getSalesOrderNumber())) {
+
+           SalesOrderEntity e =  this.portalService.findSalesOrderEntityById(project.getSalesOrderNumber());
+            if(e !=null) {
+                logger.debug("duplicate sales order number error");
+                bindingResult.rejectValue("salesOrderNumber", "duplicate_son", "duplicate sales order number");
+            }
+        }
+
+        if (bindingResult.hasErrors()) {
+            logger.debug("validation errors");
+            model.addAttribute("customers", this.portalService.findAllCustomers());
+
+            return "projectNew";
+        }
+
+
 
         SalesOrderEntity so = this.projectMapper.convert(project);
-           so.setCustomerId(1);
+
         this.portalService.saveProject(so);
 
         project = this.projectMapper.convert(so);

@@ -1,5 +1,7 @@
 package com.ys.eportal.model;
 
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -11,8 +13,10 @@ import java.util.List;
  */
 public class Project {
 
+    @Size(min=1, max=30)
     private String salesOrderNumber;
     private Customer customer;
+    @NotNull
     private Integer customerId;
 
     private long importControlId;

@@ -10,6 +10,7 @@ public class ModelConstants {
 
     protected static List<String> statusValues = new ArrayList<String>() {
         {
+            add("");
             add("Complete");
             add("Scheduled");
             add("R&D Support");

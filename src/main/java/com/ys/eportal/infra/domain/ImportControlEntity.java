@@ -13,8 +13,8 @@ public class ImportControlEntity extends AbstractDomainBase{
     private long importControlId;
     private int numberOfRecords;
     private String fileName;
-    @Lob
-    private byte[] importFile;
+
+    //private byte[] importFile;
     private String encoding;
     private ImportControlStatus status;
 
@@ -41,14 +41,6 @@ public class ImportControlEntity extends AbstractDomainBase{
 
     public void setFileName(String fileName) {
         this.fileName = fileName;
-    }
-
-    public byte[] getImportFile() {
-        return importFile;
-    }
-
-    public void setImportFile(byte[] importFile) {
-        this.importFile = importFile;
     }
 
     public String getEncoding() {

@@ -152,7 +152,7 @@ public class PortalService {
             ice.setStatus(ImportControlStatus.BEGIN);
             ice.setEncoding(salesOrderConverter.getEncoding());
 
-
+/*
             try {
                 ice.setImportFile(file.getBytes());
             } catch (IOException e) {
@@ -162,7 +162,7 @@ public class PortalService {
                 importControlRepository.save(ice);
                 throw new CSVConversionFailureException("unable to save csv file to stage",e);
             }
-
+*/
             importControlRepository.save(ice);
 
             // set the import control id

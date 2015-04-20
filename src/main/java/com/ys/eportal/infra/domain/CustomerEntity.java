@@ -21,15 +21,16 @@ public class CustomerEntity extends AbstractDomainBase {
     private String name;
 
     @Basic(fetch = FetchType.EAGER)
-    @Column(name = "notes", unique = true)
+    @Column(name = "notes")
     private String notes;
 
 
     /*
         @TODO need to think about how cascade deletes are handled
      */
-    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
-    @JoinColumn(name = "customerId")
+
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="customerId")
     private Set<SalesOrderEntity> salesOrders = new HashSet<SalesOrderEntity>();
 
     private String contact;

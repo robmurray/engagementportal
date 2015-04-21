@@ -16,7 +16,7 @@ public class ConversionResults<ID extends Serializable,T> {
     private int numRecordsToProcess;
     private int numRecordsProcessed;
     private int numRecordsInError;
-    private int batchId;
+    private long batchId;
 
     public ConversionResults() {
     }
@@ -53,11 +53,11 @@ public class ConversionResults<ID extends Serializable,T> {
         this.numRecordsInError = numRecordsInError;
     }
 
-    public int getBatchId() {
+    public long getBatchId() {
         return batchId;
     }
 
-    public void setBatchId(int batchId) {
+    public void setBatchId(long batchId) {
         this.batchId = batchId;
     }
 
@@ -75,6 +75,6 @@ public class ConversionResults<ID extends Serializable,T> {
 
     @Override
     public int hashCode() {
-        return batchId;
+        return (int) (batchId ^ (batchId >>> 32));
     }
 }

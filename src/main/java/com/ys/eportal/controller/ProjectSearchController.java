@@ -31,6 +31,12 @@ public class ProjectSearchController {
     @Autowired
     private ProjectSearchMapper projectSearchMapper;
 
+    @RequestMapping(value="/projectbatchid", method= RequestMethod.GET)
+    public String projectSearchForm3(@RequestParam(value="batchid", required=true) long batchId, Model model) {
+        ProjectSearch search = new ProjectSearch();
+        search.setImportControlId(batchId);
+        return this.customerSubmit(search,model);
+    }
     @RequestMapping(value="/projectstatus", method= RequestMethod.GET)
     public String projectSearchForm2(@RequestParam(value="status", required=true) String status, Model model) {
         ProjectSearch search = new ProjectSearch();

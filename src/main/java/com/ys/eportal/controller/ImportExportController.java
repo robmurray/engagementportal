@@ -79,7 +79,7 @@ public class ImportExportController {
 
 
         model.addAttribute("importResults",results);
-        return "redirect:projectSearch";
+        return "redirect:projectbatchid?batchid="+results.getBatchId();
     }
 
     @RequestMapping(value = "/importMaster", method = RequestMethod.GET)

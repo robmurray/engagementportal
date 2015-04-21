@@ -27,7 +27,7 @@ public class SalesOrderEntity extends AbstractDomainBase {
     private Date classRegSent;
     private String reportedRevRec;
 
-    private String status;
+    private String status="undefined";
     private Date bookDate;
     private Date shipDate;
     private Date planningMeetingDate;

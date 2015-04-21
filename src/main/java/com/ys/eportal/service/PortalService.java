@@ -2,6 +2,7 @@ package com.ys.eportal.service;
 
 import com.ys.eportal.infra.domain.*;
 import com.ys.eportal.infra.repository.*;
+import com.ys.eportal.model.ModelConstants;
 import com.ys.eportal.model.ProjectStats;
 import com.ys.eportal.service.converter.CSV2SalesOrderConverter;
 import com.ys.eportal.service.converter.ConversionResults;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -41,15 +43,40 @@ public class PortalService {
     private ImportControlRepository importControlRepository;
 
     public ProjectStats retrieveProjectStatus() {
+
+        List<Object[]> list = this.salesOrderRepository.retrieveOrderStats();
+
         ProjectStats proj = new ProjectStats();
-        proj.setNumBookedStatus(1);
-        proj.setNumCompleteStatus(2);
-        proj.setNumInprocessStatus(3);
-        proj.setNumNotdefinedStatus(4);
-        proj.setNumPostSupportStatus(5);
-        proj.setNumBookedStatus(6);
-        proj.setNumRandSupportStatus(7);
-        proj.setNumScheduledStatus(8);
+        // @TODO improve the ugliness
+        if (list != null) {
+
+            for (Object sos[] : list) {
+                try{
+
+                    // need to deal with the nordefinedstatus
+                if (sos[0] == null||sos[0].equals(ModelConstants.STATUS_NOTDEFINED)) {
+                    proj.setNumNotdefinedStatus(((BigInteger)sos[1]).intValue());
+                } else if (sos[0].equals(ModelConstants.STATUS_BOOKED)) {
+                    proj.setNumBookedStatus(((BigInteger)sos[1]).intValue());
+                } else if (sos[0].equals(ModelConstants.STATUS_COMPLETE)) {
+                    proj.setNumCompleteStatus(((BigInteger)sos[1]).intValue());
+                } else if (sos[0].equals(ModelConstants.STATUS_INPROCESS)) {
+                    proj.setNumInprocessStatus(((BigInteger)sos[1]).intValue());
+                } else if (sos[0].equals(ModelConstants.STATUS_POSTSUPPORT)) {
+                    proj.setNumPostSupportStatus(((BigInteger)sos[1]).intValue());
+                } else if (sos[0].equals(ModelConstants.STATUS_PROPOSED)) {
+                    proj.setNumProposedStatus(((BigInteger)sos[1]).intValue());
+                } else if (sos[0].equals(ModelConstants.STATUS_RANDSUPPORT)) {
+                    proj.setNumRandSupportStatus(((BigInteger)sos[1]).intValue());
+                } else if (sos[0].equals(ModelConstants.STATUS_SCHEDULED)) {
+                    proj.setNumScheduledStatus(((BigInteger)sos[1]).intValue());
+                }
+                }catch(ClassCastException e){
+                    // ignore. rewrite
+                }
+            }
+
+        }
 
         return proj;
     }
@@ -191,12 +218,14 @@ public class PortalService {
 */
             importControlRepository.save(ice);
 
+
             // set the import control id
             salesOrderConverter.setImportControlId(ice.getImportControlId());
             // step 1 csv to staging
 
             try {
                 results = salesOrderConverter.convert(file);
+                results.setBatchId(ice.getImportControlId());
             } catch (Exception e) {
                 ice.setStatus(ImportControlStatus.ERROR);
                 importControlRepository.save(ice);

@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Created by rob on 4/4/15.
  */
 @Controller
-public class SecurityController {
+public class SecurityController  extends ControllerBase{
 
     @RequestMapping(value="/login", method= RequestMethod.GET)
     public String loginForm(Model model) {

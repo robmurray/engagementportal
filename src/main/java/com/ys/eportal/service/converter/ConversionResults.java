@@ -4,6 +4,7 @@ import org.springframework.data.repository.Repository;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.TreeMap;
 
 /**
@@ -11,21 +12,22 @@ import java.util.TreeMap;
  */
 public class ConversionResults<ID extends Serializable,T> {
 
-    private TreeMap<ID,T>convertedRecords;
+    private List<T> convertedRecords;
 
     private int numRecordsToProcess;
     private int numRecordsProcessed;
+    private int numRecordsImported;
     private int numRecordsInError;
     private long batchId;
 
     public ConversionResults() {
     }
 
-    public TreeMap<ID,T> getConvertedRecords() {
+    public List<T> getConvertedRecords() {
         return convertedRecords;
     }
 
-    public void setConvertedRecords(TreeMap<ID,T> convertedRecords) {
+    public void setConvertedRecords(List<T> convertedRecords) {
         this.convertedRecords = convertedRecords;
     }
 
@@ -59,6 +61,14 @@ public class ConversionResults<ID extends Serializable,T> {
 
     public void setBatchId(long batchId) {
         this.batchId = batchId;
+    }
+
+    public int getNumRecordsImported() {
+        return numRecordsImported;
+    }
+
+    public void setNumRecordsImported(int numRecordsImported) {
+        this.numRecordsImported = numRecordsImported;
     }
 
     @Override

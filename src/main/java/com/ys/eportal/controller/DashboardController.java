@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by rob on 4/4/15.
  */
 @Controller
-public class DashboardController {
+public class DashboardController  extends ControllerBase{
 
     @Autowired
     private PortalService portalService;

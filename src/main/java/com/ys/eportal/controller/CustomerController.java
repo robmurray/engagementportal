@@ -26,7 +26,7 @@ import java.util.List;
  * Created by rob on 4/4/15.
  */
 @Controller
-public class CustomerController {
+public class CustomerController  extends ControllerBase{
     private static Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
     @Autowired
@@ -77,7 +77,7 @@ public class CustomerController {
 
         model.addAttribute("pageGroup", "customer");
         model.addAttribute("pageId", "createCustomer");
-
+        this.setSuccessAlertMessage(model,"customer created");
         return customerEditForm(customer.getCustomerId(), "", model); //"customerEdit?customerId="+customer.getCustomerId();
     }
 
@@ -119,6 +119,7 @@ public class CustomerController {
 
         }
         customer = this.customerMapper.convert(c);
+        this.setSuccessAlertMessage(model,"customer updated");
 
         model.addAttribute("customer", customer);
         model.addAttribute("projects", customer.getProjects());

@@ -28,7 +28,7 @@ import java.util.List;
  * Created by rob on 4/4/15.
  */
 @Controller
-public class ProjectController {
+public class ProjectController  extends ControllerBase{
     private static Logger logger = LoggerFactory.getLogger(ProjectController.class);
     @Autowired
     private PortalService portalService;
@@ -89,7 +89,7 @@ public class ProjectController {
         model.addAttribute("Project", so);
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "createProject");
-
+        this.setSuccessAlertMessage(model,"project created");
         return this.projectEditForm(so.getSalesOrderId(),"",model);//"projectEdit";
     }
 
@@ -111,6 +111,7 @@ public class ProjectController {
     public String projectEditSubmit(@ModelAttribute Project project, Model model) {
 
         this.portalService.saveProject(this.projectMapper.convert(project));
+        this.setSuccessAlertMessage(model,"project updated");
         model.addAttribute("pageName", "Save Project");
         model.addAttribute("project", project);
         model.addAttribute("pageGroup", "project");

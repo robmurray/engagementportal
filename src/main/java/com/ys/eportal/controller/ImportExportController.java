@@ -25,7 +25,7 @@ import java.util.TreeMap;
  * Created by rob on 4/4/15.
  */
 @Controller
-public class ImportExportController {
+public class ImportExportController extends ControllerBase{
 
     private static Logger logger = LoggerFactory.getLogger(ImportExportController.class);
 
@@ -64,22 +64,31 @@ public class ImportExportController {
             if (bindingResult.hasErrors()) {
                 logger.debug("validation errors");
                 return "uploadSalesOrder";
+                //return this.soHandleFileUpload(file,uploadSalesOrder,bindingResult,model);
             }
 
-            results = this.portalService.importOracleOBICSVSalesOrder(file);
+            results = this.portalService.importOracleOBICSVSalesOrder(file,uploadSalesOrder);
 
             logger.debug("record to process: "+results.getNumRecordsToProcess());
             logger.debug("record in error: "+results.getNumRecordsInError());
             logger.debug("records processed: "+results.getNumRecordsProcessed());
 
-
+            if(results.getNumRecordsImported()>0) {
+                this.setSuccessAlertMessage(model, "import succeeded","projectbatchid?batchid="+results.getBatchId());
+            }else {
+                this.setWarningAlertMessage(model, "No records were imported");
+            }
         } catch (Exception e) {
             logger.error("CSV IMPORT Failure", e);
+
+            this.setDangerAlertMessage(model,"CSV IMPORT Failure");
+
+            return this.uploadSalesOrderForm(model);
         }
 
-
         model.addAttribute("importResults",results);
-        return "redirect:projectbatchid?batchid="+results.getBatchId();
+
+        return this.uploadSalesOrderForm(model);
     }
 
     @RequestMapping(value = "/importMaster", method = RequestMethod.GET)

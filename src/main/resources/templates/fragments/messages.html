@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<div id="messages" th:fragment="messages (message)">
+
+                <div class="alert" th:classappend="'bg-' + ${message.type}" th:if="${message !=null}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
+
+                    <b th:text="${message.message}"></b>
+                    <a href="" th:href="${message.gotoURL}" th:if="${message.gotoURL !=null}">view imported records</a>
+                </div>
+
+    <script type="text/javascript">
+
+    </script>
+
+</div>
+</body>
+</html>

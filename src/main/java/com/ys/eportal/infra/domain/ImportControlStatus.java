@@ -13,6 +13,7 @@ public enum ImportControlStatus {
     IMPORTSO_COMPLETE,
     COMPLETE,
     NOTHING2DO,
+    NOMATCHINGMODELGROUP,
     ERROR
 
 }

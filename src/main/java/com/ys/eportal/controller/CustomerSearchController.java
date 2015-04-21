@@ -19,7 +19,7 @@ import java.util.Iterator;
  * Created by rob on 4/4/15.
  */
 @Controller
-public class CustomerSearchController {
+public class CustomerSearchController  extends ControllerBase{
 
     @Autowired
     private PortalService portalService;

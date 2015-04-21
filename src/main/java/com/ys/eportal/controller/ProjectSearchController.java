@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
  * Created by rob on 4/4/15.
  */
 @Controller
-public class ProjectSearchController {
+public class ProjectSearchController  extends ControllerBase{
 
     @Autowired
     private PortalService portalService;

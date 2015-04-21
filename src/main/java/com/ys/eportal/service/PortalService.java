@@ -4,6 +4,7 @@ import com.ys.eportal.infra.domain.*;
 import com.ys.eportal.infra.repository.*;
 import com.ys.eportal.model.ModelConstants;
 import com.ys.eportal.model.ProjectStats;
+import com.ys.eportal.model.UploadSalesOrder;
 import com.ys.eportal.service.converter.CSV2SalesOrderConverter;
 import com.ys.eportal.service.converter.ConversionResults;
 import com.ys.eportal.service.converter.ConversionUtils;
@@ -16,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 /**
@@ -51,27 +53,27 @@ public class PortalService {
         if (list != null) {
 
             for (Object sos[] : list) {
-                try{
+                try {
 
                     // need to deal with the nordefinedstatus
-                if (sos[0] == null||sos[0].equals(ModelConstants.STATUS_NOTDEFINED)) {
-                    proj.setNumNotdefinedStatus(((BigInteger)sos[1]).intValue());
-                } else if (sos[0].equals(ModelConstants.STATUS_BOOKED)) {
-                    proj.setNumBookedStatus(((BigInteger)sos[1]).intValue());
-                } else if (sos[0].equals(ModelConstants.STATUS_COMPLETE)) {
-                    proj.setNumCompleteStatus(((BigInteger)sos[1]).intValue());
-                } else if (sos[0].equals(ModelConstants.STATUS_INPROCESS)) {
-                    proj.setNumInprocessStatus(((BigInteger)sos[1]).intValue());
-                } else if (sos[0].equals(ModelConstants.STATUS_POSTSUPPORT)) {
-                    proj.setNumPostSupportStatus(((BigInteger)sos[1]).intValue());
-                } else if (sos[0].equals(ModelConstants.STATUS_PROPOSED)) {
-                    proj.setNumProposedStatus(((BigInteger)sos[1]).intValue());
-                } else if (sos[0].equals(ModelConstants.STATUS_RANDSUPPORT)) {
-                    proj.setNumRandSupportStatus(((BigInteger)sos[1]).intValue());
-                } else if (sos[0].equals(ModelConstants.STATUS_SCHEDULED)) {
-                    proj.setNumScheduledStatus(((BigInteger)sos[1]).intValue());
-                }
-                }catch(ClassCastException e){
+                    if (sos[0] == null || sos[0].equals(ModelConstants.STATUS_NOTDEFINED)) {
+                        proj.setNumNotdefinedStatus(((BigInteger) sos[1]).intValue());
+                    } else if (sos[0].equals(ModelConstants.STATUS_BOOKED)) {
+                        proj.setNumBookedStatus(((BigInteger) sos[1]).intValue());
+                    } else if (sos[0].equals(ModelConstants.STATUS_COMPLETE)) {
+                        proj.setNumCompleteStatus(((BigInteger) sos[1]).intValue());
+                    } else if (sos[0].equals(ModelConstants.STATUS_INPROCESS)) {
+                        proj.setNumInprocessStatus(((BigInteger) sos[1]).intValue());
+                    } else if (sos[0].equals(ModelConstants.STATUS_POSTSUPPORT)) {
+                        proj.setNumPostSupportStatus(((BigInteger) sos[1]).intValue());
+                    } else if (sos[0].equals(ModelConstants.STATUS_PROPOSED)) {
+                        proj.setNumProposedStatus(((BigInteger) sos[1]).intValue());
+                    } else if (sos[0].equals(ModelConstants.STATUS_RANDSUPPORT)) {
+                        proj.setNumRandSupportStatus(((BigInteger) sos[1]).intValue());
+                    } else if (sos[0].equals(ModelConstants.STATUS_SCHEDULED)) {
+                        proj.setNumScheduledStatus(((BigInteger) sos[1]).intValue());
+                    }
+                } catch (ClassCastException e) {
                     // ignore. rewrite
                 }
             }
@@ -180,7 +182,7 @@ public class PortalService {
         return results;
     }
 
-    public ConversionResults<String, ImportOracleObiStage> importOracleOBICSVSalesOrder(MultipartFile file) throws CSVConversionFailureException {
+    public ConversionResults<String, ImportOracleObiStage> importOracleOBICSVSalesOrder(MultipartFile file, UploadSalesOrder uploadSalesOrder) throws CSVConversionFailureException {
         ImportControlEntity ice = new ImportControlEntity();
 
         if (file == null || file.isEmpty()) {
@@ -226,6 +228,8 @@ public class PortalService {
             try {
                 results = salesOrderConverter.convert(file);
                 results.setBatchId(ice.getImportControlId());
+
+
             } catch (Exception e) {
                 ice.setStatus(ImportControlStatus.ERROR);
                 importControlRepository.save(ice);
@@ -240,23 +244,35 @@ public class PortalService {
 
 
             if (results != null && results.getNumRecordsProcessed() > 0) {
-
-                Collection<ImportOracleObiStage> importResults = results.getConvertedRecords().values();
-                this.oracleOBIStageRepository.save(importResults);
-
+                this.oracleOBIStageRepository.save(results.getConvertedRecords());
             }
+
             // update import control
             ice.setStatus(ImportControlStatus.CSV2STAGING_COMPLETE);
             importControlRepository.save(ice);
 
             // step 2 staging to import
             List<ImportOracleObiStage> wrkList = this.oracleOBIStageRepository.findByImportControlId(ice.getImportControlId());
-            List<ImportOracleObiEntity> resultList = new ArrayList<ImportOracleObiEntity>();
+            HashSet<ImportOracleObiEntity> resultList = new HashSet<ImportOracleObiEntity>();
 
+            String modelgroupsToImport = "";
+            if (uploadSalesOrder != null) {
+                modelgroupsToImport = uploadSalesOrder.getModelgroups();
+                if (modelgroupsToImport == null) {
+                    modelgroupsToImport = "";
+                }
+            }
 
             for (ImportOracleObiStage stage : wrkList) {
 
                 try {
+
+
+                    if (stage == null || stage.getModelGroupCode() == null || !modelgroupsToImport.contains(stage.getModelGroupCode()) ) {
+                        // only import model groups that we care about
+                        continue;
+                    }
+
                     ImportOracleObiEntity entity = new ImportOracleObiEntity();
 
                     // ok to store new object
@@ -286,6 +302,16 @@ public class PortalService {
                     logger.error("failed to process record", e);
                 }
             }
+            if(resultList.size()==0){
+                // nothing to import
+
+                // update import control
+                ice.setStatus(ImportControlStatus.NOMATCHINGMODELGROUP);
+                importControlRepository.save(ice);
+                results.setNumRecordsImported(0);
+                return results;
+            }
+
             this.oracleOBIRepository.save(resultList);
 
             // update import control
@@ -295,14 +321,13 @@ public class PortalService {
             // stage 4 create projects and customers
             List<ImportOracleObiEntity> entryList = this.oracleOBIRepository.findByImportControlId(ice.getImportControlId());
 
+
             List<SalesOrderEntity> soList = new ArrayList<SalesOrderEntity>();
 
             CustomerEntity wrkCustomer = null;
             SalesOrderEntity wrkProject = null;
 
             for (ImportOracleObiEntity entity : entryList) {
-                // @TODO add in filter
-                //entity.getModelGroupCode()
 
                 // create or find customer
                 // @TODO which name to use st or bt
@@ -344,14 +369,11 @@ public class PortalService {
 
                 wrkProject.setImportControlId(entity.getImportControlId());
                 soList.add(wrkProject);
+
             }
-
-            // create the new projects
+                // create the new projects
             this.salesOrderRepository.save(soList);
-
-            // update import control
-            // TODO update error hanfdling
-            // need transaction
+            results.setNumRecordsImported(soList.size());
             ice.setStatus(ImportControlStatus.IMPORTSO_COMPLETE);
             importControlRepository.save(ice);
 

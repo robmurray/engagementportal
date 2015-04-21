@@ -17,6 +17,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.util.ArrayList;
 import java.util.TreeMap;
 
 /**
@@ -94,7 +95,7 @@ public class CSV2SalesOrderConverter {
         logger.info("expected tokens=" + expectedTokens);
 
         ConversionResults<String,ImportOracleObiStage> results = new ConversionResults<String,ImportOracleObiStage>();
-        results.setConvertedRecords(new TreeMap<String, ImportOracleObiStage>());
+        results.setConvertedRecords(new ArrayList<ImportOracleObiStage>());
 
 
         Reader reader = null;
@@ -132,7 +133,7 @@ public class CSV2SalesOrderConverter {
 
                 try {
                     convertedObject = processLine(record);
-                    results.getConvertedRecords().put(convertedObject.getOrderNumber(),convertedObject);
+                    results.getConvertedRecords().add(convertedObject);
                     recordsProcessed++;
                 } catch (Exception e) {
                     recordsInError++;

@@ -6,7 +6,7 @@ import org.springframework.stereotype.Controller;
  * Created by rob on 4/5/15.
  */
 @Controller
-public class ExceptionHandlerController {
+public class ExceptionHandlerController extends ControllerBase {
 /*
         // @RequestHandler methods
         ...

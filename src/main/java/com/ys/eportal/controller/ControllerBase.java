@@ -1,12 +1,21 @@
 package com.ys.eportal.controller;
 
 import com.ys.eportal.model.Message;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
 
 /**
  * Created by rob on 4/21/15.
  */
 public abstract class ControllerBase {
+
+
+    public String retrieveUserName() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String name = auth.getName(); //get logged in username
+        return  name;
+    }
 
     public void setSuccessAlertMessage(Model model,String message) {
         this.setSuccessAlertMessage(model,message,null);

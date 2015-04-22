@@ -64,6 +64,7 @@ public class ProjectSearchController  extends ControllerBase{
 
 
         Iterable<Project> returnList = this.projectMapper.convert(wrkList);
+
         if(returnList !=null && !returnList.iterator().hasNext()){
             returnList =null;
         }

@@ -51,6 +51,9 @@ public class CustomerSearchController  extends ControllerBase{
 
         Iterable<Customer> returnList = this.customerMapper.convert(wrkList);
 
+        if(returnList !=null && !returnList.iterator().hasNext()){
+            returnList =null;
+        }
         model.addAttribute("customers", returnList);
         model.addAttribute("pageGroup", "customer");
         model.addAttribute("pageId", "searchCustomer");

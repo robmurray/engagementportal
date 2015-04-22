@@ -23,6 +23,7 @@ public class SalesOrderEntity extends AbstractDomainBase {
     private CustomerEntity customer;
 
     private long importControlId;
+    private int credits;
 
     private Date classRegSent;
     private String reportedRevRec;
@@ -54,6 +55,13 @@ public class SalesOrderEntity extends AbstractDomainBase {
     }
 
 
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
+    }
 
     public String getSalesOrderId() {
         return salesOrderId;

@@ -25,14 +25,6 @@ public class CustomerEntity extends AbstractDomainBase {
     private String notes;
 
 
-    /*
-        @TODO need to think about how cascade deletes are handled
-     */
-
-
-//    @OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.ALL }, orphanRemoval=true)
-    //  @JoinColumn(name="customerId", referencedColumnName="customerID", nullable = false)
-
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<SalesOrderEntity> salesOrders = new HashSet<SalesOrderEntity>();

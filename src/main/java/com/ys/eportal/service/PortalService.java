@@ -12,19 +12,21 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by rob on 4/4/15.
  */
 
 @Service
+@Transactional
 public class PortalService {
 
     private static Logger logger = LoggerFactory.getLogger(PortalService.class);
@@ -88,8 +90,10 @@ public class PortalService {
 
         if (search.getCustomerId() > 0) {
             CustomerEntity c = this.findCustomerByID(search.getCustomerId());
-            results = new ArrayList<CustomerEntity>();
-            results.add(c);
+            if(c!=null) {
+                results = new ArrayList<CustomerEntity>();
+                results.add(c);
+            }
         } else if (search.getName() != null && !search.getName().trim().equals("")) {
             results = this.searchByCustomerName(search.getName());
         } else {
@@ -150,6 +154,11 @@ public class PortalService {
         return list;
     }
 
+    public Set<SalesOrderEntity> findBySalesOrderCustomerIdlId(int customerId) {
+        return this.salesOrderRepository.findByCustomerCustomerId(customerId);
+
+    }
+
     public List<SalesOrderEntity> findByStatus(String status) {
         List<SalesOrderEntity> list = this.salesOrderRepository.findByStatus(status);
 
@@ -165,11 +174,13 @@ public class PortalService {
 
         if (search.getSalesOrderNumber() != null && !search.getSalesOrderNumber().trim().equals("")) {
             SalesOrderEntity soe = this.findSalesOrderEntityById(search.getSalesOrderNumber());
-            results = new ArrayList<SalesOrderEntity>();
-            results.add(soe);
+            if (soe != null) {
+                results = new ArrayList<SalesOrderEntity>();
+                results.add(soe);
+            }
         } else if (search.getCustomerName() != null && !search.getCustomerName().trim().equals("")) {
-            //results = this.findCustomerByName(search.getName());
-            results = this.findAllSalesOrders();
+            results = this.salesOrderRepository.findByCustomerNameLike(this.processWildCards(search.getCustomerName()));
+            //results = this.findAllSalesOrders();
         } else if (search.getImportControlId() > 0) {
             results = this.findByImportControlId(search.getImportControlId());
 
@@ -268,7 +279,7 @@ public class PortalService {
                 try {
 
 
-                    if (stage == null || stage.getModelGroupCode() == null || !modelgroupsToImport.contains(stage.getModelGroupCode()) ) {
+                    if (stage == null || stage.getModelGroupCode() == null || !modelgroupsToImport.contains(stage.getModelGroupCode())) {
                         // only import model groups that we care about
                         continue;
                     }
@@ -302,7 +313,7 @@ public class PortalService {
                     logger.error("failed to process record", e);
                 }
             }
-            if(resultList.size()==0){
+            if (resultList.size() == 0) {
                 // nothing to import
 
                 // update import control
@@ -371,7 +382,7 @@ public class PortalService {
                 soList.add(wrkProject);
 
             }
-                // create the new projects
+            // create the new projects
             this.salesOrderRepository.save(soList);
             results.setNumRecordsImported(soList.size());
             ice.setStatus(ImportControlStatus.IMPORTSO_COMPLETE);

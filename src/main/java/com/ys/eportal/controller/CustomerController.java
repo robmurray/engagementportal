@@ -2,8 +2,11 @@ package com.ys.eportal.controller;
 
 
 import com.ys.eportal.infra.domain.CustomerEntity;
+import com.ys.eportal.infra.domain.SalesOrderEntity;
 import com.ys.eportal.mapper.CustomerMapper;
+import com.ys.eportal.mapper.ProjectMapper;
 import com.ys.eportal.model.Customer;
+import com.ys.eportal.model.Project;
 import com.ys.eportal.service.PortalService;
 import org.apache.commons.lang3.StringUtils;
 import org.hibernate.exception.ConstraintViolationException;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by rob on 4/4/15.
@@ -34,6 +38,9 @@ public class CustomerController  extends ControllerBase{
 
     @Autowired
     private CustomerMapper customerMapper;
+
+    @Autowired
+    private ProjectMapper projectMapper;
 
     @RequestMapping(value = "/customerNew", method = RequestMethod.GET)
     public String customerForm(Model model) {
@@ -97,9 +104,17 @@ public class CustomerController  extends ControllerBase{
 
         Customer c = this.customerMapper.convert(customer);
 
+        // pulls sos
+        // @TODO update mappers
+        Iterable<SalesOrderEntity> sol = portalService.findBySalesOrderCustomerIdlId(c.getCustomerId());
+        Iterable<Project> projList = null;
+        if(sol!=null && sol.iterator().hasNext()) {
+            projList = this.projectMapper.convert(sol);
+        }
+
         addPageAttributes(model, "Edit Customer", "Edit the Customer ");
         model.addAttribute("customer", c);
-        model.addAttribute("projects", c.getProjects());
+        model.addAttribute("projects", projList);
         model.addAttribute("pageGroup", "customer");
         model.addAttribute("pageId", "searchCustomer");
         return "customerEdit";
@@ -109,24 +124,32 @@ public class CustomerController  extends ControllerBase{
     public String customerEditSubmit(@ModelAttribute Customer customer, Model model) {
 
         CustomerEntity c = this.customerMapper.convert(customer);
-
-
         try {
             portalService.saveCustomer(c);
             // @TODO anstract
         } catch (ConstraintViolationException e) {
-
+            logger.error("error saving customer",e);
 
         }
+        // repull customer record
+        c = portalService.findCustomerByID(c.getCustomerId());
         customer = this.customerMapper.convert(c);
+
+        // pulls sos
+        // @TODO update mappers
+        Iterable<SalesOrderEntity> sol = portalService.findBySalesOrderCustomerIdlId(c.getCustomerId());
+        Iterable<Project> projList = null;
+        if(sol!=null && sol.iterator().hasNext()) {
+            projList = this.projectMapper.convert(sol);
+        }
         this.setSuccessAlertMessage(model,"customer updated");
 
         model.addAttribute("customer", customer);
-        model.addAttribute("projects", customer.getProjects());
+        model.addAttribute("projects", projList);
         addPageAttributes(model, "Save Customer", "Save Customer update");
         model.addAttribute("pageGroup", "customer");
         model.addAttribute("pageId", "searchCustomer");
-        model.addAttribute("projects", customer.getProjects());
+
         return "customerEdit";
     }
 

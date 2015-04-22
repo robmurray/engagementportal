@@ -19,6 +19,7 @@ public class Project {
     @NotNull
     private Integer customerId;
 
+    private int credits;
     private long importControlId;
     private Date classRegSent;
     private String reportedRevRec;
@@ -68,6 +69,14 @@ public class Project {
 
 
     public Project() {
+    }
+
+    public int getCredits() {
+        return credits;
+    }
+
+    public void setCredits(int credits) {
+        this.credits = credits;
     }
 
     public String getSalesOrderNumber() {

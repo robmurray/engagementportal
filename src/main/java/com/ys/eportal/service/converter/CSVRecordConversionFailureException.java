@@ -1,4 +1,4 @@
-package com.ys.eportal.service;
+package com.ys.eportal.service.converter;
 
 /**
  * Created by rob on 4/14/15.

@@ -64,11 +64,14 @@ public class ProjectController  extends ControllerBase{
         // look for dup
         if (project != null && StringUtils.isNotEmpty(project.getSalesOrderNumber())) {
 
-           SalesOrderEntity e =  this.portalService.findSalesOrderEntityById(project.getSalesOrderNumber());
-            if(e !=null) {
-                logger.debug("duplicate sales order number error");
-                bindingResult.rejectValue("salesOrderNumber", "duplicate_son", "duplicate sales order number");
-            }
+            // @todo need to indicate to the user that there is already a salesnumber woth
+            // that number. do you want to continue
+
+           //SalesOrderEntity e =  this.portalService.findSalesOrderEntityById(project.getSalesOrderNumber());
+            //if(e !=null) {
+            //    logger.debug("duplicate sales order number error");
+             //   bindingResult.rejectValue("salesOrderNumber", "duplicate_son", "duplicate sales order number");
+            //}
         }
 
         if (bindingResult.hasErrors()) {
@@ -94,10 +97,10 @@ public class ProjectController  extends ControllerBase{
     }
 
     @RequestMapping(value="/projectEdit", method= RequestMethod.GET)
-    public String projectEditForm(@RequestParam(value="salesOrderNumber", required=true) String salesOrderNumber,
+    public String projectEditForm(@RequestParam(value="salesOrderId", required=true) int salesOrderId,
                                   @RequestParam(value="msgtype", required=false) String messageType,Model model) {
 
-        SalesOrderEntity so = this.portalService.findSalesOrderEntityById(salesOrderNumber);
+        SalesOrderEntity so = this.portalService.findSalesOrderEntityById(salesOrderId);
         Project project = this.projectMapper.convert(so);
         model.addAttribute("pageName", "Edit Project");
         model.addAttribute("project",project);

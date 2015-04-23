@@ -2,22 +2,16 @@ package com.ys.eportal.service;
 
 import com.ys.eportal.infra.domain.*;
 import com.ys.eportal.infra.repository.*;
-import com.ys.eportal.model.ModelConstants;
+import com.ys.eportal.infra.domain.Constants;
 import com.ys.eportal.model.ProjectStats;
-import com.ys.eportal.model.UploadSalesOrder;
-import com.ys.eportal.service.converter.CSV2SalesOrderConverter;
-import com.ys.eportal.service.converter.ConversionResults;
-import com.ys.eportal.service.converter.ConversionUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -27,7 +21,7 @@ import java.util.Set;
 
 @Service
 @Transactional
-public class PortalService {
+public class PortalService extends ServicesBase{
 
     private static Logger logger = LoggerFactory.getLogger(PortalService.class);
 
@@ -37,14 +31,7 @@ public class PortalService {
     @Autowired
     private SalesOrderRepository salesOrderRepository;
 
-    @Autowired
-    private ImportOracleOBIStageRepository oracleOBIStageRepository;
 
-    @Autowired
-    private ImportOracleOBIRepository oracleOBIRepository;
-
-    @Autowired
-    private ImportControlRepository importControlRepository;
 
     public ProjectStats retrieveProjectStatus() {
 
@@ -58,21 +45,21 @@ public class PortalService {
                 try {
 
                     // need to deal with the nordefinedstatus
-                    if (sos[0] == null || sos[0].equals(ModelConstants.STATUS_NOTDEFINED)) {
+                    if (sos[0] == null || sos[0].equals(Constants.SalesOrders.STATUS_NOTDEFINED)) {
                         proj.setNumNotdefinedStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(ModelConstants.STATUS_BOOKED)) {
+                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_BOOKED)) {
                         proj.setNumBookedStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(ModelConstants.STATUS_COMPLETE)) {
+                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_COMPLETE)) {
                         proj.setNumCompleteStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(ModelConstants.STATUS_INPROCESS)) {
+                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_INPROCESS)) {
                         proj.setNumInprocessStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(ModelConstants.STATUS_POSTSUPPORT)) {
+                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_POSTSUPPORT)) {
                         proj.setNumPostSupportStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(ModelConstants.STATUS_PROPOSED)) {
+                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_PROPOSED)) {
                         proj.setNumProposedStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(ModelConstants.STATUS_RANDSUPPORT)) {
+                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_RANDSUPPORT)) {
                         proj.setNumRandSupportStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(ModelConstants.STATUS_SCHEDULED)) {
+                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_SCHEDULED)) {
                         proj.setNumScheduledStatus(((BigInteger) sos[1]).intValue());
                     }
                 } catch (ClassCastException e) {
@@ -139,8 +126,13 @@ public class PortalService {
         this.salesOrderRepository.save(salesOrderEntity);
     }
 
-    public SalesOrderEntity findSalesOrderEntityById(String salesOrderId) {
-        List<SalesOrderEntity> list = this.salesOrderRepository.findBySalesOrderId(salesOrderId);
+    public SalesOrderEntity findSalesOrderEntityById(int salesOrderId) {
+        return this.salesOrderRepository.findOne(salesOrderId);
+
+    }
+
+    public SalesOrderEntity findSalesOrderEntityByNumber(String salesOrderNumber) {
+        List<SalesOrderEntity> list = this.salesOrderRepository.findBySalesOrderNumber(salesOrderNumber);
         SalesOrderEntity soe = null;
         if (list != null && list.size() > 0) {
             soe = list.get(0);
@@ -148,8 +140,9 @@ public class PortalService {
         return soe;
     }
 
+
     public List<SalesOrderEntity> findByImportControlId(long importControlId) {
-        List<SalesOrderEntity> list = this.salesOrderRepository.findByimportControlId(importControlId);
+        List<SalesOrderEntity> list = this.salesOrderRepository.findByImportControlId(importControlId);
 
         return list;
     }
@@ -173,7 +166,7 @@ public class PortalService {
         List<SalesOrderEntity> results = null;
 
         if (search.getSalesOrderNumber() != null && !search.getSalesOrderNumber().trim().equals("")) {
-            SalesOrderEntity soe = this.findSalesOrderEntityById(search.getSalesOrderNumber());
+            SalesOrderEntity soe = this.findSalesOrderEntityByNumber(search.getSalesOrderNumber());
             if (soe != null) {
                 results = new ArrayList<SalesOrderEntity>();
                 results.add(soe);
@@ -193,224 +186,5 @@ public class PortalService {
         return results;
     }
 
-    public ConversionResults<String, ImportOracleObiStage> importOracleOBICSVSalesOrder(MultipartFile file, UploadSalesOrder uploadSalesOrder) throws CSVConversionFailureException {
-        ImportControlEntity ice = new ImportControlEntity();
 
-        if (file == null || file.isEmpty()) {
-            // nothing to do
-            logger.info("csv file is empty. nothing to do");
-
-            ice.setFileName("n/a");
-            ice.setStatus(ImportControlStatus.NOTHING2DO);
-            importControlRepository.save(ice);
-
-            return new ConversionResults();
-        }
-        ConversionResults<String, ImportOracleObiStage> results = null;
-        CSV2SalesOrderConverter salesOrderConverter = new CSV2SalesOrderConverter();
-
-
-        try {
-            // step 0 create import Control record
-
-            // update import control
-            ice.setFileName(file.getName());
-            ice.setStatus(ImportControlStatus.BEGIN);
-            ice.setEncoding(salesOrderConverter.getEncoding());
-
-/*
-            try {
-                ice.setImportFile(file.getBytes());
-            } catch (IOException e) {
-                // if there was an issue with the file we would never get this far
-                logger.error("unable to save csv file to stage", e);
-                ice.setStatus(ImportControlStatus.ERROR);
-                importControlRepository.save(ice);
-                throw new CSVConversionFailureException("unable to save csv file to stage",e);
-            }
-*/
-            importControlRepository.save(ice);
-
-
-            // set the import control id
-            salesOrderConverter.setImportControlId(ice.getImportControlId());
-            // step 1 csv to staging
-
-            try {
-                results = salesOrderConverter.convert(file);
-                results.setBatchId(ice.getImportControlId());
-
-
-            } catch (Exception e) {
-                ice.setStatus(ImportControlStatus.ERROR);
-                importControlRepository.save(ice);
-                throw e;
-
-            }
-
-            // update import control
-            ice.setStatus(ImportControlStatus.CSV2STAGING_START);
-            ice.setNumberOfRecords(results.getNumRecordsToProcess());
-            importControlRepository.save(ice);
-
-
-            if (results != null && results.getNumRecordsProcessed() > 0) {
-                this.oracleOBIStageRepository.save(results.getConvertedRecords());
-            }
-
-            // update import control
-            ice.setStatus(ImportControlStatus.CSV2STAGING_COMPLETE);
-            importControlRepository.save(ice);
-
-            // step 2 staging to import
-            List<ImportOracleObiStage> wrkList = this.oracleOBIStageRepository.findByImportControlId(ice.getImportControlId());
-            HashSet<ImportOracleObiEntity> resultList = new HashSet<ImportOracleObiEntity>();
-
-            String modelgroupsToImport = "";
-            if (uploadSalesOrder != null) {
-                modelgroupsToImport = uploadSalesOrder.getModelgroups();
-                if (modelgroupsToImport == null) {
-                    modelgroupsToImport = "";
-                }
-            }
-
-            for (ImportOracleObiStage stage : wrkList) {
-
-                try {
-
-
-                    if (stage == null || stage.getModelGroupCode() == null || !modelgroupsToImport.contains(stage.getModelGroupCode())) {
-                        // only import model groups that we care about
-                        continue;
-                    }
-
-                    ImportOracleObiEntity entity = new ImportOracleObiEntity();
-
-                    // ok to store new object
-                    ConversionUtils.convertToDate(stage.getActivityDate(), ConversionUtils.DEFAULT_DATE_FORMAT);
-
-                    entity.setActivityDate(ConversionUtils.convertToDate(stage.getActivityDate(), ConversionUtils.DEFAULT_DATE_FORMAT));
-                    entity.setActivityMonth(ConversionUtils.convertToInt(stage.getActivityMonth()));
-                    entity.setActivityYear(ConversionUtils.convertToInt(stage.getActivityYear()));
-                    entity.setBtCustomerName(stage.getBtCustomerName());
-                    entity.setContractStatusCode(stage.getContractStatusCode());
-                    entity.setEndUserName(stage.getEndUserName());
-                    entity.setFnetRegion1(stage.getFnetRegion1());
-                    entity.setForecastGroupCode(stage.getForecastGroupCode());
-                    entity.setModelGroupCode(stage.getModelGroupCode());
-                    entity.setNetUsd(ConversionUtils.convertToBigDecimal(stage.getNetUsd()));
-                    entity.setOrderedQuantity(ConversionUtils.convertToInt(stage.getOrderedQuantity()));
-                    entity.setOrderNumber(stage.getOrderNumber());
-                    entity.setProductFamilyCode(stage.getProductFamilyCode());
-                    entity.setSalesAgentName(stage.getSalesAgentName());
-                    entity.setStAgentName(stage.getStAgentName());
-                    entity.setStChannelName(stage.getStChannelName());
-                    entity.setStCustomerName(stage.getStCustomerName());
-                    entity.setImportControlId(stage.getImportControlId());
-                    resultList.add(entity);
-                } catch (Exception e) {
-
-                    logger.error("failed to process record", e);
-                }
-            }
-            if (resultList.size() == 0) {
-                // nothing to import
-
-                // update import control
-                ice.setStatus(ImportControlStatus.NOMATCHINGMODELGROUP);
-                importControlRepository.save(ice);
-                results.setNumRecordsImported(0);
-                return results;
-            }
-
-            this.oracleOBIRepository.save(resultList);
-
-            // update import control
-            ice.setStatus(ImportControlStatus.IMPORT2SO_START);
-            importControlRepository.save(ice);
-
-            // stage 4 create projects and customers
-            List<ImportOracleObiEntity> entryList = this.oracleOBIRepository.findByImportControlId(ice.getImportControlId());
-
-
-            List<SalesOrderEntity> soList = new ArrayList<SalesOrderEntity>();
-
-            CustomerEntity wrkCustomer = null;
-            SalesOrderEntity wrkProject = null;
-
-            for (ImportOracleObiEntity entity : entryList) {
-
-                // create or find customer
-                // @TODO which name to use st or bt
-                String customerName = entity.getBtCustomerName();
-
-                wrkCustomer = this.findCustomerByName(customerName);
-                if (wrkCustomer == null) {
-                    wrkCustomer = new CustomerEntity();
-                    wrkCustomer.setName(customerName);
-                    this.customerRepository.save(wrkCustomer);
-                }
-
-                // create the project
-
-                wrkProject = new SalesOrderEntity();
-
-
-                //entity.getActivityDate();
-                //entity.getActivityMonth();
-                //entity.getActivityYear();
-                //entity.getBtCustomerName();
-                //entity.getContractStatusCode();
-                //entity.getEndUserName();
-
-                wrkProject.setRegion(entity.getFnetRegion1());
-                //entity.getForecastGroupCode();
-
-                wrkProject.setModelGroup(entity.getModelGroupCode());
-                wrkProject.setAmount(entity.getNetUsd());
-                //entity.getOrderedQuantity();
-                wrkProject.setSalesOrderId(entity.getOrderNumber());
-
-                //entity.getProductFamilyCode();
-                //entity.getSalesAgentName();
-                //entity.getStAgentName();
-                //entity.getStChannelName();
-
-                wrkProject.setCustomer(new CustomerEntity(wrkCustomer.getCustomerId())); //entity.getStCustomerName();
-
-                wrkProject.setImportControlId(entity.getImportControlId());
-                soList.add(wrkProject);
-
-            }
-            // create the new projects
-            this.salesOrderRepository.save(soList);
-            results.setNumRecordsImported(soList.size());
-            ice.setStatus(ImportControlStatus.IMPORTSO_COMPLETE);
-            importControlRepository.save(ice);
-
-        } catch (CSVConversionFailureException e) {
-
-            logger.error("ERROR converting csv file", e);
-            ice.setStatus(ImportControlStatus.ERROR);
-            importControlRepository.save(ice);
-            throw e;
-
-        }
-
-        // update import control
-        ice.setStatus(ImportControlStatus.COMPLETE);
-        importControlRepository.save(ice);
-
-        return results;
-    }
-
-    protected String processWildCards(String value) {
-
-        if (value == null)
-            value = "";
-        value = value.replaceAll("%", "");
-        value = value.replaceAll("\\*", "");
-        value = value + "%";
-        return value;
-    }
 }

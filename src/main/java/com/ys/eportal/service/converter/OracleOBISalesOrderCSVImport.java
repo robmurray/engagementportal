@@ -3,8 +3,6 @@ package com.ys.eportal.service.converter;
 
 import com.ys.eportal.infra.domain.ImportOracleObiStage;
 
-import com.ys.eportal.service.CSVConversionFailureException;
-import com.ys.eportal.service.CSVRecordConversionFailureException;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
@@ -18,16 +16,15 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.util.ArrayList;
-import java.util.TreeMap;
 
 /**
  * Created by rob on 4/12/15.
  */
-public class CSV2SalesOrderConverter {
+public class OracleOBISalesOrderCSVImport {
     private static String CONVERSION_FAIL_MSG = "CSV Conversion failure: Failed to create one of input stream, parser or records";
     private static String CONVERSION_RECORD_FAIL_MSG = "CSV Row Conversion failure: Failed to processs csv record:";
 
-    private static Logger logger = LoggerFactory.getLogger(CSV2SalesOrderConverter.class);
+    private static Logger logger = LoggerFactory.getLogger(OracleOBISalesOrderCSVImport.class);
     private static String DEFAULT_ENCODING = "utf-16le";
 
     boolean skipHeaderRow = true;
@@ -38,7 +35,7 @@ public class CSV2SalesOrderConverter {
 
     private long importControlId;
 
-    public CSV2SalesOrderConverter() {
+    public OracleOBISalesOrderCSVImport() {
     }
 
     public long getImportControlId() {
@@ -81,7 +78,7 @@ public class CSV2SalesOrderConverter {
         this.encoding = encoding;
     }
 
-    public  ConversionResults<String,ImportOracleObiStage> convert(MultipartFile uploadFile) throws CSVConversionFailureException {
+    public  ConversionResults<ImportOracleObiStage> convert(MultipartFile uploadFile) throws CSVConversionFailureException {
 
         if (uploadFile == null) {
             throw new CSVConversionFailureException("CSV File is null");
@@ -94,7 +91,7 @@ public class CSV2SalesOrderConverter {
         logger.info("encoding=" + this.encoding);
         logger.info("expected tokens=" + expectedTokens);
 
-        ConversionResults<String,ImportOracleObiStage> results = new ConversionResults<String,ImportOracleObiStage>();
+        ConversionResults<ImportOracleObiStage> results = new ConversionResults<ImportOracleObiStage>();
         results.setConvertedRecords(new ArrayList<ImportOracleObiStage>());
 
 

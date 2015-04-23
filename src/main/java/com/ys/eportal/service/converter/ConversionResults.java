@@ -10,7 +10,7 @@ import java.util.TreeMap;
 /**
  * Created by rob on 4/14/15.
  */
-public class ConversionResults<ID extends Serializable,T> {
+public class ConversionResults<T> {
 
     private List<T> convertedRecords;
 

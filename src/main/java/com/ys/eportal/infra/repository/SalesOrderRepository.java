@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Set;
 
 
-public interface SalesOrderRepository extends CrudRepository<SalesOrderEntity, SalesOrderEntityId> {
+public interface SalesOrderRepository extends CrudRepository<SalesOrderEntity, Integer> {
 
-    public List<SalesOrderEntity> findBySalesOrderId(String salesOrderNumber);
+    public List<SalesOrderEntity> findBySalesOrderNumber(String salesOrderNumber);
 
-    public List<SalesOrderEntity> findByimportControlId(long importControlId);
+    public List<SalesOrderEntity> findByImportControlId(long importControlId);
     public List<SalesOrderEntity> findByStatus(String status);
 
     public List<SalesOrderEntity> findByCustomerNameLike(String name);

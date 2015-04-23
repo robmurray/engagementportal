@@ -1,10 +1,9 @@
 package com.ys.eportal.infra.domain;
 
 
-import java.math.BigDecimal;
-import java.sql.Timestamp;
-import java.util.Date;
 import javax.persistence.*;
+import java.math.BigDecimal;
+import java.util.Date;
 
 /**
  * Created by rob on 4/8/15.
@@ -15,20 +14,32 @@ public class SalesOrderEntity extends AbstractDomainBase {
 
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "salesOrderId")
-    private String salesOrderId;
+    private int salesOrderId;
 
     @ManyToOne
-    @JoinColumn(name="customer_id", nullable=false)
+    @JoinColumn(name = "customer_id", nullable = false)
     private CustomerEntity customer;
+
+    private String salesOrderNumber;
 
     private long importControlId;
     private int credits;
+    private String creditStatus;
 
-    private Date classRegSent;
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "classRegSent")
+    private String classRegSent;
+
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "reportedRevRec")
     private String reportedRevRec;
 
-    private String status="undefined";
+
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "status")
+    private String status = "undefined";
     private Date bookDate;
     private Date shipDate;
     private Date planningMeetingDate;
@@ -40,6 +51,9 @@ public class SalesOrderEntity extends AbstractDomainBase {
     private Integer bookedToKickOff;
     private Integer daysToClose;
     private BigDecimal amount;
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
     private String location;
     private String region;
@@ -54,6 +68,29 @@ public class SalesOrderEntity extends AbstractDomainBase {
 
     }
 
+    public String getCreditStatus() {
+        return creditStatus;
+    }
+
+    public void setCreditStatus(String creditStatus) {
+        this.creditStatus = creditStatus;
+    }
+
+    public void setSalesOrderId(int salesOrderId) {
+        this.salesOrderId = salesOrderId;
+    }
+
+    public int getSalesOrderId() {
+        return salesOrderId;
+    }
+
+    public String getSalesOrderNumber() {
+        return salesOrderNumber;
+    }
+
+    public void setSalesOrderNumber(String salesOrderNumber) {
+        this.salesOrderNumber = salesOrderNumber;
+    }
 
     public int getCredits() {
         return credits;
@@ -63,13 +100,6 @@ public class SalesOrderEntity extends AbstractDomainBase {
         this.credits = credits;
     }
 
-    public String getSalesOrderId() {
-        return salesOrderId;
-    }
-
-    public void setSalesOrderId(String salesOrderId) {
-        this.salesOrderId = salesOrderId;
-    }
 
     public CustomerEntity getCustomer() {
         return customer;
@@ -87,18 +117,14 @@ public class SalesOrderEntity extends AbstractDomainBase {
         this.importControlId = importControlId;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "classRegSent")
-    public Date getClassRegSent() {
+    public String getClassRegSent() {
         return classRegSent;
     }
 
-    public void setClassRegSent(Date classRegSent) {
+    public void setClassRegSent(String classRegSent) {
         this.classRegSent = classRegSent;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "reportedRevRec")
     public String getReportedRevRec() {
         return reportedRevRec;
     }
@@ -108,9 +134,6 @@ public class SalesOrderEntity extends AbstractDomainBase {
     }
 
 
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "status")
     public String getStatus() {
         return status;
     }
@@ -228,9 +251,6 @@ public class SalesOrderEntity extends AbstractDomainBase {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "notes")
     public String getNotes() {
         return notes;
     }
@@ -268,9 +288,9 @@ public class SalesOrderEntity extends AbstractDomainBase {
     public void setModelGroup(String modelGroup) {
         this.modelGroup = modelGroup;
     }
-
+    @Lob
     @Basic(fetch = FetchType.EAGER)
-    @Column(name = "service")
+    @Column(name = "service", columnDefinition = "TEXT")
     public String getService() {
         return service;
     }
@@ -278,9 +298,9 @@ public class SalesOrderEntity extends AbstractDomainBase {
     public void setService(String service) {
         this.service = service;
     }
-
+    @Lob
     @Basic(fetch = FetchType.EAGER)
-    @Column(name = "accountTeam")
+    @Column(name = "accountTeam", columnDefinition = "TEXT")
     public String getAccountTeam() {
         return accountTeam;
     }
@@ -288,9 +308,9 @@ public class SalesOrderEntity extends AbstractDomainBase {
     public void setAccountTeam(String accountTeam) {
         this.accountTeam = accountTeam;
     }
-
+    @Lob
     @Basic(fetch = FetchType.EAGER)
-    @Column(name = "remote")
+    @Column(name = "remote", columnDefinition = "TEXT")
     public String getRemote() {
         return remote;
     }
@@ -299,8 +319,9 @@ public class SalesOrderEntity extends AbstractDomainBase {
         this.remote = remote;
     }
 
+    @Lob
     @Basic(fetch = FetchType.EAGER)
-    @Column(name = "onsite")
+    @Column(name = "onsite", columnDefinition = "TEXT")
     public String getOnsite() {
         return onsite;
     }
@@ -316,13 +337,13 @@ public class SalesOrderEntity extends AbstractDomainBase {
 
         SalesOrderEntity that = (SalesOrderEntity) o;
 
-        if (salesOrderId != null ? !salesOrderId.equals(that.salesOrderId) : that.salesOrderId != null) return false;
+        if (salesOrderId != that.salesOrderId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return salesOrderId != null ? salesOrderId.hashCode() : 0;
+        return salesOrderId;
     }
 }

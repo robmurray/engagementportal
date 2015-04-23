@@ -1,5 +1,6 @@
 package com.ys.eportal.service.converter;
 
+import com.ys.eportal.infra.domain.Constants;
 import org.apache.commons.lang3.StringUtils;
 
 import java.math.BigDecimal;
@@ -12,6 +13,7 @@ import java.util.Date;
  */
 public class ConversionUtils {
     public static final String DEFAULT_DATE_FORMAT = "yyyy-mm-dd";
+    public static final String MASTER_DATE_FORMAT = "mm/dd/yy";
 
     public static int convertToInt(String stringToConvert) throws NumberFormatException {
         int returnValue = 0;
@@ -22,11 +24,57 @@ public class ConversionUtils {
         return returnValue;
     }
 
-    public static BigDecimal convertToBigDecimal(String val) {
+    public static Object[] convertCredits(String stringToConvert) throws NumberFormatException {
+
+        Object[] retValues=new Object[2];
+        retValues[0]=0;
+        retValues[1]= Constants.Credits.NOTSPECIFIED;
+
+        if (stringToConvert == null || stringToConvert.trim().equals("")) {
+            return retValues;
+        }
+
+        if(StringUtils.isNumeric(stringToConvert)){
+            retValues[0]= Integer.parseInt(StringUtils.stripToEmpty(stringToConvert));
+            retValues[1]= Constants.Credits.STANDARD;
+        }else if(StringUtils.isAlphanumeric(stringToConvert)){
+            retValues[0]= 0;
+            retValues[1]= stringToConvert;
+        }
+
+        return retValues;
+    }
+
+    // @TODO 0ms ? how to map
+    public static int convertDaysToInt(String stringToConvert) throws NumberFormatException {
+        int returnValue = 0;
+
+        if (stringToConvert == null || stringToConvert.trim().equals("")) {
+            return returnValue;
+        }
+        if(stringToConvert.contains("d")){
+            stringToConvert=stringToConvert.replace("d","");
+        }
+        if(stringToConvert.contains("/")){
+            return returnValue;
+        }
+        if(stringToConvert.contains("ms")){
+            return returnValue;
+        }
+
+        returnValue = Integer.parseInt(StringUtils.stripToEmpty(stringToConvert));
+        return returnValue;
+    }
+
+    public static BigDecimal convertToBigDecimal(String val) throws NumberFormatException {
         BigDecimal returnValue = new BigDecimal(0.00);
         if (val == null || val.trim().equals("")) {
             return returnValue;
         }
+
+        val = val.replace(",","");
+        val = val.replace("$","");
+
         returnValue = new BigDecimal(val.trim());
         return returnValue;
     }

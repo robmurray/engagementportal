@@ -1,5 +1,7 @@
 package com.ys.eportal.model;
 
+import com.ys.eportal.infra.domain.Constants;
+
 import java.util.List;
 
 /**
@@ -7,16 +9,16 @@ import java.util.List;
  */
 public class Dashboard {
 
-    private String notdefinedStatus = ModelConstants.STATUS_NOTDEFINED;
-    private String completeStatus = ModelConstants.STATUS_COMPLETE;
-    private String scheduledStatus = ModelConstants.STATUS_SCHEDULED;
-    private String randSupportStatus = ModelConstants.STATUS_RANDSUPPORT;
-    private String inprocessStatus= ModelConstants.STATUS_INPROCESS;
-    private String postSupportStatus= ModelConstants.STATUS_POSTSUPPORT;
-    private String bookedStatus= ModelConstants.STATUS_BOOKED;
-    private String proposedStatus = ModelConstants.STATUS_PROPOSED;
+    private String notdefinedStatus = Constants.SalesOrders.STATUS_NOTDEFINED;
+    private String completeStatus = Constants.SalesOrders.STATUS_COMPLETE;
+    private String scheduledStatus = Constants.SalesOrders.STATUS_SCHEDULED;
+    private String randSupportStatus = Constants.SalesOrders.STATUS_RANDSUPPORT;
+    private String inprocessStatus= Constants.SalesOrders.STATUS_INPROCESS;
+    private String postSupportStatus= Constants.SalesOrders.STATUS_POSTSUPPORT;
+    private String bookedStatus= Constants.SalesOrders.STATUS_BOOKED;
+    private String proposedStatus = Constants.SalesOrders.STATUS_PROPOSED;
 
-    private List<String> statusValues = ModelConstants.statusValues;
+    private List<String> statusValues = Constants.SalesOrders.statusValues;
 
     public List<String> getStatusValues() {
         return statusValues;

@@ -1,5 +1,7 @@
 package com.ys.eportal.model;
 
+import com.ys.eportal.infra.domain.Constants;
+
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
@@ -13,6 +15,7 @@ import java.util.List;
  */
 public class Project {
 
+    private int salesOrderId;
     @Size(min=1, max=30)
     private String salesOrderNumber;
     private Customer customer;
@@ -20,12 +23,13 @@ public class Project {
     private Integer customerId;
 
     private int credits;
+    private String creditStatus;
     private long importControlId;
-    private Date classRegSent;
+    private String classRegSent;
     private String reportedRevRec;
 
 
-    private List<String> statusValues = ModelConstants.statusValues;
+    private List<String> statusValues = Constants.SalesOrders.statusValues;
 
     private String status;
     private Date bookDate;
@@ -69,6 +73,22 @@ public class Project {
 
 
     public Project() {
+    }
+
+    public int getSalesOrderId() {
+        return salesOrderId;
+    }
+
+    public void setSalesOrderId(int salesOrderId) {
+        this.salesOrderId = salesOrderId;
+    }
+
+    public String getCreditStatus() {
+        return creditStatus;
+    }
+
+    public void setCreditStatus(String creditStatus) {
+        this.creditStatus = creditStatus;
     }
 
     public int getCredits() {
@@ -136,11 +156,11 @@ public class Project {
         this.waitTimeValues = waitTimeValues;
     }
 
-    public Date getClassRegSent() {
+    public String getClassRegSent() {
         return classRegSent;
     }
 
-    public void setClassRegSent(Date classRegSent) {
+    public void setClassRegSent(String classRegSent) {
         this.classRegSent = classRegSent;
     }
 
@@ -328,14 +348,13 @@ public class Project {
 
         Project project = (Project) o;
 
-        if (salesOrderNumber != null ? !salesOrderNumber.equals(project.salesOrderNumber) : project.salesOrderNumber != null)
-            return false;
+        if (salesOrderId != project.salesOrderId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return salesOrderNumber != null ? salesOrderNumber.hashCode() : 0;
+        return salesOrderId;
     }
 }

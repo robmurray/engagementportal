@@ -1,8 +1,11 @@
 package com.ys.eportal.infra.domain;
 
+import com.ys.eportal.model.Customer;
+
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.Date;
 
 /**
  * Created by rob on 4/8/15.
@@ -12,43 +15,107 @@ import java.sql.Timestamp;
 public class ImportMasterEntity extends AbstractDomainBase {
 
     @Id @GeneratedValue
-    private long ImportMasterId;
+    private long importMasterId;
+    private String salesOrderNumber;
 
+    @Transient
+    private CustomerEntity customer;
     private String classRegSent;
     private String reportedRevRec;
     private Integer credits;
     private String name;
     private String status;
-    private Timestamp bookDate;
-    private Timestamp shipDate;
-    private Timestamp planningMeetingDate;
-    private Timestamp kickoffMeetingDate;
-    private Timestamp onSiteStartDate;
-    private Timestamp onSiteEndDate;
-    private Timestamp releaseForRevenueRecDate;
+    private Date bookDate;
+    private Date shipDate;
+    private Date planningMeetingDate;
+    private Date kickoffMeetingDate;
+    private Date onSiteStartDate;
+    private Date onSiteEndDate;
+    private Date releaseForRevenueRecDate;
     private String waitTime;
     private Integer bookedToKickOff;
+
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "daysToClose")
     private Integer daysToClose;
+
+    public String getSalesOrderNumber() {
+        return salesOrderNumber;
+    }
+
+    public void setSalesOrderNumber(String salesOrderNumber) {
+        this.salesOrderNumber = salesOrderNumber;
+    }
+
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "amount")
     private BigDecimal amount;
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "notes",columnDefinition = "TEXT")
     private String notes;
+
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "location")
     private String location;
+
+
+    @Basic(fetch = FetchType.EAGER)
+    @javax.persistence.Column(name = "region")
     private String region;
+
+
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "modelGroup")
     private String modelGroup;
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "service",columnDefinition = "TEXT")
     private String service;
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "accountTeam",columnDefinition = "TEXT")
     private String accountTeam;
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "remote",columnDefinition = "TEXT")
     private String remote;
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "onsite",columnDefinition = "TEXT")
     private String onsite;
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "equipmentList",columnDefinition = "TEXT")
     private String equipmentList;
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "shawdow",columnDefinition = "TEXT")
     private String shawdow;
-    private Timestamp importProcessedDate;
+
+
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "importProcessedDate")
+    private Date importProcessedDate;
+
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "importStatus")
     private String importStatus;
 
+    public CustomerEntity getCustomer() {
+        return customer;
+    }
+
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
+    }
+
     public long getImportMasterId() {
-        return ImportMasterId;
+        return importMasterId;
     }
 
     public void setImportMasterId(long importMasterId) {
-        ImportMasterId = importMasterId;
+        this.importMasterId = importMasterId;
     }
 
     @Basic(fetch = FetchType.EAGER)
@@ -103,71 +170,71 @@ public class ImportMasterEntity extends AbstractDomainBase {
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "bookDate")
-    public Timestamp getBookDate() {
+    public Date getBookDate() {
         return bookDate;
     }
 
-    public void setBookDate(Timestamp bookDate) {
+    public void setBookDate(Date bookDate) {
         this.bookDate = bookDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "shipDate")
-    public Timestamp getShipDate() {
+    public Date getShipDate() {
         return shipDate;
     }
 
-    public void setShipDate(Timestamp shipDate) {
+    public void setShipDate(Date shipDate) {
         this.shipDate = shipDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "planningMeetingDate")
-    public Timestamp getPlanningMeetingDate() {
+    public Date getPlanningMeetingDate() {
         return planningMeetingDate;
     }
 
-    public void setPlanningMeetingDate(Timestamp planningMeetingDate) {
+    public void setPlanningMeetingDate(Date planningMeetingDate) {
         this.planningMeetingDate = planningMeetingDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "kickoffMeetingDate")
-    public Timestamp getKickoffMeetingDate() {
+    public Date getKickoffMeetingDate() {
         return kickoffMeetingDate;
     }
 
-    public void setKickoffMeetingDate(Timestamp kickoffMeetingDate) {
+    public void setKickoffMeetingDate(Date kickoffMeetingDate) {
         this.kickoffMeetingDate = kickoffMeetingDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "onSiteStartDate")
-    public Timestamp getOnSiteStartDate() {
+    public Date getOnSiteStartDate() {
         return onSiteStartDate;
     }
 
-    public void setOnSiteStartDate(Timestamp onSiteStartDate) {
+    public void setOnSiteStartDate(Date onSiteStartDate) {
         this.onSiteStartDate = onSiteStartDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @javax.persistence.Column(name = "OnSiteEndDate")
-    public Timestamp getOnSiteEndDate() {
+    public Date getOnSiteEndDate() {
         return onSiteEndDate;
     }
 
-    public void setOnSiteEndDate(Timestamp onSiteEndDate) {
+    public void setOnSiteEndDate(Date onSiteEndDate) {
         this.onSiteEndDate = onSiteEndDate;
     }
 
     @Basic(fetch = FetchType.EAGER)
     @javax.persistence.Column(name = "releaseForRevenueRecDate")
-    public Timestamp getReleaseForRevenueRecDate() {
+    public Date getReleaseForRevenueRecDate() {
         return releaseForRevenueRecDate;
     }
 
-    public void setReleaseForRevenueRecDate(Timestamp releaseForRevenueRecDate) {
+    public void setReleaseForRevenueRecDate(Date releaseForRevenueRecDate) {
         this.releaseForRevenueRecDate = releaseForRevenueRecDate;
     }
 
@@ -191,8 +258,7 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.bookedToKickOff = bookedToKickOff;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "daysToClose")
+
     public Integer getDaysToClose() {
         return daysToClose;
     }
@@ -201,8 +267,6 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.daysToClose = daysToClose;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "amount")
     public BigDecimal getAmount() {
         return amount;
     }
@@ -211,8 +275,7 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.amount = amount;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "notes")
+
     public String getNotes() {
         return notes;
     }
@@ -221,8 +284,7 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.notes = notes;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "location")
+
     public String getLocation() {
         return location;
     }
@@ -231,8 +293,7 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.location = location;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "region")
+
     public String getRegion() {
         return region;
     }
@@ -241,8 +302,6 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.region = region;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "modelGroup")
     public String getModelGroup() {
         return modelGroup;
     }
@@ -251,8 +310,6 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.modelGroup = modelGroup;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "service")
     public String getService() {
         return service;
     }
@@ -261,8 +318,7 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.service = service;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "accountTeam")
+
     public String getAccountTeam() {
         return accountTeam;
     }
@@ -271,8 +327,6 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.accountTeam = accountTeam;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "remote")
     public String getRemote() {
         return remote;
     }
@@ -281,8 +335,6 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.remote = remote;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "onsite")
     public String getOnsite() {
         return onsite;
     }
@@ -291,8 +343,7 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.onsite = onsite;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "equipmentList")
+
     public String getEquipmentList() {
         return equipmentList;
     }
@@ -301,8 +352,7 @@ public class ImportMasterEntity extends AbstractDomainBase {
         this.equipmentList = equipmentList;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "shawdow")
+
     public String getShawdow() {
         return shawdow;
     }
@@ -312,18 +362,15 @@ public class ImportMasterEntity extends AbstractDomainBase {
     }
 
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "importProcessedDate")
-    public Timestamp getImportProcessedDate() {
+    public Date getImportProcessedDate() {
         return importProcessedDate;
     }
 
-    public void setImportProcessedDate(Timestamp importProcessedDate) {
+    public void setImportProcessedDate(Date importProcessedDate) {
         this.importProcessedDate = importProcessedDate;
     }
 
-    @Basic(fetch = FetchType.EAGER)
-    @javax.persistence.Column(name = "importStatus")
+
     public String getImportStatus() {
         return importStatus;
     }
@@ -333,45 +380,13 @@ public class ImportMasterEntity extends AbstractDomainBase {
     }
 
     @Override
-    public int hashCode() {
-        int result = classRegSent != null ? classRegSent.hashCode() : 0;
-        result = 31 * result + (reportedRevRec != null ? reportedRevRec.hashCode() : 0);
-        result = 31 * result + (credits != null ? credits.hashCode() : 0);
-        result = 31 * result + (name != null ? name.hashCode() : 0);
-        result = 31 * result + (status != null ? status.hashCode() : 0);
-        result = 31 * result + (bookDate != null ? bookDate.hashCode() : 0);
-        result = 31 * result + (shipDate != null ? shipDate.hashCode() : 0);
-        result = 31 * result + (planningMeetingDate != null ? planningMeetingDate.hashCode() : 0);
-        result = 31 * result + (kickoffMeetingDate != null ? kickoffMeetingDate.hashCode() : 0);
-        result = 31 * result + (onSiteStartDate != null ? onSiteStartDate.hashCode() : 0);
-        result = 31 * result + (onSiteEndDate != null ? onSiteEndDate.hashCode() : 0);
-        result = 31 * result + (releaseForRevenueRecDate != null ? releaseForRevenueRecDate.hashCode() : 0);
-        result = 31 * result + (waitTime != null ? waitTime.hashCode() : 0);
-        result = 31 * result + (bookedToKickOff != null ? bookedToKickOff.hashCode() : 0);
-        result = 31 * result + (daysToClose != null ? daysToClose.hashCode() : 0);
-        result = 31 * result + (amount != null ? amount.hashCode() : 0);
-        result = 31 * result + (notes != null ? notes.hashCode() : 0);
-        result = 31 * result + (location != null ? location.hashCode() : 0);
-        result = 31 * result + (region != null ? region.hashCode() : 0);
-        result = 31 * result + (modelGroup != null ? modelGroup.hashCode() : 0);
-        result = 31 * result + (service != null ? service.hashCode() : 0);
-        result = 31 * result + (accountTeam != null ? accountTeam.hashCode() : 0);
-        result = 31 * result + (remote != null ? remote.hashCode() : 0);
-        result = 31 * result + (onsite != null ? onsite.hashCode() : 0);
-        result = 31 * result + (equipmentList != null ? equipmentList.hashCode() : 0);
-        result = 31 * result + (shawdow != null ? shawdow.hashCode() : 0);
-        result = 31 * result + (importProcessedDate != null ? importProcessedDate.hashCode() : 0);
-        result = 31 * result + (importStatus != null ? importStatus.hashCode() : 0);
-        return result;
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof ImportMasterEntity)) return false;
 
         ImportMasterEntity that = (ImportMasterEntity) o;
 
+        if (importMasterId != that.importMasterId) return false;
         if (accountTeam != null ? !accountTeam.equals(that.accountTeam) : that.accountTeam != null) return false;
         if (amount != null ? !amount.equals(that.amount) : that.amount != null) return false;
         if (bookDate != null ? !bookDate.equals(that.bookDate) : that.bookDate != null) return false;
@@ -404,6 +419,8 @@ public class ImportMasterEntity extends AbstractDomainBase {
         if (remote != null ? !remote.equals(that.remote) : that.remote != null) return false;
         if (reportedRevRec != null ? !reportedRevRec.equals(that.reportedRevRec) : that.reportedRevRec != null)
             return false;
+        if (salesOrderNumber != null ? !salesOrderNumber.equals(that.salesOrderNumber) : that.salesOrderNumber != null)
+            return false;
         if (service != null ? !service.equals(that.service) : that.service != null) return false;
         if (shawdow != null ? !shawdow.equals(that.shawdow) : that.shawdow != null) return false;
         if (shipDate != null ? !shipDate.equals(that.shipDate) : that.shipDate != null) return false;
@@ -411,5 +428,40 @@ public class ImportMasterEntity extends AbstractDomainBase {
         if (waitTime != null ? !waitTime.equals(that.waitTime) : that.waitTime != null) return false;
 
         return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (int) (importMasterId ^ (importMasterId >>> 32));
+        result = 31 * result + (salesOrderNumber != null ? salesOrderNumber.hashCode() : 0);
+        result = 31 * result + (classRegSent != null ? classRegSent.hashCode() : 0);
+        result = 31 * result + (reportedRevRec != null ? reportedRevRec.hashCode() : 0);
+        result = 31 * result + (credits != null ? credits.hashCode() : 0);
+        result = 31 * result + (name != null ? name.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        result = 31 * result + (bookDate != null ? bookDate.hashCode() : 0);
+        result = 31 * result + (shipDate != null ? shipDate.hashCode() : 0);
+        result = 31 * result + (planningMeetingDate != null ? planningMeetingDate.hashCode() : 0);
+        result = 31 * result + (kickoffMeetingDate != null ? kickoffMeetingDate.hashCode() : 0);
+        result = 31 * result + (onSiteStartDate != null ? onSiteStartDate.hashCode() : 0);
+        result = 31 * result + (onSiteEndDate != null ? onSiteEndDate.hashCode() : 0);
+        result = 31 * result + (releaseForRevenueRecDate != null ? releaseForRevenueRecDate.hashCode() : 0);
+        result = 31 * result + (waitTime != null ? waitTime.hashCode() : 0);
+        result = 31 * result + (bookedToKickOff != null ? bookedToKickOff.hashCode() : 0);
+        result = 31 * result + (daysToClose != null ? daysToClose.hashCode() : 0);
+        result = 31 * result + (amount != null ? amount.hashCode() : 0);
+        result = 31 * result + (notes != null ? notes.hashCode() : 0);
+        result = 31 * result + (location != null ? location.hashCode() : 0);
+        result = 31 * result + (region != null ? region.hashCode() : 0);
+        result = 31 * result + (modelGroup != null ? modelGroup.hashCode() : 0);
+        result = 31 * result + (service != null ? service.hashCode() : 0);
+        result = 31 * result + (accountTeam != null ? accountTeam.hashCode() : 0);
+        result = 31 * result + (remote != null ? remote.hashCode() : 0);
+        result = 31 * result + (onsite != null ? onsite.hashCode() : 0);
+        result = 31 * result + (equipmentList != null ? equipmentList.hashCode() : 0);
+        result = 31 * result + (shawdow != null ? shawdow.hashCode() : 0);
+        result = 31 * result + (importProcessedDate != null ? importProcessedDate.hashCode() : 0);
+        result = 31 * result + (importStatus != null ? importStatus.hashCode() : 0);
+        return result;
     }
 }

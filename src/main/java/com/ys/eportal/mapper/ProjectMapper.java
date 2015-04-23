@@ -27,7 +27,8 @@ public class ProjectMapper {
         mapperFactory = new DefaultMapperFactory.Builder().build();
         // map to/from
         mapperFactory.classMap(SalesOrderEntity.class, Project.class)
-                .field("salesOrderId", "salesOrderNumber")
+                .field("salesOrderId", "salesOrderId")
+                .field("salesOrderNumber", "salesOrderNumber")
                 .field("customer.customerId", "customerId")
                 .field("importControlId", "importControlId")
                 .field("classRegSent", "classRegSent")
@@ -57,7 +58,8 @@ public class ProjectMapper {
 
         // map from/to
         mapperFactory.classMap(Project.class, SalesOrderEntity.class)
-                .field("salesOrderNumber", "salesOrderId")
+                .field("salesOrderId", "salesOrderId")
+                .field("salesOrderNumber", "salesOrderNumber")
                 .field("customerId", "customer.customerId")
                 .field("importControlId", "importControlId")
                 .field("classRegSent", "classRegSent")

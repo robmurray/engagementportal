@@ -34,7 +34,8 @@
                     <tr th:each="project : ${projects}" th:if="${projects != null}">
                         <td th:text="${project.customer.name}"></td>
                         <td th:text="${project.salesOrderNumber}"></td>
-                        <td><span class="label label-active" th:text="${project.status}"></span></td>
+
+                        <td><span class="label" th:classappend="'label-' + ${project.statusDisplayClass}" th:text="${project.status}"></span></td>
                         <td>
                             <div class="btn-group btn-group-xs ">
                                 <a href="" th:href="'projectEdit?salesOrderId='+${project.salesOrderId}"

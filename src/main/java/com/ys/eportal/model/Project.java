@@ -6,9 +6,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by rob on 4/5/15.
@@ -32,6 +30,18 @@ public class Project {
     private List<String> statusValues = Constants.SalesOrders.statusValues;
 
     private String status;
+
+    private Map<String,String> statusDisplayClass = new HashMap<String,String>(){{
+        put("","danger");
+        put(Constants.SalesOrders.STATUS_BOOKED,"info");
+        put(Constants.SalesOrders.STATUS_COMPLETE,"primary");
+        put(Constants.SalesOrders.STATUS_INPROCESS,"success");
+        put(Constants.SalesOrders.STATUS_NOTDEFINED,"danger");
+        put(Constants.SalesOrders.STATUS_POSTSUPPORT,"danger");
+        put(Constants.SalesOrders.STATUS_PROPOSED,"default");
+        put(Constants.SalesOrders.STATUS_RANDSUPPORT,"warning");
+        put(Constants.SalesOrders.STATUS_SCHEDULED,"success");
+    }};
     private Date bookDate;
     private Date shipDate;
     private Date planningMeetingDate;
@@ -339,6 +349,14 @@ public class Project {
 
     public void setSalesOrderNumber(String salesOrderNumber) {
         this.salesOrderNumber = salesOrderNumber;
+    }
+
+
+    public String getStatusDisplayClass(){
+        if(status==null){
+            status ="";
+        }
+        return this.statusDisplayClass.get(status);
     }
 
     @Override

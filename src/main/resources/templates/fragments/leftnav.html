@@ -26,6 +26,35 @@
                         <i class="fa fa-dashboard"></i> Dashboard
                     </a>
                 </li>
+
+                <li class="panel" th:class="${pageGroup}=='reports'? 'panel open' : 'panel'">
+                    <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
+                       data-target="#reports">
+                        <i class="fa fa-cogs"></i> reports <span class="fa arrow"></span>
+                    </a>
+                    <ul class="collapse nav" id="reports">
+                        <li>
+                            <a class="" th:class="${pageId}=='qsTimeToFulfill'? 'active' : ''" href="qsTimeToFulfill">
+                                <i class="fa fa-angle-double-right"></i>QS Time to Fulfill
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" th:class="${pageId}=='importMaster'? 'active' : ''" href="importMaster">
+                                <i class="fa fa-angle-double-right"></i>**master import***
+                            </a>
+                        </li>
+                        <li>
+                            <a class="" th:class="${pageId}=='exportSalesOrders'? 'active' : ''" href="exportSalesOrders">
+                                <i class="fa fa-angle-double-right"></i> export sales orders
+                            </a>
+                        </li>
+
+                    </ul>
+                </li>
+
+
+
+
                 <!-- BEGIN DROPDOWN -->
                 <li class="panel" th:class="${pageGroup}=='importExport'? 'panel open' : 'panel'">
                     <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"

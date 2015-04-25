@@ -7,7 +7,7 @@ import java.util.List;
  * Created by rob on 4/13/15.
  */
 public class Constants {
-    public static class SalesOrders {
+    public static class Projects {
         public final static String STATUS_NOTDEFINED = "undefined";
         public final static String STATUS_COMPLETE = "Complete";
         public final static String STATUS_SCHEDULED = "Scheduled";
@@ -30,6 +30,7 @@ public class Constants {
             }
         };
     }
+
 
     public static class Credits {
         public final static String STATUS_HI_HOLD = "HI HOLD";

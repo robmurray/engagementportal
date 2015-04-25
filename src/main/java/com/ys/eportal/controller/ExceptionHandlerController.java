@@ -1,20 +1,36 @@
 package com.ys.eportal.controller;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.servlet.ModelAndView;
+
+import javax.servlet.http.HttpServletRequest;
+import java.sql.SQLException;
 
 /**
  * Created by rob on 4/5/15.
  */
 @Controller
 public class ExceptionHandlerController extends ControllerBase {
+    private static Logger logger = LoggerFactory.getLogger(ExceptionHandlerController.class);
+
+    public ExceptionHandlerController() {
+    }
+
+
+
 /*
-        // @RequestHandler methods
-        ...
 
         // Exception handling methods
 
         // Convert a predefined exception to an HTTP Status code
-        @ResponseStatus(value=HttpStatus.CONFLICT, reason="Data integrity violation")  // 409
+        @ResponseStatus(value= HttpStatus.CONFLICT, reason="Data integrity violation")  // 409
         @ExceptionHandler(DataIntegrityViolationException.class)
         public void conflict() {
             // Nothing to do
@@ -39,7 +55,7 @@ public class ExceptionHandlerController extends ControllerBase {
             ModelAndView mav = new ModelAndView();
             mav.addObject("exception", exception);
             mav.addObject("url", req.getRequestURL());
-            mav.setViewName("error");
+            mav.setViewName("error-500");
             return mav;
         }
         */

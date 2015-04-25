@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/portalpage">
+<head>
+    <meta charset="utf-8"/>
+    <title>Project</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+
+
+    <div th:replace="fragments/project/projectInfo :: projectInfo"/>
+
+    <div th:replace="fragments/salesorder/salesOrderTable :: salesOrderTable(salesOrders=${project.salesOrders})"/>
+
+    <div th:replace="fragments/project/activityTable :: activityTable(activities=${project.activities})"/>
+
+    <div th:replace="fragments/common/noteTable :: noteTable(notes=${project.notes})"/>
+</div>
+</body>
+</html>>

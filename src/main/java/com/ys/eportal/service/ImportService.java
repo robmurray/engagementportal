@@ -229,7 +229,7 @@ public class ImportService extends ServicesBase{
                 //entity.getStAgentName();
                 //entity.getStChannelName();
 
-                wrkProject.setCustomer(new CustomerEntity(wrkCustomer.getCustomerId())); //entity.getStCustomerName();
+              //  wrkProject.setCustomer(new CustomerEntity(wrkCustomer.getCustomerId())); //entity.getStCustomerName();
 
                 wrkProject.setImportControlId(entity.getImportControlId());
                 soList.add(wrkProject);

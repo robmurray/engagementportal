@@ -1,106 +1,35 @@
-package com.ys.eportal.infra.domain;
+package com.ys.eportal.model;
 
+import com.ys.eportal.infra.domain.ProjectEntity;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
 /**
- * Created by rob on 4/8/15.
+ * Created by rob on 4/25/15.
  */
-@Entity
-@Table(name = "ep_SalesOrder")
-public class SalesOrderEntity extends AbstractDomainBase {
+public class SalesOrder extends AbstractModelBase {
 
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "salesOrderId")
     private long salesOrderId;
-
     private long importControlId;
-
-    @OneToOne
-    @JoinColumn(name = "project_id", nullable = false)
-    private ProjectEntity project;
-
     private String salesOrderNumber;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "amount")
     private BigDecimal amount;
-
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "region")
     private String region;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "modelGroup")
     private String modelGroup;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "stSalesAgentName")
     private String stSalesAgentName;
-
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "activityYear")
     private Integer activityYear;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "activityMonthNumber")
     private Integer activityMonthNumber;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "activityDate")
     private Date activityDate;
-
-
-    //@TODO mapping this column to customer
-//    @OneToOne
-//    @JoinColumn(name = "customer_id", nullable = false)
-//    private CustomerEntity customer;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "stCustomerName")
     private String stCustomerName;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "btCustomerName")
     private String btCustomerName;
-
-
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "stChannelName")
     private String stChannelName;
-
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "productFamilyCode")
     private String productFamilyCode;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "forecastGroupCode")
     private String forecastGroupCode;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "orderedQuantity")
     private Double orderedQuantity;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "contractStatusCode")
     private String contractStatusCode;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "endUserName")
     private String endUserName;
 
-    public SalesOrderEntity() {
-
-
-    }
 
     public long getSalesOrderId() {
         return salesOrderId;
@@ -116,14 +45,6 @@ public class SalesOrderEntity extends AbstractDomainBase {
 
     public void setImportControlId(long importControlId) {
         this.importControlId = importControlId;
-    }
-
-    public ProjectEntity getProject() {
-        return project;
-    }
-
-    public void setProject(ProjectEntity project) {
-        this.project = project;
     }
 
     public String getSalesOrderNumber() {
@@ -198,20 +119,20 @@ public class SalesOrderEntity extends AbstractDomainBase {
         this.stCustomerName = stCustomerName;
     }
 
-    public String getStChannelName() {
-        return stChannelName;
-    }
-
-    public void setStChannelName(String stChannelName) {
-        this.stChannelName = stChannelName;
-    }
-
     public String getBtCustomerName() {
         return btCustomerName;
     }
 
     public void setBtCustomerName(String btCustomerName) {
         this.btCustomerName = btCustomerName;
+    }
+
+    public String getStChannelName() {
+        return stChannelName;
+    }
+
+    public void setStChannelName(String stChannelName) {
+        this.stChannelName = stChannelName;
     }
 
     public String getProductFamilyCode() {
@@ -257,9 +178,9 @@ public class SalesOrderEntity extends AbstractDomainBase {
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
-        if (!(o instanceof SalesOrderEntity)) return false;
+        if (!(o instanceof SalesOrder)) return false;
 
-        SalesOrderEntity that = (SalesOrderEntity) o;
+        SalesOrder that = (SalesOrder) o;
 
         if (salesOrderId != that.salesOrderId) return false;
 

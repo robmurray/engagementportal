@@ -98,7 +98,7 @@ public class CustomerController  extends ControllerBase{
 
     */
     @RequestMapping(value = "/customerEdit", method = RequestMethod.GET)
-    public String customerEditForm(@RequestParam(value = "customerId", required = true) Integer customerId,
+    public String customerEditForm(@RequestParam(value = "customerId", required = true) Long customerId,
                                    @RequestParam(value = "msgtype", required = false) String messageType, Model model) {
         CustomerEntity customer = this.portalService.findCustomerByID(customerId);
 

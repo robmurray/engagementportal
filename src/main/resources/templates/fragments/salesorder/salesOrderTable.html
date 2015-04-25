@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<div id="salesOrderTable" th:fragment="salesOrderTable (salesOrders)">
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>Sales Order</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#salesordertableform"><i class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="salesordertableform" class="panel-collapse collapse in">
+            <div class="portlet-body">
+
+                <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="100" th:if="${salesOrders!=null}">
+                    <thead>
+                    <tr>
+                        <th>actions</th>
+
+                        <th data-toggle="true">Name</th>
+                        <th data-toggle="true">Sales Order Number</th>
+                        <th data-toggle="true">Amount</th>
+                        <th data-toggle="true">Region</th>
+                        <th data-toggle="true">Model Group</th>
+                        <th data-toggle="true">Sales Agent Name</th>
+                        <th data-toggle="true">Activity Date</th>
+                        <th data-toggle="true">Contract Status Code</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="salesOrder : ${salesOrders}">
+                            <td >
+                                <div class="action-buttons">
+                                    <a href="" th:href="'salesOrderEdit?saleOrderId='+${salesOrderId}"
+                                       data-placement="left" data-rel="tooltip" title="Edit"><i
+                                            class="fa fa-pencil bigger-130"></i></a>
+                                </div>
+                            </td>
+                            <td  th:text="${salesOrder.stCustomerName}"></td>
+                            <td  th:text="${salesOrder.salesOrderNumber}"></td>
+                            <td  th:text="${salesOrder.amount}"></td>
+                            <td  th:text="${salesOrder.region}"></td>
+                            <td  th:text="${salesOrder.modelGroup}"></td>
+                            <td  th:text="${salesOrder.stSalesAgentName}"></td>
+                            <td  th:text="${salesOrder.activityDate}"></td>
+                            <td  th:text="${salesOrder.contractStatusCode}"></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            <ul class="hide-if-no-paging pagination pagination-centered pull-right"></ul>
+                            <div class="clearfix"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

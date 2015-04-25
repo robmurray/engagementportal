@@ -14,7 +14,7 @@ public class CustomerEntity extends AbstractDomainBase {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "customerId")
-    private int customerId;
+    private long customerId;
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "name", unique = true)
@@ -27,7 +27,7 @@ public class CustomerEntity extends AbstractDomainBase {
 
 
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private Set<SalesOrderEntity> salesOrders = new HashSet<SalesOrderEntity>();
+    private Set<ProjectEntity> projects = new HashSet<ProjectEntity>();
 
     private String contact;
 
@@ -38,14 +38,13 @@ public class CustomerEntity extends AbstractDomainBase {
         this.customerId = customerId;
     }
 
-    public int getCustomerId() {
+    public long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
-
 
     public String getName() {
         return name;
@@ -63,12 +62,12 @@ public class CustomerEntity extends AbstractDomainBase {
         this.notes = notes;
     }
 
-    public Set<SalesOrderEntity> getSalesOrders() {
-        return salesOrders;
+    public Set<ProjectEntity> getProjects() {
+        return projects;
     }
 
-    public void setSalesOrders(Set<SalesOrderEntity> salesOrders) {
-        this.salesOrders = salesOrders;
+    public void setProjects(Set<ProjectEntity> projects) {
+        this.projects = projects;
     }
 
     public String getContact() {
@@ -84,15 +83,15 @@ public class CustomerEntity extends AbstractDomainBase {
         if (this == o) return true;
         if (!(o instanceof CustomerEntity)) return false;
 
-        CustomerEntity customer = (CustomerEntity) o;
+        CustomerEntity that = (CustomerEntity) o;
 
-        if (customerId != customer.customerId) return false;
+        if (customerId != that.customerId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return customerId;
+        return (int) (customerId ^ (customerId >>> 32));
     }
 }

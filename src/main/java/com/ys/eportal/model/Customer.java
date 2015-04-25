@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Customer extends AbstractModelBase{
 
-    private int customerId;
+    private long customerId;
     @Size(min=2, max=30)
     private String name;
     private String notes;
@@ -21,11 +21,11 @@ public class Customer extends AbstractModelBase{
         this.name = name;
     }
 
-    public int getCustomerId() {
+    public long getCustomerId() {
         return customerId;
     }
 
-    public void setCustomerId(int customerId) {
+    public void setCustomerId(long customerId) {
         this.customerId = customerId;
     }
 
@@ -67,6 +67,6 @@ public class Customer extends AbstractModelBase{
 
     @Override
     public int hashCode() {
-        return customerId;
+        return (int) (customerId ^ (customerId >>> 32));
     }
 }

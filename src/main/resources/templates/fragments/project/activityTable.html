@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<div id="activityTable" th:fragment="activityTable (activities)">
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>Milestones</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#projectactivitiesform"><i class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="projectactivitiesform" class="panel-collapse collapse in">
+            <div class="portlet-body">
+
+                <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="100" th:if="${activities!=null}">
+                    <thead>
+                    <tr>
+                        <th>actions</th>
+
+                        <th data-toggle="true">Name</th>
+                        <th data-toggle="true">Date</th>
+                        <th data-toggle="true">status</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="activity : ${activities}">
+                            <td >
+                                <div class="action-buttons">
+                                    <a href="" th:href="'activityEdit?activityId='+${activity.activityId}"
+                                       data-placement="left" data-rel="tooltip" title="Edit"><i
+                                            class="fa fa-pencil bigger-130"></i></a>
+                                </div>
+                            </td>
+                            <td  th:text="${activity.name}"></td>
+                            <td  th:text="${activity.date}"></td>
+                            <td  th:text="${activity.status}"></td>
+
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="7">
+                            <ul class="hide-if-no-paging pagination pagination-centered pull-right"></ul>
+                            <div class="clearfix"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

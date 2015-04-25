@@ -2,53 +2,40 @@ package com.ys.eportal.model;
 
 import com.ys.eportal.infra.domain.Constants;
 
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.*;
 
 /**
  * Created by rob on 4/5/15.
  */
-public class Project {
+public class Project extends AbstractModelBase{
 
-    private int salesOrderId;
-    @Size(min=1, max=30)
-    private String salesOrderNumber;
-    private Customer customer;
-    @NotNull
-    private Integer customerId;
+    private long projectId;
 
-    private int credits;
-    private String creditStatus;
-    private long importControlId;
-    private String classRegSent;
-    private String reportedRevRec;
+    private String name;
+
+    private List<SalesOrder> salesOrders;
 
 
-    private List<String> statusValues = Constants.SalesOrders.statusValues;
+    //@Size(min=1, max=30)
+    // private String salesOrderNumber;
+
+    private List<String> statusValues = Constants.Projects.statusValues;
 
     private String status;
 
     private Map<String,String> statusDisplayClass = new HashMap<String,String>(){{
         put("","danger");
-        put(Constants.SalesOrders.STATUS_BOOKED,"info");
-        put(Constants.SalesOrders.STATUS_COMPLETE,"primary");
-        put(Constants.SalesOrders.STATUS_INPROCESS,"success");
-        put(Constants.SalesOrders.STATUS_NOTDEFINED,"danger");
-        put(Constants.SalesOrders.STATUS_POSTSUPPORT,"danger");
-        put(Constants.SalesOrders.STATUS_PROPOSED,"default");
-        put(Constants.SalesOrders.STATUS_RANDSUPPORT,"warning");
-        put(Constants.SalesOrders.STATUS_SCHEDULED,"success");
+        put(Constants.Projects.STATUS_BOOKED,"info");
+        put(Constants.Projects.STATUS_COMPLETE,"primary");
+        put(Constants.Projects.STATUS_INPROCESS,"success");
+        put(Constants.Projects.STATUS_NOTDEFINED,"danger");
+        put(Constants.Projects.STATUS_POSTSUPPORT,"danger");
+        put(Constants.Projects.STATUS_PROPOSED,"default");
+        put(Constants.Projects.STATUS_RANDSUPPORT,"warning");
+        put(Constants.Projects.STATUS_SCHEDULED,"success");
     }};
-    private Date bookDate;
-    private Date shipDate;
-    private Date planningMeetingDate;
-    private Date kickoffMeetingDate;
-    private Date onSiteStartDate;
-    private Date onSiteEndDate;
-    private Date releaseForRevenueRecDate;
+
+    private List<Activity> activities;
 
     private List<String> waitTimeValues = new ArrayList<String>() {{
         add("standard");
@@ -56,16 +43,17 @@ public class Project {
         add("resource");
     }};
 
+    private List<NoteInterface> notes;
+
     private String waitTime;
 
     private Integer bookedToKickOff;
     private Integer daysToClose;
-    private BigDecimal amount;
-    private String notes;
-    private String location;
-    private String region;
-    private String modelGroup;
 
+
+    private String location;
+
+    private String modelGroup;
     private List<String> modelGroupValues = new ArrayList<String>() {{
         add("WLAN");
         add("VPM");
@@ -85,62 +73,57 @@ public class Project {
     public Project() {
     }
 
-    public int getSalesOrderId() {
-        return salesOrderId;
+
+    public long getProjectId() {
+        return projectId;
     }
 
-    public void setSalesOrderId(int salesOrderId) {
-        this.salesOrderId = salesOrderId;
+    public void setProjectId(long projectId) {
+        this.projectId = projectId;
+    }
+    public void addActivity(Activity activity){
+        if(this.activities ==null){
+            this.activities = new ArrayList<Activity>();
+        }
+        if(activity==null){
+            return;
+        }
+        this.activities.add(activity);
+    }
+    public List<Activity> getActivities() {
+        return activities;
     }
 
-    public String getCreditStatus() {
-        return creditStatus;
+    public void setActivities(List<Activity> activities) {
+        this.activities = activities;
     }
 
-    public void setCreditStatus(String creditStatus) {
-        this.creditStatus = creditStatus;
+    public List<SalesOrder> getSalesOrders() {
+        return salesOrders;
     }
 
-    public int getCredits() {
-        return credits;
+    public void addSalesOrder(SalesOrder salesOrder){
+        if(this.salesOrders ==null){
+            this.salesOrders = new ArrayList<SalesOrder>();
+        }
+        if(salesOrder==null){
+            return;
+        }
+        this.salesOrders.add(salesOrder);
     }
 
-    public void setCredits(int credits) {
-        this.credits = credits;
+    public void setSalesOrders(List<SalesOrder> salesorders) {
+        this.salesOrders = salesorders;
     }
 
-    public String getSalesOrderNumber() {
-        return salesOrderNumber;
+    public String getName() {
+        return name;
     }
 
-
-    public Integer getCustomerId() {
-        return customerId;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public void setCustomerId(Integer customerId) {
-        this.customerId = customerId;
-    }
-
-    public Project(Customer customer) {
-        this.customer = customer;
-    }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(Customer customer) {
-        this.customer = customer;
-    }
-
-    public long getImportControlId() {
-        return importControlId;
-    }
-
-    public void setImportControlId(long importControlId) {
-        this.importControlId = importControlId;
-    }
 
     public List<String> getStatusValues() {
         return statusValues;
@@ -150,39 +133,6 @@ public class Project {
         this.statusValues = statusValues;
     }
 
-    public List<String> getWaitTimeValues() {
-        return waitTimeValues;
-    }
-
-    public List<String> getModelGroupValues() {
-        return modelGroupValues;
-    }
-
-    public void setModelGroupValues(List<String> modelGroupValues) {
-        this.modelGroupValues = modelGroupValues;
-    }
-
-    public void setWaitTimeValues(List<String> waitTimeValues) {
-        this.waitTimeValues = waitTimeValues;
-    }
-
-    public String getClassRegSent() {
-        return classRegSent;
-    }
-
-    public void setClassRegSent(String classRegSent) {
-        this.classRegSent = classRegSent;
-    }
-
-    public String getReportedRevRec() {
-        return reportedRevRec;
-    }
-
-    public void setReportedRevRec(String reportedRevRec) {
-        this.reportedRevRec = reportedRevRec;
-    }
-
-
     public String getStatus() {
         return status;
     }
@@ -191,64 +141,20 @@ public class Project {
         this.status = status;
     }
 
-    public Date getBookDate() {
-        return bookDate;
+    public Map<String, String> getStatusDisplayClass() {
+        return statusDisplayClass;
     }
 
-    public void setBookDate(Date bookDate) {
-        this.bookDate = bookDate;
+    public void setStatusDisplayClass(Map<String, String> statusDisplayClass) {
+        this.statusDisplayClass = statusDisplayClass;
     }
 
-    public Date getShipDate() {
-        return shipDate;
+    public List<String> getWaitTimeValues() {
+        return waitTimeValues;
     }
 
-    public void setShipDate(Date shipDate) {
-        this.shipDate = shipDate;
-    }
-
-    public Date getPlanningMeetingDate() {
-        return planningMeetingDate;
-    }
-
-    public void setPlanningMeetingDate(Date planningMeetingDate) {
-        this.planningMeetingDate = planningMeetingDate;
-    }
-
-    public Date getKickoffMeetingDate() {
-        return kickoffMeetingDate;
-    }
-
-    public void setKickoffMeetingDate(Date kickoffMeetingDate) {
-        this.kickoffMeetingDate = kickoffMeetingDate;
-    }
-
-    public Date getOnSiteStartDate() {
-        return onSiteStartDate;
-    }
-
-    public void setOnSiteStartDate(Date onSiteStartDate) {
-        this.onSiteStartDate = onSiteStartDate;
-    }
-
-    public Date getOnSiteEndDate() {
-        return onSiteEndDate;
-    }
-
-    public void setOnSiteEndDate(Date onSiteEndDate) {
-        this.onSiteEndDate = onSiteEndDate;
-    }
-
-    public Date getReleaseForRevenueRecDate() {
-        return releaseForRevenueRecDate;
-    }
-
-    public void setReleaseForRevenueRecDate(Date releaseForRevenueRecDate) {
-        this.releaseForRevenueRecDate = releaseForRevenueRecDate;
-    }
-
-    public void setReleaseForRevenueRecDate(Timestamp releaseForRevenueRecDate) {
-        this.releaseForRevenueRecDate = releaseForRevenueRecDate;
+    public void setWaitTimeValues(List<String> waitTimeValues) {
+        this.waitTimeValues = waitTimeValues;
     }
 
     public String getWaitTime() {
@@ -275,19 +181,21 @@ public class Project {
         this.daysToClose = daysToClose;
     }
 
-    public BigDecimal getAmount() {
-        return amount;
+    public void addNotes(NoteInterface note){
+        if(this.notes == null){
+            notes = new ArrayList<NoteInterface>();
+        }
+        if(note==null){
+            return;
+        }
+        notes.add(note);
     }
 
-    public void setAmount(BigDecimal amount) {
-        this.amount = amount;
-    }
-
-    public String getNotes() {
+    public List<NoteInterface> getNotes() {
         return notes;
     }
 
-    public void setNotes(String notes) {
+    public void setNotes(List<NoteInterface> notes) {
         this.notes = notes;
     }
 
@@ -299,20 +207,20 @@ public class Project {
         this.location = location;
     }
 
-    public String getRegion() {
-        return region;
-    }
-
-    public void setRegion(String region) {
-        this.region = region;
-    }
-
     public String getModelGroup() {
         return modelGroup;
     }
 
     public void setModelGroup(String modelGroup) {
         this.modelGroup = modelGroup;
+    }
+
+    public List<String> getModelGroupValues() {
+        return modelGroupValues;
+    }
+
+    public void setModelGroupValues(List<String> modelGroupValues) {
+        this.modelGroupValues = modelGroupValues;
     }
 
     public String getService() {
@@ -347,18 +255,6 @@ public class Project {
         this.onsite = onsite;
     }
 
-    public void setSalesOrderNumber(String salesOrderNumber) {
-        this.salesOrderNumber = salesOrderNumber;
-    }
-
-
-    public String getStatusDisplayClass(){
-        if(status==null){
-            status ="";
-        }
-        return this.statusDisplayClass.get(status);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -366,13 +262,13 @@ public class Project {
 
         Project project = (Project) o;
 
-        if (salesOrderId != project.salesOrderId) return false;
+        if (projectId != project.projectId) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return salesOrderId;
+        return (int) (projectId ^ (projectId >>> 32));
     }
 }

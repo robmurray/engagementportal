@@ -45,21 +45,21 @@ public class PortalService extends ServicesBase{
                 try {
 
                     // need to deal with the nordefinedstatus
-                    if (sos[0] == null || sos[0].equals(Constants.SalesOrders.STATUS_NOTDEFINED)) {
+                    if (sos[0] == null || sos[0].equals(Constants.Projects.STATUS_NOTDEFINED)) {
                         proj.setNumNotdefinedStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_BOOKED)) {
+                    } else if (sos[0].equals(Constants.Projects.STATUS_BOOKED)) {
                         proj.setNumBookedStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_COMPLETE)) {
+                    } else if (sos[0].equals(Constants.Projects.STATUS_COMPLETE)) {
                         proj.setNumCompleteStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_INPROCESS)) {
+                    } else if (sos[0].equals(Constants.Projects.STATUS_INPROCESS)) {
                         proj.setNumInprocessStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_POSTSUPPORT)) {
+                    } else if (sos[0].equals(Constants.Projects.STATUS_POSTSUPPORT)) {
                         proj.setNumPostSupportStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_PROPOSED)) {
+                    } else if (sos[0].equals(Constants.Projects.STATUS_PROPOSED)) {
                         proj.setNumProposedStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_RANDSUPPORT)) {
+                    } else if (sos[0].equals(Constants.Projects.STATUS_RANDSUPPORT)) {
                         proj.setNumRandSupportStatus(((BigInteger) sos[1]).intValue());
-                    } else if (sos[0].equals(Constants.SalesOrders.STATUS_SCHEDULED)) {
+                    } else if (sos[0].equals(Constants.Projects.STATUS_SCHEDULED)) {
                         proj.setNumScheduledStatus(((BigInteger) sos[1]).intValue());
                     }
                 } catch (ClassCastException e) {
@@ -90,7 +90,7 @@ public class PortalService extends ServicesBase{
         return results;
     }
 
-    public CustomerEntity findCustomerByID(int customerId) {
+    public CustomerEntity findCustomerByID(long customerId) {
 
         return this.customerRepository.findOne(customerId);
     }
@@ -126,7 +126,7 @@ public class PortalService extends ServicesBase{
         this.salesOrderRepository.save(salesOrderEntity);
     }
 
-    public SalesOrderEntity findSalesOrderEntityById(int salesOrderId) {
+    public SalesOrderEntity findSalesOrderEntityById(long salesOrderId) {
         return this.salesOrderRepository.findOne(salesOrderId);
 
     }
@@ -147,13 +147,13 @@ public class PortalService extends ServicesBase{
         return list;
     }
 
-    public Set<SalesOrderEntity> findBySalesOrderCustomerIdlId(int customerId) {
-        return this.salesOrderRepository.findByCustomerCustomerId(customerId);
+    public Set<SalesOrderEntity> findBySalesOrderCustomerIdlId(long customerId) {
+        return null;// this.salesOrderRepository.findByCustomerCustomerId(customerId);
 
     }
 
     public List<SalesOrderEntity> findByStatus(String status) {
-        List<SalesOrderEntity> list = this.salesOrderRepository.findByStatus(status);
+        List<SalesOrderEntity> list =null;// this.salesOrderRepository.findByStatus(status);
 
         return list;
     }
@@ -172,7 +172,7 @@ public class PortalService extends ServicesBase{
                 results.add(soe);
             }
         } else if (search.getCustomerName() != null && !search.getCustomerName().trim().equals("")) {
-            results = this.salesOrderRepository.findByCustomerNameLike(this.processWildCards(search.getCustomerName()));
+            //results = this.salesOrderRepository.findByCustomerNameLike(this.processWildCards(search.getCustomerName()));
             //results = this.findAllSalesOrders();
         } else if (search.getImportControlId() > 0) {
             results = this.findByImportControlId(search.getImportControlId());

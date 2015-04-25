@@ -29,7 +29,7 @@ public class SOImportMapper {
         // map to/from
         mapperFactory.classMap(ImportMasterEntity.class, SalesOrderEntity.class)
                 .field("salesOrderNumber", "salesOrderNumber")
-                .field("classRegSent", "classRegSent")
+       /*         .field("classRegSent", "classRegSent")
                 .field("reportedRevRec", "reportedRevRec")
                 .field("customer", "customer")
                 .field("status", "status")
@@ -52,7 +52,7 @@ public class SOImportMapper {
                 .field("accountTeam", "accountTeam")
                 .field("remote", "remote")
                 .field("onsite", "onsite")
-                .byDefault()
+          */      .byDefault()
                 .register();
 
         // map from/to

@@ -11,7 +11,7 @@ public class ProjectSearch {
     private String salesOrderNumber;
     private String customerName;
     private long importControlId;
-    private List<String> statusValues = Constants.SalesOrders.statusValues;
+    private List<String> statusValues = Constants.Projects.statusValues;
     private String status;
 
     public ProjectSearch() {

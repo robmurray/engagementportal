@@ -1,13 +1,9 @@
 package com.ys.eportal.controller;
 
-import com.ys.eportal.infra.domain.CustomerEntity;
 import com.ys.eportal.infra.domain.SalesOrderEntity;
-import com.ys.eportal.mapper.CustomerMapper;
 import com.ys.eportal.mapper.ProjectMapper;
-import com.ys.eportal.model.Customer;
-import com.ys.eportal.model.Project;
+import com.ys.eportal.model.*;
 import com.ys.eportal.service.PortalService;
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +18,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 
 /**
  * Created by rob on 4/4/15.
@@ -43,10 +38,38 @@ public class ProjectController  extends ControllerBase{
         binder.registerCustomEditor(Date.class, editor);
     }
 
+    @RequestMapping(value="/project", method= RequestMethod.GET)
+    public String projectDetailForm(Model model) {
+
+        Project project = new Project();
+        project.addSalesOrder(new SalesOrder());
+
+        project.addActivity(Activity.PLANNINGMEETING_DATE);
+        project.addActivity(Activity.KICKOFF_DATE);
+        project.addActivity(Activity.BOOK_DATE);
+        project.addActivity(Activity.ONSITEEND_DATE);
+        project.addActivity(Activity.ONSITESTART_DATE);
+        project.addActivity(Activity.SHIP_DATE);
+        project.addActivity(Activity.REVREC_DATE);
+
+
+        project.addNotes(new ProjectNote("test note"));
+        project.addNotes(new ProjectNote("test note2"));
+        project.addNotes(new ProjectNote("test note3"));
+
+        model.addAttribute("pageName", "Project");
+        model.addAttribute("project", project);
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "createProject");
+        return "project";
+    }
+
+
+
     @RequestMapping(value="/projectNew", method= RequestMethod.GET)
     public String projectForm(Model model) {
 
-        Project project = new Project(new Customer());
+        Project project = new Project();
 
         model.addAttribute("customers", this.portalService.findAllCustomers());
 
@@ -62,7 +85,7 @@ public class ProjectController  extends ControllerBase{
 
 
         // look for dup
-        if (project != null && StringUtils.isNotEmpty(project.getSalesOrderNumber())) {
+//        if (project != null && StringUtils.isNotEmpty(project.getSalesOrderNumber())) {
 
             // @todo need to indicate to the user that there is already a salesnumber woth
             // that number. do you want to continue
@@ -72,7 +95,7 @@ public class ProjectController  extends ControllerBase{
             //    logger.debug("duplicate sales order number error");
              //   bindingResult.rejectValue("salesOrderNumber", "duplicate_son", "duplicate sales order number");
             //}
-        }
+//        }
 
         if (bindingResult.hasErrors()) {
             logger.debug("validation errors");
@@ -84,7 +107,7 @@ public class ProjectController  extends ControllerBase{
 
 
         SalesOrderEntity so = this.projectMapper.convert(project);
-        so.setCustomer(new CustomerEntity(project.getCustomerId()));
+     //   so.setCustomer(new CustomerEntity(project.getCustomerId()));
         this.portalService.saveProject(so);
 
         project = this.projectMapper.convert(so);
@@ -97,7 +120,7 @@ public class ProjectController  extends ControllerBase{
     }
 
     @RequestMapping(value="/projectEdit", method= RequestMethod.GET)
-    public String projectEditForm(@RequestParam(value="salesOrderId", required=true) int salesOrderId,
+    public String projectEditForm(@RequestParam(value="salesOrderId", required=true) long salesOrderId,
                                   @RequestParam(value="msgtype", required=false) String messageType,Model model) {
 
         SalesOrderEntity so = this.portalService.findSalesOrderEntityById(salesOrderId);

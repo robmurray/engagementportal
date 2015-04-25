@@ -9,16 +9,16 @@ import java.util.List;
  */
 public class Dashboard {
 
-    private String notdefinedStatus = Constants.SalesOrders.STATUS_NOTDEFINED;
-    private String completeStatus = Constants.SalesOrders.STATUS_COMPLETE;
-    private String scheduledStatus = Constants.SalesOrders.STATUS_SCHEDULED;
-    private String randSupportStatus = Constants.SalesOrders.STATUS_RANDSUPPORT;
-    private String inprocessStatus= Constants.SalesOrders.STATUS_INPROCESS;
-    private String postSupportStatus= Constants.SalesOrders.STATUS_POSTSUPPORT;
-    private String bookedStatus= Constants.SalesOrders.STATUS_BOOKED;
-    private String proposedStatus = Constants.SalesOrders.STATUS_PROPOSED;
+    private String notdefinedStatus = Constants.Projects.STATUS_NOTDEFINED;
+    private String completeStatus = Constants.Projects.STATUS_COMPLETE;
+    private String scheduledStatus = Constants.Projects.STATUS_SCHEDULED;
+    private String randSupportStatus = Constants.Projects.STATUS_RANDSUPPORT;
+    private String inprocessStatus= Constants.Projects.STATUS_INPROCESS;
+    private String postSupportStatus= Constants.Projects.STATUS_POSTSUPPORT;
+    private String bookedStatus= Constants.Projects.STATUS_BOOKED;
+    private String proposedStatus = Constants.Projects.STATUS_PROPOSED;
 
-    private List<String> statusValues = Constants.SalesOrders.statusValues;
+    private List<String> statusValues = Constants.Projects.statusValues;
 
     public List<String> getStatusValues() {
         return statusValues;

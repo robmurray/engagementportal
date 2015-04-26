@@ -3,13 +3,15 @@
       layout:decorator="layout/portalpage">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>Project Search</title>
+    <title>Search</title>
 </head>
 
 <body>
 <div layout:fragment="content">
 
-    <div th:replace="fragments/projectSearchFilter :: projectSearchFilter"/>
+    <div th:replace="fragments/project/searchFilter :: searchFilter"/>
+    <div th:replace="fragments/project/searchResults :: searchResults"/>
+
 
 </div>
 

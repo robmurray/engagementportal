@@ -9,29 +9,8 @@
 <body>
 <div layout:fragment="content">
 
-    <div id="uploadForm" th:fragment="uploadForm">
-        <div class="portlet">
-            <div class="portlet-heading default-bg">
-                <div class="portlet-title">
-                    <h4>import Oracle OBI Sales Order</h4>
-                </div>
-                <div class="portlet-widgets">
-                    <a data-toggle="collapse" data-parent="#accordion" href="#f-3"><i
-                            class="fa fa-chevron-down"></i></a>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-            <div id="f-3" class="panel-collapse collapse in">
-                <div th:replace="fragments/uploadForm :: uploadForm(actionVar=@{/uploadSalesOrder})"/>
-            </div>
-        </div>
-    </div>
+    <div th:replace="fragments/import/uploadForm :: uploadForm(actionVar=@{/uploadSalesOrder})"/>
 
-<!--
-
-    <div th:replace="fragments/importResults :: importResults"/>
-
--->
 </div>
 
 </body>

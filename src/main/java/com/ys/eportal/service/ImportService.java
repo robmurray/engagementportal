@@ -8,18 +8,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by rob on 4/22/15.
  */
 @Service
-public class ImportService extends ServicesBase{
+public class ImportService extends ServicesBase {
 
     private static Logger logger = LoggerFactory.getLogger(PortalService.class);
     @Autowired
@@ -39,6 +36,9 @@ public class ImportService extends ServicesBase{
 
     @Autowired
     private PortalService portalService;
+
+    @Autowired
+    private ProjectRepository projectRepository;
 
     @Autowired
     private ImportMasterRepository importMasterRepository;
@@ -229,7 +229,7 @@ public class ImportService extends ServicesBase{
                 //entity.getStAgentName();
                 //entity.getStChannelName();
 
-              //  wrkProject.setCustomer(new CustomerEntity(wrkCustomer.getCustomerId())); //entity.getStCustomerName();
+                //  wrkProject.setCustomer(new CustomerEntity(wrkCustomer.getCustomerId())); //entity.getStCustomerName();
 
                 wrkProject.setImportControlId(entity.getImportControlId());
                 soList.add(wrkProject);
@@ -276,17 +276,17 @@ public class ImportService extends ServicesBase{
             List<ImportMasterEntity> results = masterImporter.convert(file);
 
             // STEP 2 - persist
-            if (results != null && results.size()>0){
+            if (results != null && results.size() > 0) {
                 this.importMasterRepository.save(results);
-            }else{
+            } else {
                 logger.info("nothing to do. no records to import");
                 return;
             }
 
             // STEP 2.5 created customers
-            CustomerEntity wrkCustomer=null;
+            CustomerEntity wrkCustomer = null;
             String customerName = null;
-            for(ImportMasterEntity wrkME: results){
+            for (ImportMasterEntity wrkME : results) {
 
                 customerName = wrkME.getName();
                 wrkCustomer = portalService.findCustomerByName(customerName);
@@ -301,15 +301,42 @@ public class ImportService extends ServicesBase{
 
             }
 
+            // STep 2.6 created resources
+            /*
+            ResourceEntity wrkResource=null;
+            String resourceName = null;
+            for(ImportMasterEntity wrkME: results){
 
-            // STEP 3 - convert SalesOrders
-            // not working for some reason iterating through instead
-            // Iterable<SalesOrderEntity> orders = this.soImportMapper.convert(results);
+                customerName = wrkME.getName();
+                wrkCustomer = portalService.findCustomerByName(customerName);
+
+                if (wrkCustomer == null) {
+                    wrkCustomer = new CustomerEntity();
+                    wrkCustomer.setName(customerName);
+                    this.customerRepository.save(wrkCustomer);
+                }
+
+                wrkME.setCustomer(wrkCustomer);
+
+            }
+            */
+
+            // STEP 3 - create projects and add saleorders to projects
+
+
             SalesOrderEntity newso = null;
-            for(ImportMasterEntity wrkEnt:results){
+            ProjectEntity project = null;
+            for (ImportMasterEntity wrkEnt : results) {
 
-                newso = this.soImportMapper.convert(wrkEnt);
+                project = this.mapToProjectOrderEntity(wrkEnt);
+                this.projectRepository.save(project);
+
+                newso = this.mapToSalesOrder(wrkEnt);
+                newso.setProject(project);
                 this.salesOrderRepository.save(newso);
+
+
+
             }
 
             // STEP 4 - created and assign customer
@@ -341,4 +368,64 @@ public class ImportService extends ServicesBase{
     }
 
 
+    private SalesOrderEntity mapToSalesOrder(ImportMasterEntity importMasterEntity) {
+        SalesOrderEntity soe = new SalesOrderEntity();
+
+
+        soe.setSalesOrderNumber(importMasterEntity.getSalesOrderNumber());
+        soe.setAmount(importMasterEntity.getAmount());
+        soe.setRegion(importMasterEntity.getRegion());
+        soe.setModelGroup(importMasterEntity.getModelGroup());
+        //soe.setStSalesAgentName("");
+        //soe.setActivityYear();
+        //soe.setActivityMonthNumber();
+        //soe.setActivityDate();
+        soe.setCustomer(importMasterEntity.getCustomer());
+        //soe.setStChannelName();
+        //soe.setBtCustomerName();
+        //soe.setProductFamilyCode(String productFamilyCode));
+        //soe.setForecastGroupCode(String forecastGroupCode));
+        //soe.setOrderedQuantity(Double orderedQuantity));
+        //soe.setContractStatusCode();
+        //soe.setEndUserName(String endUserName));
+
+
+
+        return soe;
+    }
+
+    private ProjectEntity mapToProjectOrderEntity(ImportMasterEntity importMasterEntity) {
+        ProjectEntity pe = new ProjectEntity();
+
+        //pe.setsetProjectResources(Set<ProjectResourceEntity> projectResources) {
+        //pe.setProjectId(long projectId) {
+        pe.setName(importMasterEntity.getName());
+        pe.setBookDate(importMasterEntity.getBookDate());
+        pe.setShipDate(importMasterEntity.getShipDate());
+        pe.setPlanningMeetingDate(importMasterEntity.getPlanningMeetingDate());
+        pe.setKickoffMeetingDate(importMasterEntity.getKickoffMeetingDate());
+        pe.setOnSiteStartDate(importMasterEntity.getOnSiteStartDate());
+        pe.setOnSiteEndDate(importMasterEntity.getOnSiteEndDate());
+        pe.setReleaseForRevenueRecDate(importMasterEntity.getReleaseForRevenueRecDate());
+        pe.setBookedToKickOff(importMasterEntity.getBookedToKickOff());
+        pe.setDaysToClose(importMasterEntity.getDaysToClose());
+
+        pe.setService(importMasterEntity.getService());
+        pe.setAccountTeam(importMasterEntity.getAccountTeam());
+        pe.setRemote(importMasterEntity.getRemote());
+        pe.setOnsite(importMasterEntity.getOnsite());
+
+//        pe.setNotes(Set<ProjectNotesEntity> notes) {
+        pe.setWaitTime(importMasterEntity.getWaitTime());
+  //      pe.setSalesOrders(SalesOrderEntity salesOrders) {
+        //pe.setContact(importMasterEntity.getC
+        pe.setLocation(importMasterEntity.getLocation());
+        pe.setCredits(importMasterEntity.getCredits());
+        //pe.setCreditStatus(importMasterEntity.c
+        pe.setClassRegSent(importMasterEntity.getClassRegSent());
+        pe.setReportedRevRec(importMasterEntity.getReportedRevRec());
+        pe.setStatus(importMasterEntity.getStatus());
+
+        return pe;
+    }
 }

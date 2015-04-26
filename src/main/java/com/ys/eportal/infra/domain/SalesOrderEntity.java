@@ -57,15 +57,14 @@ public class SalesOrderEntity extends AbstractDomainBase {
     private Date activityDate;
 
 
-    //@TODO mapping this column to customer
-//    @OneToOne
-//    @JoinColumn(name = "customer_id", nullable = false)
-//    private CustomerEntity customer;
-
+   @OneToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private CustomerEntity customer;
+/*
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "stCustomerName")
     private String stCustomerName;
-
+*/
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "btCustomerName")
     private String btCustomerName;
@@ -190,12 +189,12 @@ public class SalesOrderEntity extends AbstractDomainBase {
         this.activityDate = activityDate;
     }
 
-    public String getStCustomerName() {
-        return stCustomerName;
+    public CustomerEntity getCustomer() {
+        return customer;
     }
 
-    public void setStCustomerName(String stCustomerName) {
-        this.stCustomerName = stCustomerName;
+    public void setCustomer(CustomerEntity customer) {
+        this.customer = customer;
     }
 
     public String getStChannelName() {

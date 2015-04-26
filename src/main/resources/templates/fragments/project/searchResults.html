@@ -1,0 +1,85 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="searchResults" th:fragment="searchResults">
+
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>projects</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#projectSearchResultsPanel"><i
+                        class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="projectSearchResultsPanel" class="panel-collapse collapse in">
+            <div class="portlet-body">
+
+                <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="100"
+                       th:if="${projects!=null}">
+                    <thead>
+                    <tr>
+                        <th data-sort-ignore="true">action</th>
+                        <th data-toggle="phone,tablet">customer name</th>
+                        <th data-toggle="true">sales order number</th>
+                        <th data-hide="phone,tablet">status</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr th:each="project : ${projects}" th:if="${projects != null}">
+                        <td>
+                            <div class="btn-group btn-group-md ">
+                                <a href="" th:href="'project?projectId='+${project.projectId}"
+                                   data-placement="left" data-rel="tooltip" title="view"><i
+                                        class="fa fa-binoculars icon-only text-success"></i></a>
+
+                                <a href="" th:href="'project?projectId='+${project.projectId}"
+                                   data-placement="left" data-rel="tooltip" title="edit"><i
+                                        class="fa fa-pencil icon-only text-warning"></i></a>
+
+                                <a href="" th:href="'project?projectId='+${project.projectId}"
+                                   data-placement="left" data-rel="tooltip" title="delete"><i
+                                        class="fa fa-trash-o icon-only text-danger"></i></a>
+                            </div>
+                        </td>
+                        <td th:text="${project.customerName}"></td>
+                        <td th:text="${project.salesOrderNumber}"></td>
+
+                        <td><span class="label" th:classappend="'label-' + ${project.statusDisplayClass}"
+                                  th:text="${project.status}"></span></td>
+
+                    </tr>
+                    </tbody>
+                    <tfoot>
+                    <tr>
+                        <td colspan="4">
+                            <ul class="hide-if-no-paging pagination pagination-centered pull-right"></ul>
+                            <div class="clearfix"></div>
+                        </td>
+                    </tr>
+                    </tfoot>
+                </table>
+
+                <div class="row" th:if="${projects==null}">
+
+                    <div class="col-sm-6">
+                        <h5 class="text-uppercase heading"><strong>No Projects Found </strong></h5>
+
+                        <div class="well bg-primary center">
+                            <p>Please modify your search parameters</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

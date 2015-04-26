@@ -21,12 +21,17 @@
                 <li>
                     <h4>Navigation</h4>
                 </li>
+
+                <li class="panel" th:class="${pageGroup}=='project'? 'panel open' : 'panel'">
+                    <a href="projectSearch">
+                        <i class="fa fa-dashboard"></i> Search
+                    </a>
+                </li>
                 <li class="panel" th:class="${pageGroup}=='dashboard'? 'panel open' : 'panel'">
-                    <a  href="index">
+                    <a href="index">
                         <i class="fa fa-dashboard"></i> Dashboard
                     </a>
                 </li>
-
                 <li class="panel" th:class="${pageGroup}=='reports'? 'panel open' : 'panel'">
                     <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
                        data-target="#reports">
@@ -38,22 +43,8 @@
                                 <i class="fa fa-angle-double-right"></i>QS Time to Fulfill
                             </a>
                         </li>
-                        <li>
-                            <a class="" th:class="${pageId}=='importMaster'? 'active' : ''" href="importMaster">
-                                <i class="fa fa-angle-double-right"></i>**master import***
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" th:class="${pageId}=='exportSalesOrders'? 'active' : ''" href="exportSalesOrders">
-                                <i class="fa fa-angle-double-right"></i> export sales orders
-                            </a>
-                        </li>
-
                     </ul>
                 </li>
-
-
-
 
                 <!-- BEGIN DROPDOWN -->
                 <li class="panel" th:class="${pageGroup}=='importExport'? 'panel open' : 'panel'">
@@ -73,47 +64,9 @@
                             </a>
                         </li>
                         <li>
-                            <a class="" th:class="${pageId}=='exportSalesOrders'? 'active' : ''" href="exportSalesOrders">
+                            <a class="" th:class="${pageId}=='exportSalesOrders'? 'active' : ''"
+                               href="exportSalesOrders">
                                 <i class="fa fa-angle-double-right"></i> export sales orders
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-                <li class="panel" th:class="${pageGroup}=='customer'? 'panel open' : 'panel'">
-                    <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
-                       data-target="#customer">
-                        <i class="fa fa-cogs"></i> Customer <span class="fa arrow"></span>
-                    </a>
-                    <ul class="collapse nav" id="customer">
-                        <li>
-                            <a class="" th:class="${pageId}=='searchCustomer'? 'active' : ''" href="customerSearch">
-                                <i class="fa fa-angle-double-right"></i> search
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" th:class="${pageId}=='createCustomer'? 'active' : ''" href="customerNew">
-                                <i class="fa fa-angle-double-right"></i> create
-                            </a>
-                        </li>
-
-                    </ul>
-                </li>
-
-                <li class="panel" th:class="${pageGroup}=='project'? 'panel open' : 'panel'">
-                    <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
-                       data-target="#project">
-                        <i class="fa fa-cogs"></i> Project <span class="fa arrow"></span>
-                    </a>
-                    <ul class="collapse nav" id="project">
-                        <li>
-                            <a class="" th:class="${pageId}=='searchProject'? 'active' : ''" href="projectSearch">
-                                <i class="fa fa-angle-double-right"></i> search
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" th:class="${pageId}=='createProject'? 'active' : ''" href="projectNew">
-                                <i class="fa fa-angle-double-right"></i> create
                             </a>
                         </li>
 

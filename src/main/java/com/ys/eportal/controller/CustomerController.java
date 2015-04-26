@@ -4,7 +4,6 @@ package com.ys.eportal.controller;
 import com.ys.eportal.infra.domain.CustomerEntity;
 import com.ys.eportal.infra.domain.SalesOrderEntity;
 import com.ys.eportal.mapper.CustomerMapper;
-import com.ys.eportal.mapper.ProjectMapper;
 import com.ys.eportal.model.Customer;
 import com.ys.eportal.model.Project;
 import com.ys.eportal.service.PortalService;
@@ -39,8 +38,6 @@ public class CustomerController  extends ControllerBase{
     @Autowired
     private CustomerMapper customerMapper;
 
-    @Autowired
-    private ProjectMapper projectMapper;
 
     @RequestMapping(value = "/customerNew", method = RequestMethod.GET)
     public String customerForm(Model model) {
@@ -109,7 +106,7 @@ public class CustomerController  extends ControllerBase{
         Iterable<SalesOrderEntity> sol = portalService.findBySalesOrderCustomerIdlId(c.getCustomerId());
         Iterable<Project> projList = null;
         if(sol!=null && sol.iterator().hasNext()) {
-            projList = this.projectMapper.convert(sol);
+            //projList = this.projectMapper.convert(sol);
         }
 
         addPageAttributes(model, "Edit Customer", "Edit the Customer ");
@@ -140,7 +137,7 @@ public class CustomerController  extends ControllerBase{
         Iterable<SalesOrderEntity> sol = portalService.findBySalesOrderCustomerIdlId(c.getCustomerId());
         Iterable<Project> projList = null;
         if(sol!=null && sol.iterator().hasNext()) {
-            projList = this.projectMapper.convert(sol);
+            //projList = this.projectMapper.convert(sol);
         }
         this.setSuccessAlertMessage(model,"customer updated");
 

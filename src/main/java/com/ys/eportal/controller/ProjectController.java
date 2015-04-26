@@ -1,7 +1,7 @@
 package com.ys.eportal.controller;
 
 import com.ys.eportal.infra.domain.SalesOrderEntity;
-import com.ys.eportal.mapper.ProjectMapper;
+
 import com.ys.eportal.model.*;
 import com.ys.eportal.service.PortalService;
 import org.slf4j.Logger;
@@ -28,9 +28,6 @@ public class ProjectController  extends ControllerBase{
     @Autowired
     private PortalService portalService;
 
-    @Autowired
-    private ProjectMapper projectMapper;
-
     @InitBinder
     protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
         SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yy");
@@ -56,6 +53,18 @@ public class ProjectController  extends ControllerBase{
         project.addNotes(new ProjectNote("test note"));
         project.addNotes(new ProjectNote("test note2"));
         project.addNotes(new ProjectNote("test note3"));
+
+        project.addAccountResource(new Resource("Bill","Smith"));
+        project.addAccountResource(new Resource("will","the Fifth"));
+        project.addAccountResource(new Resource("Tom","Wilsom"));
+
+        project.addRemoteResource(new Resource("Ed","Rickson"));
+        project.addRemoteResource(new Resource("Tim","Murray"));
+        project.addRemoteResource(new Resource("Jill","Donaldsom"));
+
+        project.addOnsiteResource(new Resource("Bill","Paxton"));
+        project.addOnsiteResource(new Resource("Angie","Perry"));
+        project.addOnsiteResource(new Resource("Terry","Sam"));
 
         model.addAttribute("pageName", "Project");
         model.addAttribute("project", project);
@@ -106,11 +115,11 @@ public class ProjectController  extends ControllerBase{
 
 
 
-        SalesOrderEntity so = this.projectMapper.convert(project);
+        SalesOrderEntity so = null;//this.projectMapper.convert(project);
      //   so.setCustomer(new CustomerEntity(project.getCustomerId()));
         this.portalService.saveProject(so);
 
-        project = this.projectMapper.convert(so);
+        //project = this.projectMapper.convert(so);
         model.addAttribute("pageName", "Save Project");
         model.addAttribute("Project", so);
         model.addAttribute("pageGroup", "project");
@@ -124,7 +133,7 @@ public class ProjectController  extends ControllerBase{
                                   @RequestParam(value="msgtype", required=false) String messageType,Model model) {
 
         SalesOrderEntity so = this.portalService.findSalesOrderEntityById(salesOrderId);
-        Project project = this.projectMapper.convert(so);
+        Project project = null;//this.projectMapper.convert(so);
         model.addAttribute("pageName", "Edit Project");
         model.addAttribute("project",project);
 
@@ -136,7 +145,7 @@ public class ProjectController  extends ControllerBase{
     @RequestMapping(value="/projectEdit", method=RequestMethod.POST)
     public String projectEditSubmit(@ModelAttribute Project project, Model model) {
 
-        this.portalService.saveProject(this.projectMapper.convert(project));
+        //this.portalService.saveProject(this.projectMapper.convert(project));
         this.setSuccessAlertMessage(model,"project updated");
         model.addAttribute("pageName", "Save Project");
         model.addAttribute("project", project);

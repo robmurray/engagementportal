@@ -1,0 +1,108 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<div id="importMasterForm" th:fragment="importMasterForm (actionVar)">
+
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>import master spreadsheet</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#f-3"><i
+                        class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="f-3" class="panel-collapse collapse in">
+            <div class="portlet-body">
+
+                <form enctype="multipart/form-data" action="#" th:action="${actionVar}" role="form" method="post">
+
+                    <div class="row bg-light">
+                        <div class="col-md-7">
+                            <div class="well white">
+                                <dl class="no-margin-bottom">
+                                    <dt>Select a Master Spreadsheet to upload and import.</dt>
+                                </dl>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row bg-light">
+                        <div class="col-md-3">
+                            <div class="input-group">
+                            <span class="input-group-btn">
+                                <span class="btn btn-file">
+                                    Browse <input type="file" name="file"/>
+                                </span>
+                            </span>
+                                <input type="text" class="form-control" readonly="readonly"/>
+
+
+                            </div>
+                            <!-- <div  class="has-error" th:errors="all"></div>-->
+                        </div>
+                    </div>
+                    <div class="row bg-light">
+                        <div class="col-md-3">
+
+                            <div class="form-actions">
+                                <div class="form-group">
+                                    <div class="col-sm-offset-2 col-sm-10">
+                                        <button type="submit" class="btn btn-primary">import</button>
+                                        <button type="reset" class="btn">Clear</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+
+
+		// Custome File Input
+		$(document).on('change', '.btn-file :file', function() {
+			var input = $(this),
+			numFiles = input.get(0).files ? input.get(0).files.length : 1,
+			label = input.val().replace(/\\/g, '/').replace(/.*\//, '');
+			input.trigger('fileselect', [numFiles, label]);
+		});
+
+		$(document).ready( function() {
+			$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
+
+				var input = $(this).parents('.input-group').find(':text'),
+				log = numFiles > 1 ? numFiles + ' files selected' : label;
+
+				if( input.length ) {
+					input.val(log);
+				} else {
+					if( log ) alert(log);
+				}
+
+			});
+		});
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</div>
+</body>
+</html>

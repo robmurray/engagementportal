@@ -21,10 +21,12 @@ public class ProjectEntity extends AbstractDomainBase {
     @Column(name = "name", unique = true)
     private String name;
 
+/*
+    this relation is stored at the so level
     @OneToOne
     @JoinColumn(name = "customer_id", nullable = false)
     private CustomerEntity customer;
-
+*/
 
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private SalesOrderEntity salesOrders;
@@ -273,13 +275,7 @@ public class ProjectEntity extends AbstractDomainBase {
         this.waitTime = waitTime;
     }
 
-    public CustomerEntity getCustomer() {
-        return customer;
-    }
 
-    public void setCustomer(CustomerEntity customer) {
-        this.customer = customer;
-    }
 
     public SalesOrderEntity getSalesOrders() {
         return salesOrders;

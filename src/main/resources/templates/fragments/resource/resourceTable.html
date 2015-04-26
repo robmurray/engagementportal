@@ -5,40 +5,40 @@
 </head>
 <body>
 
-<div id="noteTable" th:fragment="noteTable (notes)">
+<div id="resourceTable" th:fragment="resourceTable (resources,pageHeading, index)">
     <div class="portlet">
         <div class="portlet-heading default-bg">
             <div class="portlet-title">
-                <h4>Notes</h4>
+                <h4 th:text="${pageHeading}">Resources</h4>
             </div>
             <div class="portlet-widgets">
-                <a data-toggle="collapse" data-parent="#accordion" href="#noteform"><i class="fa fa-chevron-down"></i></a>
+                <a data-toggle="collapse" data-parent="#accordion" href="" th:href="${'#resourceform'+index}"><i class="fa fa-chevron-down"></i></a>
             </div>
             <div class="clearfix"></div>
         </div>
-        <div id="noteform" class="panel-collapse collapse in">
+        <div id="" th:id="${'resourceform'+index}" class="panel-collapse collapse in">
             <div class="portlet-body">
 
-                <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="100" th:if="${notes!=null}">
+                <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="100" th:if="${resources!=null}">
                     <thead>
                     <tr>
                         <th>actions</th>
-                        <th data-toggle="true">note</th>
-                        <th data-toggle="true">Created Date</th>
+                        <th data-toggle="true">First Name</th>
+                        <th data-toggle="true">Last Name</th>
 
                     </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="note : ${notes}">
+                        <tr th:each="resource : ${resources}">
                             <td >
                                 <div class="action-buttons">
-                                    <a href="" th:href="'noteEdit?noteId='+${note.noteId}"
+                                    <a href="" th:href="'noteEdit?noteId='+${resource.resourceId}"
                                        data-placement="left" data-rel="tooltip" title="Edit"><i
                                             class="fa fa-pencil bigger-130"></i></a>
                                 </div>
                             </td>
-                            <td  th:text="${note.note}"></td>
-                            <td  th:text="${note.createDate}"></td>
+                            <td  th:text="${resource.firstName}"></td>
+                            <td  th:text="${resource.lastName}"></td>
                         </tr>
                     </tbody>
                     <tfoot>

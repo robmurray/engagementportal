@@ -15,6 +15,9 @@ public class Project extends AbstractModelBase{
 
     private List<SalesOrder> salesOrders;
 
+    private List<Resource> remoteResources;
+    private List<Resource> accountResources;
+    private List<Resource> onsiteResources;
 
     //@Size(min=1, max=30)
     // private String salesOrderNumber;
@@ -35,6 +38,13 @@ public class Project extends AbstractModelBase{
         put(Constants.Projects.STATUS_SCHEDULED,"success");
     }};
 
+    private String healthStatus;
+    private List<String> healthStatusValues = new ArrayList<String>() {{
+        add("green");
+        add("yellow");
+        add("orange");
+        add("red");
+    }};
     private List<Activity> activities;
 
     private List<String> waitTimeValues = new ArrayList<String>() {{
@@ -112,8 +122,48 @@ public class Project extends AbstractModelBase{
         this.salesOrders.add(salesOrder);
     }
 
+    public String getHealthStatus() {
+        return healthStatus;
+    }
+
+    public void setHealthStatus(String healthStatus) {
+        this.healthStatus = healthStatus;
+    }
+
+    public List<String> getHealthStatusValues() {
+        return healthStatusValues;
+    }
+
+    public void setHealthStatusValues(List<String> healthStatusValues) {
+        this.healthStatusValues = healthStatusValues;
+    }
+
     public void setSalesOrders(List<SalesOrder> salesorders) {
         this.salesOrders = salesorders;
+    }
+
+    public List<Resource> getRemoteResources() {
+        return remoteResources;
+    }
+
+    public void setRemoteResources(List<Resource> remoteResources) {
+        this.remoteResources = remoteResources;
+    }
+
+    public List<Resource> getAccountResources() {
+        return accountResources;
+    }
+
+    public void setAccountResources(List<Resource> accountResources) {
+        this.accountResources = accountResources;
+    }
+
+    public List<Resource> getOnsiteResources() {
+        return onsiteResources;
+    }
+
+    public void setOnsiteResources(List<Resource> onsiteResources) {
+        this.onsiteResources = onsiteResources;
     }
 
     public String getName() {
@@ -190,6 +240,37 @@ public class Project extends AbstractModelBase{
         }
         notes.add(note);
     }
+
+    public void addRemoteResource(Resource resource){
+        if(resource ==null){
+            return;
+        }
+        if(this.remoteResources==null){
+            this.remoteResources= new ArrayList<Resource>();
+        }
+        this.remoteResources.add(resource);
+    }
+
+    public void addAccountResource(Resource resource){
+        if(resource ==null){
+            return;
+        }
+        if(this.accountResources==null){
+            this.accountResources= new ArrayList<Resource>();
+        }
+        this.accountResources.add(resource);
+    }
+
+    public void addOnsiteResource(Resource resource){
+        if(resource ==null){
+            return;
+        }
+        if(this.onsiteResources==null){
+            this.onsiteResources= new ArrayList<Resource>();
+        }
+        this.onsiteResources.add(resource);
+    }
+
 
     public List<NoteInterface> getNotes() {
         return notes;

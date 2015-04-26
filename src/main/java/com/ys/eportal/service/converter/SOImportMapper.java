@@ -2,6 +2,7 @@ package com.ys.eportal.service.converter;
 
 import com.ys.eportal.infra.domain.CustomerEntity;
 import com.ys.eportal.infra.domain.ImportMasterEntity;
+import com.ys.eportal.infra.domain.ProjectEntity;
 import com.ys.eportal.infra.domain.SalesOrderEntity;
 import com.ys.eportal.model.Customer;
 import ma.glasnost.orika.MapperFacade;
@@ -9,7 +10,10 @@ import ma.glasnost.orika.MapperFactory;
 import ma.glasnost.orika.impl.DefaultMapperFactory;
 import org.springframework.stereotype.Component;
 
+import javax.persistence.*;
+import java.math.BigDecimal;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashSet;
 
 /**
@@ -28,11 +32,17 @@ public class SOImportMapper {
         mapperFactory = new DefaultMapperFactory.Builder().build();
         // map to/from
         mapperFactory.classMap(ImportMasterEntity.class, SalesOrderEntity.class)
-                .field("salesOrderNumber", "salesOrderNumber")
-       /*         .field("classRegSent", "classRegSent")
-                .field("reportedRevRec", "reportedRevRec")
-                .field("customer", "customer")
-                .field("status", "status")
+            /*   .field("salesOrderNumber", "salesOrderNumber")
+                .field("amount", "amount")
+                .field("region", "region")
+                .field("modelGroup", "modelGroup")
+                .field("stAGentName", "stAgentName")
+                .field("stAGentName", "stAgentName")
+
+
+
+
+        .field("status", "status")
                 .field("bookDate", "bookDate")
                 .field("shipDate", "shipDate")
                 .field("planningMeetingDate", "planningMeetingDate")
@@ -43,17 +53,21 @@ public class SOImportMapper {
                 .field("waitTime", "waitTime")
                 .field("bookedToKickOff", "bookedToKickOff")
                 .field("daysToClose", "daysToClose")
-                .field("amount", "amount")
+
                 .field("notes", "notes")
                 .field("location", "location")
-                .field("region", "region")
-                .field("modelGroup", "modelGroup")
+
                 .field("service", "service")
                 .field("accountTeam", "accountTeam")
                 .field("remote", "remote")
                 .field("onsite", "onsite")
-          */      .byDefault()
+*/                .byDefault()
                 .register();
+
+
+
+
+
 
         // map from/to
         mapperFactory.classMap(ImportMasterEntity.class,SalesOrderEntity.class)

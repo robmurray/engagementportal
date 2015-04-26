@@ -31,7 +31,8 @@ public class PortalService extends ServicesBase{
     @Autowired
     private SalesOrderRepository salesOrderRepository;
 
-
+    @Autowired
+    private ProjectRepository projectRepository;
 
     public ProjectStats retrieveProjectStatus() {
 
@@ -140,6 +141,19 @@ public class PortalService extends ServicesBase{
         return soe;
     }
 
+    public ProjectEntity findProjectBySalesOrderNumber(String salesOrderNumber) {
+
+        ProjectEntity pe = null;
+
+        List<ProjectEntity> peList = this.projectRepository.findBySalesOrdersSalesOrderNumber(salesOrderNumber);
+
+
+        if (peList != null && peList.size() > 0) {
+            pe = peList.get(0);
+        }
+        return pe;
+    }
+
 
     public List<SalesOrderEntity> findByImportControlId(long importControlId) {
         List<SalesOrderEntity> list = this.salesOrderRepository.findByImportControlId(importControlId);
@@ -162,25 +176,30 @@ public class PortalService extends ServicesBase{
         return (List) this.salesOrderRepository.findAll();
     }
 
-    public Iterable<SalesOrderEntity> find(ProjectSearchSupport search) {
-        List<SalesOrderEntity> results = null;
+
+    public List<ProjectEntity> findAllProjects() {
+        return (List) this.projectRepository.findAll();
+    }
+
+    public Iterable<ProjectEntity> find(ProjectSearchSupport search) {
+        List<ProjectEntity> results = null;
 
         if (search.getSalesOrderNumber() != null && !search.getSalesOrderNumber().trim().equals("")) {
-            SalesOrderEntity soe = this.findSalesOrderEntityByNumber(search.getSalesOrderNumber());
-            if (soe != null) {
-                results = new ArrayList<SalesOrderEntity>();
-                results.add(soe);
+            ProjectEntity pe = this.findProjectBySalesOrderNumber(search.getSalesOrderNumber());
+            if (pe != null) {
+                results = new ArrayList<ProjectEntity>();
+                results.add(pe);
             }
         } else if (search.getCustomerName() != null && !search.getCustomerName().trim().equals("")) {
             //results = this.salesOrderRepository.findByCustomerNameLike(this.processWildCards(search.getCustomerName()));
             //results = this.findAllSalesOrders();
         } else if (search.getImportControlId() > 0) {
-            results = this.findByImportControlId(search.getImportControlId());
+//            results = this.findByImportControlId(search.getImportControlId());
 
         } else if (search.getStatus() != null && !search.getStatus().trim().equals("")) {
-            results = this.findByStatus(search.getStatus());
+  //          results = this.findByStatus(search.getStatus());
         } else {
-            results = this.findAllSalesOrders();
+            results = this.findAllProjects();
         }
 
         return results;

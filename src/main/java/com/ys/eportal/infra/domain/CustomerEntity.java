@@ -25,10 +25,11 @@ public class CustomerEntity extends AbstractDomainBase {
     private String notes;
 
 
-
+/*
+moved relation to salesorder
     @OneToMany(mappedBy = "customer", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ProjectEntity> projects = new HashSet<ProjectEntity>();
-
+*/
     private String contact;
 
     public CustomerEntity() {
@@ -62,13 +63,6 @@ public class CustomerEntity extends AbstractDomainBase {
         this.notes = notes;
     }
 
-    public Set<ProjectEntity> getProjects() {
-        return projects;
-    }
-
-    public void setProjects(Set<ProjectEntity> projects) {
-        this.projects = projects;
-    }
 
     public String getContact() {
         return contact;

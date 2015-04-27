@@ -1,0 +1,283 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="salesorderInfo" th:fragment="salesorderInfo (salesorder,readonly)">
+
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>Sales Order Information</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#salesorderinfopanel"><i
+                        class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="salesorderinfopanel" class="panel-collapse collapse in">
+            <div class="portlet-body">
+                <form class="form" role="form" action="#" th:action="@{/salesorder}" th:object="${salesorder}"
+                      method="post" th:if="${salesorder!=null}">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Id</label>
+                                <input type="text" class="form-control" th:field="*{salesOrderId}"
+                                       placeholder="enter the sales order Id" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('salesOrderId')}" th:errors="*{salesOrderId}">
+                                    salesorderid name error
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Sales Order Number</label>
+                                <input type="text" class="form-control" th:field="*{salesOrderNumber}"
+                                       placeholder="enter the sales order Number" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('salesOrderNumber')}"
+                                     th:errors="*{salesOrderNumber}">sales order Number
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">ST Customer Name</label>
+                                <input type="text" class="form-control" th:field="*{stCustomerName}"
+                                       placeholder="enter the ST Customer name" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('stCustomerName')}" th:errors="*{stCustomerName}">error
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Amount</label>
+                                <input type="text" class="form-control" th:field="*{amount}"
+                                       placeholder="enter the amount" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('amount')}" th:errors="*{amount}">
+                                    amount error
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Region</label>
+                                <input type="text" class="form-control" th:field="*{region}"
+                                       placeholder="enter the region" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('region')}"
+                                     th:errors="*{region}">region
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Model Group</label>
+                                <input type="text" class="form-control" th:field="*{modelGroup}"
+                                       placeholder="enter the model group" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('modelGroup')}" th:errors="*{modelGroup}">model group error
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">ST Sales Agent Name</label>
+                                <input type="text" class="form-control" th:field="*{stSalesAgentName}"
+                                       placeholder="enter the stSalesAgentName" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('stSalesAgentName')}" th:errors="*{stSalesAgentName}">
+                                    stSalesAgentName error
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Activity Year</label>
+                                <input type="text" class="form-control" th:field="*{activityYear}"
+                                       placeholder="enter the activityYear" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('activityYear')}"
+                                     th:errors="*{activityYear}">Activity Year
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Activity Month Number</label>
+                                <input type="text" class="form-control" th:field="*{activityMonthNumber}"
+                                       placeholder="enter the activityMonthNumber" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('activityMonthNumber')}" th:errors="*{activityMonthNumber}">activityMonthNumber error
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Activity Date</label>
+                                <input type="text" class="form-control" th:field="*{activityDate}"
+                                       placeholder="enter the activityDate" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('activityDate')}" th:errors="*{activityDate}">
+                                    activityDate error
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">BT Customer Name</label>
+                                <input type="text" class="form-control" th:field="*{stCustomerName}"
+                                       placeholder="enter the stCustomerName" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('stCustomerName')}" th:errors="*{stCustomerName}">stCustomerName error
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">ST Channel Name</label>
+                                <input type="text" class="form-control" th:field="*{stChannelName}"
+                                       placeholder="enter the stChannelName" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('stChannelName')}" th:errors="*{stChannelName}">
+                                    stChannelName
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Product Family Code</label>
+                                <input type="text" class="form-control" th:field="*{productFamilyCode}"
+                                       placeholder="enter the productFamilyCode" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('productFamilyCode')}"
+                                     th:errors="*{productFamilyCode}">product Family Code error
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Forecast Group Code</label>
+                                <input type="text" class="form-control" th:field="*{forecastGroupCode}"
+                                       placeholder="enter the forecastGroupCode" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('forecastGroupCode')}" th:errors="*{forecastGroupCode}">error
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Ordered Quantity</label>
+                                <input type="text" class="form-control" th:field="*{orderedQuantity}"
+                                       placeholder="enter the orderedQuantity" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('orderedQuantity')}" th:errors="*{orderedQuantity}">
+                                    error
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Contract Status Code</label>
+                                <input type="text" class="form-control" th:field="*{contractStatusCode}"
+                                       placeholder="enter the contractStatusCode" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('contractStatusCode')}"
+                                     th:errors="*{contractStatusCode}">error
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">EndUser Name</label>
+                                <input type="text" class="form-control" th:field="*{endUserName}"
+                                       placeholder="enter the endUserName" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('endUserName')}" th:errors="*{endUserName}">error
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </form>
+
+                <div class="row" th:if="${salesorder==null}">
+
+                    <div class="col-sm-6">
+                        <div class="well bg-primary center">
+                            <p>There is currently no sales order information associated with this sales order.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- END YOUR CONTENT HERE -->
+</div>
+</body>
+</html>>

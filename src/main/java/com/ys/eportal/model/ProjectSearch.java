@@ -9,6 +9,7 @@ import java.util.List;
  */
 public class ProjectSearch {
     private String salesOrderNumber;
+    private long salesOrderId;
     private String customerName;
     private long importControlId;
     private List<String> statusValues = Constants.Projects.statusValues;
@@ -59,6 +60,14 @@ public class ProjectSearch {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public long getSalesOrderId() {
+        return salesOrderId;
+    }
+
+    public void setSalesOrderId(long salesOrderId) {
+        this.salesOrderId = salesOrderId;
     }
 
     @Override

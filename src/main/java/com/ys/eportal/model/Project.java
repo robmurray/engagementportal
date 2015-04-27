@@ -143,6 +143,14 @@ public class Project extends AbstractModelBase{
         this.salesOrders = salesorders;
     }
 
+    public SalesOrder getFirstSalesOrder(){
+        SalesOrder so = null;
+        if(this.salesOrders!=null && this.salesOrders.size()>0) {
+         so=   this.salesOrders.get(0);
+        }
+        return so;
+    }
+
     public List<Resource> getRemoteResources() {
         return remoteResources;
     }

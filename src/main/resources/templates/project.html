@@ -9,7 +9,14 @@
 
 <div layout:fragment="content">
 
+    <div th:if="${nav!=null}">
 
+        <a href="" th:href="${nav.returnURL}"
+           class=" btn btn-primary" data-placement="right" data-rel="tooltip" title="Return to previous screen"><i
+                class="fa fa-arrow-left"></i></a>
+
+
+    </div>
     <div th:if="${project!=null}">
 
 

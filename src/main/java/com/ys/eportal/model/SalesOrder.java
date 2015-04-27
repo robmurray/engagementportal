@@ -1,8 +1,5 @@
 package com.ys.eportal.model;
 
-import com.ys.eportal.infra.domain.ProjectEntity;
-
-import javax.persistence.*;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -13,6 +10,7 @@ public class SalesOrder extends AbstractModelBase {
 
     private long salesOrderId;
     private long importControlId;
+    private long customerId;
     private String salesOrderNumber;
     private BigDecimal amount;
     private String region;
@@ -30,6 +28,13 @@ public class SalesOrder extends AbstractModelBase {
     private String contractStatusCode;
     private String endUserName;
 
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
+    }
 
     public long getSalesOrderId() {
         return salesOrderId;

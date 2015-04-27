@@ -23,6 +23,10 @@ public class ProjectSearchResults {
 
     private long projectId;
 
+    private long salesOrderId;
+
+    private long customerId;
+
     private String salesOrderNumber;
 
     private String customerName;
@@ -38,6 +42,39 @@ public class ProjectSearchResults {
         this.salesOrderNumber = salesOrderNumber;
         this.customerName = customerName;
         this.status = status;
+    }
+
+    public ProjectSearchResults(long projectId, long salesOrderId, String salesOrderNumber, String customerName, String status) {
+        this.projectId = projectId;
+        this.salesOrderId = salesOrderId;
+        this.salesOrderNumber = salesOrderNumber;
+        this.customerName = customerName;
+        this.status = status;
+    }
+
+    public ProjectSearchResults(long projectId, long salesOrderId, long customerId, String salesOrderNumber, String customerName, String status) {
+        this.projectId = projectId;
+        this.salesOrderId = salesOrderId;
+        this.customerId = customerId;
+        this.salesOrderNumber = salesOrderNumber;
+        this.customerName = customerName;
+        this.status = status;
+    }
+
+    public long getSalesOrderId() {
+        return salesOrderId;
+    }
+
+    public void setSalesOrderId(long salesOrderId) {
+        this.salesOrderId = salesOrderId;
+    }
+
+    public long getCustomerId() {
+        return customerId;
+    }
+
+    public void setCustomerId(long customerId) {
+        this.customerId = customerId;
     }
 
     public long getProjectId() {

@@ -39,116 +39,31 @@ public class CustomerController  extends ControllerBase{
     private CustomerMapper customerMapper;
 
 
-    @RequestMapping(value = "/customerNew", method = RequestMethod.GET)
-    public String customerForm(Model model) {
-
-        Customer customer = new Customer();
-        addPageAttributes(model, "Create Customer", "Create new Customer");
-        model.addAttribute("customer", customer);
-        model.addAttribute("pageGroup", "customer");
-        model.addAttribute("pageId", "createCustomer");
-        return "customerNew";
-    }
-
-    @RequestMapping(value = "/customerNew", method = RequestMethod.POST)
-    public String customerSubmit(@Valid Customer customer, BindingResult bindingResult, Model model) {
-
-        // look for dup
-        if (customer != null && StringUtils.isNotEmpty(customer.getName())) {
-
-            CustomerEntity wrkCustomer = this.portalService.findCustomerByName(customer.getName());
-            if (wrkCustomer != null){
-                logger.debug("duplicate name error");
-                bindingResult.rejectValue("name","duplicate_name", "duplicate name");
-            }
-
-        }
-
-
-        if (bindingResult.hasErrors()) {
-            logger.debug("validation errors");
-            return "customerNew";
-        }
-
-        CustomerEntity c = this.customerMapper.convert(customer);
-        c = this.portalService.saveCustomer(c);
-        customer = this.customerMapper.convert(c);
-
-        model.addAttribute("subTitle", "Create a new customer");
-        model.addAttribute("pageName", "Save Customer");
-        addPageAttributes(model, "Save Customer", "Save new Customer");
-        model.addAttribute("customer", customer);
-
-        model.addAttribute("pageGroup", "customer");
-        model.addAttribute("pageId", "createCustomer");
-        this.setSuccessAlertMessage(model,"customer created");
-        return customerEditForm(customer.getCustomerId(), "", model); //"customerEdit?customerId="+customer.getCustomerId();
-    }
-
-
-    /*
-        public ModelAndView editProfileContact(@RequestParam(value="locale", required=false) String localeAsString,
-                                               @RequestParam(value="type", required=false) String userType,
-                                               @ModelAttribute("contact") UpdateContactPageModel pageModel,
-                                               BindingResult result,
-                                               HttpServletRequest request) {
-
-    */
-    @RequestMapping(value = "/customerEdit", method = RequestMethod.GET)
+    @RequestMapping(value = "/customer", method = RequestMethod.GET)
     public String customerEditForm(@RequestParam(value = "customerId", required = true) Long customerId,
+                                   @RequestParam(value = "returnURL", required = false) String returnURL,
                                    @RequestParam(value = "msgtype", required = false) String messageType, Model model) {
+
         CustomerEntity customer = this.portalService.findCustomerByID(customerId);
+
 
         Customer c = this.customerMapper.convert(customer);
 
         // pulls sos
         // @TODO update mappers
-        Iterable<SalesOrderEntity> sol = portalService.findBySalesOrderCustomerIdlId(c.getCustomerId());
-        Iterable<Project> projList = null;
-        if(sol!=null && sol.iterator().hasNext()) {
+        //Iterable<SalesOrderEntity> sol = portalService.findBySalesOrderCustomerIdlId(c.getCustomerId());
+       // Iterable<Project> projList = null;
+        //if(sol!=null && sol.iterator().hasNext()) {
             //projList = this.projectMapper.convert(sol);
-        }
-
-        addPageAttributes(model, "Edit Customer", "Edit the Customer ");
+        //}
+        addNav(model,returnURL);
+        addPageAttributes(model, "Customer", "Edit the Customer ");
         model.addAttribute("customer", c);
-        model.addAttribute("projects", projList);
-        model.addAttribute("pageGroup", "customer");
-        model.addAttribute("pageId", "searchCustomer");
-        return "customerEdit";
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "searchProject");
+        return "customer";
     }
 
-    @RequestMapping(value = "/customerEdit", method = RequestMethod.POST)
-    public String customerEditSubmit(@ModelAttribute Customer customer, Model model) {
-
-        CustomerEntity c = this.customerMapper.convert(customer);
-        try {
-            portalService.saveCustomer(c);
-            // @TODO anstract
-        } catch (ConstraintViolationException e) {
-            logger.error("error saving customer",e);
-
-        }
-        // repull customer record
-        c = portalService.findCustomerByID(c.getCustomerId());
-        customer = this.customerMapper.convert(c);
-
-        // pulls sos
-        // @TODO update mappers
-        Iterable<SalesOrderEntity> sol = portalService.findBySalesOrderCustomerIdlId(c.getCustomerId());
-        Iterable<Project> projList = null;
-        if(sol!=null && sol.iterator().hasNext()) {
-            //projList = this.projectMapper.convert(sol);
-        }
-        this.setSuccessAlertMessage(model,"customer updated");
-
-        model.addAttribute("customer", customer);
-        model.addAttribute("projects", projList);
-        addPageAttributes(model, "Save Customer", "Save Customer update");
-        model.addAttribute("pageGroup", "customer");
-        model.addAttribute("pageId", "searchCustomer");
-
-        return "customerEdit";
-    }
 
     protected void addPageAttributes(Model model, String pageName, String subTitle) {
         model.addAttribute("subTitle", subTitle);

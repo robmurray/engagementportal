@@ -1,6 +1,7 @@
 package com.ys.eportal.controller;
 
 import com.ys.eportal.model.Message;
+import com.ys.eportal.model.Navigation;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
@@ -10,6 +11,12 @@ import org.springframework.ui.Model;
  */
 public abstract class ControllerBase {
 
+    protected void addNav(Model model, String returnURL){
+        if(returnURL==null || returnURL.trim().equals("")){
+            returnURL="projectSearch";
+        }
+        model.addAttribute("nav", new Navigation(returnURL));
+    }
 
     public String retrieveUserName() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();

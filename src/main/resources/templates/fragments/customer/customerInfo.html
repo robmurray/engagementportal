@@ -1,0 +1,87 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="customerInfo" th:fragment="customerInfo (customer,readonly)">
+
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>Customer Information</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#customerinfopanel"><i
+                        class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="customerinfopanel" class="panel-collapse collapse in">
+            <div class="portlet-body">
+                <form class="form" role="form" action="#" th:action="@{/customer}" th:object="${customer}"
+                      method="post" th:if="${customer!=null}">
+
+                    <div class="row">
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Id</label>
+                                <input type="text" class="form-control" th:field="*{customerId}"
+                                       placeholder="enter the customer Id" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('customerId')}"
+                                     th:errors="*{customerId}">
+                                    error
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control" th:field="*{name}"
+                                       placeholder="enter the custome name" th:if="${readonly=='true'}"
+                                       readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('name')}"
+                                     th:errors="*{name}">error
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="form-group">
+                            <label class="control-label">notes</label>
+                            <input type="text" class="form-control" th:field="*{notes}"
+                                   placeholder="enter customer notes" th:if="${readonly=='true'}"
+                                   readonly="readonly"/>
+
+                            <div class="has-error" th:if="${#fields.hasErrors('notes')}" th:errors="*{notes}">error
+                            </div>
+                        </div>
+
+
+                    </div>
+                </form>
+
+                <div class="row" th:if="${customer==null}">
+
+                    <div class="col-sm-6">
+                        <div class="well bg-primary center">
+                            <p>There is currently no customer information associated with this customer.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- END YOUR CONTENT HERE -->
+</div>
+</body>
+</html>>

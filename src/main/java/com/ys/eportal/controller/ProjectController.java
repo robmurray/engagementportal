@@ -18,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
 import java.util.Set;
 
 /**
@@ -133,8 +132,8 @@ public class ProjectController extends ControllerBase {
     */
     @RequestMapping(value = "/project", method = RequestMethod.GET)
     public String projectView(@RequestParam(value = "projectId", required = true) long projectId,
+                              @RequestParam(value = "returnURL", required = false) String returnURL,
                               @RequestParam(value = "msgtype", required = false) String messageType, Model model) {
-
 
         ProjectEntity pe = this.portalService.findProjectByProjectId(projectId);
         String projectName = "Project";
@@ -210,6 +209,7 @@ public class ProjectController extends ControllerBase {
                     // this means the data is bad
                     // but will need to add somethign in here to cover edge case
                     so.setStCustomerName(soe.getCustomer().getName());
+                    so.setCustomerId(soe.getCustomer().getCustomerId());
                 }
                 so.setStSalesAgentName(soe.getStSalesAgentName());
                 project.addSalesOrder(so);
@@ -218,7 +218,7 @@ public class ProjectController extends ControllerBase {
 
         }
 
-
+        addNav(model,returnURL);
         model.addAttribute("pageName", "Project");
         model.addAttribute("project", project);
 

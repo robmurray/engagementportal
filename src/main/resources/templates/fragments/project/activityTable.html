@@ -54,6 +54,16 @@
                     </tr>
                     </tfoot>
                 </table>
+                <div class="row" th:if="${activities==null}">
+
+                    <div class="col-sm-6">
+
+                        <div class="well bg-primary center">
+                            <p>There are currently no milestones associated with the project.</p>
+                        </div>
+                    </div>
+
+                </div>
 
 
             </div>

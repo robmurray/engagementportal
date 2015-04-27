@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div id="searchResults" th:fragment="searchResults">
+<div id="searchResults" th:fragment="searchResults  (projects, readonly)">
 
     <div class="portlet">
         <div class="portlet-heading default-bg">
@@ -33,18 +33,22 @@
                     <tbody>
                     <tr th:each="project : ${projects}" th:if="${projects != null}">
                         <td>
-                            <div class="btn-group btn-group-md ">
+                            <div class="btn-group btn-group-xs ">
                                 <a href="" th:href="'project?projectId='+${project.projectId}"
-                                   data-placement="left" data-rel="tooltip" title="view"><i
-                                        class="fa fa-binoculars icon-only text-success"></i></a>
+                                   class="btn btn-success" data-placement="left" data-rel="tooltip" title="view">
+                                    <i class="fa fa-binoculars icon-only"></i></a>
 
-                                <a href="" th:href="'project?projectId='+${project.projectId}"
-                                   data-placement="left" data-rel="tooltip" title="edit"><i
-                                        class="fa fa-pencil icon-only text-warning"></i></a>
-
-                                <a href="" th:href="'project?projectId='+${project.projectId}"
-                                   data-placement="left" data-rel="tooltip" title="delete"><i
-                                        class="fa fa-trash-o icon-only text-danger"></i></a>
+                                <div th:if="${readonly!='true'}">
+                                    <a href="" th:href="'project?projectId='+${project.projectId}"
+                                       class="btn btn-inverse" data-placement="left" data-rel="tooltip" title="edit"><i
+                                            class="fa fa-pencil icon-only"></i></a>
+                                </div>
+                                <div th:if="${readonly!='true'}">
+                                    <a href="" th:href="'project?projectId='+${project.projectId}"
+                                       class="btn btn-danger" data-placement="left" data-rel="tooltip"
+                                       title="delete"><i
+                                            class="fa fa-times icon-only"></i></a>
+                                </div>
                             </div>
                         </td>
                         <td th:text="${project.customerName}"></td>

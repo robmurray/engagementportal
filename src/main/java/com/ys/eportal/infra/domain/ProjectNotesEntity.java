@@ -24,6 +24,13 @@ public class ProjectNotesEntity extends AbstractDomainBase {
     @Column(name = "notes", columnDefinition = "TEXT")
     private String notes;
 
+    public ProjectNotesEntity() {
+    }
+
+    public ProjectNotesEntity(ProjectEntity project, String notes) {
+        this.project = project;
+        this.notes = notes;
+    }
 
     public long getNoteId() {
         return noteId;

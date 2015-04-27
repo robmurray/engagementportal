@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div id="projectInfo" th:fragment="projectInfo">
+<div id="projectInfo" th:fragment="projectInfo (project,readonly)">
 
     <div class="portlet">
         <div class="portlet-heading default-bg">
@@ -19,16 +19,16 @@
         </div>
         <div id="projectinfopanel" class="panel-collapse collapse in">
             <div class="portlet-body">
-                <form class="form" role="form" action="#" th:action="@{/projectNew}" th:object="${project}"
-                      method="post">
+                <form class="form" role="form" action="#" th:action="@{/project}" th:object="${project}"
+                      method="post" th:if="${project!=null}">
 
 
                     <div class="row">
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label">Project Name</label>
+                                <label class="control-label">Customer Name</label>
                                 <input type="text" class="form-control" th:field="*{name}"
-                                       placeholder="enter the project name" readonly="readonly"/>
+                                       placeholder="enter the project name" th:if="${readonly=='true'}" readonly="readonly"/>
                                 <div class="has-error" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">project name error</div>
                             </div>
 
@@ -37,7 +37,7 @@
                             <div class="form-group">
                                 <label class="control-label">Status</label>
 
-                                    <select class="form-control selectpicker" th:field="*{status}">
+                                    <select class="form-control selectpicker" th:field="*{status}"  th:if="${readonly=='true'}" disabled="disabled" >
                                         <option th:each="type : *{statusValues}"
                                                 th:value="${type}"
                                                 th:text="${type}"></option>
@@ -49,7 +49,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label class="control-label">days to close</label>
-                                <input th:field="*{daysToClose}" class="form-control" readonly="readonly"/>
+                                <input th:field="*{daysToClose}" class="form-control" th:if="${readonly=='true'}" readonly="readonly"/>
 
                             </div>
 
@@ -64,7 +64,7 @@
                             <div class="form-group">
                                 <label class="control-label">Location</label>
                                 <input type="text" class="form-control" th:field="*{location}"
-                                       placeholder="enter the project loaction" readonly="readonly"/>
+                                       placeholder="enter the project loaction" th:if="${readonly=='true'}" readonly="readonly"/>
                                 <div class="has-error" th:if="${#fields.hasErrors('name')}" th:errors="*{location}">location error</div>
                             </div>
 
@@ -73,7 +73,7 @@
                             <div class="form-group">
                                 <label class="control-label">Wait Time</label>
 
-                                    <select class="form-control selectpicker" th:field="*{waitTime}">
+                                    <select class="form-control selectpicker" th:field="*{waitTime}"  th:if="${readonly=='true'}" disabled="disabled" >
 
                                         <option th:each="type : *{waitTimeValues}"
                                                 th:value="${type}"
@@ -87,7 +87,7 @@
                         <div class="col-md-2">
                             <div class="form-group">
                                 <label class="control-label">booked to kickoff</label>
-                                <input th:field="*{bookedToKickOff}" class="form-control" readonly="readonly"/>
+                                <input th:field="*{bookedToKickOff}" class="form-control" th:if="${readonly=='true'}" readonly="readonly"/>
                             </div>
                         </div>
                     </div>
@@ -98,7 +98,7 @@
                             <div class="form-group">
                                 <label class="control-label">Service</label>
                                 <input type="text" class="form-control" th:field="*{service}"
-                                       placeholder="enter the service" readonly="readonly"/>
+                                       placeholder="enter the service" th:if="${readonly=='true'}" readonly="readonly"/>
                                 <div class="has-error" th:if="${#fields.hasErrors('service')}" th:errors="*{service}">service error</div>
                             </div>
 
@@ -107,7 +107,7 @@
                             <div class="form-group">
                                 <label class="control-label">Health</label>
 
-                                <select class="form-control selectpicker" th:field="*{healthStatus}">
+                                <select class="form-control selectpicker" th:field="*{healthStatus}"  th:if="${readonly=='true'}" disabled="${disabled}" >
                                     <option th:each="type : *{healthStatusValues}"
                                             th:value="${type}"
                                             th:text="${type}"></option>
@@ -128,7 +128,15 @@
 
                 </form>
 
+                <div class="row" th:if="${project==null}">
 
+                    <div class="col-sm-6">
+                        <div class="well bg-primary center">
+                            <p>There is currently no project information  associated with this project.</p>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     </div>

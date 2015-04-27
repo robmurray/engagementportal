@@ -51,6 +51,16 @@
                     </tfoot>
                 </table>
 
+                <div class="row" th:if="${notes==null}">
+
+                    <div class="col-sm-6">
+
+                        <div class="well bg-primary center">
+                            <p>There are currently no notes associated with the project.</p>
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
         </div>

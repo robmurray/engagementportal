@@ -10,7 +10,7 @@
 <div layout:fragment="content">
 
     <div th:replace="fragments/project/searchFilter :: searchFilter"/>
-    <div th:replace="fragments/project/searchResults :: searchResults"/>
+    <div th:replace="fragments/project/searchResults :: searchResults (projects=${projects}, readonly='true' )"/>
 
 
 </div>

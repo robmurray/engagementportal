@@ -1,5 +1,7 @@
 package com.ys.eportal.model;
 
+import java.util.Date;
+
 /**
  * Created by rob on 4/25/15.
  */
@@ -8,12 +10,17 @@ public class ProjectNote extends AbstractModelBase implements NoteInterface{
     private long noteId;
     private String note;
 
+
     public ProjectNote() {
     }
 
     public ProjectNote(String note) {
 
         this.note = note;
+    }
+    public ProjectNote(String note, Date createDate) {
+        this.note = note;
+        this.createDate= createDate;
     }
 
     public long getNoteId() {

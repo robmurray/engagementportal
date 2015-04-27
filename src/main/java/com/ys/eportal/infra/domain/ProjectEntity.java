@@ -36,8 +36,11 @@ public class ProjectEntity extends AbstractDomainBase {
     private Set<ProjectNotesEntity> notes = new HashSet<ProjectNotesEntity>();
 
 
-    @OneToMany(mappedBy = "project")
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ProjectResourceEntity> projectResources;
+
+    @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private Set<ProjectActivityEntity> projectActivity;
 
 
     @Basic(fetch = FetchType.EAGER)
@@ -136,6 +139,14 @@ public class ProjectEntity extends AbstractDomainBase {
 
     public void setProjectResources(Set<ProjectResourceEntity> projectResources) {
         this.projectResources = projectResources;
+    }
+
+    public Set<ProjectActivityEntity> getProjectActivity() {
+        return projectActivity;
+    }
+
+    public void setProjectActivity(Set<ProjectActivityEntity> projectActivity) {
+        this.projectActivity = projectActivity;
     }
 
     public long getProjectId() {

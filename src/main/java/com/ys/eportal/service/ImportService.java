@@ -2,6 +2,8 @@ package com.ys.eportal.service;
 
 import com.ys.eportal.infra.domain.*;
 import com.ys.eportal.infra.repository.*;
+import com.ys.eportal.model.ProjectNote;
+import com.ys.eportal.model.Resource;
 import com.ys.eportal.model.UploadSalesOrder;
 import com.ys.eportal.service.converter.*;
 import org.slf4j.Logger;
@@ -19,6 +21,9 @@ import java.util.*;
 public class ImportService extends ServicesBase {
 
     private static Logger logger = LoggerFactory.getLogger(PortalService.class);
+
+    private boolean addTestData = true;
+
     @Autowired
     private ImportOracleOBIStageRepository oracleOBIStageRepository;
 
@@ -42,6 +47,19 @@ public class ImportService extends ServicesBase {
 
     @Autowired
     private ImportMasterRepository importMasterRepository;
+
+    @Autowired
+    private ResourceRepository resourceRepository;
+
+    @Autowired
+    private ProjectResourceRepository projectResourceRepository;
+
+    @Autowired
+    private ProjectActivityRepository projectActivityRepository;
+
+
+    @Autowired
+    private ProjectNotesRepository projectNotesRepository;
 
     @Autowired
     private SOImportMapper soImportMapper;
@@ -321,6 +339,33 @@ public class ImportService extends ServicesBase {
             }
             */
 
+            // STEP 2.7
+
+            if(this.addTestData){
+                List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
+
+                resourceList.add(new ResourceEntity("Bob", "Murray", "Account Team"));
+                resourceList.add(new ResourceEntity("Bill","Murray","Account Team"));
+                resourceList.add(new ResourceEntity("Tammy","Smith","Account Team"));
+                resourceList.add(new ResourceEntity("Jill","Jones","Account Team"));
+                resourceList.add(new ResourceEntity("jose","Dodd","Account Team"));
+
+                resourceList.add(new ResourceEntity("Tim", "Murray", "Technical"));
+                resourceList.add(new ResourceEntity("Gale","Murray","Technical"));
+                resourceList.add(new ResourceEntity("gill","Smith","Technical"));
+                resourceList.add(new ResourceEntity("Ted","Jones","Technical"));
+                resourceList.add(new ResourceEntity("Mark","Dodd","Technical"));
+
+                resourceList.add(new ResourceEntity("Tim", "Holden", "Trainer"));
+                resourceList.add(new ResourceEntity("helen","Murray","Trainer"));
+                resourceList.add(new ResourceEntity("Randy","Smith","Trainer"));
+                resourceList.add(new ResourceEntity("Sandy","Jones","Trainer"));
+                resourceList.add(new ResourceEntity("Sarah","Dodd","Trainer"));
+
+                this.resourceRepository.save(resourceList);
+
+            }
+
             // STEP 3 - create projects and add saleorders to projects
 
 
@@ -330,6 +375,45 @@ public class ImportService extends ServicesBase {
 
                 project = this.mapToProjectOrderEntity(wrkEnt);
                 this.projectRepository.save(project);
+                int count=0;
+
+                if(this.addTestData) {
+                    Iterable<ResourceEntity> resourceList = this.resourceRepository.findAll();
+                    ProjectResourceEntity pre = null;
+                    String role="";
+                    for(ResourceEntity resource:resourceList) {
+                        if (count < 6) {
+                            role = Constants.Role.ACCOUNT;
+                        } else if (count < 11) {
+                            role = Constants.Role.REMOTE;
+                        } else {
+                            role = Constants.Role.ONSITE;
+                        }
+                        pre = new ProjectResourceEntity(project, resource, role);
+
+                        this.projectResourceRepository.save(pre);
+                        count++;
+                    }
+
+
+                    this.projectNotesRepository.save(new ProjectNotesEntity(project,"The meeting was delayed ue to weather condition"));
+                    this.projectNotesRepository.save(new ProjectNotesEntity(project,"we will need more resources for the next phase"));
+                    this.projectNotesRepository.save(new ProjectNotesEntity(project,"The meeting went well"));
+
+                }
+
+                // add in milestones
+                // every project gets a standard set
+                List<ProjectActivityEntity> paeList = new ArrayList<ProjectActivityEntity>();
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.BOOK_DATE,project.getBookDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.KICKOFF_DATE,project.getKickoffMeetingDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.ONSITESTART_DATE,project.getOnSiteStartDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.ONSITEEND_DATE,project.getOnSiteEndDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.PLANNINGMEETING_DATE,project.getPlanningMeetingDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.REVREC_DATE,project.getReleaseForRevenueRecDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.SHIP_DATE,project.getShipDate()));
+
+                this.projectActivityRepository.save(paeList);
 
                 newso = this.mapToSalesOrder(wrkEnt);
                 newso.setProject(project);
@@ -399,7 +483,12 @@ public class ImportService extends ServicesBase {
 
         //pe.setsetProjectResources(Set<ProjectResourceEntity> projectResources) {
         //pe.setProjectId(long projectId) {
+
+        // create name cusomername+sonumber
+
+
         pe.setName(importMasterEntity.getName());
+
         pe.setBookDate(importMasterEntity.getBookDate());
         pe.setShipDate(importMasterEntity.getShipDate());
         pe.setPlanningMeetingDate(importMasterEntity.getPlanningMeetingDate());
@@ -407,10 +496,14 @@ public class ImportService extends ServicesBase {
         pe.setOnSiteStartDate(importMasterEntity.getOnSiteStartDate());
         pe.setOnSiteEndDate(importMasterEntity.getOnSiteEndDate());
         pe.setReleaseForRevenueRecDate(importMasterEntity.getReleaseForRevenueRecDate());
+
         pe.setBookedToKickOff(importMasterEntity.getBookedToKickOff());
         pe.setDaysToClose(importMasterEntity.getDaysToClose());
 
         pe.setService(importMasterEntity.getService());
+
+        // @TODO to be phased out
+        // need to map to new model
         pe.setAccountTeam(importMasterEntity.getAccountTeam());
         pe.setRemote(importMasterEntity.getRemote());
         pe.setOnsite(importMasterEntity.getOnsite());

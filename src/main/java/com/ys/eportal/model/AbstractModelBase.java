@@ -7,9 +7,10 @@ import java.util.Date;
  */
 public abstract class AbstractModelBase {
 
-    private Date createDate;
+    protected Date createDate;
 
-    private Date modifiedDate;
+    protected Date modifiedDate;
+
 
     public Date getCreateDate() {
         return createDate;

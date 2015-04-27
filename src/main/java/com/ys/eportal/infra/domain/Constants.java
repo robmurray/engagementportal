@@ -52,4 +52,22 @@ public class Constants {
 
 
     }
+    public static class Role{
+        public final static String ACCOUNT="account team";
+        public final static String ONSITE="onsite";
+        public final static String REMOTE="remote";
+    }
+
+
+    public static class Activities{
+
+        public static String BOOK_DATE ="bookDate";
+        public static String  SHIP_DATE ="shipDate";
+        public static String  REVREC_DATE ="releaseForRevenueRecDate";
+        public static String  ONSITEEND_DATE = "onSiteEndDate";
+        public static String  ONSITESTART_DATE = "onSiteStartDate";
+        public static String  KICKOFF_DATE = "kickoffMeetingDate";
+        public static String  PLANNINGMEETING_DATE ="planningMeetingDate";
+
+    }
 }

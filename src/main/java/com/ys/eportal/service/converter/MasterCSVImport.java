@@ -322,6 +322,15 @@ public class MasterCSVImport {
             }
 
             // ok to store new object
+            /*
+            String projectName ="";
+            if(c)
+            if(salesOrderNumber!=null){
+
+            }
+
+            importMaster.setName();
+            */
             importMaster.setSalesOrderNumber(salesOrderNumber);
             importMaster.setAccountTeam(accountTeam);
             importMaster.setAmount(amount);

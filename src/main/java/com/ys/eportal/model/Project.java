@@ -39,7 +39,7 @@ public class Project extends AbstractModelBase{
     }};
 
     private String healthStatus;
-    private List<String> healthStatusValues = new ArrayList<String>() {{
+    public List<String> healthStatusValues = new ArrayList<String>() {{
         add("green");
         add("yellow");
         add("orange");
@@ -63,6 +63,7 @@ public class Project extends AbstractModelBase{
 
     private String location;
 
+    /*
     private String modelGroup;
     private List<String> modelGroupValues = new ArrayList<String>() {{
         add("WLAN");
@@ -70,15 +71,15 @@ public class Project extends AbstractModelBase{
         add("CSN");
     }};
 
-
+*/
     private String service;
 
 
-
+/*
     private String accountTeam;
     private String remote;
     private String onsite;
-
+*/
 
     public Project() {
     }
@@ -288,52 +289,12 @@ public class Project extends AbstractModelBase{
         this.location = location;
     }
 
-    public String getModelGroup() {
-        return modelGroup;
-    }
-
-    public void setModelGroup(String modelGroup) {
-        this.modelGroup = modelGroup;
-    }
-
-    public List<String> getModelGroupValues() {
-        return modelGroupValues;
-    }
-
-    public void setModelGroupValues(List<String> modelGroupValues) {
-        this.modelGroupValues = modelGroupValues;
-    }
-
     public String getService() {
         return service;
     }
 
     public void setService(String service) {
         this.service = service;
-    }
-
-    public String getAccountTeam() {
-        return accountTeam;
-    }
-
-    public void setAccountTeam(String accountTeam) {
-        this.accountTeam = accountTeam;
-    }
-
-    public String getRemote() {
-        return remote;
-    }
-
-    public void setRemote(String remote) {
-        this.remote = remote;
-    }
-
-    public String getOnsite() {
-        return onsite;
-    }
-
-    public void setOnsite(String onsite) {
-        this.onsite = onsite;
     }
 
     @Override

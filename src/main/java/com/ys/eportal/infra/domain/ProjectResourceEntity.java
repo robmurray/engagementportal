@@ -27,7 +27,14 @@ public class ProjectResourceEntity {
     @Column(name = "role")
     private String role;
 
+    public ProjectResourceEntity() {
+    }
 
+    public ProjectResourceEntity(ProjectEntity project, ResourceEntity resource, String role) {
+        this.project = project;
+        this.resource = resource;
+        this.role = role;
+    }
 
     public long getProjectResourceId() {
         return projectResourceId;

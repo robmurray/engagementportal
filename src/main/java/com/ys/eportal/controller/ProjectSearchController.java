@@ -42,8 +42,13 @@ public class ProjectSearchController  extends ControllerBase{
     @RequestMapping(value="/projectSearch", method= RequestMethod.GET)
     public String projectSearchForm(Model model) {
 
+        Iterable<ProjectEntity> wrkList = this.portalService.findAllProjects();
+        List<ProjectSearchResults> returnList=buildSearchResults(wrkList);
+
+
         model.addAttribute("pageName", "Project Search");
         model.addAttribute("projectsearch", new ProjectSearch());
+        model.addAttribute("projects", returnList);
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
         return "projectSearch";
@@ -57,18 +62,7 @@ public class ProjectSearchController  extends ControllerBase{
 
         Iterable<ProjectEntity> wrkList = this.portalService.find(this.projectSearchMapper.convert(search));
 
-
-        // build search results
-        List<ProjectSearchResults> returnList= null;
-        if(wrkList !=null){
-            returnList= new ArrayList<ProjectSearchResults>();
-            ProjectSearchResults ps = null;
-            for(ProjectEntity pe:wrkList){
-                ps = new ProjectSearchResults(pe.getProjectId(),pe.getSalesOrders().getSalesOrderNumber(),pe.getSalesOrders().getCustomer().getName(),pe.getStatus());
-                returnList.add(ps);
-
-            }
-        }
+        List<ProjectSearchResults> returnList=buildSearchResults(wrkList);
 
 
         model.addAttribute("projects", returnList);
@@ -77,4 +71,20 @@ public class ProjectSearchController  extends ControllerBase{
         return "projectSearch";
     }
 
+
+    private List<ProjectSearchResults> buildSearchResults(Iterable<ProjectEntity> list){
+
+        List<ProjectSearchResults> returnList= null;
+        if(list !=null){
+            returnList= new ArrayList<ProjectSearchResults>();
+            ProjectSearchResults ps = null;
+            for(ProjectEntity pe:list){
+                ps = new ProjectSearchResults(pe.getProjectId(),pe.getSalesOrders().getSalesOrderNumber(),pe.getSalesOrders().getCustomer().getName(),pe.getStatus());
+                returnList.add(ps);
+
+            }
+
+        }
+        return returnList;
+    }
 }

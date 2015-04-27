@@ -1,0 +1,63 @@
+INSERT INTO ep_resource (first_name, last_name, type)
+VALUES
+('Dana','','account team'),
+('David', 'PDana','account team'),
+('David','P','account team'),
+('Kevin','A','account team'),
+('Ed','Canfield','account team'),
+('Carl','','account team'),
+('Carl','H','account team'),
+('Kevin','','account team'),
+('Adam','','account team'),
+('Jason','Adam','account team'),
+('Jason','','account team'),
+('Mike','Jett','account team'),
+('Trish', 'Gundy','account team'),
+('Douglas','Jones','account team'),
+('Carl','','account team'),
+('Kevin','Carl','account team'),
+('Chris Wilson','','account team'),
+('Geoffrey','Paul','account team'),
+('Stephen', 'Davis','account team'),
+('Arne','','account team'),
+('Robert','Holly','account team'),
+('Ronnie','','account team'),
+('John','Giles','account team'),
+('David','Parker','account team'),
+('Stephanie','Walker','account team'),
+('Lavonne','','account team'),
+('Matt', 'Marchbanks','account team'),
+('Bill','Wells','account team'),
+('Jorge','Valez','account team'),
+('Trey', 'O``Banion','account team'),
+('Jason','C','account team'),
+('David','O','account team'),
+('Vangie','','account team'),
+('Matt','Marchbanks','account team'),
+('Adam','Kurtz','account team'),
+('Ray','Feldman','account team'),
+('Arne','Lepp','account team'),
+('Matt','','account team'),
+('Lavonne','','account team'),
+('Francisco','Tarasuk','account team'),
+('Linda','Ta','account team');
+
+David Oliver
+David O
+Bill W
+Joe Woodwell
+Rick Slominski
+Zack Belcher
+Todd Davis?
+Linda Ta
+Chuck Smith
+Jason Cornwell
+Steven Davis
+David Parker
+Dave B
+Chuck
+Ray
+Bonnie
+Bill
+
+

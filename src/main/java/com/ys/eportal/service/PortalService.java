@@ -181,6 +181,10 @@ public class PortalService extends ServicesBase{
         return (List) this.projectRepository.findAll();
     }
 
+    public ProjectEntity findProjectByProjectId(long projectId){
+        return this.projectRepository.findOne(projectId);
+    }
+
     public Iterable<ProjectEntity> find(ProjectSearchSupport search) {
         List<ProjectEntity> results = null;
 

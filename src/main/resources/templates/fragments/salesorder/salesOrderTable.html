@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<div id="salesOrderTable" th:fragment="salesOrderTable (salesOrders)">
+<div id="salesOrderTable" th:fragment="salesOrderTable (salesOrders, readonly)">
     <div class="portlet">
         <div class="portlet-heading default-bg">
             <div class="portlet-title">
@@ -37,13 +37,29 @@
                     </thead>
                     <tbody>
                         <tr th:each="salesOrder : ${salesOrders}">
-                            <td >
+
+                            <div class="action-buttons">
+                                <a href="" th:href="'salesOrder?saleOrderId='+${salesOrderId}"
+                                   class=" btn btn-success" data-placement="left" data-rel="tooltip" title="Edit"><i
+                                        class="fa fa-binoculars"></i></a>
+                            </div>
+
+                            <td th:if="${readonly!='true'}" >
                                 <div class="action-buttons">
-                                    <a href="" th:href="'salesOrderEdit?saleOrderId='+${salesOrderId}"
-                                       data-placement="left" data-rel="tooltip" title="Edit"><i
-                                            class="fa fa-pencil bigger-130"></i></a>
+                                    <a href="" th:href="'salesOrder?saleOrderId='+${salesOrderId}"
+                                       class=" btn btn-inverse" data-placement="left" data-rel="tooltip" title="Edit"><i
+                                            class="fa fa-pencil"></i></a>
                                 </div>
                             </td>
+                            <td th:if="${readonly!='true'}" >
+                                <div class="action-buttons">
+                                    <a href="" th:href="'salesOrder?saleOrderId='+${salesOrderId}"
+                                       class=" btn btn-danger" data-placement="left" data-rel="tooltip" title="Edit"><i
+                                            class="fa fa-times"></i></a>
+                                </div>
+                            </td>
+
+
                             <td  th:text="${salesOrder.stCustomerName}"></td>
                             <td  th:text="${salesOrder.salesOrderNumber}"></td>
                             <td  th:text="${salesOrder.amount}"></td>
@@ -63,7 +79,15 @@
                     </tr>
                     </tfoot>
                 </table>
+                <div class="row" th:if="${salesOrders==null}">
 
+                    <div class="col-sm-6">
+                        <div class="well bg-primary center">
+                            <p>There are currently no sales orders associated with the project.</p>
+                        </div>
+                    </div>
+
+                </div>
 
             </div>
         </div>

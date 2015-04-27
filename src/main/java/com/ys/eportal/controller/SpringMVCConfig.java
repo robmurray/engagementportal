@@ -34,5 +34,10 @@ public class SpringMVCConfig extends WebSecurityConfigurerAdapter {
         auth
                 .inMemoryAuthentication()
                 .withUser("flukeadmin").password("portal").roles("USER");
+        auth
+                .inMemoryAuthentication()
+                .withUser("robmurray").password("portal").roles("ADMIN");
+
+
     }
 }

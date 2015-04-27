@@ -171,11 +171,11 @@ public class ProjectController extends ControllerBase {
 
                 for (ProjectResourceEntity pre : reList) {
                     if (pre.getRole().equals(Constants.Role.ONSITE)) {
-                        project.addOnsiteResource(new Resource(pre.getResource().getFirstName(), pre.getResource().getLastName()));
+                        project.addOnsiteResource(new Resource(pre.getResource().getFirstName(), pre.getResource().getLastName(),pre.getResource().getType()));
                     } else if (pre.getRole().equals(Constants.Role.ACCOUNT)) {
-                        project.addAccountResource(new Resource(pre.getResource().getFirstName(), pre.getResource().getLastName()));
+                        project.addAccountResource(new Resource(pre.getResource().getFirstName(), pre.getResource().getLastName(),pre.getResource().getType()));
                     } else if (pre.getRole().equals(Constants.Role.REMOTE)) {
-                        project.addRemoteResource(new Resource(pre.getResource().getFirstName(), pre.getResource().getLastName()));
+                        project.addRemoteResource(new Resource(pre.getResource().getFirstName(), pre.getResource().getLastName(),pre.getResource().getType()));
                     }
                 }
             }

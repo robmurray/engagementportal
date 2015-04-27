@@ -20,24 +20,26 @@
         <div id="projectSearchResultsPanel" class="panel-collapse collapse in">
             <div class="portlet-body">
 
-                <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="100"
+                <table class="table table-bordered table-striped table-hover tc-table footable no-padding" data-page-size="100"
                        th:if="${projects!=null}">
                     <thead>
                     <tr>
-                        <th data-sort-ignore="true">action</th>
-                        <th data-toggle="phone,tablet">customer name</th>
-                        <th data-toggle="true">sales order number</th>
-                        <th data-hide="phone,tablet">status</th>
+                        <th class="col-small left" th:if="${readonly!='true'}" data-toggle="phone,tablet" data-sort-ignore="true">action</th>
+                        <th class="col-small left" data-toggle="phone,tablet">Project ID</th>
+                        <th class="col-small left" data-toggle="phone,tablet">Customer</th>
+                        <th class="col-small left" data-toggle="phone, tablet">Sales Order</th>
+                        <th class="col-small left" data-toggle="phone,tablet">Status</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="project : ${projects}" th:if="${projects != null}">
-                        <td>
+                        <td class="col-small left" th:if="${readonly!='true'}">
                             <div class="btn-group btn-group-xs ">
-                                <a href="" th:href="'project?projectId='+${project.projectId}"
+                          <!--      <a href="" th:href="'project?projectId='+${project.projectId}"
                                    class="btn btn-success" data-placement="left" data-rel="tooltip" title="view">
                                     <i class="fa fa-binoculars icon-only"></i></a>
 
+                              -->
                                 <div th:if="${readonly!='true'}">
                                     <a href="" th:href="'project?projectId='+${project.projectId}"
                                        class="btn btn-inverse" data-placement="left" data-rel="tooltip" title="edit"><i
@@ -50,11 +52,13 @@
                                             class="fa fa-times icon-only"></i></a>
                                 </div>
                             </div>
-                        </td>
-                        <td th:text="${project.customerName}"></td>
-                        <td th:text="${project.salesOrderNumber}"></td>
 
-                        <td><span class="label" th:classappend="'label-' + ${project.statusDisplayClass}"
+                        </td>
+                        <td class="col-small left"><a href="" th:href="'project?projectId='+${project.projectId}" data-placement="left" data-rel="tooltip" title="view" th:text="${project.projectId}"></a></td>
+                        <td class="col-small left" th:text="${project.customerName}"></td>
+                        <td class="col-small left" th:text="${project.salesOrderNumber}"></td>
+
+                        <td class="col-small center"><span class="label" th:classappend="'label-' + ${project.statusDisplayClass}"
                                   th:text="${project.status}"></span></td>
 
                     </tr>

@@ -13,33 +13,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
  * Created by rob on 4/4/15.
  */
 @Controller
-public class DashboardController  extends ControllerBase{
+public class RootController extends ControllerBase{
 
     @Autowired
     private PortalService portalService;
-/*
+
     @RequestMapping("/")
     public String stdRedirect(){
-        return "redirect:/index";
+        return "redirect:/projectSearch";
     }
 
     @RequestMapping(value="/index", method= RequestMethod.GET)
-    public String customerForm(Model model) {
-        model.addAttribute("pageName", "Dashboard");
-        Dashboard d = new Dashboard();
-
-
-        ProjectStats ps = portalService.retrieveProjectStatus();
-
-        model.addAttribute("dashboard",d );
-        model.addAttribute("stats",ps );
-
-        model.addAttribute("pageGroup", "dashboard");
-        model.addAttribute("pageId", "dashboard");
-
-        return "index";
+    public String stdRedirectIndex(){
+        return "redirect:/projectSearch";
     }
 
-*/
 
 }

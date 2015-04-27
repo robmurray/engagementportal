@@ -7,6 +7,7 @@ public class Resource {
     private long resourceId;
     private String firstName;
     private String lastName;
+    private String type;
 
     public Resource() {
     }
@@ -14,6 +15,20 @@ public class Resource {
     public Resource(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Resource(String firstName, String lastName, String type) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.type = type;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     public long getResourceId() {

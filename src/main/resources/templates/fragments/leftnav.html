@@ -1,5 +1,5 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:security="http://www.springframework.org/schema/security">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
@@ -24,18 +24,20 @@
 
                 <li class="panel" th:class="${pageGroup}=='project'? 'panel open' : 'panel'">
                     <a href="projectSearch">
-                        <i class="fa fa-dashboard"></i> Search
+                        <i class="fa fa-search"></i> Search
                     </a>
                 </li>
+                <!--
                 <li class="panel" th:class="${pageGroup}=='dashboard'? 'panel open' : 'panel'">
                     <a href="index">
                         <i class="fa fa-dashboard"></i> Dashboard
                     </a>
                 </li>
+                -->
                 <li class="panel" th:class="${pageGroup}=='reports'? 'panel open' : 'panel'">
                     <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
                        data-target="#reports">
-                        <i class="fa fa-cogs"></i> reports <span class="fa arrow"></span>
+                        <i class="fa fa-print"></i> reports <span class="fa arrow"></span>
                     </a>
                     <ul class="collapse nav" id="reports">
                         <li>
@@ -47,31 +49,34 @@
                 </li>
 
                 <!-- BEGIN DROPDOWN -->
-                <li class="panel" th:class="${pageGroup}=='importExport'? 'panel open' : 'panel'">
-                    <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
-                       data-target="#import">
-                        <i class="fa fa-cogs"></i> import/export <span class="fa arrow"></span>
-                    </a>
-                    <ul class="collapse nav" id="import">
-                        <li>
-                            <a class="" th:class="${pageId}=='uploadSalesOrder'? 'active' : ''" href="uploadSalesOrder">
-                                <i class="fa fa-angle-double-right"></i>sales order import
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" th:class="${pageId}=='importMaster'? 'active' : ''" href="importMaster">
-                                <i class="fa fa-angle-double-right"></i>**master import***
-                            </a>
-                        </li>
-                        <li>
-                            <a class="" th:class="${pageId}=='exportSalesOrders'? 'active' : ''"
-                               href="exportSalesOrders">
-                                <i class="fa fa-angle-double-right"></i> export sales orders
-                            </a>
-                        </li>
+                <div security:authorize="hasRole('ROLE_ADMIN')">
+                    <li class="panel" th:class="${pageGroup}=='importExport'? 'panel open' : 'panel'">
+                        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
+                           data-target="#import">
+                            <i class="fa fa-cogs"></i> import/export <span class="fa arrow"></span>
+                        </a>
+                        <ul class="collapse nav" id="import">
+                            <li>
+                                <a class="" th:class="${pageId}=='uploadSalesOrder'? 'active' : ''"
+                                   href="uploadSalesOrder">
+                                    <i class="fa fa-angle-double-right"></i>sales order import
+                                </a>
+                            </li>
+                            <li>
+                                <a class="" th:class="${pageId}=='importMaster'? 'active' : ''" href="importMaster">
+                                    <i class="fa fa-angle-double-right"></i>**master import***
+                                </a>
+                            </li>
+                            <li>
+                                <a class="" th:class="${pageId}=='exportSalesOrders'? 'active' : ''"
+                                   href="exportSalesOrders">
+                                    <i class="fa fa-angle-double-right"></i> export sales orders
+                                </a>
+                            </li>
 
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
+                </div>
                 <!-- END DROPDOWN -->
             </ul>
             <!-- /.side-nav -->

@@ -22,37 +22,37 @@
                 <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="100" th:if="${salesOrders!=null}">
                     <thead>
                     <tr>
-                        <th>actions</th>
+                        <th class="col-small left" data-sort-ignore="true" th:if="${readonly!='true'}">actions</th>
 
-                        <th data-toggle="true">Name</th>
-                        <th data-toggle="true">Sales Order Number</th>
-                        <th data-toggle="true">Amount</th>
-                        <th data-toggle="true">Region</th>
-                        <th data-toggle="true">Model Group</th>
-                        <th data-toggle="true">Sales Agent Name</th>
-                        <th data-toggle="true">Activity Date</th>
-                        <th data-toggle="true">Contract Status Code</th>
+                        <th class="col-small left" data-sort-ignore="true">Name</th>
+                        <th class="col-small left" data-sort-ignore="true">Sales Order Number</th>
+                        <th class="col-small left" data-sort-ignore="true">Amount</th>
+                        <th class="col-small left" data-sort-ignore="true">Region</th>
+                        <th class="col-small left" data-sort-ignore="true">Model Group</th>
+                        <th class="col-small left" data-sort-ignore="true">Sales Agent Name</th>
+                        <th class="col-small left" data-sort-ignore="true">Activity Date</th>
+                        <th class="col-small left" data-sort-ignore="true">Contract Status Code</th>
 
                     </tr>
                     </thead>
                     <tbody>
                         <tr th:each="salesOrder : ${salesOrders}">
 
-                            <div class="action-buttons">
+                            <td  th:if="${readonly!='true'}" class="col-small left">
+                            <div class="action-buttons" th:if="${readonly!='true'}">
                                 <a href="" th:href="'salesOrder?saleOrderId='+${salesOrderId}"
                                    class=" btn btn-success" data-placement="left" data-rel="tooltip" title="Edit"><i
                                         class="fa fa-binoculars"></i></a>
                             </div>
 
-                            <td th:if="${readonly!='true'}" >
-                                <div class="action-buttons">
+
+                                <div class="action-buttons"  th:if="${readonly!='true'}">
                                     <a href="" th:href="'salesOrder?saleOrderId='+${salesOrderId}"
                                        class=" btn btn-inverse" data-placement="left" data-rel="tooltip" title="Edit"><i
                                             class="fa fa-pencil"></i></a>
                                 </div>
-                            </td>
-                            <td th:if="${readonly!='true'}" >
-                                <div class="action-buttons">
+
+                                <div class="action-buttons"  th:if="${readonly!='true'}">
                                     <a href="" th:href="'salesOrder?saleOrderId='+${salesOrderId}"
                                        class=" btn btn-danger" data-placement="left" data-rel="tooltip" title="Edit"><i
                                             class="fa fa-times"></i></a>
@@ -60,14 +60,14 @@
                             </td>
 
 
-                            <td  th:text="${salesOrder.stCustomerName}"></td>
-                            <td  th:text="${salesOrder.salesOrderNumber}"></td>
-                            <td  th:text="${salesOrder.amount}"></td>
-                            <td  th:text="${salesOrder.region}"></td>
-                            <td  th:text="${salesOrder.modelGroup}"></td>
-                            <td  th:text="${salesOrder.stSalesAgentName}"></td>
-                            <td  th:text="${salesOrder.activityDate}"></td>
-                            <td  th:text="${salesOrder.contractStatusCode}"></td>
+                            <td  class="col-small left" th:text="${salesOrder.stCustomerName}"></td>
+                            <td  class="col-small left" th:text="${salesOrder.salesOrderNumber}"></td>
+                            <td  class="col-small left" th:text="${salesOrder.amount}"></td>
+                            <td  class="col-small left" th:text="${salesOrder.region}"></td>
+                            <td  class="col-small left" th:text="${salesOrder.modelGroup}"></td>
+                            <td  class="col-small left" th:text="${salesOrder.stSalesAgentName}"></td>
+                            <td  class="col-small left" th:text="${salesOrder.activityDate}"></td>
+                            <td  class="col-small left" th:text="${salesOrder.contractStatusCode}"></td>
                         </tr>
                     </tbody>
                     <tfoot>

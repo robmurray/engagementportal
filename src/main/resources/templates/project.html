@@ -17,13 +17,13 @@
 
         <div th:replace="fragments/salesorder/salesOrderTable :: salesOrderTable(salesOrders=${project.salesOrders}, readonly='true')"/>
 
-        <div th:replace="fragments/project/activityTable :: activityTable(activities=${project.activities})"/>
+        <div th:replace="fragments/project/activityTable :: activityTable(activities=${project.activities}, readonly='true')"/>
 
-        <div th:replace="fragments/note/noteTable :: noteTable(notes=${project.notes},pageHeading='Notes', index='1')"/>
+        <div th:replace="fragments/note/noteTable :: noteTable(notes=${project.notes},pageHeading='Notes', index='1', readonly='true')"/>
 
-        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.remoteResources},pageHeading='Remote Resources', index='1')"/>
-        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.onsiteResources},pageHeading='Onsite Resources', index='2')"/>
-        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.accountResources},pageHeading='Account Team', index='3')"/>
+        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.remoteResources},pageHeading='Remote Resources', index='1', readonly='true')"/>
+        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.onsiteResources},pageHeading='Onsite Resources', index='2', readonly='true')"/>
+        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.accountResources},pageHeading='Account Team', index='3', readonly='true')"/>
 
 
     </div>

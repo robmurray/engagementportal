@@ -85,6 +85,9 @@ public class ProjectSearchController  extends ControllerBase{
             }
 
         }
+        if(returnList.size()<1){
+            returnList=null;
+        }
         return returnList;
     }
 }

@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<div id="resourceTable" th:fragment="resourceTable (resources,pageHeading, index)">
+<div id="resourceTable" th:fragment="resourceTable (resources,pageHeading, index, readonly)">
     <div class="portlet">
         <div class="portlet-heading default-bg">
             <div class="portlet-title">
@@ -22,23 +22,24 @@
                 <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="100" th:if="${resources!=null}">
                     <thead>
                     <tr>
-                        <th>actions</th>
-                        <th data-toggle="true">First Name</th>
-                        <th data-toggle="true">Last Name</th>
-
+                        <th class="col-small left" th:if="${readonly!='true'}">actions</th>
+                        <th class="col-small left" data-toggle="true">First Name</th>
+                        <th class="col-small left" data-toggle="true">Last Name</th>
+                        <th class="col-small left" data-toggle="true">Type</th>
                     </tr>
                     </thead>
                     <tbody>
                         <tr th:each="resource : ${resources}">
-                            <td >
+                            <td class="col-small left" th:if="${readonly!='true'}">
                                 <div class="action-buttons">
                                     <a href="" th:href="'noteEdit?noteId='+${resource.resourceId}"
                                        data-placement="left" data-rel="tooltip" title="Edit"><i
                                             class="fa fa-pencil bigger-130"></i></a>
                                 </div>
                             </td>
-                            <td  th:text="${resource.firstName}"></td>
-                            <td  th:text="${resource.lastName}"></td>
+                            <td class="col-small left" th:text="${resource.firstName}"></td>
+                            <td class="col-small left" th:text="${resource.lastName}"></td>
+                            <td class="col-small left" th:text="${resource.type}"></td>
                         </tr>
                     </tbody>
                     <tfoot>

@@ -8,12 +8,19 @@ public class ProjectSearchSupport {
     private String salesOrderNumber;
     private String customerName;
     private long importControlId;
+    private String modelGroup;
     private String status;
 
     public ProjectSearchSupport() {
     }
 
+    public String getModelGroup() {
+        return modelGroup;
+    }
 
+    public void setModelGroup(String modelGroup) {
+        this.modelGroup = modelGroup;
+    }
 
     public ProjectSearchSupport(String customerName) {
         this.customerName = customerName;

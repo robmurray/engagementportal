@@ -12,7 +12,9 @@ public class ProjectSearch {
     private long salesOrderId;
     private String customerName;
     private long importControlId;
+    private String modelGroup;
     private List<String> statusValues = Constants.Projects.statusValues;
+    private List<String> modelGroupValues = Constants.modelGroupValues;
     private String status;
 
     public ProjectSearch() {
@@ -20,6 +22,22 @@ public class ProjectSearch {
 
     public ProjectSearch(String customerName) {
         this.customerName = customerName;
+    }
+
+    public String getModelGroup() {
+        return modelGroup;
+    }
+
+    public void setModelGroup(String modelGroup) {
+        this.modelGroup = modelGroup;
+    }
+
+    public List<String> getModelGroupValues() {
+        return modelGroupValues;
+    }
+
+    public void setModelGroupValues(List<String> modelGroupValues) {
+        this.modelGroupValues = modelGroupValues;
     }
 
     public void setSalesOrderNumber(String salesOrderNumber) {

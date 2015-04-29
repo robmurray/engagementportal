@@ -1,0 +1,25 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="formButtons" th:fragment="formButtons (readonly)">
+
+    <div class="row" th:if="${readonly!='true'}">
+
+        <div class="pull-left">
+            <button type="submit" class="btn  btn-default"><i class="fa fa-floppy-o icon-only"></i>
+            </button>
+            <button type="reset" class="btn  btn-default"><i class="fa fa-refresh icon-only"></i></button>
+        </div>
+
+
+
+    </div>
+
+
+
+</div>
+</body>
+</html>>

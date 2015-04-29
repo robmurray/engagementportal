@@ -10,7 +10,7 @@ import java.util.*;
 public class Project extends AbstractModelBase{
 
     private long projectId;
-
+    private boolean readonly;
     private String name;
 
     private List<SalesOrder> salesOrders;
@@ -39,12 +39,8 @@ public class Project extends AbstractModelBase{
     }};
 
     private String healthStatus;
-    public List<String> healthStatusValues = new ArrayList<String>() {{
-        add("green");
-        add("yellow");
-        add("orange");
-        add("red");
-    }};
+    public List<String> healthStatusValues = Constants.Projects.healthStatusValues;
+
     private List<Activity> activities;
 
     private List<String> waitTimeValues = new ArrayList<String>() {{
@@ -121,6 +117,14 @@ public class Project extends AbstractModelBase{
             return;
         }
         this.salesOrders.add(salesOrder);
+    }
+
+    public boolean isReadonly() {
+        return readonly;
+    }
+
+    public void setReadonly(boolean readonly) {
+        this.readonly = readonly;
     }
 
     public String getHealthStatus() {
@@ -240,6 +244,16 @@ public class Project extends AbstractModelBase{
         this.daysToClose = daysToClose;
     }
 
+    public long getCustomerId(){
+        long customerId = 0;
+        if(salesOrders!=null){
+            SalesOrder so =this.salesOrders.get(0);
+            if(so!=null){
+                customerId=so.getCustomerId();
+            }
+        }
+        return  customerId;
+    }
     public void addNotes(NoteInterface note){
         if(this.notes == null){
             notes = new ArrayList<NoteInterface>();

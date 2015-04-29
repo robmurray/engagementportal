@@ -31,10 +31,9 @@ public class ProjectEntity extends AbstractDomainBase {
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private SalesOrderEntity salesOrders;
 
-
+    @OrderBy("createDate DESC")
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ProjectNotesEntity> notes = new HashSet<ProjectNotesEntity>();
-
 
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ProjectResourceEntity> projectResources;
@@ -66,6 +65,10 @@ public class ProjectEntity extends AbstractDomainBase {
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "status")
     private String status = "undefined";
+
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "health")
+    private String health = "good";
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "waitTime")
@@ -127,6 +130,7 @@ public class ProjectEntity extends AbstractDomainBase {
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "onsite", columnDefinition = "TEXT")
 
+
     private String onsite;
 
 
@@ -165,6 +169,13 @@ public class ProjectEntity extends AbstractDomainBase {
         this.name = name;
     }
 
+    public String getHealth() {
+        return health;
+    }
+
+    public void setHealth(String health) {
+        this.health = health;
+    }
 
     public Date getBookDate() {
         return bookDate;

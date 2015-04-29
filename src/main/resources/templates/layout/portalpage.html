@@ -47,8 +47,9 @@
     <![endif]-->
 
 </head>
-
 <body>
+<!-- <body th:onload="'doAnchor(\''+ ${anchor}+'\')'">
+-->
 <div id="wrapper">
     <div id="main-container">
 
@@ -68,7 +69,7 @@
             <div class="row">
                 <div class="col-lg-12">
 
-                     <div class="breadcrumbs">
+                    <div class="breadcrumbs">
                         <ul class="breadcrumb">
                             <li>
                                 <a href="projectSearch"></a>
@@ -92,7 +93,7 @@
             <!-- END PAGE HEADING ROW -->
             <div class="row">
 
-                <div th:replace="fragments/messages :: messages(message=${message})"/>
+                <div th:replace="fragments/common/messages :: messages(message=${message})"/>
             </div>
             <div class="row">
                 <div class="col-lg-12">
@@ -168,7 +169,7 @@
 <script src="assets/js/plugins/datatables/datatables.init.js"></script>
 
 
-<script>
+<script type="text/javascript">
 
         $(document).ready(function() {
 			//Dual listbox examples  for more information and options please visit http://www.virtuosoft.eu/code/bootstrap-duallistbox/
@@ -329,27 +330,6 @@
 			$('#ek-colorpicker').ek_colorpicker();
 		});
 
-
-
-            var input = $( "input:file" ).css({
-                background: "yellow",
-                border: "3px red solid"
-            });
-
-
-
-		//for tables checkbox demo
-		jQuery(function($) {
-			$('table th input:checkbox').on('click' , function(){
-					var that = this;
-					$(this).closest('table').find('tr > td:first-child input:checkbox')
-					.each(function(){
-						this.checked = that.checked;
-						$(this).closest('tr').toggleClass('selected');
-					});
-
-			});
-		});
 
 
 </script>

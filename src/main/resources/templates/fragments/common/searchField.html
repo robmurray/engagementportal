@@ -1,0 +1,33 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="searchField" th:fragment="searchField (label,object,field,action,placeHolder)">
+    <div class="col-md-4 ">
+        <div class="form-group">
+            <label class="control-label" th:text="${label}">Search</label>
+
+            <form role="form" action="#" th:action="${action}" method="post" th:object="${object}">
+                <div class="input-group">
+                    <input type="text" class="form-control" th:text="*{customerName}"
+                           th:placeholder="${placeHolder}"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-search icon-only"></i>
+
+                                    </button>
+                                     <button class="btn btn-danger" type="reset">
+                                         <i class="fa fa-times icon-only"></i>
+                                     </button>
+                                </span>
+                </div>
+
+            </form>
+        </div>
+    </div></div>
+</body>
+</html>>
+
+

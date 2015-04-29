@@ -52,9 +52,12 @@ public class ProjectSearchController extends ControllerBase {
         Iterable<ProjectEntity> wrkList = this.portalService.findAllProjects();
         List<ProjectSearchResults> returnList = buildSearchResults(wrkList);
 
+        // @TODO check aauthorization
+        ProjectSearch project =new ProjectSearch();
+
         addNav(model,"projectSearch");
         model.addAttribute("pageName", "Project Search");
-        model.addAttribute("projectsearch", new ProjectSearch());
+        model.addAttribute("projectsearch", project);
         model.addAttribute("projects", returnList);
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
@@ -82,6 +85,9 @@ public class ProjectSearchController extends ControllerBase {
 
     private List<ProjectSearchResults> buildSearchResults(Iterable<ProjectEntity> list) {
 
+
+        // @TODO test autnorization
+        boolean readonly = false;
         List<ProjectSearchResults> returnList = null;
         if (list != null) {
             returnList = new ArrayList<ProjectSearchResults>();
@@ -100,15 +106,17 @@ public class ProjectSearchController extends ControllerBase {
 
                 }
 
-                ps = new ProjectSearchResults(pe.getProjectId(), pe.getSalesOrders().getSalesOrderId(), pe.getSalesOrders().getCustomer().getCustomerId(), pe.getSalesOrders().getSalesOrderNumber(), pe.getSalesOrders().getCustomer().getName(), pe.getStatus());
+                ps = new ProjectSearchResults(pe.getProjectId(), pe.getSalesOrders().getSalesOrderId(), pe.getSalesOrders().getCustomer().getCustomerId(), pe.getSalesOrders().getSalesOrderNumber(), pe.getSalesOrders().getCustomer().getName(), pe.getStatus(),pe.getHealth());
+                ps.setReadonly(readonly);
                 returnList.add(ps);
 
             }
 
+            if (returnList.size() < 1) {
+                returnList = null;
+            }
         }
-        if (returnList.size() < 1) {
-            returnList = null;
-        }
+
         return returnList;
     }
 }

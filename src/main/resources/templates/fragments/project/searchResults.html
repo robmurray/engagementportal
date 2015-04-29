@@ -24,42 +24,34 @@
                        th:if="${projects!=null}">
                     <thead>
                     <tr>
-                        <th class="col-small left" th:if="${readonly!='true'}" data-toggle="phone,tablet" data-sort-ignore="true">action</th>
+                        <th class="col-small left" data-toggle="phone,tablet" data-sort-ignore="true">action</th>
                         <th class="col-small left" data-toggle="phone,tablet">Project ID</th>
                         <th class="col-small left" data-toggle="phone,tablet">Customer</th>
                         <th class="col-small left" data-toggle="phone, tablet">Sales Order</th>
                         <th class="col-small left" data-toggle="phone,tablet">Status</th>
+                        <th class="col-small left" data-toggle="phone,tablet">Health</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr th:each="project : ${projects}" th:if="${projects != null}">
-                        <td class="col-small left" th:if="${readonly!='true'}">
-                            <div class="btn-group btn-group-xs ">
-                          <!--      <a href="" th:href="'project?projectId='+${project.projectId}"
-                                   class="btn btn-success" data-placement="left" data-rel="tooltip" title="view">
-                                    <i class="fa fa-binoculars icon-only"></i></a>
+                        <td class="col-small left">
+                            <div class="btn-group btn-group-sm ">
 
-                              -->
-                                <div th:if="${readonly!='true'}">
-                                    <a href="" th:href="'project?projectId='+${project.projectId}"
-                                       class="btn btn-inverse" data-placement="left" data-rel="tooltip" title="edit"><i
-                                            class="fa fa-pencil icon-only"></i></a>
-                                </div>
-                                <div th:if="${readonly!='true'}">
-                                    <a href="" th:href="'project?projectId='+${project.projectId}"
-                                       class="btn btn-danger" data-placement="left" data-rel="tooltip"
-                                       title="delete"><i
-                                            class="fa fa-times icon-only"></i></a>
-                                </div>
+                                    <a href="" th:href="'project?projectId='+${project.projectId}" class="btn btn-inverse" data-placement="left" data-rel="tooltip" title="edit" th:if="${project.readonly!='true'}">
+                                        <i class="fa fa-pencil icon-only"></i>
+                                    </a>
+                                    <a href="" th:href="'project?projectId='+${project.projectId}" class="btn btn-danger" data-placement="left" data-rel="tooltip" title="delete" th:if="${project.readonly!='true'}">
+                                        <i class="fa fa-times icon-only"></i>
+                                    </a>
+
                             </div>
 
                         </td>
                         <td class="col-small left"><a href="" th:href="'project?projectId='+${project.projectId}" data-placement="left" data-rel="tooltip" title="view" th:text="${project.projectId}"></a></td>
                         <td class="col-small left"><a href="" th:href="'customer?customerId='+${project.customerId}" data-placement="left" data-rel="tooltip" title="view" th:text="${project.customerName}"></a></td>
                         <td class="col-small left"><a href="" th:href="'salesorder?salesorderId='+${project.salesOrderId}" data-placement="left" data-rel="tooltip" title="view" th:text="${project.salesOrderNumber}"></a></td>
-                        <td class="col-small center"><span class="label" th:classappend="'label-' + ${project.statusDisplayClass}"
-                                  th:text="${project.status}"></span></td>
-
+                        <td class="col-small center"><span class="label" th:classappend="'label-' + ${project.statusDisplayClass}" th:text="${project.status}"></span></td>
+                        <td class="col-small center"><span class="label" th:classappend="'label-' + ${project.healthStatusDisplayClass}" th:text="${project.health}"></span></td>
                     </tr>
                     </tbody>
                     <tfoot>

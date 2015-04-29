@@ -9,17 +9,25 @@ import java.util.Map;
  * Created by rob on 4/25/15.
  */
 public class ProjectSearchResults {
-    private Map<String,String> statusDisplayClass = new HashMap<String,String>(){{
-        put("","danger");
-        put(Constants.Projects.STATUS_BOOKED,"info");
-        put(Constants.Projects.STATUS_COMPLETE,"primary");
-        put(Constants.Projects.STATUS_INPROCESS,"success");
-        put(Constants.Projects.STATUS_NOTDEFINED,"danger");
-        put(Constants.Projects.STATUS_POSTSUPPORT,"danger");
-        put(Constants.Projects.STATUS_PROPOSED,"default");
-        put(Constants.Projects.STATUS_RANDSUPPORT,"warning");
-        put(Constants.Projects.STATUS_SCHEDULED,"success");
+    private Map<String, String> statusDisplayClass = new HashMap<String, String>() {{
+        put("", "danger");
+        put(Constants.Projects.STATUS_BOOKED, "info");
+        put(Constants.Projects.STATUS_COMPLETE, "primary");
+        put(Constants.Projects.STATUS_INPROCESS, "success");
+        put(Constants.Projects.STATUS_NOTDEFINED, "danger");
+        put(Constants.Projects.STATUS_POSTSUPPORT, "danger");
+        put(Constants.Projects.STATUS_PROPOSED, "default");
+        put(Constants.Projects.STATUS_RANDSUPPORT, "warning");
+        put(Constants.Projects.STATUS_SCHEDULED, "success");
     }};
+
+    private Map<String, String> healthStatusDisplayClass = new HashMap<String, String>() {{
+        put(Constants.Projects.HEALTH_STATUS_GOOD, "success");
+        put(Constants.Projects.HEALTH_STATUS_WARNING, "warning");
+        put(Constants.Projects.HEALTH_STATUS_RISK, "danger");
+
+    }};
+
 
     private long projectId;
 
@@ -33,6 +41,9 @@ public class ProjectSearchResults {
 
     private String status;
 
+    private String health;
+
+    private boolean readonly;
 
     public ProjectSearchResults() {
     }
@@ -59,6 +70,24 @@ public class ProjectSearchResults {
         this.salesOrderNumber = salesOrderNumber;
         this.customerName = customerName;
         this.status = status;
+    }
+
+    public ProjectSearchResults(long projectId, long salesOrderId, long customerId, String salesOrderNumber, String customerName, String status, String health) {
+        this.projectId = projectId;
+        this.salesOrderId = salesOrderId;
+        this.customerId = customerId;
+        this.salesOrderNumber = salesOrderNumber;
+        this.customerName = customerName;
+        this.status = status;
+        this.health = health;
+    }
+
+    public boolean isReadonly() {
+        return readonly;
+    }
+
+    public void setReadonly(boolean readonly) {
+        this.readonly = readonly;
     }
 
     public long getSalesOrderId() {
@@ -109,12 +138,26 @@ public class ProjectSearchResults {
         this.status = status;
     }
 
-    public String getStatusDisplayClass(){
-        if(status==null){
-            status ="";
+    public String getHealth() {
+        return health;
+    }
+
+    public void setHealth(String health) {
+        this.health = health;
+    }
+
+    public String getStatusDisplayClass() {
+        if (status == null) {
+            status = "";
         }
         return this.statusDisplayClass.get(status);
     }
 
+    public String getHealthStatusDisplayClass() {
+        if (this.health == null) {
+            health = Constants.Projects.HEALTH_STATUS_GOOD;
+        }
+        return this.healthStatusDisplayClass.get(health);
+    }
 
 }

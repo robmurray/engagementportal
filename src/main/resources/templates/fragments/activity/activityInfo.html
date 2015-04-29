@@ -1,0 +1,90 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="activityInfo" th:fragment="activityInfo (activity,readonly)">
+
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>Activity Information</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#activityinfopanel"><i
+                        class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="activityinfopanel" class="panel-collapse collapse in">
+            <div class="portlet-body">
+                <form class="form" role="form" action="#" th:action="@{/activity}" th:object="${activity}"
+                      method="post" th:if="${activity!=null}">
+
+                    <div th:replace="fragments/common/formButtons :: formButtons (readonly=${readonly} )"/>
+                    <div class="row">
+                                <input type="hidden" th:field="*{activityId}"/>
+                            <div class="col-md-3">
+                                <div class="form-group">
+                                    <label class="control-label">Name</label>
+                                    <input type="text" class="form-control" th:field="*{name}"
+                                           placeholder="enter the activity name" readonly="readonly"/>
+
+                                    <div class="has-error" th:if="${#fields.hasErrors('name')}"
+                                         th:errors="*{name}">error
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-3 col-sm-6">
+                                <div class="form-group">
+                                    <label>Date</label>
+                                    <div class="input-group date form_date" data-date="" data-date-format="mm/dd/yy" data-link-field="dtp_input2" data-link-format="mm/dd/yy">
+                                        <span class="input-group-addon">
+                                            <i class="glyphicon glyphicon-calendar"></i>
+                                        </span>
+                                        <input class="form-control" />
+                                    </div>
+                                    <input type="hidden" id="dtp_input2" value="" th:field="*{date}"/><br/>
+                                </div>
+                            </div>
+
+                    </div>
+                    <div class="row">
+
+                        <div class="col-md-2">
+
+                            <div class="form-group">
+                                <label class="control-label">status</label>
+                                <select class="form-control selectpicker" th:field="*{status}">
+                                    <option th:each="type : *{activityStatusValues}"
+                                            th:value="${type}"
+                                            th:text="${type}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+
+
+                    </div>
+                </form>
+
+                <div class="row" th:if="${activity==null}">
+
+                    <div class="col-sm-6">
+                        <div class="well bg-primary center">
+                            <p>There is currently no activity information associated with this project.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- END YOUR CONTENT HERE -->
+</div>
+</body>
+</html>>

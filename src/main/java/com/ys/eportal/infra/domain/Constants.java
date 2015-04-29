@@ -7,6 +7,13 @@ import java.util.List;
  * Created by rob on 4/13/15.
  */
 public class Constants {
+
+    public final static List<String> modelGroupValues = new ArrayList<String>() {{
+        add("WLAN");
+        add("VPM");
+        add("CSN");
+    }};
+
     public static class Projects {
         public final static String STATUS_NOTDEFINED = "undefined";
         public final static String STATUS_COMPLETE = "Complete";
@@ -17,6 +24,18 @@ public class Constants {
         public final static String STATUS_BOOKED = "Booked";
         public final static String STATUS_PROPOSED = "Proposed";
 
+        public final static String HEALTH_STATUS_GOOD = "good";
+        public final static String HEALTH_STATUS_WARNING = "warning";
+        public final static String HEALTH_STATUS_RISK = "at risk";
+
+        public static List<String> healthStatusValues = new ArrayList<String>() {
+            {
+                add(HEALTH_STATUS_GOOD);
+                add(HEALTH_STATUS_WARNING);
+                add(HEALTH_STATUS_GOOD);
+
+            }
+        };
         public static List<String> statusValues = new ArrayList<String>() {
             {
                 add(STATUS_NOTDEFINED);

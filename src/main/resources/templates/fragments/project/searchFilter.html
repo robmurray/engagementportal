@@ -67,7 +67,7 @@
                     </div>
                     <div class="col-md-3">
                         <div class="form-group">
-                            <label class="control-label">search by status</label>
+                            <label class="control-label">Filter Projects by Status</label>
 
                             <form role="form" action="#" th:action="@{/projectSearch}" th:object="${projectsearch}"
                                   method="post">
@@ -82,15 +82,44 @@
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fa fa-search icon-only"></i>
                                     </button>
-                                     <button class="btn btn-danger" type="reset">
-                                         <i class="fa fa-times icon-only"></i>
-                                     </button>
                                 </span>
                                 </div>
 
                             </form>
                         </div>
                     </div>
+                    </div>
+                <div class="row bg-light ">
+
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Filter Projects by Sales Order Model Group</label>
+
+                            <form role="form" action="#" th:action="@{/projectSearch}" th:object="${projectsearch}"
+                                  method="post">
+                                <div class="input-group">
+                                    <select class="form-control selectpicker" th:field="*{modelGroup}">
+                                        <option th:each="type : *{modelGroupValues}"
+                                                th:value="${type}"
+                                                th:text="${type}"></option>
+                                    </select>
+
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-search icon-only"></i>
+                                    </button>
+
+                                </span>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <!--<div th:replace="fragments/common/searchField :: searchField(label='Search by Model Group',field=${project.modelGroup}, action='/projectSearch', placeHolder='enter something')"/>
+                    -->
+
                 </div>
             </div>
 

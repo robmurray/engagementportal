@@ -42,6 +42,13 @@ public class Activity extends AbstractModelBase{
         this.status = status;
     }
 
+    public Activity(long activityId, String name, Date date, String status) {
+        this.activityId = activityId;
+        this.name = name;
+        this.date = date;
+        this.status = status;
+    }
+
     public long getActivityId() {
         return activityId;
     }

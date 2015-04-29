@@ -34,6 +34,12 @@ public class PortalService extends ServicesBase{
     @Autowired
     private ProjectRepository projectRepository;
 
+    @Autowired
+    private ProjectNotesRepository projectNotesRepository;
+
+    @Autowired
+    private ProjectActivityRepository projectActivityRepository;
+
     public ProjectStats retrieveProjectStatus() {
 
         List<Object[]> list = this.salesOrderRepository.retrieveOrderStats();
@@ -112,6 +118,9 @@ public class PortalService extends ServicesBase{
 
     }
 
+    public ProjectActivityEntity findProjectActivityById(long activityId){
+        return this.projectActivityRepository.findOne(activityId);
+    }
 
     public List<CustomerEntity> findAllCustomers() {
         return (List) this.customerRepository.findAll();
@@ -127,6 +136,9 @@ public class PortalService extends ServicesBase{
         this.salesOrderRepository.save(salesOrderEntity);
     }
 
+    public void addNote(ProjectNotesEntity pne){
+        this.projectNotesRepository.save(pne);
+    }
     public SalesOrderEntity findSalesOrderEntityById(long salesOrderId) {
         return this.salesOrderRepository.findOne(salesOrderId);
 
@@ -155,21 +167,18 @@ public class PortalService extends ServicesBase{
     }
 
 
-    public List<SalesOrderEntity> findByImportControlId(long importControlId) {
-        List<SalesOrderEntity> list = this.salesOrderRepository.findByImportControlId(importControlId);
-
+    public List<ProjectEntity> findByImportControlId(long importControlId) {
+        List<ProjectEntity> list = this.projectRepository.findBySalesOrdersImportControlId(importControlId);
         return list;
     }
 
-    public Set<SalesOrderEntity> findBySalesOrderCustomerIdlId(long customerId) {
+   /* public Set<SalesOrderEntity> findBySalesOrderCustomerIdlId(long customerId) {
         return null;// this.salesOrderRepository.findByCustomerCustomerId(customerId);
 
     }
-
-    public List<SalesOrderEntity> findByStatus(String status) {
-        List<SalesOrderEntity> list =null;// this.salesOrderRepository.findByStatus(status);
-
-        return list;
+*/
+    public List<ProjectEntity> findByStatus(String status) {
+        return this.projectRepository.findByStatus(status);
     }
 
     public List<SalesOrderEntity> findAllSalesOrders() {
@@ -195,14 +204,16 @@ public class PortalService extends ServicesBase{
                 results.add(pe);
             }
         } else if (search.getCustomerName() != null && !search.getCustomerName().trim().equals("")) {
-            //results = this.salesOrderRepository.findByCustomerNameLike(this.processWildCards(search.getCustomerName()));
-            //results = this.findAllSalesOrders();
+            results = this.projectRepository.findByNameLike(this.processWildCards(search.getCustomerName()));
+
         } else if (search.getImportControlId() > 0) {
-//            results = this.findByImportControlId(search.getImportControlId());
+            results = this.findByImportControlId(search.getImportControlId());
 
         } else if (search.getStatus() != null && !search.getStatus().trim().equals("")) {
-  //          results = this.findByStatus(search.getStatus());
-        } else {
+            results = this.findByStatus(search.getStatus());
+        } else if(search.getModelGroup()!=null && !search.getModelGroup().trim().equals("")){
+            results = this.projectRepository.findBySalesOrdersModelGroup(search.getModelGroup());
+        }else{
             results = this.findAllProjects();
         }
 

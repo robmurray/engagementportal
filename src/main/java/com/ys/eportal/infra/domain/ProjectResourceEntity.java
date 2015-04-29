@@ -7,7 +7,7 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "ep_ProjectResource")
-public class ProjectResourceEntity {
+public class ProjectResourceEntity extends AbstractDomainBase{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "projectResourceId")

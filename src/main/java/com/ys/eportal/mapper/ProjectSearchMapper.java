@@ -29,6 +29,7 @@ public class ProjectSearchMapper {
                 .field("customerName", "customerName")
                 .field("importControlId", "importControlId")
                 .field("status", "status")
+                .field("modelGroup","modelGroup")
                 .byDefault()
                 .register();
 
@@ -38,6 +39,7 @@ public class ProjectSearchMapper {
                 .field("customerName", "customerName")
                 .field("importControlId", "importControlId")
                 .field("status", "status")
+                .field("modelGroup","modelGroup")
                 .byDefault()
                 .register();
 

@@ -10,10 +10,9 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
@@ -36,106 +35,31 @@ public class ProjectController extends ControllerBase {
         binder.registerCustomEditor(Date.class, editor);
     }
 
-    @RequestMapping(value = "/project1", method = RequestMethod.GET)
-    public String projectDetailForm(Model model) {
 
-        Project project = new Project();
-        project.addSalesOrder(new SalesOrder());
-
-        project.addActivity(Activity.PLANNINGMEETING_DATE);
-        project.addActivity(Activity.KICKOFF_DATE);
-        project.addActivity(Activity.BOOK_DATE);
-        project.addActivity(Activity.ONSITEEND_DATE);
-        project.addActivity(Activity.ONSITESTART_DATE);
-        project.addActivity(Activity.SHIP_DATE);
-        project.addActivity(Activity.REVREC_DATE);
-
-
-        project.addNotes(new ProjectNote("test note"));
-        project.addNotes(new ProjectNote("test note2"));
-        project.addNotes(new ProjectNote("test note3"));
-
-        project.addAccountResource(new Resource("Bill", "Smith"));
-        project.addAccountResource(new Resource("will", "the Fifth"));
-        project.addAccountResource(new Resource("Tom", "Wilsom"));
-
-        project.addRemoteResource(new Resource("Ed", "Rickson"));
-        project.addRemoteResource(new Resource("Tim", "Murray"));
-        project.addRemoteResource(new Resource("Jill", "Donaldsom"));
-
-        project.addOnsiteResource(new Resource("Bill", "Paxton"));
-        project.addOnsiteResource(new Resource("Angie", "Perry"));
-        project.addOnsiteResource(new Resource("Terry", "Sam"));
-
-        model.addAttribute("pageName", "Project");
-        model.addAttribute("project", project);
-        model.addAttribute("pageGroup", "project");
-        model.addAttribute("pageId", "createProject");
-        return "project";
-    }
-
-    /*
-
-        @RequestMapping(value="/projectNew", method= RequestMethod.GET)
-        public String projectForm(Model model) {
-
-            Project project = new Project();
-
-            model.addAttribute("customers", this.portalService.findAllCustomers());
-
-            model.addAttribute("pageName", "New Project");
-            model.addAttribute("project", project);
-            model.addAttribute("pageGroup", "project");
-            model.addAttribute("pageId", "createProject");
-            return "projectNew";
-        }
-
-        @RequestMapping(value="/projectNew", method=RequestMethod.POST)
-        public String projectSubmit(@Valid Project project,BindingResult bindingResult, Model model) {
-
-
-            // look for dup
-    //        if (project != null && StringUtils.isNotEmpty(project.getSalesOrderNumber())) {
-
-                // @todo need to indicate to the user that there is already a salesnumber woth
-                // that number. do you want to continue
-
-               //SalesOrderEntity e =  this.portalService.findSalesOrderEntityById(project.getSalesOrderNumber());
-                //if(e !=null) {
-                //    logger.debug("duplicate sales order number error");
-                 //   bindingResult.rejectValue("salesOrderNumber", "duplicate_son", "duplicate sales order number");
-                //}
-    //        }
-
-            if (bindingResult.hasErrors()) {
-                logger.debug("validation errors");
-                model.addAttribute("customers", this.portalService.findAllCustomers());
-
-                return "projectNew";
-            }
-
-
-
-            SalesOrderEntity so = null;//this.projectMapper.convert(project);
-         //   so.setCustomer(new CustomerEntity(project.getCustomerId()));
-            this.portalService.saveProject(so);
-
-            //project = this.projectMapper.convert(so);
-            model.addAttribute("pageName", "Save Project");
-            model.addAttribute("Project", so);
-            model.addAttribute("pageGroup", "project");
-            model.addAttribute("pageId", "createProject");
-            this.setSuccessAlertMessage(model,"project created");
-            return this.projectEditForm(so.getSalesOrderId(),"",model);//"projectEdit";
-        }
-
-    */
     @RequestMapping(value = "/project", method = RequestMethod.GET)
     public String projectView(@RequestParam(value = "projectId", required = true) long projectId,
                               @RequestParam(value = "returnURL", required = false) String returnURL,
                               @RequestParam(value = "msgtype", required = false) String messageType, Model model) {
 
         ProjectEntity pe = this.portalService.findProjectByProjectId(projectId);
+
+        Project project = this.loadProject(pe);
+
+            // @TODO check aauthorization
+            project.setReadonly(false);
+
+        addNav(model,returnURL);
+        model.addAttribute("pageName", "Project");
+        model.addAttribute("project", project);
+        model.addAttribute("anchor", "noteForm");
+        model.addAttribute("returnURL", "project?projectId="+projectId);
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "searchProject");
+        return "project";
+    }
+
+    private Project loadProject(ProjectEntity pe){
+
         String projectName = "Project";
         Project project = null;
         // manually map for now
@@ -144,7 +68,7 @@ public class ProjectController extends ControllerBase {
             project = new Project();
 
             // @TODO need to hook up
-            project.setHealthStatus("green");
+            project.setHealthStatus(pe.getHealth());
 
             // ready
             if (pe.getName() != null) {
@@ -162,7 +86,7 @@ public class ProjectController extends ControllerBase {
             Set<ProjectActivityEntity> paeList = pe.getProjectActivity();
             if (paeList != null) {
                 for (ProjectActivityEntity pae : paeList) {
-                    project.addActivity(new Activity(pae.getName(), pae.getDate(), pae.getStatus()));
+                    project.addActivity(new Activity(pae.getActivityId(),pae.getName(), pae.getDate(), pae.getStatus()));
                 }
             }
             Set<ProjectResourceEntity> reList = pe.getProjectResources();
@@ -217,36 +141,14 @@ public class ProjectController extends ControllerBase {
 
 
         }
-
-        addNav(model,returnURL);
-        model.addAttribute("pageName", "Project");
-        model.addAttribute("project", project);
-
-        model.addAttribute("pageGroup", "project");
-        model.addAttribute("pageId", "searchProject");
-        return "project";
+        return project;
     }
 
-
-
-/*
-
-    @RequestMapping(value="/projectEdit", method= RequestMethod.GET)
-    public String projectEditForm(@RequestParam(value="salesOrderId", required=true) long salesOrderId,
-                                  @RequestParam(value="msgtype", required=false) String messageType,Model model) {
-
-        SalesOrderEntity so = this.portalService.findSalesOrderEntityById(salesOrderId);
-        Project project = null;//this.projectMapper.convert(so);
-        model.addAttribute("pageName", "Edit Project");
-        model.addAttribute("project",project);
-
-        model.addAttribute("pageGroup", "project");
-        model.addAttribute("pageId", "searchProject");
-        return "projectEdit";
-    }
-
-    @RequestMapping(value="/projectEdit", method=RequestMethod.POST)
+   @RequestMapping(value="/projectInfo", method=RequestMethod.POST)
     public String projectEditSubmit(@ModelAttribute Project project, Model model) {
+
+
+
 
         //this.portalService.saveProject(this.projectMapper.convert(project));
         this.setSuccessAlertMessage(model,"project updated");
@@ -254,8 +156,34 @@ public class ProjectController extends ControllerBase {
         model.addAttribute("project", project);
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
-        return "projectEdit";
+        return "project";
     }
 
-*/
+    @RequestMapping(value="/projectNote", method=RequestMethod.POST)
+    public String projectNoteSubmit(@RequestParam(value="id",required=false) long id,@RequestParam(value="newnote",required=false) String newnote, Model model) {
+
+
+        ProjectEntity pe = this.portalService.findProjectByProjectId(id);
+
+        if(pe !=null) {
+            ProjectNotesEntity pne = new ProjectNotesEntity(pe, newnote);
+            this.portalService.addNote(pne);
+            pe = this.portalService.findProjectByProjectId(id);
+        }
+        Project project = this.loadProject(pe);
+
+        //this.setSuccessAlertMessage(model,"project updated");
+        model.addAttribute("pageName", "Save Project");
+        model.addAttribute("project", project);
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "searchProject");
+
+        //return new ModelAndView(new RedirectView("project#notesForm", true));
+
+
+        return projectView(id,"","", model);
+
+            //    return "redirect:project#notesForm?projectId="+id;
+    }
+
 }

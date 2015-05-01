@@ -1,5 +1,9 @@
 package com.ys.eportal.model;
 
+import com.ys.eportal.infra.domain.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Temporal;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -9,26 +13,16 @@ import java.util.List;
  */
 public class Activity extends AbstractModelBase{
 
-    public static Activity BOOK_DATE = new Activity("bookDate");
-    public static Activity SHIP_DATE = new Activity("shipDate");
-    public static Activity REVREC_DATE = new Activity("releaseForRevenueRecDate");
-    public static Activity ONSITEEND_DATE = new Activity("onSiteEndDate");
-    public static Activity ONSITESTART_DATE = new Activity("onSiteStartDate");
-    public static Activity KICKOFF_DATE = new Activity("kickoffMeetingDate");
-    public static Activity PLANNINGMEETING_DATE = new Activity("planningMeetingDate");
-
     private long activityId;
     private String name;
-    private Date date;
+
+
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
+    private Date activityDate;
     private String status;
 
-    private List<String> activityStatusValues = new ArrayList<String>() {{
-        add("NOT STARTED");
-        add("BOOKED");
-        add("COMPLETE");
-        add("WARNING");
-        add("BLOCKED");
-    }};
+    private List<String> activityStatusValues = Constants.Activities.ActivityStateValues;
+
     public Activity() {
     }
 
@@ -36,16 +30,16 @@ public class Activity extends AbstractModelBase{
         this.name = name;
     }
 
-    public Activity(String name, Date date, String status) {
+    public Activity(String name, Date activityDate, String status) {
         this.name = name;
-        this.date = date;
+        this.activityDate=activityDate;
         this.status = status;
     }
 
-    public Activity(long activityId, String name, Date date, String status) {
+    public Activity(long activityId, String name, Date activityDate, String status) {
         this.activityId = activityId;
         this.name = name;
-        this.date = date;
+        this.activityDate=activityDate;
         this.status = status;
     }
 
@@ -65,12 +59,13 @@ public class Activity extends AbstractModelBase{
         this.name = name;
     }
 
-    public Date getDate() {
-        return date;
+
+    public Date getActivityDate() {
+        return activityDate;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
+    public void setActivityDate(Date activityDate) {
+        this.activityDate = activityDate;
     }
 
     public String getStatus() {

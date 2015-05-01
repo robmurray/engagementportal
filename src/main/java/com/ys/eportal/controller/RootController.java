@@ -15,8 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class RootController extends ControllerBase{
 
-    @Autowired
-    private PortalService portalService;
 
     @RequestMapping("/")
     public String stdRedirect(){

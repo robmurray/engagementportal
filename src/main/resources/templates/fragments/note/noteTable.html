@@ -18,7 +18,7 @@
             <div class="clearfix"></div>
         </div>
         <div id="" th:id="${'noteform'+index}" class="panel-collapse collapse in">
-            <div name="noteForm" class="portlet-body">
+            <div id="noteForm" class="portlet-body">
 
                 <form role="form" action="#" th:action="${actionVar}" method="post">
                     <div class="input-group">
@@ -32,7 +32,7 @@
                     </div>
                 </form>
                 <div class="space-4"></div>
-                <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="3"
+                <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="5"
                        th:if="${notes!=null}">
                     <thead>
                     <tr>
@@ -48,7 +48,6 @@
 
                             <div class="btn-group btn-group-sm ">
                                 <a href="" th:href="@{projectNotes(projectId=${id},returnURL=${returnURL})}" class="btn btn-inverse"
-                                   data-placement="left" data-rel="tooltip" title="edit"
                                    th:if="${project.readonly!='true'}">
                                     <i class="fa fa-pencil icon-only"></i>
                                 </a>

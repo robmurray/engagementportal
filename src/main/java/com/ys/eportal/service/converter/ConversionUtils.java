@@ -12,8 +12,6 @@ import java.util.Date;
  * Created by rob on 4/14/15.
  */
 public class ConversionUtils {
-    public static final String DEFAULT_DATE_FORMAT = "yyyy-mm-dd";
-    public static final String MASTER_DATE_FORMAT = "mm/dd/yy";
 
     public static int convertToInt(String stringToConvert) throws NumberFormatException {
         int returnValue = 0;
@@ -83,7 +81,7 @@ public class ConversionUtils {
     public static Date convertToDate(String origdate,String dateFormat) throws ParseException {
 
         if(dateFormat == null||StringUtils.isEmpty(dateFormat)){
-            dateFormat = DEFAULT_DATE_FORMAT;
+            dateFormat = Constants.DEFAULT_DATE_FORMAT;
         }
 
         origdate = StringUtils.stripToNull(origdate);

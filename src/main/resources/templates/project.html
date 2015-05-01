@@ -19,19 +19,54 @@
     </div>
     <div th:if="${project!=null}">
 
-        <div th:replace="fragments/project/projectInfo :: projectInfo (project=${project}, readonly=${project.readonly} )"/>
-
+        <div th:replace="fragments/project/projectInfo :: projectInfo(project=${project}, readonly=${project.readonly})"/>
         <div th:replace="fragments/salesorder/salesOrderTable :: salesOrderTable(salesOrders=${project.salesOrders}, readonly=${project.readonly})"/>
 
         <div th:replace="fragments/activity/activityTable :: activityTable(activities=${project.activities}, readonly=${project.readonly})"/>
 
         <div th:replace="fragments/note/noteTable :: noteTable(actionVar=@{/projectNote},id=${project.projectId},notes=${project.notes},pageHeading='Notes', index='1', readonly=${project.readonly})"/>
 
-        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.remoteResources},pageHeading='Remote Resources', index='1', readonly='true')"/>
-        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.onsiteResources},pageHeading='Onsite Resources', index='2', readonly='true')"/>
-        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.accountResources},pageHeading='Account Team', index='3', readonly='true')"/>
+
+        <div class="portlet">
+            <div class="portlet-heading default-bg">
+                <div class="portlet-title">
+                    <h4>Resources</h4>
+                </div>
+                <div class="portlet-widgets">
+                    <a data-toggle="collapse" data-parent="#accordion" href="" th:href="${'#resourceform'+index}"><i
+                            class="fa fa-chevron-down"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div id="" th:id="${'resourceform'+index}" class="panel-collapse collapse in">
+                <div class="portlet-body">
 
 
+                    <div class="tc-tabs"><!-- Nav tabs style 1 -->
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a href="#tab1" data-toggle="tab">Remote</a></li>
+                            <li><a href="#tab2" data-toggle="tab">Onsite</a></li>
+                            <li><a href="#tab3" data-toggle="tab">Account</a></li>
+                        </ul>
+
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane active" id="tab1">
+                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.remoteResources},pageHeading='Remote Resources', index='1', readonly='true')"/>
+                            </div>
+                            <div class="tab-pane" id="tab2">
+                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.onsiteResources},pageHeading='Onsite Resources', index='2', readonly='true')"/>
+                            </div>
+                            <div class="tab-pane" id="tab3">
+                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.accountResources},pageHeading='Account Team', index='3', readonly='true')"/>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
     </div>
     <div class="row" th:if="${project==null}">
 
@@ -44,6 +79,37 @@
         </div>
 
     </div>
+
+    <script th:inline="javascript">
+        /*<![CDATA[*/
+        var anchor = /*[[${anchor}]]*/;
+        /*]]>*/
+
+        function doAnchor(){
+            if(anchor){
+                var anchor_node = document.getElementById(anchor);
+                window.scrollTo(0, anchor_node.offsetTop);
+                anchor=null;
+            }
+        }
+
+    </script>
+
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+            doAnchor();
+
+		});
+
+
+
+
+
+    </script>
+
+
 </div>
 </body>
 </html>>

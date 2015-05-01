@@ -21,8 +21,6 @@ import java.util.Iterator;
 @Controller
 public class CustomerSearchController  extends ControllerBase{
 
-    @Autowired
-    private PortalService portalService;
 
     @Autowired
     private CustomerMapper customerMapper;

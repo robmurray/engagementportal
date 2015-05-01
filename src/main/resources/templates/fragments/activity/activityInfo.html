@@ -24,31 +24,77 @@
 
                     <div th:replace="fragments/common/formButtons :: formButtons (readonly=${readonly} )"/>
                     <div class="row">
-                                <input type="hidden" th:field="*{activityId}"/>
-                            <div class="col-md-3">
-                                <div class="form-group">
-                                    <label class="control-label">Name</label>
-                                    <input type="text" class="form-control" th:field="*{name}"
-                                           placeholder="enter the activity name" readonly="readonly"/>
+                        <input type="hidden" th:field="*{activityId}"/>
 
-                                    <div class="has-error" th:if="${#fields.hasErrors('name')}"
-                                         th:errors="*{name}">error
-                                    </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Name</label>
+                                <input type="text" class="form-control" th:field="*{name}"
+                                       placeholder="enter the activity name" readonly="readonly"/>
+
+                                <div class="has-error" th:if="${#fields.hasErrors('name')}"
+                                     th:errors="*{name}">error
                                 </div>
                             </div>
+                        </div>
 
-                            <div class="col-lg-3 col-sm-6">
+                        <div class="col-lg-3 col-sm-6">
+                            <div class="form-group">
+
                                 <div class="form-group">
-                                    <label>Date</label>
-                                    <div class="input-group date form_date" data-date="" data-date-format="mm/dd/yy" data-link-field="dtp_input2" data-link-format="mm/dd/yy">
-                                        <span class="input-group-addon">
-                                            <i class="glyphicon glyphicon-calendar"></i>
-                                        </span>
-                                        <input class="form-control" />
+                                    <label class="control-label">activity date</label>
+
+                                    <div class="input-group">
+                                                    <span class="input-group-addon">
+                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                    </span>
+                                        <input class="form_date form-control" value="" th:field="*{activityDate}"/>
+
                                     </div>
-                                    <input type="hidden" id="dtp_input2" value="" th:field="*{date}"/><br/>
                                 </div>
+
+
+                                <!--
+                                                                <label>DateTime Picking</label>
+                                                                <div class="input-group date form_datetime">
+                                                                                                <span class="input-group-addon">
+                                                                                                    <i class="glyphicon glyphicon-time"></i>
+                                                                                                </span>
+                                                                    <input class="form-control" />
+                                                                </div>
+                                                                <input type="hidden" id="dtp_input1" value="" /><br/>
+
+
+                                                                <label>Date</label>
+                                                                <div class="input-group">
+                                                                    <span class="input-group-addon">
+                                                                        <i class="glyphicon glyphicon-calendar"></i>
+                                                                    </span>
+                                                                    <input type="text" class="datepicker form-control" th:field="*{activityDate}" data-date-format="mm/dd/yy" />
+                                                                </div>
+                                -->
+                                <!--
+                                <div class="input-group date form_date" data-date=""  data-date-format="mm/dd/yy">
+                                    <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    <input class="form-control" type="text" name="date" id="date" th:pattern="yyyy-mm-dd" th:value="*{date}"/>
+                                </div>
+                                <input class="form-control" type="text" th:pattern="yyyy-mm-dd" th:field="*{date}"/>
+                                -->
+                                <!--
+                                data-link-field="date" data-link-format="yyyy-mm-dd">
+                                th:attr="data-date=${activity.date}"
+                                                                <input class="form-control" type="text" name="date" id="date" th:value="*{date}"/>
+                                                                <input class="form-control" type="text" th:value="*{date}"/>
+                                                                <input class="form-control" type="text" th:pattern="yyyy-mm-dd" th:field="*{date}"/>
+
+                                                                <div class="input-append date" id="dp3" data-date="12-02-2012" data-date-format="dd-mm-yyyy">
+                                                                    <input class="span2" size="16" type="text" value="12-02-2012" readonly>
+                                                                    <span class="add-on"><i class="icon-calendar"></i></span>
+                                                                </div>
+                                -->
+
                             </div>
+                        </div>
 
                     </div>
                     <div class="row">
@@ -64,7 +110,6 @@
                                 </select>
                             </div>
                         </div>
-
 
 
                     </div>
@@ -83,6 +128,34 @@
         </div>
     </div>
 
+    <script type="text/javascript">
+
+        $(document).ready(function() {
+
+
+			$.mask.definitions['~']='[+-]';
+			$('.input-date').mask('99/99/9999');
+
+	        $('.datepicker').datepicker();
+
+			//Bootstrap Datetimepicker
+			$('.form_date').datetimepicker({
+				format: "dd/mm/yyyy",
+				weekStart: 1,
+				todayBtn:  1,
+				autoclose: 1,
+				todayHighlight: 1,
+				startView: 2,
+				minView: 2,
+				forceParse: 0
+			});
+
+		});
+
+
+
+
+    </script>
 
     <!-- END YOUR CONTENT HERE -->
 </div>

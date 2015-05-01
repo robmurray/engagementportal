@@ -7,9 +7,19 @@ import java.util.Date;
  */
 public abstract class AbstractModelBase {
 
+    protected boolean readonly;
+
     protected Date createDate;
 
     protected Date modifiedDate;
+
+    public boolean isReadonly() {
+        return readonly;
+    }
+
+    public void setReadonly(boolean readonly) {
+        this.readonly = readonly;
+    }
 
     public Date getCreateDate() {
         return createDate;

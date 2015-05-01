@@ -33,9 +33,6 @@ public class CustomerController  extends ControllerBase{
     private static Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
     @Autowired
-    private PortalService portalService;
-
-    @Autowired
     private CustomerMapper customerMapper;
 
 

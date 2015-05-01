@@ -132,8 +132,16 @@ public class PortalService extends ServicesBase{
     }
 
 
-    public void saveProject(SalesOrderEntity salesOrderEntity) {
+    public void save(SalesOrderEntity salesOrderEntity) {
         this.salesOrderRepository.save(salesOrderEntity);
+    }
+
+    public void save(ProjectActivityEntity projectActivity) {
+        this.projectActivityRepository.save(projectActivity);
+    }
+
+    public void save(ProjectEntity projectEntity) {
+        this.projectRepository.save(projectEntity);
     }
 
     public void addNote(ProjectNotesEntity pne){

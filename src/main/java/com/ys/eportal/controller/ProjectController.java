@@ -16,7 +16,9 @@ import org.springframework.web.servlet.view.RedirectView;
 
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Set;
 
 /**
@@ -25,15 +27,6 @@ import java.util.Set;
 @Controller
 public class ProjectController extends ControllerBase {
     private static Logger logger = LoggerFactory.getLogger(ProjectController.class);
-    @Autowired
-    private PortalService portalService;
-
-    @InitBinder
-    protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("mm/dd/yy");
-        CustomDateEditor editor = new CustomDateEditor(dateFormat, true);
-        binder.registerCustomEditor(Date.class, editor);
-    }
 
 
     @RequestMapping(value = "/project", method = RequestMethod.GET)
@@ -51,11 +44,25 @@ public class ProjectController extends ControllerBase {
         addNav(model,returnURL);
         model.addAttribute("pageName", "Project");
         model.addAttribute("project", project);
-        model.addAttribute("anchor", "noteForm");
         model.addAttribute("returnURL", "project?projectId="+projectId);
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
         return "project";
+    }
+
+    private static long daysDiff(Calendar c1, Calendar c2) {
+        Calendar earlierDate = new GregorianCalendar();
+        Calendar laterDate = new GregorianCalendar();
+        earlierDate.set(c1.get(Calendar.YEAR),
+                c1.get(Calendar.MONTH), c1.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+        laterDate.set(c2.get(Calendar.YEAR),
+                c2.get(Calendar.MONTH), c2.get(Calendar.DAY_OF_MONTH), 0, 0, 0);
+
+        long duration = laterDate.getTime().getTime() - earlierDate.getTime().getTime();
+        double days = duration / (24 * 60 * 60 * 1000);
+
+        return Math.round(days);
+
     }
 
     private Project loadProject(ProjectEntity pe){
@@ -67,15 +74,39 @@ public class ProjectController extends ControllerBase {
 
             project = new Project();
 
-            // @TODO need to hook up
+
+            project.setProjectId(project.getProjectId());
             project.setHealthStatus(pe.getHealth());
 
             // ready
             if (pe.getName() != null) {
                 projectName = projectName + ":" + pe.getName();
             }
-            project.setBookedToKickOff(pe.getBookedToKickOff());
-            project.setDaysToClose(pe.getDaysToClose());
+
+
+            // calculate @TODO push down into service layer
+            if(pe.getKickoffMeetingDate()!=null && pe.getBookDate()!=null) {
+
+                Calendar c1 = Calendar.getInstance();
+                Calendar c2 = Calendar.getInstance();
+                c1.setTime(pe.getKickoffMeetingDate());
+                c2.setTime(pe.getBookDate());
+                project.setBookedToKickOff(daysDiff(c1,c2));
+            }
+
+            if(pe.getReleaseForRevenueRecDate()!=null && pe.getBookDate()!=null) {
+
+                Calendar c1 = Calendar.getInstance();
+                Calendar c2 = Calendar.getInstance();
+
+                c1.setTime(pe.getReleaseForRevenueRecDate());
+                c2.setTime(pe.getBookDate());
+
+                project.setDaysToClose(daysDiff(c1,c2));
+
+            }
+
+            project.setReadonly(true);
             project.setLocation(pe.getLocation());
             project.setName(pe.getName());
             project.setProjectId(pe.getProjectId());
@@ -147,10 +178,18 @@ public class ProjectController extends ControllerBase {
    @RequestMapping(value="/projectInfo", method=RequestMethod.POST)
     public String projectEditSubmit(@ModelAttribute Project project, Model model) {
 
+        ProjectEntity pe = this.retrieveProject(project);
 
+       // @TODO push to mapping layer
+        if(pe!=null) {
+            pe.setHealth(project.getHealthStatus());
+            pe.setLocation(project.getLocation());
+            pe.setService(project.getService());
+            pe.setStatus(project.getStatus());
+            pe.setWaitTime(project.getWaitTime());
 
-
-        //this.portalService.saveProject(this.projectMapper.convert(project));
+            this.portalService.save(pe);
+        }
         this.setSuccessAlertMessage(model,"project updated");
         model.addAttribute("pageName", "Save Project");
         model.addAttribute("project", project);
@@ -158,6 +197,7 @@ public class ProjectController extends ControllerBase {
         model.addAttribute("pageId", "searchProject");
         return "project";
     }
+
 
     @RequestMapping(value="/projectNote", method=RequestMethod.POST)
     public String projectNoteSubmit(@RequestParam(value="id",required=false) long id,@RequestParam(value="newnote",required=false) String newnote, Model model) {
@@ -177,7 +217,7 @@ public class ProjectController extends ControllerBase {
         model.addAttribute("project", project);
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
-
+        model.addAttribute("anchor", "noteForm");
         //return new ModelAndView(new RedirectView("project#notesForm", true));
 
 

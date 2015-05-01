@@ -1,6 +1,7 @@
 package com.ys.eportal.service.converter;
 
 
+import com.ys.eportal.infra.domain.Constants;
 import com.ys.eportal.infra.domain.ImportMasterEntity;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
@@ -206,7 +207,7 @@ public class MasterCSVImport {
 
             Date bookDate = null;
             try {
-                bookDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), ConversionUtils.MASTER_DATE_FORMAT);
+                bookDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), Constants.MASTER_DATE_FORMAT);
             } catch (ParseException e) {
 
                 handleFieldError(e, "bookDate", record);
@@ -215,14 +216,14 @@ public class MasterCSVImport {
 
             Date shipDate = null;
             try {
-                shipDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), ConversionUtils.MASTER_DATE_FORMAT);
+                shipDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), Constants.MASTER_DATE_FORMAT);
             } catch (ParseException e) {
                 handleFieldError(e, "shipDate", record);
             }
 
             Date planningMeetingDate = null;
             try {
-                planningMeetingDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), ConversionUtils.MASTER_DATE_FORMAT);
+                planningMeetingDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), Constants.MASTER_DATE_FORMAT);
             } catch (ParseException e) {
                 handleFieldError(e, "planningMeetingDate", record);
                 ;
@@ -230,28 +231,28 @@ public class MasterCSVImport {
 
             Date kickoffMeetingDate = null;
             try {
-                kickoffMeetingDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), ConversionUtils.MASTER_DATE_FORMAT);
+                kickoffMeetingDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), Constants.MASTER_DATE_FORMAT);
             } catch (ParseException e) {
                 handleFieldError(e, "kickOffMeetingDate", record);
             }
 
             Date onSiteStartDate = null;
             try {
-                onSiteStartDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), ConversionUtils.MASTER_DATE_FORMAT);
+                onSiteStartDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), Constants.MASTER_DATE_FORMAT);
             } catch (ParseException e) {
                 handleFieldError(e, "onSiteStartDate", record);
             }
 
             Date onSiteEndDate = null;
             try {
-                onSiteEndDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), ConversionUtils.MASTER_DATE_FORMAT);
+                onSiteEndDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), Constants.MASTER_DATE_FORMAT);
             } catch (ParseException e) {
                 handleFieldError(e, "onSiteDate", record);
             }
 
             Date releaseForRevenueRecDate = null;
             try {
-                releaseForRevenueRecDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), ConversionUtils.MASTER_DATE_FORMAT);
+                releaseForRevenueRecDate = ConversionUtils.convertToDate(StringUtils.stripToNull(record.get(index++)), Constants.MASTER_DATE_FORMAT);
             } catch (ParseException e) {
                 handleFieldError(e, "releaseForRevenueRecDate", record);
             }

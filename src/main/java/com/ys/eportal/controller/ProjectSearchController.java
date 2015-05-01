@@ -25,9 +25,6 @@ import java.util.List;
 @Controller
 public class ProjectSearchController extends ControllerBase {
     private static Logger logger = LoggerFactory.getLogger(ProjectSearchController.class);
-    @Autowired
-    private PortalService portalService;
-
 
     @Autowired
     private ProjectSearchMapper projectSearchMapper;

@@ -6,8 +6,18 @@
 <body>
 
 <div id="messages" th:fragment="messages (message)">
+<!--
+    <div id="dialog-message" th:classappend="'bg-' + ${message.type}" th:if="${message !=null}">
+        <p>
+            <b th:text="${message.message}"></b>
+        </p>
 
-                <div class="alert" th:classappend="'bg-' + ${message.type}" th:if="${message !=null}">
+    </div>
+-->
+
+
+
+    <div class="alert" th:classappend="'bg-' + ${message.type}" th:if="${message !=null}">
                     <button type="button" class="close" data-dismiss="alert" aria-hidden="true">x</button>
 
                     <b th:text="${message.message}"></b>

@@ -158,9 +158,9 @@ public class ImportService extends ServicesBase {
                     ImportOracleObiEntity entity = new ImportOracleObiEntity();
 
                     // ok to store new object
-                    ConversionUtils.convertToDate(stage.getActivityDate(), ConversionUtils.DEFAULT_DATE_FORMAT);
+                    ConversionUtils.convertToDate(stage.getActivityDate(), Constants.DEFAULT_DATE_FORMAT);
 
-                    entity.setActivityDate(ConversionUtils.convertToDate(stage.getActivityDate(), ConversionUtils.DEFAULT_DATE_FORMAT));
+                    entity.setActivityDate(ConversionUtils.convertToDate(stage.getActivityDate(), Constants.DEFAULT_DATE_FORMAT));
                     entity.setActivityMonth(ConversionUtils.convertToInt(stage.getActivityMonth()));
                     entity.setActivityYear(ConversionUtils.convertToInt(stage.getActivityYear()));
                     entity.setBtCustomerName(stage.getBtCustomerName());

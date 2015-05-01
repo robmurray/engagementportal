@@ -24,7 +24,7 @@ public class ProjectActivityEntity extends AbstractDomainBase{
     @Column(name = "name", unique = false)
     private String name;
 
-    @Basic(fetch = FetchType.EAGER)
+    @Temporal(TemporalType.DATE)
     @Column(name = "date", unique = false)
     private Date date;
 

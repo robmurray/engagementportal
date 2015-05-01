@@ -36,11 +36,10 @@
                     <tr th:each="project : ${projects}" th:if="${projects != null}">
                         <td class="col-small left">
                             <div class="btn-group btn-group-sm ">
-
-                                    <a href="" th:href="'project?projectId='+${project.projectId}" class="btn btn-inverse" data-placement="left" data-rel="tooltip" title="edit" th:if="${project.readonly!='true'}">
+                                    <a href="" th:href="'project?projectId='+${project.projectId}" class="btn btn-inverse" th:if="${project.readonly!='true'}">
                                         <i class="fa fa-pencil icon-only"></i>
                                     </a>
-                                    <a href="" th:href="'project?projectId='+${project.projectId}" class="btn btn-danger" data-placement="left" data-rel="tooltip" title="delete" th:if="${project.readonly!='true'}">
+                                    <a href="" th:href="'project?projectId='+${project.projectId}" class="btn btn-danger" th:if="${project.readonly!='true'}">
                                         <i class="fa fa-times icon-only"></i>
                                     </a>
 

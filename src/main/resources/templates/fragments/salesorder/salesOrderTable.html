@@ -40,7 +40,7 @@
                         <td th:if="${readonly!='true'}" class="col-small left">
                             <div class="btn-group btn-group-sm ">
                                 <a href="" th:href="@{salesOrder(salesOrderId=${salesOrderId},returnURL=${returnURL})}"
-                                   class="btn btn-inverse" data-placement="left" data-rel="tooltip" title="Edit" th:if="${readonly!='true'}">
+                                   class="btn btn-inverse" th:if="${readonly!='true'}">
                                     <i class="fa fa-pencil icon-only"></i></a>
 
 
@@ -48,11 +48,9 @@
                         </td>
 
                         <td class="col-small left"><a href="" th:href="@{customer(customerId=${salesOrder.customerId},returnURL=${returnURL})}"
-                                                      data-placement="left" data-rel="tooltip" title="view"
                                                       th:text="${salesOrder.stCustomerName}"></a></td>
 
                         <td class="col-small left"><a href="" th:href="@{salesorder(salesorderId=${salesOrder.salesOrderId},returnURL=${returnURL})}"
-                                                      data-placement="left" data-rel="tooltip" title="view"
                                                       th:text="${salesOrder.salesOrderNumber}"></a></td>
                         <td class="col-small left" th:text="${salesOrder.amount}"></td>
                         <td class="col-small left" th:text="${salesOrder.region}"></td>

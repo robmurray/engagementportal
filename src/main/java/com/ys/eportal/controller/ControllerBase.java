@@ -1,21 +1,58 @@
 package com.ys.eportal.controller;
 
+import com.ys.eportal.infra.domain.Constants;
+import com.ys.eportal.infra.domain.ProjectEntity;
 import com.ys.eportal.model.Message;
 import com.ys.eportal.model.Navigation;
+import com.ys.eportal.model.Project;
+import com.ys.eportal.service.PortalService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.ServletRequestDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+
+import javax.servlet.http.HttpServletRequest;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Created by rob on 4/21/15.
  */
 public abstract class ControllerBase {
 
+    @Autowired
+    protected PortalService portalService;
+
+
+
+
+    public ProjectEntity retrieveProject(Project project){
+        if(project ==null){
+            return null;
+        }
+        return this.portalService.findProjectByProjectId(project.getProjectId());
+    }
+
+
     protected void addNav(Model model, String returnURL){
         if(returnURL==null || returnURL.trim().equals("")){
             returnURL="projectSearch";
         }
         model.addAttribute("nav", new Navigation(returnURL));
+    }
+
+    protected void addNav(Model model, String returnURL,String anchor){
+        if(returnURL==null || returnURL.trim().equals("")){
+            returnURL="projectSearch";
+        }
+        Navigation nav = new Navigation();
+        if(anchor!=null){
+
+        }
+        model.addAttribute("nav", nav);
     }
 
     public String retrieveUserName() {

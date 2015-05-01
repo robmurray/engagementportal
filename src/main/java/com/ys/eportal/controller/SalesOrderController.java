@@ -26,8 +26,6 @@ import java.util.Set;
 @Controller
 public class SalesOrderController extends ControllerBase {
     private static Logger logger = LoggerFactory.getLogger(SalesOrderController.class);
-    @Autowired
-    private PortalService portalService;
 
     @InitBinder
     protected void initBinder(HttpServletRequest request, ServletRequestDataBinder binder) throws Exception {

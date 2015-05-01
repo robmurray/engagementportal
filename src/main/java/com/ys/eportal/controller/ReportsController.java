@@ -15,9 +15,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class ReportsController extends ControllerBase{
 
-    @Autowired
-    private PortalService portalService;
-
 
     @RequestMapping(value="/qsTimeToFulfill", method= RequestMethod.GET)
     public String customerForm(Model model) {

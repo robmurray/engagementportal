@@ -11,7 +11,7 @@
            th:if="${resources!=null}">
         <thead>
         <tr>
-            <th class="col-small left" th:if="${readonly!='true'}">actions</th>
+            <th class="col-small left">actions</th>
             <th class="col-small left" data-toggle="true">First Name</th>
             <th class="col-small left" data-toggle="true">Last Name</th>
             <th class="col-small left" data-toggle="true">Type</th>
@@ -19,15 +19,18 @@
         </thead>
         <tbody>
         <tr th:each="resource : ${resources}">
-            <td class="col-small left" th:if="${readonly!='true'}">
+            <td class="col-small left">
                 <div class="action-buttons">
-                    <a href="" th:href="'noteEdit?noteId='+${resource.resourceId}"
-                       data-placement="left" data-rel="tooltip" title="Edit"><i
-                            class="fa fa-pencil bigger-130"></i></a>
+                    <form class="form" role="form" action="" th:action="@{/projectResourceDelete}" method="post">
+                        <input type="hidden" name="projectResourceId" th:value="${resource.projectResourceId}"/>
+                        <button type="submit" class="btn  btn-inverse"><i class="fa fa-times icon-only"></i></button>
+                    </form>
                 </div>
             </td>
-            <td class="col-small left" th:text="${resource.firstName}"></td>
-            <td class="col-small left" th:text="${resource.lastName}"></td>
+            <td class="col-small left"><a href="" th:href="@{resource(resourceId=${resource.resourceId},returnURL=${returnURL})}"
+                                          th:text="${resource.firstName}"></a></td>
+            <td class="col-small left"><a href="" th:href="@{resource(resourceId=${resource.resourceId},returnURL=${returnURL})}"
+                                          th:text="${resource.lastName}"></a></td>
             <td class="col-small left" th:text="${resource.type}"></td>
         </tr>
         </tbody>
@@ -50,7 +53,42 @@
 
     </div>
 
+    <script type="text/javascript">
 
+        $(document).ready(function() {
+
+
+            $( "#id-btn-removeresource" ).on('click', function(e) {
+                e.preventDefault();
+
+		        $( "#dialog-confirm" ).removeClass('hide').dialog({
+			    resizable: false,
+			    modal: true,
+			    title: "<i class='fa fa-warning text-danger'></i> Remove Resource from Project?",
+			    title_html: true,
+			    buttons: [
+                    {
+                        html: "<i class='fa fa-trash-o'></i> Remove Resource",
+                        "class" : "btn btn-danger btn-sm",
+                        click: function() {
+                            $( this ).dialog( "close" );
+                        }
+                    }
+                    ,
+                    {
+                        html: "<i class='fa fa-times'></i> No",
+                        "class" : "btn btn-sm",
+                        click: function() {
+                            $( this ).dialog( "close" );
+                        }
+                    }
+			    ]
+		    });
+	    });
+
+    });
+
+</script>
 </div>
 </body>
 </html>

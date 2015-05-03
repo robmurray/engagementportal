@@ -1,14 +1,20 @@
 package com.ys.eportal.model;
 
+import com.ys.eportal.infra.domain.Constants;
+
+import java.util.List;
+
 /**
  * Created by rob on 4/25/15.
  */
 public class Resource {
+
     private long resourceId;
+    private long projectResourceId;
     private String firstName;
     private String lastName;
     private String type;
-
+    private List<String> typeValues = Constants.Resource.typeValues;
     public Resource() {
     }
 
@@ -21,6 +27,37 @@ public class Resource {
         this.firstName = firstName;
         this.lastName = lastName;
         this.type = type;
+    }
+
+    public Resource(long resourceId, String firstName, String lastName, String type) {
+        this.resourceId = resourceId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.type = type;
+    }
+
+    public Resource(long resourceId, long projectResourceId, String firstName, String lastName, String type) {
+        this.resourceId = resourceId;
+        this.projectResourceId = projectResourceId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.type = type;
+    }
+
+    public List<String> getTypeValues() {
+        return typeValues;
+    }
+
+    public long getProjectResourceId() {
+        return projectResourceId;
+    }
+
+    public void setProjectResourceId(long projectResourceId) {
+        this.projectResourceId = projectResourceId;
+    }
+
+    public void setTypeValues(List<String> typeValues) {
+        this.typeValues = typeValues;
     }
 
     public String getType() {

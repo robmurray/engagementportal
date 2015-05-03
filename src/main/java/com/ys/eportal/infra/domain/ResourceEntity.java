@@ -27,7 +27,8 @@ public class ResourceEntity extends AbstractDomainBase {
     @Column(name = "type", unique = false)
     private String type;
 
-    @OneToMany(mappedBy = "resource")
+    //@OneToMany(mappedBy = "resource ")
+    @OneToMany(mappedBy = "resource", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ProjectResourceEntity> projectResources;
 
     public ResourceEntity() {

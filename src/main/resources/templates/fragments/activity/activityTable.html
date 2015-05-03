@@ -44,7 +44,7 @@
                                 </div>
                             </td>
                             <td class="col-small left" th:text="${activity.name}"></td>
-                            <td class="col-small left" th:text="${activity.activityDate}"></td>
+                            <td class="col-small left" th:format="dd-MM-yyyy" th:text="${activity.activityDate}"></td>
                             <td class="col-small left" th:text="${activity.status}"></td>
 
                         </tr>

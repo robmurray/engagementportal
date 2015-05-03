@@ -18,9 +18,10 @@ public class ProjectNote extends AbstractModelBase implements NoteInterface{
 
         this.note = note;
     }
-    public ProjectNote(String note, Date createDate) {
-        this.note = note;
+    public ProjectNote(long noteId, String note, Date createDate) {
         this.createDate= createDate;
+        this.noteId = noteId;
+        this.note = note;
     }
 
     public long getNoteId() {

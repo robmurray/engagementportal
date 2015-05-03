@@ -63,6 +63,22 @@ public class Constants {
         };
     }
 
+    public static class Resource {
+        public final static String TYPE_TECHNICAL = "Technical";
+        public final static String TYPE_TRAINER = "Trainer";
+        public final static String TYPE_ACCOUNTTEAM = "Account Team";
+
+        public static List<String> typeValues = new ArrayList<String>() {
+            {
+                add(TYPE_TECHNICAL);
+                add(TYPE_TRAINER);
+                add(TYPE_ACCOUNTTEAM);
+            }
+        };
+
+
+    }
+
 
     public static class Credits {
         public final static String STATUS_HI_HOLD = "HI HOLD";

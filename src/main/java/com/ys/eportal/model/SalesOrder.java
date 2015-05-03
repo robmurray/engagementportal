@@ -18,6 +18,7 @@ public class SalesOrder extends AbstractModelBase {
     private String stSalesAgentName;
     private Integer activityYear;
     private Integer activityMonthNumber;
+
     private Date activityDate;
     private String stCustomerName;
     private String btCustomerName;

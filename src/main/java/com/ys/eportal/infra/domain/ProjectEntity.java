@@ -289,6 +289,12 @@ public class ProjectEntity extends AbstractDomainBase {
         this.notes = notes;
     }
 
+    public void addNotes(ProjectNotesEntity pne){
+        if(this.notes ==null){
+            this.notes = new HashSet<ProjectNotesEntity>();
+        }
+        notes.add(pne);
+    }
     public String getWaitTime() {
         return waitTime;
     }

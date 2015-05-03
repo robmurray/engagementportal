@@ -3,8 +3,10 @@ package com.ys.eportal.controller;
 
 import com.ys.eportal.infra.domain.Constants;
 import com.ys.eportal.infra.domain.ProjectActivityEntity;
+import com.ys.eportal.infra.domain.ProjectEntity;
 import com.ys.eportal.mapper.CustomerMapper;
 import com.ys.eportal.model.Activity;
+import com.ys.eportal.model.Project;
 import com.ys.eportal.service.PortalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -58,6 +60,8 @@ public class ActivityController extends ControllerBase {
 
 
         ProjectActivityEntity pae = this.portalService.findProjectActivityById(activity.getActivityId());
+        Project p = null;
+        ProjectEntity pe = null;
         // @TODO push to mapping layer
         if (pae != null) {
 
@@ -68,14 +72,24 @@ public class ActivityController extends ControllerBase {
 
             // repull
             pae = this.portalService.findProjectActivityById(activity.getActivityId());
-            activity= this.loadActivity(pae);
+          //  activity= this.loadActivity(pae);
 
+            pe = pae.getProject();
+            p = loadProject(pe);
         }
 
         this.setSuccessAlertMessage(model, "Milestone updated");
+        model.addAttribute("anchor","projectactivitiesform");
+        model.addAttribute("projectId",pae.getProject().getProjectId());
 
 
-        return activityViewForm(activity.getActivityId(), "", "","", model);
+        // hack @TODO fix
+        model.addAttribute("pageName", "Project");
+        model.addAttribute("project",p );
+        model.addAttribute("returnURL", "project?projectId="+pae.getProject().getProjectId());
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "searchProject");
+        return "project";
 
 
     }

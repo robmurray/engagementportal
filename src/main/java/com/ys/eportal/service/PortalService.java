@@ -10,8 +10,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -40,7 +43,16 @@ public class PortalService extends ServicesBase{
     @Autowired
     private ProjectActivityRepository projectActivityRepository;
 
+    @Autowired
+    private ResourceRepository resourceRepository;
+
+    @Autowired
+    private ProjectResourceRepository projectResourceRepository;
+
+    @PersistenceContext
+    private EntityManager entityManager;
     public ProjectStats retrieveProjectStatus() {
+
 
         List<Object[]> list = this.salesOrderRepository.retrieveOrderStats();
 
@@ -102,7 +114,9 @@ public class PortalService extends ServicesBase{
         return this.customerRepository.findOne(customerId);
     }
 
-
+    public ResourceEntity findResourceEntityById(long resourceId){
+        return this.resourceRepository.findOne(resourceId);
+    }
     public CustomerEntity findCustomerByName(String name) {
         CustomerEntity customer = null;
         List<CustomerEntity> list = this.customerRepository.findByName(name);
@@ -138,20 +152,46 @@ public class PortalService extends ServicesBase{
 
     public void save(ProjectActivityEntity projectActivity) {
         this.projectActivityRepository.save(projectActivity);
+        //entityManager.refresh(projectActivity);
     }
 
     public void save(ProjectEntity projectEntity) {
         this.projectRepository.save(projectEntity);
+        entityManager.refresh(projectEntity);
     }
 
     public void addNote(ProjectNotesEntity pne){
         this.projectNotesRepository.save(pne);
+
     }
     public SalesOrderEntity findSalesOrderEntityById(long salesOrderId) {
         return this.salesOrderRepository.findOne(salesOrderId);
 
     }
 
+    public void save(ResourceEntity resourceEntity){
+        this.resourceRepository.save(resourceEntity);
+    }
+    public void delete(ResourceEntity resourceEntity){
+        this.resourceRepository.delete(resourceEntity);
+    }
+
+    public void delete(ProjectResourceEntity projectResourceEntity){
+
+
+        this.projectResourceRepository.deleteProjectResourceEntity(projectResourceEntity.getProjectResourceId());
+        ProjectEntity pe =projectResourceEntity.getProject();
+        pe.getProjectResources().remove(projectResourceEntity);
+        ResourceEntity re = projectResourceEntity.getResource();
+        re.getProjectResources().remove(projectResourceEntity);
+        this.projectRepository.save(pe);
+        this.resourceRepository.save(re);
+
+
+    }
+    public void save(ProjectResourceEntity projectResourceEntity){
+        this.projectResourceRepository.save(projectResourceEntity);
+    }
     public SalesOrderEntity findSalesOrderEntityByNumber(String salesOrderNumber) {
         List<SalesOrderEntity> list = this.salesOrderRepository.findBySalesOrderNumber(salesOrderNumber);
         SalesOrderEntity soe = null;
@@ -202,6 +242,11 @@ public class PortalService extends ServicesBase{
         return this.projectRepository.findOne(projectId);
     }
 
+
+    public ProjectResourceEntity findProjectResourceById(long id){
+        return this.projectResourceRepository.findOne(id);
+    }
+
     public Iterable<ProjectEntity> find(ProjectSearchSupport search) {
         List<ProjectEntity> results = null;
 
@@ -228,5 +273,18 @@ public class PortalService extends ServicesBase{
         return results;
     }
 
+
+    public Iterable<ResourceEntity> find(ResourceSearchSupport search) {
+        Iterable<ResourceEntity> results = null;
+
+            results = this.findAllResources();
+
+
+        return results;
+    }
+
+    public Iterable<ResourceEntity> findAllResources() {
+        return this.resourceRepository.findAll();
+    }
 
 }

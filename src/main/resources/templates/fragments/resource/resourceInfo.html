@@ -4,55 +4,49 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div id="activityInfo" th:fragment="activityInfo (activity,readonly)">
+<div id="resourceInfo" th:fragment="resourceInfo (resource,readonly)">
 
     <div class="portlet">
         <div class="portlet-heading default-bg">
             <div class="portlet-title">
-                <h4>Activity Information</h4>
+                <h4>Resource Information</h4>
             </div>
             <div class="portlet-widgets">
-                <a data-toggle="collapse" data-parent="#accordion" href="#activityinfopanel"><i
+                <a data-toggle="collapse" data-parent="#accordion" href="#resourceinfopanel"><i
                         class="fa fa-chevron-down"></i></a>
             </div>
             <div class="clearfix"></div>
         </div>
-        <div id="activityinfopanel" class="panel-collapse collapse in">
+        <div id="resourceinfopanel" class="panel-collapse collapse in">
             <div class="portlet-body">
-                <form class="form" role="form" action="#" th:action="@{/activity}" th:object="${activity}"
-                      method="post" th:if="${activity!=null}">
+                <form class="form" role="form" action="#" th:action="@{/resource}" th:object="${resource}"
+                      method="post" th:if="${resource!=null}">
 
                     <div th:replace="fragments/common/formButtons :: formButtons (readonly=${readonly} )"/>
                     <div class="row">
-                        <input type="hidden" th:field="*{activityId}"/>
+                        <input type="hidden" th:field="*{resourceId}"/>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label class="control-label">Name</label>
-                                <input type="text" class="form-control" th:field="*{name}"
-                                       placeholder="enter the activity name" readonly="readonly"/>
+                                <label class="control-label">First Name</label>
+                                <input type="text" class="form-control" th:field="*{firstName}"
+                                       placeholder="enter the first name"/>
 
-                                <div class="has-error" th:if="${#fields.hasErrors('name')}"
-                                     th:errors="*{name}">error
+                                <div class="has-error" th:if="${#fields.hasErrors('firstName')}"
+                                     th:errors="*{firstName}">error
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-3 col-sm-6">
+                        <div class="col-md-3">
                             <div class="form-group">
+                                <label class="control-label">Last Name</label>
+                                <input type="text" class="form-control" th:field="*{lastName}"
+                                       placeholder="enter the first name"/>
 
-                                <div class="form-group">
-                                    <label class="control-label">activity date</label>
-
-                                    <div class="input-group">
-                                                    <span class="input-group-addon">
-                                                        <i class="glyphicon glyphicon-calendar"></i>
-                                                    </span>
-                                        <input class="form_date form-control" value="" th:field="*{activityDate}"/>
-
-                                    </div>
+                                <div class="has-error" th:if="${#fields.hasErrors('lastName')}"
+                                     th:errors="*{lastName}">error
                                 </div>
-
                             </div>
                         </div>
 
@@ -62,9 +56,9 @@
                         <div class="col-md-2">
 
                             <div class="form-group">
-                                <label class="control-label">status</label>
-                                <select class="form-control selectpicker" th:field="*{status}">
-                                    <option th:each="type : *{activityStatusValues}"
+                                <label class="control-label">Type</label>
+                                <select class="form-control selectpicker" th:field="*{type}">
+                                    <option th:each="type : *{typeValues}"
                                             th:value="${type}"
                                             th:text="${type}"></option>
                                 </select>
@@ -75,11 +69,11 @@
                     </div>
                 </form>
 
-                <div class="row" th:if="${activity==null}">
+                <div class="row" th:if="${resource==null}">
 
                     <div class="col-sm-6">
                         <div class="well bg-primary center">
-                            <p>There is currently no activity information associated with this project.</p>
+                            <p>There is currently no resource information associated with this resource.</p>
                         </div>
                     </div>
 

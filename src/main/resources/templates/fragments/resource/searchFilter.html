@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="searchFilter" th:fragment="searchFilter">
+
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>Project Search</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#f-3"><i class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="f-3" class="panel-collapse collapse in">
+            <div class="portlet-body">
+                <div class="row bg-light ">
+
+                    <div class="col-md-4 ">
+                        <div class="form-group">
+                            <label class="control-label">search by resource last name</label>
+
+                            <form role="form" action="#" th:action="@{/resourceSearch}" th:object="${resourcesearch}"
+                                  method="post">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" th:field="*{lastName}"
+                                           placeholder="enter the last name"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-search icon-only"></i>
+
+                                    </button>
+                                     <button class="btn btn-danger" type="reset">
+                                         <i class="fa fa-times icon-only"></i>
+                                     </button>
+                                </span>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-4 ">
+                        <div class="form-group">
+                            <label class="control-label">search by resource first name</label>
+
+                            <form role="form" action="#" th:action="@{/resourceSearch}" th:object="${resourcesearch}"
+                                  method="post">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" th:field="*{firstName}"
+                                           placeholder="enter the first name"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-search icon-only"></i>
+
+                                    </button>
+                                     <button class="btn btn-danger" type="reset">
+                                         <i class="fa fa-times icon-only"></i>
+                                     </button>
+                                </span>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Filter by Type</label>
+
+                            <form role="form" action="#" th:action="@{/resourceSearch}" th:object="${resourcesearch}"
+                                  method="post">
+                                <div class="input-group">
+                                    <select class="form-control selectpicker" th:field="*{type}">
+                                        <option th:each="type : *{typeValues}"
+                                                th:value="${type}"
+                                                th:text="${type}"></option>
+                                    </select>
+
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-search icon-only"></i>
+                                    </button>
+                                </span>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+</html>

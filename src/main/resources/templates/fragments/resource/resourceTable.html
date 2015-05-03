@@ -5,8 +5,26 @@
 </head>
 <body>
 
-<div id="resourceTable" th:fragment="resourceTable (resources,pageHeading, index, readonly)">
+<div id="resourceTable" th:fragment="resourceTable (resources,addableResources, index, readonly)">
 
+    <form class="form" role="form" action="" th:action="@{/projectResourceAdd}" method="post">
+        <div class="form-group">
+            <div class="col-sm-2">
+                <label class="control-label">Add Resource</label>
+            </div>
+            <div class="col-sm-6">
+                <div class="input-group">
+                    <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                    <select id="e2" class="form-control" name="newResource">
+                        <option th:each="res : *{addableResources}"
+                                th:value="${res}"
+                                th:text="${res.firstName+' ' +res.lastName}"></option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </form>
+    <div class="space-15"></div>
     <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="100"
            th:if="${resources!=null}">
         <thead>
@@ -27,9 +45,11 @@
                     </form>
                 </div>
             </td>
-            <td class="col-small left"><a href="" th:href="@{resource(resourceId=${resource.resourceId},returnURL=${returnURL})}"
+            <td class="col-small left"><a href=""
+                                          th:href="@{resource(resourceId=${resource.resourceId},returnURL=${returnURL})}"
                                           th:text="${resource.firstName}"></a></td>
-            <td class="col-small left"><a href="" th:href="@{resource(resourceId=${resource.resourceId},returnURL=${returnURL})}"
+            <td class="col-small left"><a href=""
+                                          th:href="@{resource(resourceId=${resource.resourceId},returnURL=${returnURL})}"
                                           th:text="${resource.lastName}"></a></td>
             <td class="col-small left" th:text="${resource.type}"></td>
         </tr>
@@ -57,7 +77,15 @@
 
         $(document).ready(function() {
 
+           //Select2 examples
+			$("#e2").select2({
+				width: 175
+			});
 
+
+
+
+/*
             $( "#id-btn-removeresource" ).on('click', function(e) {
                 e.preventDefault();
 
@@ -85,10 +113,13 @@
 			    ]
 		    });
 	    });
+*/
 
     });
 
-</script>
+
+
+    </script>
 </div>
 </body>
 </html>

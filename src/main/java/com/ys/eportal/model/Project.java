@@ -18,6 +18,7 @@ public class Project extends AbstractModelBase {
     private List<Resource> remoteResources;
     private List<Resource> accountResources;
     private List<Resource> onsiteResources;
+    private List<Resource> remoteAddableResources;
     private List<Activity> activities;
 
     private String name;
@@ -156,6 +157,23 @@ public class Project extends AbstractModelBase {
         this.accountResources.add(resource);
     }
 
+    public List<Resource> getRemoteAddableResources() {
+        return remoteAddableResources;
+    }
+
+    public void setRemoteAddableResources(List<Resource> remoteAddableResources) {
+        this.remoteAddableResources = remoteAddableResources;
+    }
+
+    public void addRemoteAddableResource(Resource resource) {
+        if (resource == null) {
+            return;
+        }
+        if (this.remoteAddableResources == null) {
+            this.remoteAddableResources = new ArrayList<Resource>();
+        }
+        this.remoteAddableResources.add(resource);
+    }
     public void addOnsiteResource(Resource resource) {
         if (resource == null) {
             return;

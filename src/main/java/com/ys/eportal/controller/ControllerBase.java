@@ -6,18 +6,11 @@ import com.ys.eportal.service.PortalService;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
 
-import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
-import java.util.GregorianCalendar;
 import java.util.Set;
 
 /**
@@ -29,48 +22,47 @@ public abstract class ControllerBase {
     protected PortalService portalService;
 
 
-
-
-    public ProjectEntity retrieveProject(Project project){
-        if(project ==null){
+    public ProjectEntity retrieveProject(Project project) {
+        if (project == null) {
             return null;
         }
         return this.portalService.findProjectByProjectId(project.getProjectId());
     }
 
     protected Long getDifferenceInDays(Date date1, Date date2) {
-        if(date1 == null || date2==null){
+        if (date1 == null || date2 == null) {
             return null;
         }
-        boolean isNegative=false;
+        boolean isNegative = false;
         Date param1 = date1;
-        Date param2=date2;
+        Date param2 = date2;
 
         // swap the dates if necessary
-        if(date1.getTime()>date2.getTime()){
-            isNegative=true;
+        if (date1.getTime() > date2.getTime()) {
+            isNegative = true;
             param1 = date2;
-            param2=date1;
+            param2 = date1;
         }
 
         Interval interval = new Interval(param1.getTime(), param2.getTime());
         Duration d = interval.toDuration();
 
-        return isNegative?(-1)*d.getStandardDays():d.getStandardDays();
+        return isNegative ? (-1) * d.getStandardDays() : d.getStandardDays();
     }
-    protected void addNav(Model model, String returnURL){
-        if(returnURL==null || returnURL.trim().equals("")){
-            returnURL="projectSearch";
+
+    protected void addNav(Model model, String returnURL) {
+        if (returnURL == null || returnURL.trim().equals("")) {
+            returnURL = "projectSearch";
         }
         model.addAttribute("nav", new Navigation(returnURL));
     }
 
-    protected void addNav(Model model, String returnURL,String anchor){
-        if(returnURL==null || returnURL.trim().equals("")){
-            returnURL="projectSearch";
+    protected void addNav(Model model, String returnURL, String anchor) {
+        if (returnURL == null || returnURL.trim().equals("")) {
+            returnURL = "projectSearch";
         }
         Navigation nav = new Navigation();
-        if(anchor!=null){
+        if (anchor != null) {
 
         }
         model.addAttribute("nav", nav);
@@ -79,14 +71,14 @@ public abstract class ControllerBase {
     public String retrieveUserName() {
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
         String name = auth.getName(); //get logged in username
-        return  name;
+        return name;
     }
 
-    public void setSuccessAlertMessage(Model model,String message) {
-        this.setSuccessAlertMessage(model,message,null);
+    public void setSuccessAlertMessage(Model model, String message) {
+        this.setSuccessAlertMessage(model, message, null);
     }
 
-    public void setSuccessAlertMessage(Model model,String message,String gotoURL){
+    public void setSuccessAlertMessage(Model model, String message, String gotoURL) {
         Message m = new Message();
         m.setSuccess();
         m.setMessage(message);
@@ -94,11 +86,11 @@ public abstract class ControllerBase {
         model.addAttribute("message", m);
     }
 
-    public void setPrimaryAlertMessage(Model model,String message){
-        setPrimaryAlertMessage(model,message,null);
+    public void setPrimaryAlertMessage(Model model, String message) {
+        setPrimaryAlertMessage(model, message, null);
     }
 
-    public void setPrimaryAlertMessage(Model model,String message,String gotoURL){
+    public void setPrimaryAlertMessage(Model model, String message, String gotoURL) {
         Message m = new Message();
         m.setPrimary();
         m.setMessage(message);
@@ -106,10 +98,11 @@ public abstract class ControllerBase {
         model.addAttribute("message", m);
     }
 
-    public void setDangerAlertMessage(Model model,String message){
-        setDangerAlertMessage(model,message,null);
+    public void setDangerAlertMessage(Model model, String message) {
+        setDangerAlertMessage(model, message, null);
     }
-    public void setDangerAlertMessage(Model model,String message,String gotoURL){
+
+    public void setDangerAlertMessage(Model model, String message, String gotoURL) {
         Message m = new Message();
         m.setDanger();
         m.setMessage(message);
@@ -117,21 +110,23 @@ public abstract class ControllerBase {
         model.addAttribute("message", m);
     }
 
-    public void setInfoAlertMessage(Model model,String message){
-        setInfoAlertMessage(model,message,null);
+    public void setInfoAlertMessage(Model model, String message) {
+        setInfoAlertMessage(model, message, null);
     }
 
-    public void setInfoAlertMessage(Model model,String message,String gotoURL){
+    public void setInfoAlertMessage(Model model, String message, String gotoURL) {
         Message m = new Message();
         m.setInfo();
         m.setMessage(message);
         m.setGotoURL(gotoURL);
         model.addAttribute("message", m);
     }
-    public void setWarningAlertMessage(Model model,String message){
-        setWarningAlertMessage(model,message,null);
+
+    public void setWarningAlertMessage(Model model, String message) {
+        setWarningAlertMessage(model, message, null);
     }
-    public void setWarningAlertMessage(Model model,String message,String gotoURL){
+
+    public void setWarningAlertMessage(Model model, String message, String gotoURL) {
         Message m = new Message();
         m.setWarning();
         m.setMessage(message);
@@ -145,7 +140,7 @@ public abstract class ControllerBase {
         model.addAttribute("pageName", pageName);
     }
 
-    protected Project loadProject(ProjectEntity pe){
+    protected Project loadProject(ProjectEntity pe) {
 
         String projectName = "Project";
         Project project = null;
@@ -165,17 +160,16 @@ public abstract class ControllerBase {
 
 
             // calculate @TODO push down into service layer
-            if(pe.getKickoffMeetingDate()!=null && pe.getBookDate()!=null) {
-
+            if (pe.getKickoffMeetingDate() != null && pe.getBookDate() != null) {
 
 
                 project.setBookedToKickOff(getDifferenceInDays(pe.getKickoffMeetingDate(), pe.getBookDate()));
             }
 
-            if(pe.getReleaseForRevenueRecDate()!=null && pe.getBookDate()!=null) {
+            if (pe.getReleaseForRevenueRecDate() != null && pe.getBookDate() != null) {
 
 
-                project.setDaysToClose(getDifferenceInDays(pe.getReleaseForRevenueRecDate(),pe.getBookDate()));
+                project.setDaysToClose(getDifferenceInDays(pe.getReleaseForRevenueRecDate(), pe.getBookDate()));
 
             }
 
@@ -190,7 +184,7 @@ public abstract class ControllerBase {
             Set<ProjectActivityEntity> paeList = pe.getProjectActivity();
             if (paeList != null) {
                 for (ProjectActivityEntity pae : paeList) {
-                    project.addActivity(new Activity(pae.getActivityId(),pae.getName(), pae.getDate(), pae.getStatus()));
+                    project.addActivity(new Activity(pae.getActivityId(), pae.getName(), pae.getDate(), pae.getStatus()));
                 }
             }
             Set<ProjectResourceEntity> reList = pe.getProjectResources();
@@ -198,19 +192,25 @@ public abstract class ControllerBase {
 
                 for (ProjectResourceEntity pre : reList) {
                     if (pre.getRole().equals(Constants.Role.ONSITE)) {
-                        project.addOnsiteResource(new Resource(pre.getResource().getResourceId(),pre.getProjectResourceId(),pre.getResource().getFirstName(), pre.getResource().getLastName(),pre.getResource().getType()));
+                        project.addOnsiteResource(new Resource(pre.getResource().getResourceId(), pre.getProjectResourceId(), pre.getResource().getFirstName(), pre.getResource().getLastName(), pre.getResource().getType()));
                     } else if (pre.getRole().equals(Constants.Role.ACCOUNT)) {
-                        project.addAccountResource(new Resource(pre.getResource().getResourceId(),pre.getProjectResourceId(),pre.getResource().getFirstName(), pre.getResource().getLastName(),pre.getResource().getType()));
+                        project.addAccountResource(new Resource(pre.getResource().getResourceId(), pre.getProjectResourceId(), pre.getResource().getFirstName(), pre.getResource().getLastName(), pre.getResource().getType()));
                     } else if (pre.getRole().equals(Constants.Role.REMOTE)) {
-                        project.addRemoteResource(new Resource(pre.getResource().getResourceId(),pre.getProjectResourceId(),pre.getResource().getFirstName(), pre.getResource().getLastName(),pre.getResource().getType()));
+                        project.addRemoteResource(new Resource(pre.getResource().getResourceId(), pre.getProjectResourceId(), pre.getResource().getFirstName(), pre.getResource().getLastName(), pre.getResource().getType()));
                     }
                 }
             }
-            Set<ProjectNotesEntity> pneList =pe.getNotes();
-            if(pneList !=null){
+            Iterable<ResourceEntity> allResources = this.portalService.findAllResources();
+            if (allResources != null) {
+                for (ResourceEntity pre : allResources) {
+                    project.addRemoteAddableResource(new Resource(pre.getResourceId(), -1, pre.getFirstName(), pre.getLastName(), pre.getType()));
+                }
+            }
+            Set<ProjectNotesEntity> pneList = pe.getNotes();
+            if (pneList != null) {
 
-                for(ProjectNotesEntity pne:pneList){
-                    project.addNotes(new ProjectNote(pne.getNoteId(),pne.getNotes(),pne.getCreateDate()));
+                for (ProjectNotesEntity pne : pneList) {
+                    project.addNotes(new ProjectNote(pne.getNoteId(), pne.getNotes(), pne.getCreateDate()));
                 }
             }
             SalesOrderEntity soe = pe.getSalesOrders();

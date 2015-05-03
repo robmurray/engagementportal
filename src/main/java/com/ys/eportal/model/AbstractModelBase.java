@@ -1,5 +1,7 @@
 package com.ys.eportal.model;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import java.util.Date;
 
 /**
@@ -8,9 +10,10 @@ import java.util.Date;
 public abstract class AbstractModelBase {
 
     protected boolean readonly;
-
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     protected Date createDate;
 
+    @DateTimeFormat(pattern = "dd/MM/yyyy")
     protected Date modifiedDate;
 
     public boolean isReadonly() {

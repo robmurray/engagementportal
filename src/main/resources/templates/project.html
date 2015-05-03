@@ -52,13 +52,13 @@
                         <!-- Tab panes -->
                         <div id="resourceTabs" class="tab-content">
                             <div class="tab-pane active" id="tab1">
-                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.remoteResources},pageHeading='Remote Resources', index='1', readonly='true')"/>
+                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.remoteResources},addableResources=${project.remoteAddableResources}, index='1', readonly='true')"/>
                             </div>
                             <div class="tab-pane" id="tab2">
-                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.onsiteResources},pageHeading='Onsite Resources', index='2', readonly='true')"/>
+                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.onsiteResources},addableResources=${project.remoteAddableResources}, index='2', readonly='true')"/>
                             </div>
                             <div class="tab-pane" id="tab3">
-                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.accountResources},pageHeading='Account Team', index='3', readonly='true')"/>
+                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.accountResources},addableResources=${project.remoteAddableResources}, index='3', readonly='true')"/>
                             </div>
 
                         </div>
@@ -109,7 +109,6 @@
         $(document).ready(function() {
 
             doAnchor();
-
 		});
 
 

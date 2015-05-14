@@ -64,7 +64,7 @@ public class ResourceController extends ResourceControllerBase {
             resource = this.load(re);
         }
 
-        this.setSuccessAlertMessage(model, "Resource updated");
+//        this.setSuccessAlertMessage(model, "Resource updated");
 
         addNav(model, "projectSearch", null);
         addPageAttributes(model, "Resource", "Resource");
@@ -90,7 +90,7 @@ public class ResourceController extends ResourceControllerBase {
             this.portalService.delete(re);
         }
 
-        this.setSuccessAlertMessage(model, "Resource deleted");
+        //this.setSuccessAlertMessage(model, "Resource deleted");
 
 
         addPageAttributes(model, "Resource", "Resource");

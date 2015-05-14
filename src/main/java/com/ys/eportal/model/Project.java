@@ -19,6 +19,8 @@ public class Project extends AbstractModelBase {
     private List<Resource> accountResources;
     private List<Resource> onsiteResources;
     private List<Resource> remoteAddableResources;
+    private List<Resource> onsiteAddableResources;
+    private List<Resource> accountAddableResources;
     private List<Activity> activities;
 
     private String name;
@@ -127,6 +129,22 @@ public class Project extends AbstractModelBase {
         this.onsiteResources = onsiteResources;
     }
 
+    public List<Resource> getOnsiteAddableResources() {
+        return onsiteAddableResources;
+    }
+
+    public void setOnsiteAddableResources(List<Resource> onsiteAddableResources) {
+        this.onsiteAddableResources = onsiteAddableResources;
+    }
+
+    public List<Resource> getAccountAddableResources() {
+        return accountAddableResources;
+    }
+
+    public void setAccountAddableResources(List<Resource> accountAddableResources) {
+        this.accountAddableResources = accountAddableResources;
+    }
+
     public void addNotes(NoteInterface note) {
         if (this.notes == null) {
             notes = new ArrayList<NoteInterface>();
@@ -172,7 +190,10 @@ public class Project extends AbstractModelBase {
         if (this.remoteAddableResources == null) {
             this.remoteAddableResources = new ArrayList<Resource>();
         }
-        this.remoteAddableResources.add(resource);
+        if(this.remoteResources==null ||(this.remoteResources!=null && !this.remoteResources.contains(resource))){
+            this.remoteAddableResources.add(resource);
+        }
+
     }
     public void addOnsiteResource(Resource resource) {
         if (resource == null) {
@@ -183,7 +204,31 @@ public class Project extends AbstractModelBase {
         }
         this.onsiteResources.add(resource);
     }
+    public void addOnsiteAddableResource(Resource resource) {
+        if (resource == null) {
+            return;
+        }
+        if (this.onsiteAddableResources == null) {
+            this.onsiteAddableResources = new ArrayList<Resource>();
+        }
+        if(this.onsiteResources==null ||(this.onsiteResources!=null && !this.onsiteResources.contains(resource))){
+            this.onsiteAddableResources.add(resource);
+        }
 
+    }
+
+    public void addAccountAddableResource(Resource resource) {
+        if (resource == null) {
+            return;
+        }
+        if (this.accountAddableResources == null) {
+            this.accountAddableResources = new ArrayList<Resource>();
+        }
+        if(this.accountResources==null|(this.accountResources!=null && !this.accountResources.contains(resource))){
+            this.accountAddableResources.add(resource);
+        }
+
+    }
 
     public List<NoteInterface> getNotes() {
         return notes;

@@ -60,6 +60,7 @@ public class ProjectController extends ControllerBase {
 
        // @TODO push to mapping layer
         if(pe!=null) {
+            long projectId = pe.getProjectId();
             pe.setHealth(project.getHealthStatus());
             pe.setLocation(project.getLocation());
             pe.setService(project.getService());
@@ -67,8 +68,13 @@ public class ProjectController extends ControllerBase {
             pe.setWaitTime(project.getWaitTime());
 
             this.portalService.save(pe);
+            // repull
+            pe = this.portalService.findProjectByProjectId(projectId);
+            project = this.loadProject(pe);
         }
-        this.setSuccessAlertMessage(model,"project updated");
+
+
+        //this.setSuccessAlertMessage(model,"project updated");
         model.addAttribute("pageName", "Save Project");
         model.addAttribute("project", project);
         model.addAttribute("pageGroup", "project");
@@ -85,28 +91,49 @@ public class ProjectController extends ControllerBase {
 
         if(pe !=null) {
             pe.addNotes(new ProjectNotesEntity(pe, newnote));
-            //ProjectNotesEntity pne = new ProjectNotesEntity(pe, newnote);
             this.portalService.save(pe);
-            //pe = this.portalService.findProjectByProjectId(id);
         }
         Project project = this.loadProject(pe);
 
-        //this.setSuccessAlertMessage(model,"project updated");
         model.addAttribute("pageName", "Save Project");
         model.addAttribute("project", project);
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
         model.addAttribute("anchor", "noteForm");
-        //return new ModelAndView(new RedirectView("project#notesForm", true));
 
-
-        return projectView(id,"","", model);
-
-            //    return "redirect:project#notesForm?projectId="+id;
+        return "project";
     }
 
 
+    @RequestMapping(value = "/projectNotesDelete", method = RequestMethod.GET)
+    public String projectNoteDeleteSubmit(@RequestParam(value = "projectNotesId", required = true) long projectNoteId,
+                                       @RequestParam(value = "returnURL", required = false) String returnURL,
+                                       Model model){
 
+
+        // pull original
+        ProjectNotesEntity pne = this.portalService.findProjectNoteById(projectNoteId);
+
+
+        Project project = null;
+        if (pne != null) {
+            long projectId = pne.getProject().getProjectId();
+            this.portalService.delete(pne);
+            // repull
+            ProjectEntity pe = this.portalService.findProjectByProjectId(projectId);
+            project = this.loadProject(pe);
+        }
+
+        model.addAttribute("pageName", "Save Project");
+        model.addAttribute("project", project);
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "searchProject");
+        model.addAttribute("anchor", "noteForm");
+
+        return "project";
+
+
+    }
 
 
 }

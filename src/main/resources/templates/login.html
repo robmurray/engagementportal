@@ -13,17 +13,9 @@
     <link rel="stylesheet" href="assets/css/fonts.css"/>
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css"/>
 
-    <!-- PAGE LEVEL PLUGINS STYLES -->
-    <!-- REQUIRE FOR SPEECH COMMANDS -->
-    <link rel="stylesheet" type="text/css" href="assets/css/plugins/gritter/jquery.gritter.css"/>
-
     <!-- Tc core CSS -->
     <link id="qstyle" rel="stylesheet" href="assets/css/themes/style-3.css"/>
 
-
-    <!-- Add custom CSS here -->
-
-    <!-- End custom CSS here -->
 
     <!--[if lt IE 9]>
     <script src="assets/js/html5shiv.js"></script>
@@ -32,78 +24,34 @@
 
 </head>
 
-<body class="login">
-<div id="wrapper">
+<body>
 
-    <div class="login-container">
-        <h2>
-            <a href="index.html"><img src="assets/images/logo1.png" alt="logo" class="img-responsive"/></a><!-- can use your logo-->
-        </h2>
-        <!-- BEGIN LOGIN BOX -->
-        <div id="login-box" class="login-box visible">
-            <p class="bigger-110">
-                <i class="fa fa-key"></i> Please Enter Your Information
-            <div th:if="${param.error}">
+
+    <form name="f" th:action="@{/login}" method="post">
+        <fieldset>
+            <legend>Please Login</legend>
+            <div th:if="${param.error}" class="alert alert-error">
                 Invalid username and password.
             </div>
-            <div th:if="${param.logout}">
+            <div th:if="${param.logout}" class="alert alert-success">
                 You have been logged out.
             </div>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username"/>
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"/>
+            <div class="form-actions">
+                <button type="submit" class="btn">Log in</button>
+            </div>
+        </fieldset>
+    </form>
 
-            </p>
-
-            <div class="hr hr-8 hr-double dotted"></div>
-
-            <form th:action="@{/login}" method="post">
-                <div class="form-group">
-                    <div class="input-icon right">
-                        <span class="fa fa-key text-gray"></span>
-                        <input type="text" class="form-control" name="username" placeholder="Username" autofocus="autofocus"/>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-icon right">
-                        <span class="fa fa-lock text-gray"></span>
-                        <input type="password" class="form-control" name="password" placeholder="your password"/>
-                    </div>
-                </div>
-                <div class="tcb">
-                    <!--a href="#" class="pull-right btn btn-primary">Login<i class="fa fa-key icon-on-right"></i></a>-->
-                    <div><input type="submit" value="Sign In"/></div>
-
-                    <div class="clearfix"></div>
-                </div>
-
-            </form>
-        </div>
-        <!-- END LOGIN BOX -->
-
-    </div>
 
     <!-- core JavaScript -->
     <script src="assets/js/jquery.min.js"></script>
     <script src="assets/js/bootstrap.min.js"></script>
-    <script src="assets/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="assets/js/plugins/pace/pace.min.js"></script>
-
-    <!-- PAGE LEVEL PLUGINS JS -->
-
     <!-- Themes Core Scripts -->
     <script src="assets/js/main.js"></script>
 
-    <!-- REQUIRE FOR SPEECH COMMANDS -->
-    <script src="assets/js/speech-commands.js"></script>
-    <!--<script src="assets/js/plugins/gritter/jquery.gritter.min.js"></script>-->
-
-    <!-- initial page level scripts for examples -->
-    <script type="text/javascript">
-		function show_box(id) {
-			jQuery('.login-box.visible').removeClass('visible');
-			jQuery('#'+id).addClass('visible');
-		}
-
-
-    </script>
-    </div>
 </body>
 </html>

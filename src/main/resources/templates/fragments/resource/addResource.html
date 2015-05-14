@@ -16,7 +16,7 @@
             <input type="hidden" name="index" th:value="${index}"/>
             <input type="hidden" name="projectId" th:value="${projectId}"/>
             <input type="hidden" name="role" th:value="${role}"/>
-            <select  class="e2 form-control" name="resourceId">
+            <select  class="dd175 form-control" name="resourceId">
                 <option th:each="res : *{addableResources}"
                         th:value="${res.resourceId}"
                         th:text="${res.firstName+' ' +res.lastName}"></option>

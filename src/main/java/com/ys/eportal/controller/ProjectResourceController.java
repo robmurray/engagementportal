@@ -21,29 +21,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 public class ProjectResourceController extends ControllerBase {
     private static Logger logger = LoggerFactory.getLogger(ProjectResourceController.class);
 
-    @RequestMapping(value = "/zzprojectResource", method = RequestMethod.GET)
-    public String resourceViewForm(@RequestParam(value = "projectId", required = true) long resourceId,
-                                   @RequestParam(value = "returnURL", required = false) String returnURL,
-                                   @RequestParam(value = "anchor", required = false) String anchor,
-                                   @RequestParam(value = "msgtype", required = false) String messageType, Model model) {
-
-        ResourceEntity re = null;
-
-        re = this.portalService.findResourceEntityById(resourceId);
-
-        Resource r = null;
-
-        if (re != null) {
-            r = this.load(re);
-
-        }
-        addNav(model, returnURL, anchor);
-        addPageAttributes(model, "Resource", "Resource");
-        model.addAttribute("resource", r);
-        model.addAttribute("pageGroup", "project");
-        model.addAttribute("pageId", "searchProject");
-        return "resource";
-    }
 
     @RequestMapping(value = "/projectResourceAdd", method = RequestMethod.POST)
     public String resourceAddSubmitForm(@RequestParam(value = "resourceId", required = true) long resourceId, @RequestParam(value = "index", required = true) String index, @RequestParam(value = "projectId", required = true) long projectId, @RequestParam(value = "role", required = true) String role, Model model) {

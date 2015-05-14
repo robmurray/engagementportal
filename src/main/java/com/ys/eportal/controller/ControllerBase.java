@@ -11,10 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.ModelAndView;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.Set;
 
@@ -212,21 +209,26 @@ public abstract class ControllerBase {
             }
             Set<ProjectResourceEntity> reList = pe.getProjectResources();
             if (reList != null) {
-
+                Resource newres = null;
                 for (ProjectResourceEntity pre : reList) {
+                    newres = new Resource(pre.getResource().getResourceId(), pre.getProjectResourceId(), pre.getResource().getFirstName(), pre.getResource().getLastName(), pre.getResource().getType());
                     if (pre.getRole().equals(Constants.Role.ONSITE)) {
-                        project.addOnsiteResource(new Resource(pre.getResource().getResourceId(), pre.getProjectResourceId(), pre.getResource().getFirstName(), pre.getResource().getLastName(), pre.getResource().getType()));
+                        project.addOnsiteResource(newres);
                     } else if (pre.getRole().equals(Constants.Role.ACCOUNT)) {
-                        project.addAccountResource(new Resource(pre.getResource().getResourceId(), pre.getProjectResourceId(), pre.getResource().getFirstName(), pre.getResource().getLastName(), pre.getResource().getType()));
+                        project.addAccountResource(newres);
                     } else if (pre.getRole().equals(Constants.Role.REMOTE)) {
-                        project.addRemoteResource(new Resource(pre.getResource().getResourceId(), pre.getProjectResourceId(), pre.getResource().getFirstName(), pre.getResource().getLastName(), pre.getResource().getType()));
+                        project.addRemoteResource(newres);
                     }
                 }
             }
             Iterable<ResourceEntity> allResources = this.portalService.findAllResources();
             if (allResources != null) {
+                Resource newResn = null;
                 for (ResourceEntity pre : allResources) {
-                    project.addRemoteAddableResource(new Resource(pre.getResourceId(), -1, pre.getFirstName(), pre.getLastName(), pre.getType()));
+                    newResn = new Resource(pre.getResourceId(), -1, pre.getFirstName(), pre.getLastName(), pre.getType());
+                    project.addRemoteAddableResource(newResn);
+                    project.addOnsiteAddableResource(newResn);
+                    project.addAccountAddableResource(newResn);
                 }
             }
             Set<ProjectNotesEntity> pneList = pe.getNotes();

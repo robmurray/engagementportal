@@ -47,8 +47,10 @@
                             </div>
                         </td>
 
-                        <td class="col-small left"><a href="" th:href="@{customer(customerId=${salesOrder.customerId},returnURL=${returnURL})}"
+                        <!--<td class="col-small left"><a href="" th:href="@{customer(customerId=${salesOrder.customerId},returnURL=${returnURL})}"
                                                       th:text="${salesOrder.stCustomerName}"></a></td>
+-->
+                        <td class="col-small left" th:text="${salesOrder.stCustomerName}"></td>
 
                         <td class="col-small left"><a href="" th:href="@{salesorder(salesorderId=${salesOrder.salesOrderId},returnURL=${returnURL})}"
                                                       th:text="${salesOrder.salesOrderNumber}"></a></td>

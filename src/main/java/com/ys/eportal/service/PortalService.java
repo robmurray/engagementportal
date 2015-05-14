@@ -117,6 +117,10 @@ public class PortalService extends ServicesBase{
     public ResourceEntity findResourceEntityById(long resourceId){
         return this.resourceRepository.findOne(resourceId);
     }
+    public ProjectResourceEntity findProjectResourceEntityById(long resourceId){
+        return this.projectResourceRepository.findOne(resourceId);
+    }
+
     public CustomerEntity findCustomerByName(String name) {
         CustomerEntity customer = null;
         List<CustomerEntity> list = this.customerRepository.findByName(name);
@@ -190,7 +194,16 @@ public class PortalService extends ServicesBase{
 
     }
     public void save(ProjectResourceEntity projectResourceEntity){
+
         this.projectResourceRepository.save(projectResourceEntity);
+
+        ProjectEntity pe =projectResourceEntity.getProject();
+        pe.getProjectResources().add(projectResourceEntity);
+        ResourceEntity re = projectResourceEntity.getResource();
+        re.getProjectResources().add(projectResourceEntity);
+        this.projectRepository.save(pe);
+        this.resourceRepository.save(re);
+        
     }
     public SalesOrderEntity findSalesOrderEntityByNumber(String salesOrderNumber) {
         List<SalesOrderEntity> list = this.salesOrderRepository.findBySalesOrderNumber(salesOrderNumber);

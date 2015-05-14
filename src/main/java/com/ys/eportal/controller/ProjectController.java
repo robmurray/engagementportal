@@ -108,33 +108,5 @@ public class ProjectController extends ControllerBase {
 
 
 
-    @RequestMapping(value = "/projectResourceDelete", method = RequestMethod.POST)
-    public String resourceDeleteSubmit(@RequestParam(value = "projectResourceId", required = true) long projectResourceId,
-                                       @RequestParam(value = "returnURL", required = false) String returnURL,
-                                       Model model){
-
-
-
-        // pull original
-        ProjectResourceEntity pre = this.portalService.findProjectResourceById(projectResourceId);
-        long projectId =0;
-
-
-        if (pre != null) {
-            projectId = pre.getProject().getProjectId();
-            this.portalService.delete(pre);
-
-
-        }
-
-       // this.setSuccessAlertMessage(model, "Resource deleted");
-        model.addAttribute("anchor","resourceTabs");
-        model.addAttribute("tabIndex","tab2");
-        return this.projectView(projectId,null,"",model);
-
-
-    }
-
-
 
 }

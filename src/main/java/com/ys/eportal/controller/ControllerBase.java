@@ -5,11 +5,16 @@ import com.ys.eportal.model.*;
 import com.ys.eportal.service.PortalService;
 import org.joda.time.Duration;
 import org.joda.time.Interval;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.Date;
 import java.util.Set;
 
@@ -18,9 +23,27 @@ import java.util.Set;
  */
 public abstract class ControllerBase {
 
+    private static Logger logger = LoggerFactory.getLogger(ControllerBase.class);
+
     @Autowired
     protected PortalService portalService;
 
+/*
+
+    @ExceptionHandler(Exception.class)
+    public ModelAndView defaultExceptionHandler(HttpServletRequest request, Exception ex){
+        logger.error("Requested URL="+request.getRequestURL());
+        logger.error("Exception Raised="+ex);
+
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.addObject("exception", ex);
+        modelAndView.addObject("url", request.getRequestURL());
+
+        modelAndView.setViewName("defaultException");
+        return modelAndView;
+    }
+
+*/
 
     public ProjectEntity retrieveProject(Project project) {
         if (project == null) {

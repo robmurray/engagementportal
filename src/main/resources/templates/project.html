@@ -30,44 +30,84 @@
         <div class="portlet">
             <div class="portlet-heading default-bg">
                 <div class="portlet-title">
-                    <h4>Resources</h4>
+                    <h4>Remote Resources</h4>
                 </div>
                 <div class="portlet-widgets">
-                    <a data-toggle="collapse" data-parent="#accordion" href="" th:href="${'#resourceform'+index}"><i
+                    <a data-toggle="collapse" data-parent="#accordion" href="" th:href="resourceRemote"><i
                             class="fa fa-chevron-down"></i></a>
                 </div>
                 <div class="clearfix"></div>
             </div>
-            <div id="" th:id="${'resourceform'+index}" class="panel-collapse collapse in">
+
+            <div id="remoteResourceForm" class="panel-collapse collapse in">
                 <div class="portlet-body">
-
-
-                    <div class="tc-tabs"><!-- Nav tabs style 1 -->
-                        <ul class="nav nav-tabs">
-                            <li class="active"><a href="#tab1" data-toggle="tab">Remote</a></li>
-                            <li><a href="#tab2" data-toggle="tab">Onsite</a></li>
-                            <li><a href="#tab3" data-toggle="tab">Account</a></li>
-                        </ul>
-
-                        <!-- Tab panes -->
-                        <div id="resourceTabs" class="tab-content">
-                            <div class="tab-pane active" id="tab1">
-                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.remoteResources},addableResources=${project.remoteAddableResources}, index='1', readonly='true')"/>
-                            </div>
-                            <div class="tab-pane" id="tab2">
-                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.onsiteResources},addableResources=${project.remoteAddableResources}, index='2', readonly='true')"/>
-                            </div>
-                            <div class="tab-pane" id="tab3">
-                                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.accountResources},addableResources=${project.remoteAddableResources}, index='3', readonly='true')"/>
-                            </div>
-
-                        </div>
+                    <div class="row">
+                        <div th:replace="fragments/resource/addResource :: addResource(addableResources=${project.remoteAddableResources}, index='remoteResourceForm', projectId=${project.projectId}, role='remote', readonly='true')"/>
+                        <div class="space-4"></div>
+                    </div>
+                    <div class="row">
+                        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.remoteResources}, index='remoteResourceForm', readonly='true')"/>
                     </div>
 
                 </div>
             </div>
         </div>
+
+
+        <div class="portlet">
+            <div class="portlet-heading default-bg">
+                <div class="portlet-title">
+                    <h4>Onsite Resources</h4>
+                </div>
+                <div class="portlet-widgets">
+                    <a data-toggle="collapse" data-parent="#accordion" href="" th:href="resourceOnsite"><i
+                            class="fa fa-chevron-down"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+
+            <div id="resourceOnsite" class="panel-collapse collapse in">
+                <div class="portlet-body">
+                    <div class="row">
+                        <div th:replace="fragments/resource/addResource :: addResource(addableResources=${project.remoteAddableResources}, index='resourceOnsite', projectId=${project.projectId}, role='onsite', readonly='true')"/>
+                        <div class="space-4"></div>
+                    </div>
+                    <div class="row">
+                        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.onsiteResources}, index='resourceOnsite', readonly='true')"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="portlet">
+            <div class="portlet-heading default-bg">
+                <div class="portlet-title">
+                    <h4>Account Resources</h4>
+                </div>
+                <div class="portlet-widgets">
+                    <a data-toggle="collapse" data-parent="#accordion" href="" th:href="resourceAccount"><i
+                            class="fa fa-chevron-down"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div id="resourceAccount" class="panel-collapse collapse in">
+                <div class="portlet-body">
+                    <div class="row">
+                        <div th:replace="fragments/resource/addResource :: addResource(addableResources=${project.remoteAddableResources}, index='resourceAccount', projectId=${project.projectId}, role='account team',readonly='true')"/>
+                        <div class="space-4"></div>
+                    </div>
+                    <div class="row">
+                        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.accountResources}, index='resourceAccount', readonly='true')"/>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
     </div>
+
     <div class="row" th:if="${project==null}">
 
         <div class="col-sm-6">
@@ -83,23 +123,20 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
         var anchor = /*[[${anchor}]]*/;
-        var tabIndex = /*[[${tabIndex}]]*/;
+
         /*]]>*/
 
         function doAnchor(){
+        try{
             if(anchor){
                 var anchor_node = document.getElementById(anchor);
                 window.scrollTo(0, anchor_node.offsetTop);
                 anchor=null;
-            }
-            if(tabIndex){
-                $(document).scrollTop( $("#tab2").offset().top );
 
-                //  var tabs = $("tab-pane").removeClass("active");
-                //var tab_pane  = document.getElementById(tabIndex);
-                //tab_pane.addClass( "active" );
             }
-
+            }catch(error){
+                //alert(error);
+            }
         }
 
     </script>
@@ -107,17 +144,14 @@
     <script type="text/javascript">
 
         $(document).ready(function() {
-
+            $(".e2").select2({
+				width: 175
+			});
             doAnchor();
-		});
 
-
-
-
+    });
 
     </script>
-
-
 </div>
 </body>
-</html>>
+</html>

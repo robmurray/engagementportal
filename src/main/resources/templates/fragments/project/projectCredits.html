@@ -1,0 +1,89 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="projectCredits" th:fragment="projectCredits (project,readonly)">
+
+
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>Project Credits</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#projectcreditpanel"><i
+                        class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="projectcreditpanel" class="panel-collapse collapse in">
+            <div class="portlet-body">
+                <div class="row" th:if="${project!=null}">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Starting Credits</label>
+                                <input type="text" class="form-control" th:field="${project.name}"
+                                       placeholder="enter the project name" readonly="readonly"/>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Credits Used</label>
+                                <input type="text" class="form-control" th:field="${project.name}"
+                                       placeholder="credits used" readonly="readonly"/>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label class="control-label">Remaining Credits</label>
+                                <input type="text" class="form-control" th:field="${project.name}"
+                                       placeholder="remaining credits" readonly="readonly"/>
+
+                            </div>
+                        </div>
+
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="form-group">
+                            <form class="form" role="form" action="#" th:action="@{/projectInfo}" th:object="${project}"
+                                  method="post">
+                                <input type="hidden" th:field="*{projectId}"/>
+
+                                <div class="input-group">
+                                    <input type="text" class="form-control" th:field="*{name}"
+                                           placeholder="enter the customer name"/>
+                                <span class="input-group-btn">
+                                    <button class="btn btn-primary" type="submit">
+                                        use credits
+                                    </button>
+
+                                </span>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="row" th:if="${project==null}">
+
+                    <div class="col-sm-6">
+                        <div class="well bg-primary center">
+                            <p>There is currently no project credits associated with this project.</p>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- END YOUR CONTENT HERE -->
+</div>
+</body>
+</html>>

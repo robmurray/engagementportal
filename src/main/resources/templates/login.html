@@ -9,49 +9,43 @@
     <meta name="author" content=""/>
 
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css"/>
     <link rel="stylesheet" href="assets/css/fonts.css"/>
     <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css"/>
 
-    <!-- Tc core CSS -->
-    <link id="qstyle" rel="stylesheet" href="assets/css/themes/style-3.css"/>
 
-
-    <!--[if lt IE 9]>
-    <script src="assets/js/html5shiv.js"></script>
-    <script src="assets/js/respond.min.js"></script>
-    <![endif]-->
+    <link id="eportstyle" rel="stylesheet" href="assets/css/eportal.css"/>
 
 </head>
 
 <body>
 
+<section class="loginform cf">
+    <div class="title">Engagement Portal Login</div>
+    <p>
 
-    <form name="f" th:action="@{/login}" method="post">
-        <fieldset>
-            <legend>Please Login</legend>
-            <div th:if="${param.error}" class="alert alert-error">
-                Invalid username and password.
-            </div>
-            <div th:if="${param.logout}" class="alert alert-success">
-                You have been logged out.
-            </div>
-            <label for="username">Username</label>
-            <input type="text" id="username" name="username"/>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password"/>
-            <div class="form-actions">
-                <button type="submit" class="btn">Log in</button>
-            </div>
-        </fieldset>
+    <div class="error" th:if="${param.error}">
+        Invalid username and/or password.
+    </div>
+    <div class="error" th:if="${param.logout}">
+        You have been logged out.
+    </div>
+    </p>
+    <form th:action="@{/login}" role="form" method="post" accept-charset="utf-8">
+        <ul>
+            <li>
+                <label for="username">username</label>
+                <input type="text" name="username" placeholder="enter your username" required="required"/>
+            </li>
+            <li>
+                <label for="password">password</label>
+                <input type="password" name="password" placeholder="enter your password" required="required"/></li>
+            <li>
+                <input type="submit" value="Login"/>
+            </li>
+        </ul>
+
     </form>
-
-
-    <!-- core JavaScript -->
-    <script src="assets/js/jquery.min.js"></script>
-    <script src="assets/js/bootstrap.min.js"></script>
-    <!-- Themes Core Scripts -->
-    <script src="assets/js/main.js"></script>
+</section>
 
 </body>
 </html>

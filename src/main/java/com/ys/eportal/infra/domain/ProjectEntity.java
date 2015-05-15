@@ -31,6 +31,9 @@ public class ProjectEntity extends AbstractDomainBase {
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private SalesOrderEntity salesOrders;
 
+    @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private ProjectCreditEntity projectCredit;
+
     @OrderBy("createDate DESC")
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ProjectNotesEntity> notes = new HashSet<ProjectNotesEntity>();

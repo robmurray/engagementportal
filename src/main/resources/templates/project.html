@@ -20,6 +20,9 @@
     <div th:if="${project!=null}">
 
         <div th:replace="fragments/project/projectInfo :: projectInfo(project=${project}, readonly=${project.readonly})"/>
+
+        <div th:replace="fragments/project/projectCredits :: projectCredits(project=${project}, readonly=${project.readonly})"/>
+
         <div th:replace="fragments/salesorder/salesOrderTable :: salesOrderTable(salesOrders=${project.salesOrders}, readonly=${project.readonly})"/>
 
         <div th:replace="fragments/activity/activityTable :: activityTable(activities=${project.activities}, readonly=${project.readonly})"/>

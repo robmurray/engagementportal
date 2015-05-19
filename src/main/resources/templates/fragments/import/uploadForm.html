@@ -46,41 +46,31 @@
                     </div>
 
                     <div class="row bg-light">
-                        <div class="col-md-3">
+
+                        <div class="col-md-5">
                             <div class="input-group">
-                            <span class="input-group-btn">
-                                <span class="btn btn-file">
-                                    Browse <input type="file" name="file"/>
+                                <span class="input-group-btn">
+                                    <span class="btn btn-file">
+                                        Browse <input type="file" name="file"/>
+                                    </span>
                                 </span>
-                            </span>
                                 <input type="text" class="form-control" readonly="readonly"/>
 
+                                 <span class="input-group-btn">
+                                     <button type="submit" class="btn btn-primary">import</button>
+                                     <button type="reset" class="btn btn-danger">Clear</button>
 
+                                </span>
                             </div>
                             <div class="has-error" th:errors="all"></div>
-                        </div>
-                    </div>
-                    <div class="row bg-light">
-                        <div class="col-md-3">
-
-                            <div class="form-actions">
-                                <div class="form-group">
-                                    <div class="col-sm-offset-2 col-sm-10">
-                                        <button type="submit" class="btn btn-primary">import</button>
-                                        <button type="reset" class="btn">Clear</button>
-                                    </div>
-                                </div>
-                            </div>
                         </div>
                     </div>
 
                 </form>
             </div>
         </div>
-    </div>
 
-    <script type="text/javascript">
-
+        <script type="text/javascript">
 
 		// Custome File Input
 		$(document).on('change', '.btn-file :file', function() {
@@ -92,8 +82,8 @@
 
 		$(document).ready( function() {
 			$('.btn-file :file').on('fileselect', function(event, numFiles, label) {
-
 				var input = $(this).parents('.input-group').find(':text'),
+				log = numFiles > 1 ? numFiles + ' files selected' : label;
 				log = numFiles > 1 ? numFiles + ' files selected' : label;
 
 				if( input.length ) {
@@ -107,16 +97,12 @@
 
 
 
-
-
-
-
-
-
-
-
-    </script>
-
+</script>
+    </div>
 </div>
+
+
+
+
 </body>
 </html>

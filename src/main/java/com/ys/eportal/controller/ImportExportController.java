@@ -139,7 +139,7 @@ public class ImportExportController extends ControllerBase {
     @RequestMapping(value = "/exportSalesOrders", method = RequestMethod.GET)
     public String exportSalesordersForm(Model model) {
 
-        addPageAttributes(model, "Import Master", "import master spreadsheet admin only");
+        addPageAttributes(model, "Export Sales Order", "import master spreadsheet admin only");
 
         model.addAttribute("pageGroup", "importExport");
         model.addAttribute("pageId", "exportSalesOrders");

@@ -37,7 +37,7 @@ public class ResourceController extends ResourceControllerBase {
             r = this.load(re);
 
         }
-        addNav(model, returnURL, anchor);
+        addNav(model, returnURL);
         addPageAttributes(model, "Resource", "Resource");
         model.addAttribute("resource", r);
         model.addAttribute("pageGroup", "project");
@@ -66,7 +66,7 @@ public class ResourceController extends ResourceControllerBase {
 
 //        this.setSuccessAlertMessage(model, "Resource updated");
 
-        addNav(model, "projectSearch", null);
+        addNav(model, "resourceSearch");
         addPageAttributes(model, "Resource", "Resource");
         model.addAttribute("resource", resource);
         model.addAttribute("pageGroup", "project");
@@ -76,7 +76,7 @@ public class ResourceController extends ResourceControllerBase {
 
     }
 
-    @RequestMapping(value = "/resourceDelete", method = RequestMethod.POST)
+    @RequestMapping(value = "/resourceDelete", method = RequestMethod.GET)
     public String resourceDeleteSubmit(@RequestParam(value = "resourceId", required = true) long resourceId,
                                        @RequestParam(value = "returnURL", required = false) String returnURL,
                                        Model model){

@@ -83,6 +83,57 @@ public class ProjectController extends ControllerBase {
     }
 
 
+    @RequestMapping(value="/projectCreditAdd", method=RequestMethod.POST)
+    public String projectCreditDELSubmit(@RequestParam(value="projectId",required=true) long projectId,@RequestParam(value="numOfCredits",required=true) long credits, @RequestParam(value="anchor",required=true) String anchor, Model model) {
+
+
+        ProjectEntity pe = this.portalService.findProjectByProjectId(projectId);
+
+        if(pe !=null) {
+
+            long newBalance = pe.getCredits()+credits;
+            pe.setCredits(newBalance);
+            this.portalService.save(pe);
+            //repull
+            pe = this.portalService.findProjectByProjectId(projectId);
+        }
+        Project project = this.loadProject(pe);
+
+        model.addAttribute("pageName", "Save Project");
+        model.addAttribute("project", project);
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "searchProject");
+        model.addAttribute("anchor", anchor);
+
+        return "project";
+    }
+
+    @RequestMapping(value="/projectCreditSubtract", method=RequestMethod.POST)
+    public String projectCreditADDSubmit(@RequestParam(value="projectId",required=true) long projectId,@RequestParam(value="numOfCredits",required=true) long credits, @RequestParam(value="anchor",required=true) String anchor, Model model) {
+
+
+        ProjectEntity pe = this.portalService.findProjectByProjectId(projectId);
+
+        if(pe !=null) {
+
+            long newBalance = pe.getCredits()-credits;
+            pe.setCredits(newBalance);
+            this.portalService.save(pe);
+            //repull
+            pe = this.portalService.findProjectByProjectId(projectId);
+        }
+        Project project = this.loadProject(pe);
+
+        model.addAttribute("pageName", "Save Project");
+        model.addAttribute("project", project);
+        model.addAttribute("pageGroup", "project");
+        model.addAttribute("pageId", "searchProject");
+        model.addAttribute("anchor", anchor);
+
+        return "project";
+    }
+
+
     @RequestMapping(value="/projectNote", method=RequestMethod.POST)
     public String projectNoteSubmit(@RequestParam(value="id",required=true) long id,@RequestParam(value="newnote",required=false) String newnote, Model model) {
 

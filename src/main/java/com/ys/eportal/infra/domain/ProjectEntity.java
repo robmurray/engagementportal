@@ -31,9 +31,6 @@ public class ProjectEntity extends AbstractDomainBase {
     @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private SalesOrderEntity salesOrders;
 
-    @OneToOne(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private ProjectCreditEntity projectCredit;
-
     @OrderBy("createDate DESC")
     @OneToMany(mappedBy = "project", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Set<ProjectNotesEntity> notes = new HashSet<ProjectNotesEntity>();
@@ -50,11 +47,13 @@ public class ProjectEntity extends AbstractDomainBase {
     private String contact;
 
     @Basic(fetch = FetchType.EAGER)
+    @Column(name = "credits")
+    private long credits;
+
+    @Basic(fetch = FetchType.EAGER)
     @Column(name = "location")
     private String location;
 
-    private Integer credits;
-    private String creditStatus;
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "classRegSent")
@@ -76,43 +75,6 @@ public class ProjectEntity extends AbstractDomainBase {
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "waitTime")
     private String waitTime;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "bookDate")
-    private Date bookDate;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "shipDate")
-    private Date shipDate;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "planningMeetingDate")
-    private Date planningMeetingDate;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "kickOffMeetingDate")
-    private Date kickoffMeetingDate;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "onSiteStartDate")
-    private Date onSiteStartDate;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "onSiteEndDate")
-    private Date onSiteEndDate;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "releaseForRevenueRecDate")
-    private Date releaseForRevenueRecDate;
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "bookedToKickOff")
-    private Integer bookedToKickOff;
-
-
-    @Basic(fetch = FetchType.EAGER)
-    @Column(name = "daysToClose")
-    private Integer daysToClose;
 
     @Lob
     @Basic(fetch = FetchType.EAGER)
@@ -180,76 +142,9 @@ public class ProjectEntity extends AbstractDomainBase {
         this.health = health;
     }
 
-    public Date getBookDate() {
-        return bookDate;
-    }
 
-    public void setBookDate(Date bookDate) {
-        this.bookDate = bookDate;
-    }
-
-    public Date getShipDate() {
-        return shipDate;
-    }
-
-    public void setShipDate(Date shipDate) {
-        this.shipDate = shipDate;
-    }
-
-    public Date getPlanningMeetingDate() {
-        return planningMeetingDate;
-    }
-
-    public void setPlanningMeetingDate(Date planningMeetingDate) {
-        this.planningMeetingDate = planningMeetingDate;
-    }
-
-    public Date getKickoffMeetingDate() {
-        return kickoffMeetingDate;
-    }
-
-    public void setKickoffMeetingDate(Date kickoffMeetingDate) {
-        this.kickoffMeetingDate = kickoffMeetingDate;
-    }
-
-    public Date getOnSiteStartDate() {
-        return onSiteStartDate;
-    }
-
-    public void setOnSiteStartDate(Date onSiteStartDate) {
-        this.onSiteStartDate = onSiteStartDate;
-    }
-
-    public Date getOnSiteEndDate() {
-        return onSiteEndDate;
-    }
-
-    public void setOnSiteEndDate(Date onSiteEndDate) {
-        this.onSiteEndDate = onSiteEndDate;
-    }
-
-    public Date getReleaseForRevenueRecDate() {
-        return releaseForRevenueRecDate;
-    }
-
-    public void setReleaseForRevenueRecDate(Date releaseForRevenueRecDate) {
-        this.releaseForRevenueRecDate = releaseForRevenueRecDate;
-    }
-
-    public Integer getBookedToKickOff() {
-        return bookedToKickOff;
-    }
-
-    public void setBookedToKickOff(Integer bookedToKickOff) {
-        this.bookedToKickOff = bookedToKickOff;
-    }
-
-    public Integer getDaysToClose() {
-        return daysToClose;
-    }
-
-    public void setDaysToClose(Integer daysToClose) {
-        this.daysToClose = daysToClose;
+    public void setCredits(long credits) {
+        this.credits = credits;
     }
 
     public String getService() {
@@ -332,20 +227,9 @@ public class ProjectEntity extends AbstractDomainBase {
         this.location = location;
     }
 
-    public Integer getCredits() {
+
+    public long getCredits() {
         return credits;
-    }
-
-    public void setCredits(Integer credits) {
-        this.credits = credits;
-    }
-
-    public String getCreditStatus() {
-        return creditStatus;
-    }
-
-    public void setCreditStatus(String creditStatus) {
-        this.creditStatus = creditStatus;
     }
 
     public String getClassRegSent() {

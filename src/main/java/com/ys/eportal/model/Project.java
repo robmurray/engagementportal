@@ -13,7 +13,7 @@ public class Project extends AbstractModelBase {
 
     private long projectId;
     private boolean readonly;
-
+    private long credits;
     private List<SalesOrder> salesOrders;
     private List<Resource> remoteResources;
     private List<Resource> accountResources;
@@ -49,7 +49,13 @@ public class Project extends AbstractModelBase {
         this.projectId = projectId;
     }
 
+    public long getCredits() {
+        return credits;
+    }
 
+    public void setCredits(long credits) {
+        this.credits = credits;
+    }
 
     public void addActivity(Activity activity) {
         if (this.activities == null) {

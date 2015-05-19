@@ -204,12 +204,16 @@ public class ImportService extends ServicesBase {
             List<ImportOracleObiEntity> entryList = this.oracleOBIRepository.findByImportControlId(ice.getImportControlId());
 
 
-            List<SalesOrderEntity> soList = new ArrayList<SalesOrderEntity>();
+            List<ProjectEntity> pList = new ArrayList<ProjectEntity>();
 
             CustomerEntity wrkCustomer = null;
-            SalesOrderEntity wrkProject = null;
+
 
             for (ImportOracleObiEntity entity : entryList) {
+
+                ProjectEntity pe = new ProjectEntity();
+
+
 
                 // create or find customer
                 // @TODO which name to use st or bt
@@ -222,11 +226,11 @@ public class ImportService extends ServicesBase {
                     this.customerRepository.save(wrkCustomer);
                 }
 
-                // create the project
+              //  pe.setName(wrkCustomer.getName());
+                //this.projectRepository.save(pe);
 
-                wrkProject = new SalesOrderEntity();
-
-
+                pe.setSalesOrders(new SalesOrderEntity());
+                pe.getSalesOrders().setProject(pe);
                 //entity.getActivityDate();
                 //entity.getActivityMonth();
                 //entity.getActivityYear();
@@ -234,28 +238,73 @@ public class ImportService extends ServicesBase {
                 //entity.getContractStatusCode();
                 //entity.getEndUserName();
 
-                wrkProject.setRegion(entity.getFnetRegion1());
+                pe.getSalesOrders().setRegion(entity.getFnetRegion1());
                 //entity.getForecastGroupCode();
 
-                wrkProject.setModelGroup(entity.getModelGroupCode());
-                wrkProject.setAmount(entity.getNetUsd());
+                pe.getSalesOrders().setModelGroup(entity.getModelGroupCode());
+                pe.getSalesOrders().setAmount(entity.getNetUsd());
                 //entity.getOrderedQuantity();
-                wrkProject.setSalesOrderNumber(entity.getOrderNumber());
+                pe.getSalesOrders().setSalesOrderNumber(entity.getOrderNumber());
 
                 //entity.getProductFamilyCode();
                 //entity.getSalesAgentName();
                 //entity.getStAgentName();
                 //entity.getStChannelName();
 
-                //  wrkProject.setCustomer(new CustomerEntity(wrkCustomer.getCustomerId())); //entity.getStCustomerName();
+                pe.getSalesOrders().setCustomer(wrkCustomer);
 
-                wrkProject.setImportControlId(entity.getImportControlId());
-                soList.add(wrkProject);
+                pe.getSalesOrders().setImportControlId(entity.getImportControlId());
+
+
+                pe.addNotes(new ProjectNotesEntity(pe,"Sales Order imported on: "+new Date()));
+
+
+                pList.add(pe);
 
             }
             // create the new projects
-            this.salesOrderRepository.save(soList);
-            results.setNumRecordsImported(soList.size());
+            this.projectRepository.save(pList);
+
+
+            // add in default milestone
+            // @TODO fix model
+
+            for(ProjectEntity p:pList) {
+
+
+                p.setProjectActivity(new HashSet<ProjectActivityEntity>());
+                ProjectActivityEntity pae = new ProjectActivityEntity(p, Constants.Activities.BOOK_DATE, null);
+                p.getProjectActivity().add(pae);
+                this.projectActivityRepository.save(pae);
+
+
+                pae = new ProjectActivityEntity(p, Constants.Activities.KICKOFF_DATE, null);
+                p.getProjectActivity().add(pae);
+                this.projectActivityRepository.save(pae);
+
+                pae = new ProjectActivityEntity(p, Constants.Activities.ONSITESTART_DATE, null);
+                p.getProjectActivity().add(pae);
+                this.projectActivityRepository.save(pae);
+
+                pae = new ProjectActivityEntity(p, Constants.Activities.ONSITEEND_DATE, null);
+                p.getProjectActivity().add(pae);
+                this.projectActivityRepository.save(pae);
+
+                pae = new ProjectActivityEntity(p, Constants.Activities.PLANNINGMEETING_DATE, null);
+                p.getProjectActivity().add(pae);
+                this.projectActivityRepository.save(pae);
+
+                pae = new ProjectActivityEntity(p, Constants.Activities.REVREC_DATE, null);
+                p.getProjectActivity().add(pae);
+                this.projectActivityRepository.save(pae);
+
+                pae = new ProjectActivityEntity(p, Constants.Activities.SHIP_DATE, null);
+                p.getProjectActivity().add(pae);
+                this.projectActivityRepository.save(pae);
+
+            }
+
+            results.setNumRecordsImported(pList.size());
             ice.setStatus(ImportControlStatus.IMPORTSO_COMPLETE);
             importControlRepository.save(ice);
 
@@ -405,13 +454,13 @@ public class ImportService extends ServicesBase {
                 // add in milestones
                 // every project gets a standard set
                 List<ProjectActivityEntity> paeList = new ArrayList<ProjectActivityEntity>();
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.BOOK_DATE,project.getBookDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.KICKOFF_DATE,project.getKickoffMeetingDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.ONSITESTART_DATE,project.getOnSiteStartDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.ONSITEEND_DATE,project.getOnSiteEndDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.PLANNINGMEETING_DATE,project.getPlanningMeetingDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.REVREC_DATE,project.getReleaseForRevenueRecDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.SHIP_DATE,project.getShipDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.BOOK_DATE,wrkEnt.getBookDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.KICKOFF_DATE,wrkEnt.getKickoffMeetingDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.ONSITESTART_DATE,wrkEnt.getOnSiteStartDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.ONSITEEND_DATE,wrkEnt.getOnSiteEndDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.PLANNINGMEETING_DATE,wrkEnt.getPlanningMeetingDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.REVREC_DATE,wrkEnt.getReleaseForRevenueRecDate()));
+                paeList.add(new ProjectActivityEntity(project,Constants.Activities.SHIP_DATE,wrkEnt.getShipDate()));
 
                 this.projectActivityRepository.save(paeList);
 
@@ -489,16 +538,16 @@ public class ImportService extends ServicesBase {
 
         pe.setName(importMasterEntity.getName());
 
-        pe.setBookDate(importMasterEntity.getBookDate());
-        pe.setShipDate(importMasterEntity.getShipDate());
-        pe.setPlanningMeetingDate(importMasterEntity.getPlanningMeetingDate());
-        pe.setKickoffMeetingDate(importMasterEntity.getKickoffMeetingDate());
-        pe.setOnSiteStartDate(importMasterEntity.getOnSiteStartDate());
-        pe.setOnSiteEndDate(importMasterEntity.getOnSiteEndDate());
-        pe.setReleaseForRevenueRecDate(importMasterEntity.getReleaseForRevenueRecDate());
+        //pe.setBookDate(importMasterEntity.getBookDate());
+        //pe.setShipDate(importMasterEntity.getShipDate());
+        //pe.setPlanningMeetingDate(importMasterEntity.getPlanningMeetingDate());
+        //pe.setKickoffMeetingDate(importMasterEntity.getKickoffMeetingDate());
+        //pe.setOnSiteStartDate(importMasterEntity.getOnSiteStartDate());
+        //pe.setOnSiteEndDate(importMasterEntity.getOnSiteEndDate());
+        //pe.setReleaseForRevenueRecDate(importMasterEntity.getReleaseForRevenueRecDate());
 
-        pe.setBookedToKickOff(importMasterEntity.getBookedToKickOff());
-        pe.setDaysToClose(importMasterEntity.getDaysToClose());
+        //pe.setBookedToKickOff(importMasterEntity.getBookedToKickOff());
+        //pe.setDaysToClose(importMasterEntity.getDaysToClose());
 
         pe.setService(importMasterEntity.getService());
 

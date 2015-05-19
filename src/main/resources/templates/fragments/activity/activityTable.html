@@ -39,8 +39,7 @@
                             <td class="col-small left" th:if="${readonly!='true'}">
                                 <div class="btn-group btn-group-sm ">
                                     <a href="" th:href="@{activity(activityId=${activity.activityId},returnURL=${returnURL},anchor='projectactivitiesform')}"
-                                       class="btn btn-inverse"><i
-                                            class="fa fa-pencil icon-only"></i></a>
+                                       class="">edit</a>
                                 </div>
                             </td>
                             <td class="col-small left" th:text="${activity.name}"></td>

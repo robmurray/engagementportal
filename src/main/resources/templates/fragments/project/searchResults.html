@@ -37,9 +37,9 @@
                     <tr th:each="project : ${projects}" th:if="${projects != null}">
                         <td class="col-small left">
                             <div class="btn-group btn-group-sm ">
-                                <a href="" th:href="'project?projectId='+${project.projectId}" class="btn btn-inverse"
+                                <a href="" th:href="'project?projectId='+${project.projectId}" class=""
                                    th:if="${project.readonly!='true'}">
-                                    <i class="fa fa-pencil icon-only"></i>
+                                    edit
                                 </a>
                                 <!--
                                     <a href="" th:href="'project?projectId='+${project.projectId}" class="btn btn-danger" th:if="${project.readonly!='true'}">

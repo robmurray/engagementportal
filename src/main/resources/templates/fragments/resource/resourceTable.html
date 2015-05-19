@@ -21,19 +21,19 @@
         <tbody>
         <tr th:each="resource : ${resources}">
             <td class="col-small left">
-                <div class="action-buttons">
-                    <form class="form" role="form" action="" th:action="@{/projectResourceDelete}" method="post">
-                        <input type="hidden" name="projectResourceId" th:value="${resource.projectResourceId}"/>
-                        <input type="hidden" name="index" th:value="${index}"/>
-                        <button type="submit" class="btn  btn-danger"><i class="fa fa-times icon-only"></i></button>
-                    </form>
-                </div>
+                <div class="btn-group btn-group-sm ">
+                        <a href="" th:href="@{resource(resourceId=${resource.resourceId},returnURL='resourceSearch')}" class=""
+                           th:if="${readonly!='true'}">
+                            edit
+                        </a>
+                    </div>
             </td>
+
             <td class="col-small left"><a href=""
-                                          th:href="@{resource(resourceId=${resource.resourceId},returnURL=${returnURL})}"
+                                          th:href="@{resource(resourceId=${resource.resourceId},returnURL='resourceSearch')}"
                                           th:text="${resource.firstName}"></a></td>
             <td class="col-small left"><a href=""
-                                          th:href="@{resource(resourceId=${resource.resourceId},returnURL=${returnURL})}"
+                                          th:href="@{resource(resourceId=${resource.resourceId},returnURL='resourceSearch')}"
                                           th:text="${resource.lastName}"></a></td>
             <td class="col-small left" th:text="${resource.type}"></td>
         </tr>

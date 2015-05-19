@@ -21,48 +21,56 @@
         <div id="projectcreditpanel" class="panel-collapse collapse in">
             <div class="portlet-body">
                 <div class="row" th:if="${project!=null}">
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="control-label">Starting Credits</label>
-                                <input type="text" class="form-control" th:field="${project.name}"
-                                       placeholder="enter the project name" readonly="readonly"/>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">remaining Credits</label>
+                            <input type="text" class="form-control" th:field="${project.credits}" readonly="readonly"/>
 
-                            </div>
                         </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="control-label">Credits Used</label>
-                                <input type="text" class="form-control" th:field="${project.name}"
-                                       placeholder="credits used" readonly="readonly"/>
-
-                            </div>
-                        </div>
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label class="control-label">Remaining Credits</label>
-                                <input type="text" class="form-control" th:field="${project.name}"
-                                       placeholder="remaining credits" readonly="readonly"/>
-
-                            </div>
-                        </div>
+                    </div>
 
                 </div>
-                <div class="row">
-                    <div class="col-md-10">
+                <div id="creditManagement" class="row">
+                    <div class="col-md-2">
                         <div class="form-group">
-                            <form class="form" role="form" action="#" th:action="@{/projectInfo}" th:object="${project}"
-                                  method="post">
-                                <input type="hidden" th:field="*{projectId}"/>
-
+                            <form class="form" role="form" action="#" th:action="@{/projectCreditAdd}" method="post">
+                                <input type="hidden" th:field="${project.projectId}"/>
+                                <input type="hidden" value="creditManagement" name="anchor"/>
                                 <div class="input-group">
-                                    <input type="text" class="form-control" th:field="*{name}"
-                                           placeholder="enter the customer name"/>
+                                    <input type="text" class="form-control input-credits" name="numOfCredits"/>
                                 <span class="input-group-btn">
-                                    <button class="btn btn-primary" type="submit">
-                                        use credits
+                                    <button class="btn btn-default" type="submit">
+                                        add
                                     </button>
 
                                 </span>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <form class="form" role="form" action="#" th:action="@{/projectCreditSubtract}" method="post">
+                                <input type="hidden" th:field="${project.projectId}"/>
+                                <input type="hidden" value="creditManagement" id="addCreditAnchor" name="anchor"/>
+                                <div class="input-group">
+                                    <input type="text" class="form-control input-credits" name="numOfCredits" min="1" max="100000"/>
+                                <span class="input-group-btn">
+                                    <button id="buttonAddCredits" class="btn btn-default" type="submit">
+                                        use
+                                    </button>
+                                </span>
+
+                                <!--    <script>
+                                        $(function (){
+
+                                            //var scrollPos = $("#buttonAddCredits").offset().top;
+                                            // alert(scrollPos);
+                                            //$("#addCreditAnchor").val(scrollPos);
+                                        });
+                                    </script>
+-->
                                 </div>
 
                             </form>

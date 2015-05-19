@@ -24,7 +24,7 @@
                        th:if="${salesOrders!=null}">
                     <thead>
                     <tr>
-                        <th class="col-small left" data-sort-ignore="true" th:if="${readonly!='true'}">actions</th>
+               <!--         <th class="col-small left" data-sort-ignore="true" th:if="${readonly!='true'}">actions</th>-->
 
                         <th class="col-small left" data-sort-ignore="true">Name</th>
                         <th class="col-small left" data-sort-ignore="true">SO Number</th>
@@ -36,17 +36,18 @@
                     </thead>
                     <tbody>
                     <tr th:each="salesOrder : ${salesOrders}">
-
+<!--
                         <td th:if="${readonly!='true'}" class="col-small left">
                             <div class="btn-group btn-group-sm ">
                                 <a href="" th:href="@{salesOrder(salesOrderId=${salesOrderId},returnURL=${returnURL})}"
-                                   class="btn btn-inverse" th:if="${readonly!='true'}">
-                                    <i class="fa fa-pencil icon-only"></i></a>
+                                   class="" th:if="${readonly!='true'}">
+                                    edit
+                                </a>
 
 
                             </div>
                         </td>
-
+-->
                         <!--<td class="col-small left"><a href="" th:href="@{customer(customerId=${salesOrder.customerId},returnURL=${returnURL})}"
                                                       th:text="${salesOrder.stCustomerName}"></a></td>
 -->

@@ -77,7 +77,7 @@ public abstract class ControllerBase {
         model.addAttribute("nav", new Navigation(returnURL));
     }
 
-    protected void addNav(Model model, String returnURL, String anchor) {
+    protected void zzaddNav(Model model, String returnURL, String anchor) {
         if (returnURL == null || returnURL.trim().equals("")) {
             returnURL = "projectSearch";
         }
@@ -178,21 +178,6 @@ public abstract class ControllerBase {
                 projectName = projectName + ":" + pe.getName();
             }
 
-
-            // calculate @TODO push down into service layer
-            if (pe.getKickoffMeetingDate() != null && pe.getBookDate() != null) {
-
-
-                project.setBookedToKickOff(getDifferenceInDays(pe.getKickoffMeetingDate(), pe.getBookDate()));
-            }
-
-            if (pe.getReleaseForRevenueRecDate() != null && pe.getBookDate() != null) {
-
-
-                project.setDaysToClose(getDifferenceInDays(pe.getReleaseForRevenueRecDate(), pe.getBookDate()));
-
-            }
-
             project.setReadonly(true);
             project.setLocation(pe.getLocation());
             project.setName(pe.getName());
@@ -201,10 +186,31 @@ public abstract class ControllerBase {
             project.setStatus(pe.getStatus());
             project.setWaitTime(pe.getWaitTime());
 
+            project.setCredits(pe.getCredits());
+            Date bookDate = null;
+            Date kickOffDate = null;
+            Date resForRevDate = null;
+
             Set<ProjectActivityEntity> paeList = pe.getProjectActivity();
             if (paeList != null) {
                 for (ProjectActivityEntity pae : paeList) {
                     project.addActivity(new Activity(pae.getActivityId(), pae.getName(), pae.getDate(), pae.getStatus()));
+                    if (Constants.Activities.BOOK_DATE.equals(pae.getName())) {
+                        bookDate = pae.getDate();
+                    } else if (Constants.Activities.KICKOFF_DATE.equals(pae.getName())) {
+                        kickOffDate = pae.getDate();
+                    } else if (Constants.Activities.REVREC_DATE.equals(pae.getName())) {
+                        resForRevDate = pae.getDate();
+                    }
+
+                    if (kickOffDate != null && bookDate != null) {
+                        project.setBookedToKickOff(getDifferenceInDays(kickOffDate, bookDate));
+                    }
+
+                    if (resForRevDate != null && bookDate != null) {
+                        project.setDaysToClose(getDifferenceInDays(resForRevDate, bookDate));
+                    }
+
                 }
             }
             Set<ProjectResourceEntity> reList = pe.getProjectResources();

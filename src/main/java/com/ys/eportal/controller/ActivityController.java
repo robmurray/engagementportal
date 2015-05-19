@@ -47,7 +47,9 @@ public class ActivityController extends ControllerBase {
             a= this.loadActivity(pae);
 
         }
-        addNav(model, returnURL,anchor);
+        //addNav(model, returnURL,anchor);
+        //model.addAttribute("returnURL", "project?projectId="+pae.getProject().getProjectId());
+        addNav(model, "project?projectId="+pae.getProject().getProjectId());
         addPageAttributes(model, "Milestone", "Edit Milestone ");
         model.addAttribute("activity", a);
         model.addAttribute("pageGroup", "project");
@@ -77,8 +79,8 @@ public class ActivityController extends ControllerBase {
             pe = pae.getProject();
             p = loadProject(pe);
         }
-
-        this.setSuccessAlertMessage(model, "Milestone updated");
+        addNav(model, "projectSearch");
+        //this.setSuccessAlertMessage(model, "Milestone updated");
         model.addAttribute("anchor","projectactivitiesform");
         model.addAttribute("projectId",pae.getProject().getProjectId());
 
@@ -86,7 +88,7 @@ public class ActivityController extends ControllerBase {
         // hack @TODO fix
         model.addAttribute("pageName", "Project");
         model.addAttribute("project",p );
-        model.addAttribute("returnURL", "project?projectId="+pae.getProject().getProjectId());
+        //model.addAttribute("returnURL", "project?projectId="+pae.getProject().getProjectId());
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
         return "project";

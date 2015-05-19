@@ -160,7 +160,7 @@ public class PortalService extends ServicesBase {
 
     public void save(ProjectEntity projectEntity) {
         this.projectRepository.save(projectEntity);
-        entityManager.refresh(projectEntity);
+       // entityManager.refresh(projectEntity);
     }
 
     public void addNote(ProjectNotesEntity pne) {

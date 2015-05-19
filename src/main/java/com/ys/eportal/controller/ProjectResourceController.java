@@ -43,7 +43,7 @@ public class ProjectResourceController extends ControllerBase {
         model.addAttribute("project", project);
         this.setSuccessAlertMessage(model, "Resource updated");
 
-        addNav(model, "projectSearch", null);
+        addNav(model, "projectSearch");
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
         model.addAttribute("anchor", index);
@@ -53,7 +53,7 @@ public class ProjectResourceController extends ControllerBase {
     }
 
 
-    @RequestMapping(value = "/projectResourceDelete", method = RequestMethod.POST)
+    @RequestMapping(value = "/projectResourceDelete", method = RequestMethod.GET)
     public String resourceDeleteSubmit(@RequestParam(value = "projectResourceId", required = true) long projectResourceId,
                                        @RequestParam(value = "returnURL", required = false) String returnURL,
                                        @RequestParam(value = "index", required = false) String index,
@@ -78,7 +78,7 @@ public class ProjectResourceController extends ControllerBase {
 
 
         model.addAttribute("project", project);
-        addNav(model, "projectSearch", null);
+        addNav(model, "projectSearch");
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
         model.addAttribute("anchor", index);

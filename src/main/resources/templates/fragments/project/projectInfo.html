@@ -6,147 +6,163 @@
 <body>
 <div id="projectInfo" th:fragment="projectInfo (project,readonly)">
 
+    <div class="portlet-body">
+        <div class="row well white" th:if="${project!=null}">
+            <form class="form" role="form" action="#" th:action="@{/projectInfo}" th:object="${project}"
 
-    <div class="portlet">
-        <div class="portlet-heading default-bg">
-            <div class="portlet-title">
-                <h4>Project Information</h4>
-            </div>
-            <div class="portlet-widgets">
-                <a data-toggle="collapse" data-parent="#accordion" href="#projectinfopanel"><i
-                        class="fa fa-chevron-down"></i></a>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div id="projectinfopanel" class="panel-collapse collapse in">
-            <div class="portlet-body">
-                <div class="row" th:if="${project!=null}">
-                    <form class="form" role="form" action="#" th:action="@{/projectInfo}" th:object="${project}"
+                  method="post">
+                <div th:replace="fragments/common/formButtons :: formButtons (readonly=${project.readonly} )"/>
+                <input type="hidden" th:field="*{projectId}"/>
 
-                          method="post">
-                        <div th:replace="fragments/common/formButtons :: formButtons (readonly=${project.readonly} )"/>
-                        <input type="hidden" th:field="*{projectId}"/>
+                <div class="row">
 
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Customer Name</label>
-                                    <input type="text" class="form-control" th:field="*{name}"
-                                           placeholder="enter the project name" readonly="readonly"/>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Sales Order Number</label>
+                            <a href=""
+                               th:href="@{salesorder(salesorderId=*{salesOrder.salesOrderId},returnURL=${returnURL})}"
+                               th:text="*{salesOrder.salesOrderNumber}" class="form-control"
+                               data-placement="right" data-rel="tooltip" title="View Sales Order">
+                            </a>
+                        </div>
 
-                                </div>
-
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label class="control-label">Status</label>
-
-                                    <select class="form-control selectpicker" th:field="*{status}"
-                                            th:disabled="${readonly}">
-                                        <option th:each="type : *{statusValues}"
-                                                th:value="${type}"
-                                                th:text="${type}"></option>
-                                    </select>
-
-                                </div>
-
-                            </div>
-                            <div class="col-md-2 ">
-                                <div class="form-group">
-                                    <label class="control-label">Health</label>
-
-                                    <select class="form-control selectpicker" th:field="*{healthStatus}"
-                                            th:disabled="${readonly}">
-                                        <option th:each="type : *{healthStatusValues}"
-                                                th:value="${type}"
-                                                th:text="${type}"></option>
-                                    </select>
-
-                                </div>
-
-                            </div>
-
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Customer Name</label>
+                            <input type="text" class="form-control" th:field="*{name}"
+                                   placeholder="enter the project name" readonly="readonly"/>
 
                         </div>
 
-
-                        <div class="row">
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label class="control-label">Location</label>
-                                    <input type="text" class="form-control" th:field="*{location}"
-                                           placeholder="enter the project location" th:disabled="${readonly}"/>
-
-                                    <div class="has-error" th:if="${#fields.hasErrors('name')}" th:errors="*{location}">
-                                        location error
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label class="control-label">Wait Time</label>
-
-                                    <select class="form-control selectpicker" th:field="*{waitTime}"
-                                            th:disabled="${readonly}">
-
-                                        <option th:each="type : *{waitTimeValues}"
-                                                th:value="${type}"
-                                                th:text="${type}"></option>
-                                    </select>
-
-                                </div>
-
-                            </div>
-
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label class="control-label">booked to kickoff</label>
-                                    <input th:field="*{bookedToKickOff}" class="form-control" readonly="readonly" th:if="*{bookedToKickOff!=null}"/>
-                                    <input value="N/A" class="form-control" readonly="readonly" th:if="*{bookedToKickOff==null}"/>
-                                </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-4">
-                                <div class="form-group">
-                                    <label class="control-label">Service</label>
-                                    <input type="text" class="form-control" th:field="*{service}"
-                                           placeholder="enter the service" th:disabled="${readonly}"/>
-
-                                    <div class="has-error" th:if="${#fields.hasErrors('service')}"
-                                         th:errors="*{service}">
-                                        service error
-                                    </div>
-                                </div>
-
-                            </div>
-                            <div class="col-md-2">
-                                <div class="form-group">
-                                    <label class="control-label">days to close</label>
-                                    <input th:field="*{daysToClose}" class="form-control" readonly="readonly" th:if="*{daysToClose!=null}"/>
-                                    <input value="N/A" class="form-control" readonly="readonly" th:if="*{daysToClose==null}"/>
-                                </div>
-
-                            </div>
-
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Amount</label>
+                            <input type="text" class="form-control" th:field="*{salesOrder.amount}"
+                                   placeholder="Sales Order Number" readonly="readonly"/>
 
                         </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label class="control-label">Model Group</label>
+                            <input type="text" class="form-control" th:field="*{salesOrder.modelGroup}"
+                                   placeholder="model Group" readonly="readonly"/>
 
-                    </form>
-                </div>
-                <div class="row" th:if="${project==null}">
-
-                    <div class="col-sm-6">
-                        <div class="well bg-primary center">
-                            <p>There is currently no project information associated with this project.</p>
                         </div>
                     </div>
 
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">booked to kickoff</label>
+                            <input th:field="*{bookedToKickOff}" class="form-control" readonly="readonly"
+                                   th:if="*{bookedToKickOff!=null}"/>
+                            <input value="N/A" class="form-control" readonly="readonly"
+                                   th:if="*{bookedToKickOff==null}"/>
+                        </div>
+                    </div>
+
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">days to close</label>
+                            <input th:field="*{daysToClose}" class="form-control" readonly="readonly"
+                                   th:if="*{daysToClose!=null}"/>
+                            <input value="N/A" class="form-control" readonly="readonly" th:if="*{daysToClose==null}"/>
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-sm-1">
+                        <div class="form-group">
+                            <label class="control-label">Location</label>
+                            <input type="text" class="form-control" th:field="*{location}"
+                                   placeholder="enter the project location" th:disabled="${readonly}"/>
+
+                            <div class="has-error" th:if="${#fields.hasErrors('name')}" th:errors="*{location}">
+                                location error
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Wait Time</label>
+
+                            <select class="form-control selectpicker" th:field="*{waitTime}"
+                                    th:disabled="${readonly}">
+
+                                <option th:each="type : *{waitTimeValues}"
+                                        th:value="${type}"
+                                        th:text="${type}"></option>
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label class="control-label">Status</label>
+
+                            <select class="form-control selectpicker" th:field="*{status}"
+                                    th:disabled="${readonly}">
+                                <option th:each="type : *{statusValues}"
+                                        th:value="${type}"
+                                        th:text="${type}"></option>
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-2 ">
+                        <div class="form-group">
+                            <label class="control-label">Health</label>
+
+                            <select class="form-control selectpicker" th:field="*{healthStatus}"
+                                    th:disabled="${readonly}">
+                                <option th:each="type : *{healthStatusValues}"
+                                        th:value="${type}"
+                                        th:text="${type}"></option>
+                            </select>
+
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label class="control-label">Service</label>
+                            <input type="text" class="form-control" th:field="*{service}"
+                                   placeholder="enter the service" th:disabled="${readonly}"/>
+
+                            <div class="has-error" th:if="${#fields.hasErrors('service')}"
+                                 th:errors="*{service}">
+                                service error
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </form>
+        </div>
+        <div class="row" th:if="${project==null}">
+
+            <div class="col-sm-6">
+                <div class="well bg-primary center">
+                    <p>There is currently no project information associated with this project.</p>
                 </div>
             </div>
+
         </div>
     </div>
 

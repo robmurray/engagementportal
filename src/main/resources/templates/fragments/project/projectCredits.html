@@ -4,93 +4,72 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
+
 <div id="projectCredits" th:fragment="projectCredits (project,readonly)">
+    <div class="portlet-body">
+        <div class="row  well white" th:if="${project!=null}">
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">remaining Credits</label>
+                        <input type="text" class="form-control" th:field="${project.credits}" readonly="readonly"/>
 
-
-    <div class="portlet">
-        <div class="portlet-heading default-bg">
-            <div class="portlet-title">
-                <h4>Project Credits</h4>
-            </div>
-            <div class="portlet-widgets">
-                <a data-toggle="collapse" data-parent="#accordion" href="#projectcreditpanel"><i
-                        class="fa fa-chevron-down"></i></a>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div id="projectcreditpanel" class="panel-collapse collapse in">
-            <div class="portlet-body">
-                <div class="row" th:if="${project!=null}">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label class="control-label">remaining Credits</label>
-                            <input type="text" class="form-control" th:field="${project.credits}" readonly="readonly"/>
-
-                        </div>
                     </div>
-
                 </div>
-                <div id="creditManagement" class="row">
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <form class="form" role="form" action="#" th:action="@{/projectCreditAdd}" method="post">
-                                <input type="hidden" th:field="${project.projectId}"/>
-                                <input type="hidden" value="creditManagement" name="anchor"/>
-                                <div class="input-group">
-                                    <input type="text" class="form-control input-credits" name="numOfCredits"/>
+
+            </div>
+            <div id="creditManagement" class="row">
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <form class="form" role="form" action="#" th:action="@{/projectCreditAdd}" method="post">
+                            <input type="hidden" th:field="${project.projectId}"/>
+                            <input type="hidden" value="creditManagement" name="anchor"/>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control input-credits" name="numOfCredits"/>
                                 <span class="input-group-btn">
                                     <button class="btn btn-default" type="submit">
                                         add
                                     </button>
 
                                 </span>
-                                </div>
+                            </div>
 
-                            </form>
-                        </div>
+                        </form>
                     </div>
-                    <div class="col-md-2">
-                        <div class="form-group">
-                            <form class="form" role="form" action="#" th:action="@{/projectCreditSubtract}" method="post">
-                                <input type="hidden" th:field="${project.projectId}"/>
-                                <input type="hidden" value="creditManagement" id="addCreditAnchor" name="anchor"/>
-                                <div class="input-group">
-                                    <input type="text" class="form-control input-credits" name="numOfCredits" min="1" max="100000"/>
+                </div>
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <form class="form" role="form" action="#" th:action="@{/projectCreditSubtract}" method="post">
+                            <input type="hidden" th:field="${project.projectId}"/>
+                            <input type="hidden" value="creditManagement" id="addCreditAnchor" name="anchor"/>
+
+                            <div class="input-group">
+                                <input type="text" class="form-control input-credits" name="numOfCredits" min="1"
+                                       max="100000"/>
                                 <span class="input-group-btn">
                                     <button id="buttonAddCredits" class="btn btn-default" type="submit">
                                         use
                                     </button>
                                 </span>
+                            </div>
 
-                                <!--    <script>
-                                        $(function (){
-
-                                            //var scrollPos = $("#buttonAddCredits").offset().top;
-                                            // alert(scrollPos);
-                                            //$("#addCreditAnchor").val(scrollPos);
-                                        });
-                                    </script>
--->
-                                </div>
-
-                            </form>
-                        </div>
+                        </form>
                     </div>
-                </div>
-                <div class="row" th:if="${project==null}">
-
-                    <div class="col-sm-6">
-                        <div class="well bg-primary center">
-                            <p>There is currently no project credits associated with this project.</p>
-                        </div>
-                    </div>
-
                 </div>
             </div>
+            <div class="row" th:if="${project==null}">
+
+                <div class="col-sm-6">
+                    <div class="well bg-primary center">
+                        <p>There is currently no project credits associated with this project.</p>
+                    </div>
+                </div>
+
+            </div>
         </div>
+
     </div>
-
-
     <!-- END YOUR CONTENT HERE -->
 </div>
 </body>

@@ -134,6 +134,8 @@ public abstract class EportalBaseController extends com.ys.ui.controller.Control
                     project.addNotes(new ProjectNote(pne.getNoteId(), pne.getNotes(), pne.getCreateDate()));
                 }
             }
+
+
             SalesOrderEntity soe = pe.getSalesOrders();
             SalesOrder so = null;
             if (soe != null) {
@@ -161,7 +163,7 @@ public abstract class EportalBaseController extends com.ys.ui.controller.Control
                     so.setCustomerId(soe.getCustomer().getCustomerId());
                 }
                 so.setStSalesAgentName(soe.getStSalesAgentName());
-                project.addSalesOrder(so);
+                project.setSalesOrder(so);
             }
 
 

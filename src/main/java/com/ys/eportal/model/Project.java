@@ -13,7 +13,7 @@ public class Project extends AbstractModelBase {
     private long projectId;
     private boolean readonly;
     private long credits;
-    private List<SalesOrder> salesOrders;
+    private SalesOrder salesOrder;
     private List<Resource> remoteResources;
     private List<Resource> accountResources;
     private List<Resource> onsiteResources;
@@ -74,23 +74,6 @@ public class Project extends AbstractModelBase {
         this.activities = activities;
     }
 
-    public List<SalesOrder> getSalesOrders() {
-        return salesOrders;
-    }
-
-    public void setSalesOrders(List<SalesOrder> salesorders) {
-        this.salesOrders = salesorders;
-    }
-
-    public void addSalesOrder(SalesOrder salesOrder) {
-        if (this.salesOrders == null) {
-            this.salesOrders = new ArrayList<SalesOrder>();
-        }
-        if (salesOrder == null) {
-            return;
-        }
-        this.salesOrders.add(salesOrder);
-    }
 
     public boolean isReadonly() {
         return readonly;
@@ -100,14 +83,12 @@ public class Project extends AbstractModelBase {
         this.readonly = readonly;
     }
 
+    public SalesOrder getSalesOrder() {
+        return salesOrder;
+    }
 
-
-    public SalesOrder getFirstSalesOrder() {
-        SalesOrder so = null;
-        if (this.salesOrders != null && this.salesOrders.size() > 0) {
-            so = this.salesOrders.get(0);
-        }
-        return so;
+    public void setSalesOrder(SalesOrder salesOrder) {
+        this.salesOrder = salesOrder;
     }
 
     public List<Resource> getRemoteResources() {

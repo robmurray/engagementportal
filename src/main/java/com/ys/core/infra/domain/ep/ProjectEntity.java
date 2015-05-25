@@ -77,6 +77,25 @@ public class ProjectEntity extends AbstractDomainBase {
     @Column(name = "waitTime")
     private String waitTime;
 
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "service", columnDefinition = "TEXT")
+    private String service;
+
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "accountTeam", columnDefinition = "TEXT")
+    private String accountTeam;
+
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "remote", columnDefinition = "TEXT")
+    private String remote;
+
+    @Lob
+    @Basic(fetch = FetchType.EAGER)
+    @Column(name = "onsite", columnDefinition = "TEXT")
+
 
     private String onsite;
 
@@ -127,6 +146,30 @@ public class ProjectEntity extends AbstractDomainBase {
 
     public void setCredits(long credits) {
         this.credits = credits;
+    }
+
+    public String getService() {
+        return service;
+    }
+
+    public void setService(String service) {
+        this.service = service;
+    }
+
+    public String getAccountTeam() {
+        return accountTeam;
+    }
+
+    public void setAccountTeam(String accountTeam) {
+        this.accountTeam = accountTeam;
+    }
+
+    public String getRemote() {
+        return remote;
+    }
+
+    public void setRemote(String remote) {
+        this.remote = remote;
     }
 
     public String getOnsite() {

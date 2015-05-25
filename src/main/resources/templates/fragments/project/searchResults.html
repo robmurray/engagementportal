@@ -56,8 +56,8 @@
                                               th:href="'salesorder?salesorderId='+${project.salesOrderId}"
                                               data-placement="left" data-rel="tooltip" title="view"
                                               th:text="${project.salesOrderNumber}"></a></td>
-                <td class="col-small center"></td>
-                <td class="col-small center"></td>
+                <td class="col-small left" th:text="${project.bookedDate}"></td>
+                <td class="col-small left" th:text="${project.modelGroup}"></td>
                 <td class="col-small center"><span class="label"
                                                    th:classappend="'label-' + ${project.statusDisplayClass}"
                                                    th:text="${project.status}"></span></td>

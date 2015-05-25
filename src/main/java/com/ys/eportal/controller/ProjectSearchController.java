@@ -1,6 +1,7 @@
 package com.ys.eportal.controller;
 
 import com.ys.core.infra.domain.ep.ProjectEntity;
+import com.ys.core.infra.domain.ep.UMProjectSearchResults;
 import com.ys.eportal.mapper.ProjectSearchMapper;
 import com.ys.eportal.model.ProjectSearch;
 import com.ys.eportal.model.ProjectSearchResults;
@@ -44,7 +45,7 @@ public class ProjectSearchController extends EportalBaseController {
     @RequestMapping(value = "/projectSearch", method = RequestMethod.GET)
     public String projectSearchForm(Model model) {
 
-        Iterable<ProjectEntity> wrkList = this.portalService.findAllProjectsSearchResults();
+        Iterable<UMProjectSearchResults> wrkList = this.portalService.findAllProjectsSearchResults();
 
         List<ProjectSearchResults> returnList = buildSearchResults(wrkList);
 
@@ -66,7 +67,8 @@ public class ProjectSearchController extends EportalBaseController {
         model.addAttribute("pageName", "Project Search");
         model.addAttribute("projectsearch", search);
 
-        Iterable<ProjectEntity> wrkList = this.portalService.find(this.projectSearchMapper.convert(search));
+//        Iterable<ProjectEntity> wrkList = null;//this.portalService.find(this.projectSearchMapper.convert(search));
+        Iterable<UMProjectSearchResults> wrkList = this.portalService.findAllProjectsSearchResults();
 
         List<ProjectSearchResults> returnList = buildSearchResults(wrkList);
 
@@ -79,7 +81,7 @@ public class ProjectSearchController extends EportalBaseController {
     }
 
 
-    private List<ProjectSearchResults> buildSearchResults(Iterable<ProjectEntity> list) {
+    private List<ProjectSearchResults> buildSearchResults(Iterable<UMProjectSearchResults> list) {
 
 
         // @TODO test autnorization
@@ -88,21 +90,20 @@ public class ProjectSearchController extends EportalBaseController {
         if (list != null) {
             returnList = new ArrayList<ProjectSearchResults>();
             ProjectSearchResults ps = null;
-            for (ProjectEntity pe : list) {
+            for (UMProjectSearchResults pe : list) {
 
                 if (pe == null) {
                     // won't happen
                     logger.error("project record null wtf ");
                     continue;
                 }
-                if (pe.getSalesOrders() == null || pe.getSalesOrders().getCustomer() == null) {
-                    // bad record log and skip
-                    logger.error("bad project record: " + pe.getProjectId());
-                    continue;
 
-                }
+                ps = new ProjectSearchResults(pe.getProjectId(), pe.getSalesOrderId(),
+                        pe.getCustomerId(), pe.getSalesOrderNumber(), pe.getCustomerName(),
+                        pe.getModelGroup(),pe.getBookDate(),pe.getStatus(),pe.getHealth());
 
-                ps = new ProjectSearchResults(pe.getProjectId(), pe.getSalesOrders().getSalesOrderId(), pe.getSalesOrders().getCustomer().getCustomerId(), pe.getSalesOrders().getSalesOrderNumber(), pe.getSalesOrders().getCustomer().getName(), pe.getStatus(),pe.getHealth());
+
+
                 ps.setReadonly(readonly);
                 returnList.add(ps);
 

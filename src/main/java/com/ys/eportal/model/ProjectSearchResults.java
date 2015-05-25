@@ -2,6 +2,7 @@ package com.ys.eportal.model;
 
 import com.ys.core.infra.domain.ep.Constants;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -39,6 +40,10 @@ public class ProjectSearchResults {
 
     private String customerName;
 
+    private String modelGroup;
+
+    private Date bookedDate;
+
     private String status;
 
     private String health;
@@ -48,36 +53,14 @@ public class ProjectSearchResults {
     public ProjectSearchResults() {
     }
 
-    public ProjectSearchResults(long projectId, String salesOrderNumber, String customerName, String status) {
-        this.projectId = projectId;
-        this.salesOrderNumber = salesOrderNumber;
-        this.customerName = customerName;
-        this.status = status;
-    }
-
-    public ProjectSearchResults(long projectId, long salesOrderId, String salesOrderNumber, String customerName, String status) {
-        this.projectId = projectId;
-        this.salesOrderId = salesOrderId;
-        this.salesOrderNumber = salesOrderNumber;
-        this.customerName = customerName;
-        this.status = status;
-    }
-
-    public ProjectSearchResults(long projectId, long salesOrderId, long customerId, String salesOrderNumber, String customerName, String status) {
+    public ProjectSearchResults(long projectId, long salesOrderId, long customerId, String salesOrderNumber, String customerName, String modelGroup, Date bookedDate, String status, String health) {
         this.projectId = projectId;
         this.salesOrderId = salesOrderId;
         this.customerId = customerId;
         this.salesOrderNumber = salesOrderNumber;
         this.customerName = customerName;
-        this.status = status;
-    }
-
-    public ProjectSearchResults(long projectId, long salesOrderId, long customerId, String salesOrderNumber, String customerName, String status, String health) {
-        this.projectId = projectId;
-        this.salesOrderId = salesOrderId;
-        this.customerId = customerId;
-        this.salesOrderNumber = salesOrderNumber;
-        this.customerName = customerName;
+        this.modelGroup = modelGroup;
+        this.bookedDate = bookedDate;
         this.status = status;
         this.health = health;
     }
@@ -144,6 +127,22 @@ public class ProjectSearchResults {
 
     public void setHealth(String health) {
         this.health = health;
+    }
+
+    public String getModelGroup() {
+        return modelGroup;
+    }
+
+    public void setModelGroup(String modelGroup) {
+        this.modelGroup = modelGroup;
+    }
+
+    public Date getBookedDate() {
+        return bookedDate;
+    }
+
+    public void setBookedDate(Date bookedDate) {
+        this.bookedDate = bookedDate;
     }
 
     public String getStatusDisplayClass() {

@@ -9,8 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.persistence.*;
 import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
@@ -272,9 +271,16 @@ public class PortalService extends ServicesBase {
         return (List) this.projectRepository.findAll();
     }
 
-    public List<ProjectEntity> findAllProjectsSearchResults() {
 
-        return (List) this.projectRepository.findAll();
+    public List<UMProjectSearchResults> findAllProjectsSearchResults() {
+
+        String theQuery="SELECT p.project_Id, e.sales_order_number,e.sales_order_id,e.model_group,c.customer_id,c.name, p.status, p.health, a.date as bookedDate\n" +
+                "from ep_customer c, ep_project p, ep_sales_order e, ep_project_activity a\n" +
+                " where p.project_id=e.project_id AND e.customer_id = c.customer_id AND a.project_id = p.project_id AND a.name ='bookDate'\n";
+
+        Query q = this.entityManager.createNativeQuery(theQuery, "ProjectSearchResult");
+
+        return q.getResultList();
 
 
     }

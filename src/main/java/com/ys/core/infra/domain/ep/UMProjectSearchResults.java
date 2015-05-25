@@ -36,6 +36,8 @@ public class UMProjectSearchResults {
     private String customerName;
     private String status;
     private String health;
+
+    @Temporal(TemporalType.DATE)
     private Date bookDate;
 
     public UMProjectSearchResults() {

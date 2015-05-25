@@ -1,6 +1,7 @@
 package com.ys.eportal.model;
 
 import com.ys.core.infra.domain.ep.Constants;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -42,6 +43,7 @@ public class ProjectSearchResults {
 
     private String modelGroup;
 
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE)
     private Date bookedDate;
 
     private String status;

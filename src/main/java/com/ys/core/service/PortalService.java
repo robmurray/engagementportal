@@ -274,7 +274,7 @@ public class PortalService extends ServicesBase {
 
     public List<UMProjectSearchResults> findAllProjectsSearchResults() {
 
-        String theQuery="SELECT p.project_Id, e.sales_order_number,e.sales_order_id,e.model_group,c.customer_id,c.name, p.status, p.health, a.date as bookedDate\n" +
+        String theQuery="SELECT p.project_Id, e.sales_order_number,e.sales_order_id,e.model_group,c.customer_id,c.name, p.status, p.health,a.date  as bookedDate\n" +
                 "from ep_customer c, ep_project p, ep_sales_order e, ep_project_activity a\n" +
                 " where p.project_id=e.project_id AND e.customer_id = c.customer_id AND a.project_id = p.project_id AND a.name ='bookDate'\n";
 

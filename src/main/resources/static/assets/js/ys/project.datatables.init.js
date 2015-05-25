@@ -35,19 +35,32 @@ $(document).ready(function () {
         }
     });
 
+$('#SampleDT').dataTable()
+.columnFilter({aoColumns:[
+                null,
+    		    { sSelector: "#customerFilter",type:"text" },
+				{ sSelector: "#salesOrderFilter",type:"text"},
+				{ sSelector: "#bookDateFilter", type:"text"},
+				{ sSelector: "#typeFilter", type:"select", values : ["VPM","PNA","CSN","WLAN","ASPRO"]   },
+				{ sSelector: "#statusFilter", type:"select", values : ["Complete","Scheduled","R&D Support","In Process","Post Support","Booked","Proposed","undefined"]   },
+				{ sSelector: "#healthFilter", type:"select", values : ["good", "warning", "at risk"]   }
+				]});
 
+});
+
+/*
  $('#SampleDT').dataTable()
     		.columnFilter({sPlaceHolder: "head:before",aoColumns:[
                 null,
     		    { type:"text" },
 				{ type:"text"},
 				{ type:"text"},
-				{ type:"select", values : ["", "", ""]   },
+				{ type:"select", values : ["VPM","PNA","CSN","WLAN","ASPRO"]   },
 				{ type:"select", values : ["Complete","Scheduled","R&D Support","In Process","Post Support","Booked","Proposed","undefined"]   },
 				{ type:"select", values : ["good", "warning", "at risk"]   }
 				]}
 			);
-
+*/
 /*
 $('#SampleDT').dataTable()
 			.columnFilter({aoColumns:[
@@ -80,4 +93,3 @@ $('#SampleDT').dataTable()
 			);
 
 */
-});

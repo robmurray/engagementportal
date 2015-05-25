@@ -1,5 +1,6 @@
 package com.ys.eportal.model;
 
+import com.ys.ui.model.PageModelBase;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -7,22 +8,14 @@ import java.util.Date;
 /**
  * Created by rob on 4/9/15.
  */
-public abstract class AbstractModelBase {
+public abstract class AbstractModelBase extends PageModelBase {
 
-    protected boolean readonly;
+
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     protected Date createDate;
 
     @DateTimeFormat(pattern = "dd/MM/yyyy")
     protected Date modifiedDate;
-
-    public boolean isReadonly() {
-        return readonly;
-    }
-
-    public void setReadonly(boolean readonly) {
-        this.readonly = readonly;
-    }
 
     public Date getCreateDate() {
         return createDate;

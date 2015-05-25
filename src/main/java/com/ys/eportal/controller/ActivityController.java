@@ -1,36 +1,25 @@
 package com.ys.eportal.controller;
 
 
-import com.ys.eportal.infra.domain.Constants;
-import com.ys.eportal.infra.domain.ProjectActivityEntity;
-import com.ys.eportal.infra.domain.ProjectEntity;
+import com.ys.core.infra.domain.ep.ProjectActivityEntity;
+import com.ys.core.infra.domain.ep.ProjectEntity;
 import com.ys.eportal.mapper.CustomerMapper;
 import com.ys.eportal.model.Activity;
 import com.ys.eportal.model.Project;
-import com.ys.eportal.service.PortalService;
+import com.ys.core.service.PortalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestDataBinder;
-import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 
 /**
  * Created by rob on 4/4/15.
  */
 @Controller
-public class ActivityController extends ControllerBase {
+public class ActivityController extends EportalBaseController {
     private static Logger logger = LoggerFactory.getLogger(ActivityController.class);
-
-    @Autowired
-    private PortalService portalService;
 
     @Autowired
     private CustomerMapper customerMapper;
@@ -81,7 +70,7 @@ public class ActivityController extends ControllerBase {
         }
         addNav(model, "projectSearch");
         //this.setSuccessAlertMessage(model, "Milestone updated");
-        model.addAttribute("anchor","projectactivitiesform");
+        model.addAttribute("anchor", "projectactivitiesform");
         model.addAttribute("projectId",pae.getProject().getProjectId());
 
 

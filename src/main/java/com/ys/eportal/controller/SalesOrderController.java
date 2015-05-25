@@ -1,11 +1,9 @@
 package com.ys.eportal.controller;
 
-import com.ys.eportal.infra.domain.*;
+import com.ys.core.infra.domain.ep.SalesOrderEntity;
 import com.ys.eportal.model.*;
-import com.ys.eportal.service.PortalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,13 +16,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import javax.servlet.http.HttpServletRequest;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.Set;
 
 /**
  * Created by rob on 4/4/15.
  */
 @Controller
-public class SalesOrderController extends ControllerBase {
+public class SalesOrderController extends EportalBaseController {
     private static Logger logger = LoggerFactory.getLogger(SalesOrderController.class);
 
     @InitBinder

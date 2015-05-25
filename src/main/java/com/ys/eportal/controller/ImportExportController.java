@@ -1,12 +1,11 @@
 package com.ys.eportal.controller;
 
 
-import com.ys.eportal.infra.domain.ImportOracleObiStage;
+import com.ys.core.infra.domain.ep.ImportOracleObiStage;
 import com.ys.eportal.model.ImportMasterStats;
 import com.ys.eportal.model.UploadSalesOrder;
-import com.ys.eportal.service.ImportService;
-import com.ys.eportal.service.converter.ConversionResults;
-import org.apache.commons.lang3.StringEscapeUtils;
+import com.ys.core.service.ImportService;
+import com.ys.core.service.converter.ConversionResults;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +22,7 @@ import org.springframework.web.multipart.MultipartFile;
  * Created by rob on 4/4/15.
  */
 @Controller
-public class ImportExportController extends ControllerBase {
+public class ImportExportController extends EportalBaseController {
 
     private static Logger logger = LoggerFactory.getLogger(ImportExportController.class);
 

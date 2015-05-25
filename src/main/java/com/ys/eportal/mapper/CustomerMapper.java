@@ -1,6 +1,6 @@
 package com.ys.eportal.mapper;
 
-import com.ys.eportal.infra.domain.CustomerEntity;
+import com.ys.core.infra.domain.ep.CustomerEntity;
 import com.ys.eportal.model.Customer;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;

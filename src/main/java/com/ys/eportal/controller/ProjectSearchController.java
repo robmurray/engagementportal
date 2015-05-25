@@ -1,11 +1,9 @@
 package com.ys.eportal.controller;
 
-import com.ys.eportal.infra.domain.ProjectEntity;
+import com.ys.core.infra.domain.ep.ProjectEntity;
 import com.ys.eportal.mapper.ProjectSearchMapper;
-import com.ys.eportal.model.Navigation;
 import com.ys.eportal.model.ProjectSearch;
 import com.ys.eportal.model.ProjectSearchResults;
-import com.ys.eportal.service.PortalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +21,7 @@ import java.util.List;
  * Created by rob on 4/4/15.
  */
 @Controller
-public class ProjectSearchController extends ControllerBase {
+public class ProjectSearchController extends EportalBaseController {
     private static Logger logger = LoggerFactory.getLogger(ProjectSearchController.class);
 
     @Autowired
@@ -46,7 +44,8 @@ public class ProjectSearchController extends ControllerBase {
     @RequestMapping(value = "/projectSearch", method = RequestMethod.GET)
     public String projectSearchForm(Model model) {
 
-        Iterable<ProjectEntity> wrkList = this.portalService.findAllProjects();
+        Iterable<ProjectEntity> wrkList = this.portalService.findAllProjectsSearchResults();
+
         List<ProjectSearchResults> returnList = buildSearchResults(wrkList);
 
         // @TODO check aauthorization

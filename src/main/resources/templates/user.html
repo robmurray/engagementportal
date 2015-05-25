@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/portalpage">
+<head>
+    <meta charset="utf-8"/>
+    <title>Project</title>
+</head>
+<body>
+
+<div layout:fragment="content">
+    <div th:if="${nav!=null}">
+
+        <a href="" th:href="${nav.returnURL}"
+           class=" btn btn-primary" data-placement="right" data-rel="tooltip" title="Return to previous screen"><i
+                class="fa fa-arrow-left"></i></a>
+
+
+    </div>
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>User Information</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#customerinfopanel"><i
+                        class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="customerinfopanel" class="panel-collapse collapse in">
+            <div class="portlet-body">
+
+
+                <div th:if="${user!=null}">
+                    <div th:replace="fragments/usermanagement/userInfo :: userInfo(user=${user})"/>
+
+                    <div class="portlet">
+                        <div class="portlet-heading inverse-bg">
+                            <div class="portlet-title">
+                                <h4>Update Password</h4>
+                            </div>
+                            <div class="portlet-widgets">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#projectcreditpanel"><i
+                                        class="fa fa-chevron-down"></i></a>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div id="projectcreditpanel" class="panel-collapse collapse in">
+                            <div class="portlet-body">
+                                <div th:replace="fragments/usermanagement/changePassword :: changePassword(passwordChange=${passwordChange})"/>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="row" th:if="${user==null}">
+
+                    <div class="col-sm-6">
+                        <div class="well bg-primary center">
+                            <p>There is currently no user information associated with this user.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>
+</body>
+</html>

@@ -1,10 +1,9 @@
 package com.ys.eportal.model;
 
-import com.ys.eportal.infra.domain.Constants;
+import com.ys.core.infra.domain.ep.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * Created by rob on 4/5/15.

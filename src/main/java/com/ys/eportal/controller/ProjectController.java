@@ -1,31 +1,19 @@
 package com.ys.eportal.controller;
 
-import com.ys.eportal.infra.domain.*;
+import com.ys.core.infra.domain.ep.ProjectEntity;
+import com.ys.core.infra.domain.ep.ProjectNotesEntity;
 import com.ys.eportal.model.*;
-import com.ys.eportal.service.PortalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.ServletRequestDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.view.RedirectView;
-
-import javax.servlet.http.HttpServletRequest;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.GregorianCalendar;
-import java.util.Set;
 
 /**
  * Created by rob on 4/4/15.
  */
 @Controller
-public class ProjectController extends ControllerBase {
+public class ProjectController extends EportalBaseController {
     private static Logger logger = LoggerFactory.getLogger(ProjectController.class);
 
 

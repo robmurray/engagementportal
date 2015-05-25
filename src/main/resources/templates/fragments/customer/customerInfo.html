@@ -6,19 +6,6 @@
 <body>
 <div id="customerInfo" th:fragment="customerInfo (customer,readonly)">
 
-    <div class="portlet">
-        <div class="portlet-heading default-bg">
-            <div class="portlet-title">
-                <h4>Customer Information</h4>
-            </div>
-            <div class="portlet-widgets">
-                <a data-toggle="collapse" data-parent="#accordion" href="#customerinfopanel"><i
-                        class="fa fa-chevron-down"></i></a>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div id="customerinfopanel" class="panel-collapse collapse in">
-            <div class="portlet-body">
                 <form class="form" role="form" action="#" th:action="@{/customer}" th:object="${customer}"
                       method="post" th:if="${customer!=null}">
 
@@ -66,20 +53,6 @@
 
                     </div>
                 </form>
-
-                <div class="row" th:if="${customer==null}">
-
-                    <div class="col-sm-6">
-                        <div class="well bg-primary center">
-                            <p>There is currently no customer information associated with this customer.</p>
-                        </div>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-    </div>
-
 
     <!-- END YOUR CONTENT HERE -->
 </div>

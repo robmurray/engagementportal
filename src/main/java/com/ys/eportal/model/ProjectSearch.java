@@ -1,6 +1,6 @@
 package com.ys.eportal.model;
 
-import com.ys.eportal.infra.domain.Constants;
+import com.ys.core.infra.domain.ep.Constants;
 
 import java.util.List;
 

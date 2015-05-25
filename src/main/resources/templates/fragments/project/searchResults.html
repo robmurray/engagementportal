@@ -6,94 +6,82 @@
 <body>
 <div id="searchResults" th:fragment="searchResults  (projects, readonly)">
 
-    <div class="portlet">
-        <div class="portlet-heading default-bg">
-            <div class="portlet-title">
-                <h4>projects</h4>
-            </div>
-            <div class="portlet-widgets">
-                <a data-toggle="collapse" data-parent="#accordion" href="#projectSearchResultsPanel"><i
-                        class="fa fa-chevron-down"></i></a>
-            </div>
-            <div class="clearfix"></div>
-        </div>
-        <div id="projectSearchResultsPanel" class="panel-collapse collapse in">
-            <div class="portlet-body">
+    <div class="well white">
+        <table id="SampleDT" class="datatable table table-hover table-striped table-bordered tc-table"
+               th:if="${projects!=null}">
+            <thead>
+            <tr>
+                <th></th>
+                <th data-class="expand">customer</th>
+                <th data-hide="phone,tablet">Sale Order</th>
+                <th data-hide="phone">Book Date</th>
+                <th data-hide="phone">Type</th>
+                <th data-hide="phone,tablet">Status</th>
+                <th data-hide="phone,tablet">Health</th>
+            </tr>
+            <tr>
+                <th>Action</th>
+                <th data-class="expand">customer</th>
+                <th data-hide="phone,tablet">Sale Order</th>
+                <th data-hide="phone">Book Date</th>
+                <th data-hide="phone">Type</th>
+                <th data-hide="phone,tablet">Status</th>
+                <th data-hide="phone,tablet">Health</th>
+            </tr>
 
-                <table class="table table-bordered table-striped table-hover tc-table footable no-padding"
-                       data-page-size="100"
-                       th:if="${projects!=null}">
-                    <thead>
-                    <tr>
-                        <th class="col-small left" data-toggle="phone,tablet" data-sort-ignore="true">action</th>
-                        <th class="col-small left" data-toggle="phone,tablet">Project ID</th>
-                        <th class="col-small left" data-toggle="phone,tablet">Customer</th>
-                        <th class="col-small left" data-toggle="phone, tablet">Sales Order</th>
-                        <th class="col-small left" data-toggle="phone,tablet">Status</th>
-                        <th class="col-small left" data-toggle="phone,tablet">Health</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr th:each="project : ${projects}" th:if="${projects != null}">
-                        <td class="col-small left">
-                            <div class="btn-group btn-group-sm ">
-                                <a href="" th:href="'project?projectId='+${project.projectId}" class=""
-                                   th:if="${project.readonly!='true'}">
-                                    edit
-                                </a>
-                                <!--
-                                    <a href="" th:href="'project?projectId='+${project.projectId}" class="btn btn-danger" th:if="${project.readonly!='true'}">
-                                        <i class="fa fa-times icon-only"></i>
-                                    </a>
-                                -->
-                            </div>
+            </thead>
+            <tfoot>
+            <th>Action</th>
+            <th>customer</th>
+            <th>Sale Order</th>
+            <th>Book Date</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>Health</th>
+            </tfoot>
+            <tbody>
 
-                        </td>
-                        <td class="col-small left"><a href="" th:href="'project?projectId='+${project.projectId}"
-                                                      data-placement="left" data-rel="tooltip" title="view"
-                                                      th:text="${project.projectId}"></a></td>
-                        <!-- <td class="col-small left"><a href="" th:href="'customer?customerId='+${project.customerId}"
-                                                      data-placement="left" data-rel="tooltip" title="view"
-                                                      th:text="${project.customerName}"></a></td>
-                                                      -->
-                        <td class="col-small left" th:text="${project.customerName}"></td>
-                        <td class="col-small left"><a href=""
-                                                      th:href="'salesorder?salesorderId='+${project.salesOrderId}"
-                                                      data-placement="left" data-rel="tooltip" title="view"
-                                                      th:text="${project.salesOrderNumber}"></a></td>
-                        <td class="col-small center"><span class="label"
-                                                           th:classappend="'label-' + ${project.statusDisplayClass}"
-                                                           th:text="${project.status}"></span></td>
-                        <td class="col-small center"><span class="label"
-                                                           th:classappend="'label-' + ${project.healthStatusDisplayClass}"
-                                                           th:text="${project.health}"></span></td>
-                    </tr>
-                    </tbody>
-                    <tfoot>
-                    <tr>
-                        <td colspan="4">
-                            <ul class="hide-if-no-paging pagination pagination-centered pull-right"></ul>
-                            <div class="clearfix"></div>
-                        </td>
-                    </tr>
-                    </tfoot>
-                </table>
-
-                <div class="row" th:if="${projects==null}">
-
-                    <div class="col-sm-6">
-                        <h5 class="text-uppercase heading"><strong>No Projects Found </strong></h5>
-
-                        <div class="well bg-primary center">
-                            <p>Please modify your search parameters</p>
-                        </div>
+            <tr th:each="project : ${projects}" th:if="${projects != null}">
+                <td class="col-small left">
+                    <div class="btn-group btn-group-sm ">
+                        <a href="" th:href="'project?projectId='+${project.projectId}" class=""
+                           th:if="${project.readonly!='true'}">
+                            edit
+                        </a>
                     </div>
 
-                </div>
+                </td>
+                <td class="col-small left" th:text="${project.customerName}"></td>
+                <td class="col-small left"><a href=""
+                                              th:href="'salesorder?salesorderId='+${project.salesOrderId}"
+                                              data-placement="left" data-rel="tooltip" title="view"
+                                              th:text="${project.salesOrderNumber}"></a></td>
+                <td class="col-small center"></td>
+                <td class="col-small center"></td>
+                <td class="col-small center"><span class="label"
+                                                   th:classappend="'label-' + ${project.statusDisplayClass}"
+                                                   th:text="${project.status}"></span></td>
+                <td class="col-small center"><span class="label"
+                                                   th:classappend="'label-' + ${project.healthStatusDisplayClass}"
+                                                   th:text="${project.health}"></span></td>
+            </tr>
+            </tbody>
 
+        </table>
+    </div>
+    <div class="row" th:if="${projects==null}">
+
+        <div class="col-sm-6">
+            <h5 class="text-uppercase heading"><strong>No Projects Found </strong></h5>
+
+            <div class="well bg-primary center">
+                <p>Please modify your search parameters</p>
             </div>
         </div>
+
     </div>
+
+
 </div>
 </body>
 </html>

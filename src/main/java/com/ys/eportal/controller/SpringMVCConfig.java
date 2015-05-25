@@ -6,6 +6,9 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.annotation.web.servlet.configuration.EnableWebMvcSecurity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import javax.sql.DataSource;
 
 /**
  * Created by rob on 4/18/15.
@@ -13,6 +16,24 @@ import org.springframework.security.config.annotation.web.servlet.configuration.
 @Configuration
 @EnableWebMvcSecurity
 public class SpringMVCConfig extends WebSecurityConfigurerAdapter {
+
+    @Autowired
+    DataSource dataSource;
+
+    public static String encodePasswordWithBCrypt(String plainPassword) {
+        return new BCryptPasswordEncoder().encode(plainPassword);
+    }
+
+    @Autowired
+    public void configAuthentication(AuthenticationManagerBuilder auth) throws Exception {
+
+        auth.jdbcAuthentication().dataSource(dataSource)
+                .usersByUsernameQuery(
+                        "select email,password, enabled from sec_user where email=?")
+                .authoritiesByUsernameQuery(
+                        "select u.email, r.name from sec_user u,sec_role r where u.role_id=r.role_id and u.email=?");
+
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
@@ -29,7 +50,7 @@ public class SpringMVCConfig extends WebSecurityConfigurerAdapter {
                 .permitAll();
     }
 
-    @Autowired
+    /*
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth
                 .inMemoryAuthentication()
@@ -40,4 +61,5 @@ public class SpringMVCConfig extends WebSecurityConfigurerAdapter {
 
 
     }
+    */
 }

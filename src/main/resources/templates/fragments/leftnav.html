@@ -33,29 +33,8 @@
                         <i class="fa fa-search"></i> Resource Search
                     </a>
                 </li>
-                <!--
-                <li class="panel" th:class="${pageGroup}=='dashboard'? 'panel open' : 'panel'">
-                    <a href="index">
-                        <i class="fa fa-dashboard"></i> Dashboard
-                    </a>
-                </li>
-                -->
-                <!--
-                <li class="panel" th:class="${pageGroup}=='reports'? 'panel open' : 'panel'">
-                    <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
-                       data-target="#reports">
-                        <i class="fa fa-print"></i> reports <span class="fa arrow"></span>
-                    </a>
-                    <ul class="collapse nav" id="reports">
-                        <li>
-                            <a class="" th:class="${pageId}=='qsTimeToFulfill'? 'active' : ''" href="qsTimeToFulfill">
-                                <i class="fa fa-angle-double-right"></i>QS Time to Fulfill
-                            </a>
-                        </li>
-                    </ul>
-                </li>
--->
-                <!-- BEGIN DROPDOWN -->
+
+
                 <div security:authorize="hasRole('ROLE_ADMIN')">
                     <li class="panel" th:class="${pageGroup}=='importExport'? 'panel open' : 'panel'">
                         <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
@@ -84,7 +63,26 @@
                         </ul>
                     </li>
                 </div>
-                <!-- END DROPDOWN -->
+
+
+                <div security:authorize="hasRole('ROLE_ADMIN')">
+                    <li class="panel" th:class="${pageGroup}=='usermanagement'? 'panel open' : 'panel'">
+                        <a href="javascript:;" data-parent="#side" data-toggle="collapse" class="accordion-toggle"
+                           data-target="#um">
+                            <i class="fa fa-cogs"></i> user management <span class="fa arrow"></span>
+                        </a>
+                        <ul class="collapse nav" id="um">
+                            <li>
+                                <a class="" th:class="${pageId}=='userSearch'? 'active' : ''"
+                                   href="userSearch">
+                                    <i class="fa fa-angle-double-right"></i>user search
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </div>
+
+
             </ul>
             <!-- /.side-nav -->
 

@@ -1,35 +1,23 @@
 package com.ys.eportal.controller;
 
 
-import com.ys.eportal.infra.domain.CustomerEntity;
-import com.ys.eportal.infra.domain.SalesOrderEntity;
+import com.ys.core.infra.domain.ep.CustomerEntity;
 import com.ys.eportal.mapper.CustomerMapper;
 import com.ys.eportal.model.Customer;
-import com.ys.eportal.model.Project;
-import com.ys.eportal.service.PortalService;
-import org.apache.commons.lang3.StringUtils;
-import org.hibernate.exception.ConstraintViolationException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ValidationUtils;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-
-import javax.validation.Valid;
-import java.util.List;
-import java.util.Set;
 
 /**
  * Created by rob on 4/4/15.
  */
 @Controller
-public class CustomerController  extends ControllerBase{
+public class CustomerController  extends EportalBaseController {
     private static Logger logger = LoggerFactory.getLogger(CustomerController.class);
 
     @Autowired

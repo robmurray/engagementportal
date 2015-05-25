@@ -1,8 +1,6 @@
 package com.ys.eportal.mapper;
 
-import com.ys.eportal.infra.domain.CustomerSearchSupport;
-import com.ys.eportal.infra.domain.ProjectSearchSupport;
-import com.ys.eportal.model.CustomerSearch;
+import com.ys.core.infra.domain.ep.ProjectSearchSupport;
 import com.ys.eportal.model.ProjectSearch;
 import ma.glasnost.orika.MapperFacade;
 import ma.glasnost.orika.MapperFactory;

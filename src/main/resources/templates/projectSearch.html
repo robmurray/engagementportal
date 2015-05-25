@@ -2,21 +2,36 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorator="layout/portalpage">
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <title>Project Search</title>
 </head>
 
 <body>
 <div layout:fragment="content">
 
-    <div th:replace="fragments/project/searchFilter :: searchFilter"/>
-    <div th:replace="fragments/project/searchResults :: searchResults (projects=${projects}, readonly='true' )"/>
+        <div class="portlet">
+            <div class="portlet-heading default-bg">
+                <div class="portlet-title">
+                    <h4>projects</h4>
+                </div>
+                <div class="portlet-widgets">
+                    <a data-toggle="collapse" data-parent="#accordion" href="#projectSearchResultsPanel"><i
+                            class="fa fa-chevron-down"></i></a>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+            <div id="projectSearchResultsPanel" class="panel-collapse collapse in">
+                <div class="portlet-body">
+<!--                    <div th:replace="fragments/project/searchFilter :: searchFilter"/> -->
+                    <div th:replace="fragments/project/searchResults :: searchResults (projects=${projects}, readonly='true' )"/>
 
+                </div>
+            </div>
+
+        </div>
 
 </div>
-
 </body>
-
 
 
 </html>

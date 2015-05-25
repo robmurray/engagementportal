@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="userInfo" th:fragment="userInfo (user)">
+
+    <div class="row" th:if="${user!=null}">
+
+        <form id="userInfoForm" class="form" role="form" action="#" th:action="@{/user}" th:object="${user}"
+              method="post">
+            <div th:replace="fragments/common/formButtons :: formButtons (readonly=${user.readonly} )"/>
+
+
+            <div class="row">
+                <input type="hidden" class="form-control" th:field="*{userId}"/>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">First Name</label>
+                        <input type="text" class="form-control" th:field="*{firstName}"
+                               placeholder="enter the first name" th:readonly="*{readonly}"/>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label class="control-label">Last Name</label>
+                        <input type="text" class="form-control" th:field="*{lastName}"
+                               placeholder="enter the last name" th:readonly="*{readonly}"/>
+                    </div>
+
+                </div>
+            </div>
+            <div class="row">
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label class="control-label">Role</label>
+
+                        <select class="form-control selectpicker" th:field="*{role.roleId}"
+                                th:disabled="*{readonly}">
+                            <option th:each="type : *{roleValues}"
+                                    th:value="${type.roleId}"
+                                    th:text="${type.name}"></option>
+                        </select>
+
+                    </div>
+
+                </div>
+            </div>
+
+
+        </form>
+    </div>
+    <div class="row" th:if="${user==null}">
+
+        <div class="col-sm-6">
+            <div class="well bg-primary center">
+                <p>There is currently no user information associated with this user.</p>
+            </div>
+        </div>
+
+    </div>
+
+
+    <!-- END YOUR CONTENT HERE -->
+</div>
+</body>
+</html>>

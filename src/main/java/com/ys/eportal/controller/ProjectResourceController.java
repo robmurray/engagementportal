@@ -1,9 +1,9 @@
 package com.ys.eportal.controller;
 
 
-import com.ys.eportal.infra.domain.ProjectEntity;
-import com.ys.eportal.infra.domain.ProjectResourceEntity;
-import com.ys.eportal.infra.domain.ResourceEntity;
+import com.ys.core.infra.domain.ep.ProjectEntity;
+import com.ys.core.infra.domain.ep.ProjectResourceEntity;
+import com.ys.core.infra.domain.ep.ResourceEntity;
 import com.ys.eportal.model.Project;
 import com.ys.eportal.model.Resource;
 import org.slf4j.Logger;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  * Created by rob on 4/4/15.
  */
 @Controller
-public class ProjectResourceController extends ControllerBase {
+public class ProjectResourceController extends EportalBaseController {
     private static Logger logger = LoggerFactory.getLogger(ProjectResourceController.class);
 
 

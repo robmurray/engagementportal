@@ -107,24 +107,17 @@ public abstract class EportalBaseController extends com.ys.ui.controller.Control
             if (reList != null) {
                 Resource newres = null;
                 for (ProjectResourceEntity pre : reList) {
-                    newres = new Resource(pre.getResource().getResourceId(), pre.getProjectResourceId(), pre.getResource().getFirstName(), pre.getResource().getLastName(), pre.getResource().getType());
-                    if (pre.getRole().equals(Constants.Role.ONSITE)) {
-                        project.addOnsiteResource(newres);
-                    } else if (pre.getRole().equals(Constants.Role.ACCOUNT)) {
-                        project.addAccountResource(newres);
-                    } else if (pre.getRole().equals(Constants.Role.REMOTE)) {
-                        project.addRemoteResource(newres);
-                    }
+                    newres = new Resource(pre.getResource().getResourceId(), pre.getProjectResourceId(), pre.getResource().getFirstName(), pre.getResource().getLastName(), pre.getResource().getType(),pre.getRole());
+                    project.addResource(newres);
                 }
             }
+
             Iterable<ResourceEntity> allResources = this.portalService.findAllResources();
             if (allResources != null) {
                 Resource newResn = null;
                 for (ResourceEntity pre : allResources) {
-                    newResn = new Resource(pre.getResourceId(), -1, pre.getFirstName(), pre.getLastName(), pre.getType());
-                    project.addRemoteAddableResource(newResn);
-                    project.addOnsiteAddableResource(newResn);
-                    project.addAccountAddableResource(newResn);
+                    newResn = new Resource(pre.getResourceId(), -1, pre.getFirstName(), pre.getLastName(), pre.getType(),"");
+                    project.addAvailableResource(newResn);
                 }
             }
             Set<ProjectNotesEntity> pneList = pe.getNotes();

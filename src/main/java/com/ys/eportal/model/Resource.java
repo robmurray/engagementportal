@@ -15,33 +15,26 @@ public class Resource {
     private String lastName;
     private String type;
     private List<String> typeValues = Constants.Resource.typeValues;
+    private String resourceRole;
+    private List<String> resourceRoleValues = Constants.ResourceRole.typeValues;
+
     public Resource() {
     }
 
-    public Resource(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public Resource(String firstName, String lastName, String type) {
+    public Resource(String firstName, String lastName, String type, String resourceRole) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.type = type;
+        this.resourceRole = resourceRole;
     }
 
-    public Resource(long resourceId, String firstName, String lastName, String type) {
-        this.resourceId = resourceId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.type = type;
-    }
-
-    public Resource(long resourceId, long projectResourceId, String firstName, String lastName, String type) {
+    public Resource(long resourceId, long projectResourceId, String firstName, String lastName, String type, String resourceRole) {
         this.resourceId = resourceId;
         this.projectResourceId = projectResourceId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.type = type;
+        this.resourceRole = resourceRole;
     }
 
     public List<String> getTypeValues() {
@@ -90,6 +83,14 @@ public class Resource {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
+    }
+
+    public String getResourceRole() {
+        return resourceRole;
+    }
+
+    public void setResourceRole(String resourceRole) {
+        this.resourceRole = resourceRole;
     }
 
     @Override

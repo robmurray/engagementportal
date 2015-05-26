@@ -27,8 +27,8 @@ public class ActivityController extends EportalBaseController {
     @RequestMapping(value = "/activity", method = RequestMethod.GET)
     public String activityViewForm(@RequestParam(value = "activityId", required = true) long activityId,
                                    @RequestParam(value = "returnURL", required = false) String returnURL,
-                                   @RequestParam(value = "anchor", required = false) String anchor,
-                                   @RequestParam(value = "msgtype", required = false) String messageType, Model model) {
+                                   @RequestParam(value = "tabIndex", required = false) String tabIndex,
+                                    Model model) {
 
         ProjectActivityEntity pae = this.portalService.findProjectActivityById(activityId);
         Activity a = null;
@@ -43,11 +43,13 @@ public class ActivityController extends EportalBaseController {
         model.addAttribute("activity", a);
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
+        model.addAttribute("tabIndex", tabIndex);
         return "activity";
     }
 
     @RequestMapping(value = "/activity", method = RequestMethod.POST)
-    public String activitySubmit(@ModelAttribute Activity activity, Model model) {
+    public String activitySubmit(@ModelAttribute Activity activity,
+                                 @RequestParam(value = "tabIndex", required = false) String tabIndex, Model model) {
 
 
         ProjectActivityEntity pae = this.portalService.findProjectActivityById(activity.getActivityId());
@@ -80,6 +82,7 @@ public class ActivityController extends EportalBaseController {
         //model.addAttribute("returnURL", "project?projectId="+pae.getProject().getProjectId());
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
+        model.addAttribute("tabIndex",tabIndex);
         return "project";
 
 

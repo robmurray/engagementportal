@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div id="activityInfo" th:fragment="activityInfo (activity,readonly)">
+<div id="activityInfo" th:fragment="activityInfo (activity,tabIndex)">
 
     <div class="portlet">
         <div class="portlet-heading default-bg">
@@ -22,10 +22,10 @@
                 <form class="form" role="form" action="#" th:action="@{/activity}" th:object="${activity}"
                       method="post" th:if="${activity!=null}">
 
-                    <div th:replace="fragments/common/formButtons :: formButtons (readonly=${readonly} )"/>
+                    <div th:replace="fragments/common/formButtons :: formButtons (readonly='false' )"/>
                     <div class="row">
                         <input type="hidden" th:field="*{activityId}"/>
-
+                        <input type="hidden" th:name="tabIndex" th:value="${tabIndex}"/>
                         <div class="col-md-3">
                             <div class="form-group">
                                 <label class="control-label">Name</label>

@@ -123,7 +123,9 @@ public class ProjectController extends EportalBaseController {
 
 
     @RequestMapping(value="/projectNote", method=RequestMethod.POST)
-    public String projectNoteSubmit(@RequestParam(value="id",required=true) long id,@RequestParam(value="newnote",required=false) String newnote, Model model) {
+    public String projectNoteSubmit(@RequestParam(value="id",required=true) long id,
+                                    @RequestParam(value="newnote",required=false) String newnote,
+                                    @RequestParam(value = "tabIndex", required = false) String tabIndex,Model model) {
 
 
         ProjectEntity pe = this.portalService.findProjectByProjectId(id);
@@ -138,7 +140,7 @@ public class ProjectController extends EportalBaseController {
         model.addAttribute("project", project);
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
-        model.addAttribute("anchor", "noteForm");
+        model.addAttribute("tabIndex", tabIndex);
 
         return "project";
     }
@@ -146,7 +148,8 @@ public class ProjectController extends EportalBaseController {
 
     @RequestMapping(value = "/projectNotesDelete", method = RequestMethod.GET)
     public String projectNoteDeleteSubmit(@RequestParam(value = "projectNotesId", required = true) long projectNoteId,
-                                       @RequestParam(value = "returnURL", required = false) String returnURL,
+                                          @RequestParam(value = "tabIndex", required = false) String tabIndex,
+                                          @RequestParam(value = "returnURL", required = false) String returnURL,
                                        Model model){
 
 
@@ -167,7 +170,7 @@ public class ProjectController extends EportalBaseController {
         model.addAttribute("project", project);
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
-        model.addAttribute("anchor", "noteForm");
+        model.addAttribute("tabIndex", tabIndex);
 
         return "project";
 

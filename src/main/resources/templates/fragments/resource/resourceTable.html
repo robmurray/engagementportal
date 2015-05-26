@@ -5,7 +5,7 @@
 </head>
 <body>
 
-<div id="resourceTable" th:fragment="resourceTable (resources, index, readonly)">
+<div id="resourceTable" th:fragment="resourceTable (resources, tabIndex)">
 
 
     <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="100"
@@ -15,16 +15,15 @@
             <th class="col-small left">actions</th>
             <th class="col-small left" data-toggle="true">First Name</th>
             <th class="col-small left" data-toggle="true">Last Name</th>
-            <th class="col-small left" data-toggle="true">Type</th>
+            <th class="col-small left" data-toggle="true">Project Role</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="resource : ${resources}">
             <td class="col-small left">
                 <div class="btn-group btn-group-sm ">
-                        <a href="" th:href="@{resource(resourceId=${resource.resourceId},returnURL='resourceSearch')}" class=""
-                           th:if="${readonly!='true'}">
-                            edit
+                        <a href="" th:href="@{projectResourceDelete(projectResourceId=${resource.projectResourceId},returnURL='resourceSearch',tabIndex=${tabIndex})}" class="">
+                            remove
                         </a>
                     </div>
             </td>
@@ -35,7 +34,7 @@
             <td class="col-small left"><a href=""
                                           th:href="@{resource(resourceId=${resource.resourceId},returnURL='resourceSearch')}"
                                           th:text="${resource.lastName}"></a></td>
-            <td class="col-small left" th:text="${resource.type}"></td>
+            <td class="col-small left" th:text="${resource.resourceRole}"></td>
         </tr>
         </tbody>
         <tfoot>

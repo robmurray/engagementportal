@@ -5,25 +5,48 @@
 </head>
 <body>
 
-<div id="addResource" th:fragment="addResource (addableResources, index, projectId, role,readonly)">
+<div id="addResource" th:fragment="addResource (addableResources,resourceRoles, tabIndex, projectId)">
 
-    <form class="form" role="form" action="" th:action="@{/projectResourceAdd}" method="post">
-        <div class="input-group">
-                    <span class="input-group-btn">
-                        <button type="submit" class="btn  btn-default">add
-                        </button>
-                    </span>
-            <input type="hidden" name="index" th:value="${index}"/>
-            <input type="hidden" name="projectId" th:value="${projectId}"/>
-            <input type="hidden" name="role" th:value="${role}"/>
-            <select  class="dd175 form-control" name="resourceId">
-                <option th:each="res : *{addableResources}"
-                        th:value="${res.resourceId}"
-                        th:text="${res.firstName+' ' +res.lastName}"></option>
-            </select>
+    <div class="portlet-body">
+
+        <div class="row bg-light">
+            <form class="form" role="form" action="" th:action="@{/projectResourceAdd}" method="post">
+
+
+                    <input type="hidden" name="tabIndex" th:value="${tabIndex}"/>
+                    <input type="hidden" name="projectId" th:value="${projectId}"/>
+
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label class="control-label">Resource </label>
+
+                                <select class="dd175 form-control" name="resourceId">
+                                    <option th:each="res : ${addableResources}"
+                                            th:value="${res.resourceId}"
+                                            th:text="${res.firstName+' ' +res.lastName}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Role</label>
+
+                                <select class="dd175 form-control" name="resourceRole">
+                                    <option th:each="resrole : *{resourceRoles}"
+                                            th:value="${resrole}"
+                                            th:text="${resrole}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                <div th:replace="fragments/common/rowColSubmitButton :: rowColSubmitButton(label='Assign Project Resource')"/>
+
+            </form>
         </div>
-
-    </form>
+    </div>
 
 </div>
 </body>

@@ -23,7 +23,10 @@ public class ProjectResourceController extends EportalBaseController {
 
 
     @RequestMapping(value = "/projectResourceAdd", method = RequestMethod.POST)
-    public String resourceAddSubmitForm(@RequestParam(value = "resourceId", required = true) long resourceId, @RequestParam(value = "index", required = true) String index, @RequestParam(value = "projectId", required = true) long projectId, @RequestParam(value = "role", required = true) String role, Model model) {
+    public String resourceAddSubmitForm(@RequestParam(value = "resourceId", required = true) long resourceId,
+                                        @RequestParam(value = "tabIndex", required = true) String tabIndex,
+                                        @RequestParam(value = "projectId", required = true) long projectId,
+                                        @RequestParam(value = "resourceRole", required = true) String role, Model model) {
 
 
         // long resourceId = resource.getResourceId();
@@ -41,12 +44,12 @@ public class ProjectResourceController extends EportalBaseController {
 
 
         model.addAttribute("project", project);
-        this.setSuccessAlertMessage(model, "Resource updated");
+        //this.setSuccessAlertMessage(model, "Resource updated");
 
         addNav(model, "projectSearch");
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
-        model.addAttribute("anchor", index);
+        model.addAttribute("tabIndex", tabIndex);
         return "project";
 
 
@@ -56,7 +59,7 @@ public class ProjectResourceController extends EportalBaseController {
     @RequestMapping(value = "/projectResourceDelete", method = RequestMethod.GET)
     public String resourceDeleteSubmit(@RequestParam(value = "projectResourceId", required = true) long projectResourceId,
                                        @RequestParam(value = "returnURL", required = false) String returnURL,
-                                       @RequestParam(value = "index", required = false) String index,
+                                       @RequestParam(value = "tabIndex", required = false) String index,
                                        Model model) {
 
 
@@ -81,7 +84,7 @@ public class ProjectResourceController extends EportalBaseController {
         addNav(model, "projectSearch");
         model.addAttribute("pageGroup", "project");
         model.addAttribute("pageId", "searchProject");
-        model.addAttribute("anchor", index);
+        model.addAttribute("tabIndex", index);
         return "project";
 
     }

@@ -14,12 +14,8 @@ public class Project extends AbstractModelBase {
     private boolean readonly;
     private long credits;
     private SalesOrder salesOrder;
-    private List<Resource> remoteResources;
-    private List<Resource> accountResources;
-    private List<Resource> onsiteResources;
-    private List<Resource> remoteAddableResources;
-    private List<Resource> onsiteAddableResources;
-    private List<Resource> accountAddableResources;
+    private List<Resource> projectResources;
+    private List<Resource> availableResources;
     private List<Activity> activities;
 
     private String name;
@@ -34,6 +30,8 @@ public class Project extends AbstractModelBase {
     private List<String> healthStatusValues = Constants.Projects.healthStatusValues;
     private String healthStatus;
     private List<NoteInterface> notes;
+
+    private List<String> resourceRoleValues = Constants.ResourceRole.typeValues;
 
 
     public Project() {
@@ -91,46 +89,6 @@ public class Project extends AbstractModelBase {
         this.salesOrder = salesOrder;
     }
 
-    public List<Resource> getRemoteResources() {
-        return remoteResources;
-    }
-
-    public void setRemoteResources(List<Resource> remoteResources) {
-        this.remoteResources = remoteResources;
-    }
-
-    public List<Resource> getAccountResources() {
-        return accountResources;
-    }
-
-    public void setAccountResources(List<Resource> accountResources) {
-        this.accountResources = accountResources;
-    }
-
-    public List<Resource> getOnsiteResources() {
-        return onsiteResources;
-    }
-
-    public void setOnsiteResources(List<Resource> onsiteResources) {
-        this.onsiteResources = onsiteResources;
-    }
-
-    public List<Resource> getOnsiteAddableResources() {
-        return onsiteAddableResources;
-    }
-
-    public void setOnsiteAddableResources(List<Resource> onsiteAddableResources) {
-        this.onsiteAddableResources = onsiteAddableResources;
-    }
-
-    public List<Resource> getAccountAddableResources() {
-        return accountAddableResources;
-    }
-
-    public void setAccountAddableResources(List<Resource> accountAddableResources) {
-        this.accountAddableResources = accountAddableResources;
-    }
-
     public void addNotes(NoteInterface note) {
         if (this.notes == null) {
             notes = new ArrayList<NoteInterface>();
@@ -141,81 +99,33 @@ public class Project extends AbstractModelBase {
         notes.add(note);
     }
 
-    public void addRemoteResource(Resource resource) {
-        if (resource == null) {
-            return;
-        }
-        if (this.remoteResources == null) {
-            this.remoteResources = new ArrayList<Resource>();
-        }
-        this.remoteResources.add(resource);
+    public List<Resource> getAvailableResources() {
+        return availableResources;
     }
 
-    public void addAccountResource(Resource resource) {
-        if (resource == null) {
-            return;
+    public void setAvailableResources(List<Resource> availableResources) {
+        this.availableResources = availableResources;
+    }
+    public void addAvailableResource(Resource resource){
+        if(this.availableResources == null){
+            this.availableResources = new ArrayList<Resource>();
         }
-        if (this.accountResources == null) {
-            this.accountResources = new ArrayList<Resource>();
-        }
-        this.accountResources.add(resource);
+        this.availableResources.add(resource);
+    }
+    public List<Resource> getProjectResources() {
+        return projectResources;
     }
 
-    public List<Resource> getRemoteAddableResources() {
-        return remoteAddableResources;
+    public void setProjectResources(List<Resource> projectResources) {
+        this.projectResources = projectResources;
     }
 
-    public void setRemoteAddableResources(List<Resource> remoteAddableResources) {
-        this.remoteAddableResources = remoteAddableResources;
+    public void addResource(Resource resource){
+        if(this.projectResources == null){
+            this.projectResources = new ArrayList<Resource>();
+        }
+        this.projectResources.add(resource);
     }
-
-    public void addRemoteAddableResource(Resource resource) {
-        if (resource == null) {
-            return;
-        }
-        if (this.remoteAddableResources == null) {
-            this.remoteAddableResources = new ArrayList<Resource>();
-        }
-        if(this.remoteResources==null ||(this.remoteResources!=null && !this.remoteResources.contains(resource))){
-            this.remoteAddableResources.add(resource);
-        }
-
-    }
-    public void addOnsiteResource(Resource resource) {
-        if (resource == null) {
-            return;
-        }
-        if (this.onsiteResources == null) {
-            this.onsiteResources = new ArrayList<Resource>();
-        }
-        this.onsiteResources.add(resource);
-    }
-    public void addOnsiteAddableResource(Resource resource) {
-        if (resource == null) {
-            return;
-        }
-        if (this.onsiteAddableResources == null) {
-            this.onsiteAddableResources = new ArrayList<Resource>();
-        }
-        if(this.onsiteResources==null ||(this.onsiteResources!=null && !this.onsiteResources.contains(resource))){
-            this.onsiteAddableResources.add(resource);
-        }
-
-    }
-
-    public void addAccountAddableResource(Resource resource) {
-        if (resource == null) {
-            return;
-        }
-        if (this.accountAddableResources == null) {
-            this.accountAddableResources = new ArrayList<Resource>();
-        }
-        if(this.accountResources==null|(this.accountResources!=null && !this.accountResources.contains(resource))){
-            this.accountAddableResources.add(resource);
-        }
-
-    }
-
     public List<NoteInterface> getNotes() {
         return notes;
     }
@@ -310,6 +220,14 @@ public class Project extends AbstractModelBase {
 
     public void setHealthStatus(String healthStatus) {
         this.healthStatus = healthStatus;
+    }
+
+    public List<String> getResourceRoleValues() {
+        return resourceRoleValues;
+    }
+
+    public void setResourceRoleValues(List<String> resourceRoleValues) {
+        this.resourceRoleValues = resourceRoleValues;
     }
 
     @Override

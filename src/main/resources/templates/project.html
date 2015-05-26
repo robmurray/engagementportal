@@ -8,7 +8,7 @@
 <body>
 
 <div layout:fragment="content">
-
+<!--
     <div th:if="${nav!=null}">
 
         <a href="" th:href="${nav.returnURL}"
@@ -17,53 +17,39 @@
 
 
     </div>
+    -->
     <div th:if="${project!=null}">
 
         <div class="tc-tabs"><!-- Nav tabs style 1 -->
             <ul class="nav nav-tabs">
-                <li class="active"><a href="#tab1" data-toggle="tab">Project Info</a></li>
-                <li><a href="#tab2" data-toggle="tab">Milestones</a></li>
-                <li><a href="#tab3" data-toggle="tab">Notes</a></li>
-                <li><a href="#tab4" data-toggle="tab">Resources </a></li>
+                <li id="li_tab1"><a href="#tab1" data-toggle="tab">Project Info</a></li>
+                <li id="li_tab2"><a href="#tab2" data-toggle="tab">Milestones</a></li>
+                <li id="li_tab3"><a href="#tab3" data-toggle="tab">Notes</a></li>
+                <li id="li_tab4"><a href="#tab4" data-toggle="tab">Resources </a></li>
             </ul>
 
             <!-- Tab panes -->
             <div class="tab-content">
-                <div class="tab-pane active" id="tab1">
+
+                <div class="tab-pane" id="tab1">
                     <div th:replace="fragments/project/projectInfo :: projectInfo(project=${project}, readonly=${project.readonly})"/>
                     <div th:replace="fragments/project/projectCredits :: projectCredits(project=${project}, readonly=${project.readonly})"/>
                     <!--<div th:replace="fragments/salesorder/salesOrderTable :: salesOrderTable(salesOrders=${project.salesOrders}, readonly=${project.readonly})"/>-->
                 </div>
                 <div class="tab-pane" id="tab2">
-                    <div th:replace="fragments/activity/activityTable :: activityTable(activities=${project.activities}, readonly=${project.readonly})"/>
+                    <div th:replace="fragments/activity/activityTable :: activityTable(activities=${project.activities},tabIndex='tab2')"/>
                 </div>
                 <div class="tab-pane" id="tab3">
-                    <div th:replace="fragments/note/noteTable :: noteTable(actionVar=@{/projectNote},id=${project.projectId},notes=${project.notes},pageHeading='Notes', index='1', readonly=${project.readonly})"/>
+                    <div th:replace="fragments/note/noteTable :: noteTable(actionVar=@{/projectNote},id=${project.projectId},notes=${project.notes}, tabIndex='tab3',returnURL='')"/>
                 </div>
                 <div class="tab-pane" id="tab4">
-                    <div class="row">
-                        <div th:replace="fragments/resource/addResource :: addResource(addableResources=${project.remoteAddableResources}, index='remoteResourceForm', projectId=${project.projectId}, role='remote', readonly='true')"/>
+                    <div class="row well white">
+                        <div th:replace="fragments/resource/addResource :: addResource(addableResources=${project.availableResources}, resourceRoles=${project.resourceRoleValues},tabIndex='tab4', projectId=${project.projectId})"/>
                         <div class="space-4"></div>
                     </div>
-                    <div class="row">
-                        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.remoteResources}, index='remoteResourceForm', readonly='true')"/>
+                    <div class="row well white">
+                        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.projectResources}, tabIndex='tab4')"/>
                     </div>
-
-                    <div class="row">
-                        <div th:replace="fragments/resource/addResource :: addResource(addableResources=${project.onsiteAddableResources}, index='resourceOnsite', projectId=${project.projectId}, role='onsite', readonly='true')"/>
-                        <div class="space-4"></div>
-                    </div>
-                    <div class="row">
-                        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.onsiteResources}, index='resourceOnsite', readonly='true')"/>
-                    </div>
-                    <div class="row">
-                        <div th:replace="fragments/resource/addResource :: addResource(addableResources=${project.accountAddableResources}, index='resourceAccount', projectId=${project.projectId}, role='account team',readonly='true')"/>
-                        <div class="space-4"></div>
-                    </div>
-                    <div class="row">
-                        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.accountResources}, index='resourceAccount', readonly='true')"/>
-                    </div>
-
                 </div>
 
             </div>
@@ -88,23 +74,25 @@
     <script th:inline="javascript">
         /*<![CDATA[*/
         var anchor = /*[[${anchor}]]*/;
+        var tabIndex = /*[[${tabIndex}]]*/;
 
+        function activateTab(){
+            if(!tabIndex){
+                tabIndex='tab1';
+            }
+            $("#"+tabIndex).addClass('active');
+            $("#li_"+tabIndex).addClass('active');
 
+        }
 
         function doAnchor(){
         try{
             if(anchor){
-            //alert(anchor);
+
                 window.scroll(0, anchor);
                 var anchor_node = document.getElementById(anchor);
                 window.scrollTo(0, anchor_node.offsetTop);
                 anchor=null;
-
-                //$('html, body').animate({
-                 //   scrollTop: 100
-
-               // }, 1000);
-
             }
             }catch(error){
                 //alert(error);
@@ -125,12 +113,8 @@
             $(".dd175").select2({
 				width: 175
 			});
-
-			//$.mask.definitions["~"]="[+-]";
-			//$(".input-credits").mask("9999999");
-
-            doAnchor();
-
+        doAnchor();
+        activateTab();
 
 
 

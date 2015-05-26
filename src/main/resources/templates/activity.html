@@ -19,7 +19,7 @@
 
     <div th:if="${activity!=null}">
 
-        <div th:replace="fragments/activity/activityInfo :: activityInfo (activity=${activity}, readonly='false' )"/>
+        <div th:replace="fragments/activity/activityInfo :: activityInfo (activity=${activity},tabIndex=${tabIndex})"/>
 
     </div>
     <div class="row" th:if="${activity==null}">

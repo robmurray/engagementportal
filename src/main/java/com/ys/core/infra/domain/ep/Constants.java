@@ -63,6 +63,23 @@ public class Constants {
         };
     }
 
+
+    public static class ResourceRole {
+        public final static String RRTYPE_PM = "Project Manager";
+        public final static String RRTYPE_SA = "Solution Architect";
+        public final static String RRTYPE_REMOTE = "Remote Resource";
+        public final static String RRTYPE_USER = "User Input";
+        public static List<String> typeValues = new ArrayList<String>() {
+            {
+                add(RRTYPE_PM);
+                add(RRTYPE_REMOTE);
+                add(RRTYPE_SA);
+                add(RRTYPE_USER);
+            }
+        };
+    }
+
+
     public static class Resource {
         public final static String TYPE_TECHNICAL = "Technical";
         public final static String TYPE_TRAINER = "Trainer";

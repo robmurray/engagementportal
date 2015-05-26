@@ -8,10 +8,6 @@
 
 <body>
 <div layout:fragment="content">
-
-    <div th:replace="fragments/resource/searchFilter :: searchFilter"/>
-
-
     <div class="portlet">
         <div class="portlet-heading default-bg">
             <div class="portlet-title">
@@ -25,7 +21,51 @@
         </div>
         <div id="projectSearchResultsPanel" class="panel-collapse collapse in">
             <div class="portlet-body">
-                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${resources},pageHeading='aaaaa', index='3', readonly='false')"/>
+                <div class="well white">
+
+
+                    <div class="row bg-light ">
+
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label class="control-label">First Name</label>
+
+                                <div class="input-group">
+                                    <p id="firstNameFilter"></p>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label class="control-label">Last Name</label>
+
+                                <div class="input-group">
+                                    <p id="lastNameFilter"></p>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <div class="col-md-4 ">
+                            <div class="form-group">
+                                <label class="control-label">Type</label>
+
+                                <div class="input-group">
+                                    <p id="typeFilter"></p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="space-4"></div>
+                <div class="well white">
+                    <div th:replace="fragments/common/linkButton :: linkButton(label='Create New Resource',targetURL='resourceNew',returnURL='resourceSearch')"/>
+                </div>
+                <div class="space-4"></div>
+                <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${resources})"/>
             </div>
         </div>
     </div>

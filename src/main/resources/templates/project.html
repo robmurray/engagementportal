@@ -32,9 +32,9 @@
             <div class="tab-content">
 
                 <div class="tab-pane" id="tab1">
-                    <div th:replace="fragments/project/projectInfo :: projectInfo(project=${project}, readonly=${project.readonly})"/>
-                    <div th:replace="fragments/project/projectCredits :: projectCredits(project=${project}, readonly=${project.readonly})"/>
-                    <!--<div th:replace="fragments/salesorder/salesOrderTable :: salesOrderTable(salesOrders=${project.salesOrders}, readonly=${project.readonly})"/>-->
+                    <div th:replace="fragments/project/projectInfo :: projectInfo(project=${project})"/>
+                    <div class="space-4"></div>
+                    <div th:replace="fragments/project/projectCredits :: projectCredits(project=${project})"/>
                 </div>
                 <div class="tab-pane" id="tab2">
                     <div th:replace="fragments/activity/activityTable :: activityTable(activities=${project.activities},tabIndex='tab2')"/>
@@ -44,11 +44,11 @@
                 </div>
                 <div class="tab-pane" id="tab4">
                     <div class="row well white">
-                        <div th:replace="fragments/resource/addResource :: addResource(addableResources=${project.availableResources}, resourceRoles=${project.resourceRoleValues},tabIndex='tab4', projectId=${project.projectId})"/>
-                        <div class="space-4"></div>
+                        <div th:replace="fragments/resource/addProjectResource :: addProjectResource(addableResources=${project.availableResources}, resourceRoles=${project.resourceRoleValues},tabIndex='tab4', projectId=${project.projectId})"/>
                     </div>
+                    <div class="space-4"></div>
                     <div class="row well white">
-                        <div th:replace="fragments/resource/resourceTable :: resourceTable(resources=${project.projectResources}, tabIndex='tab4')"/>
+                        <div th:replace="fragments/resource/projectResourceTable :: projectResourceTable(resources=${project.projectResources}, tabIndex='tab4')"/>
                     </div>
                 </div>
 

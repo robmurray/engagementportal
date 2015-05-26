@@ -1,0 +1,13 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+<div id="linkButton" th:fragment="linkButton (label,targetURL,returnURL)">
+
+    <a class="btn success" href="" th:href="@{${targetURL}(returnURL=${returnURL})}" th:text="${label}"></a>
+
+</div>
+</body>
+</html>>

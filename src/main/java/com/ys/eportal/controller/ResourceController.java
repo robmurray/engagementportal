@@ -36,11 +36,60 @@ public class ResourceController extends ResourceControllerBase {
 
         }
         addNav(model, returnURL);
+        model.addAttribute("mode","edit");
+        model.addAttribute("targetURL", "resource");
         addPageAttributes(model, "Resource", "Resource");
         model.addAttribute("resource", r);
-        model.addAttribute("pageGroup", "project");
-        model.addAttribute("pageId", "searchProject");
+        model.addAttribute("pageGroup", "resource");
+        model.addAttribute("pageId", "searchResource");
         return "resource";
+    }
+
+    @RequestMapping(value = "/resourceNew", method = RequestMethod.GET)
+    public String resourceNewViewForm(@RequestParam(value = "returnURL", required = false) String returnURL, Model model) {
+
+        ResourceEntity re = new ResourceEntity();
+
+        Resource r = this.load(re);
+
+        addNav(model, returnURL);
+        addPageAttributes(model, "Resource", "Resource");
+        model.addAttribute("mode","create");
+        model.addAttribute("targetURL","resourceNew");
+        model.addAttribute("resource", r);
+        model.addAttribute("pageGroup", "resource");
+        model.addAttribute("pageId", "searchResource");
+        return "resource";
+    }
+
+    @RequestMapping(value = "/resourceNew", method = RequestMethod.POST)
+    public String resourceNewSubmitForm(@ModelAttribute Resource resource, Model model) {
+
+        // pull original
+        //ResourceEntity re = this.portalService.findResourceEntityById(resource.getResourceId());
+
+        ResourceEntity re = new ResourceEntity();
+        re.setFirstName(resource.getFirstName());
+        re.setLastName(resource.getLastName());
+        re.setType(resource.getType());
+        this.portalService.save(re);
+
+        // repull
+        re = this.portalService.findResourceEntityById(re.getResourceId());
+
+        resource = this.load(re);
+
+        this.setSuccessAlertMessage(model, "Resource created");
+        addNav(model, "resourceSearch");
+        model.addAttribute("mode","edit");
+        model.addAttribute("targetURL","resource");
+        addPageAttributes(model, "Resource", "Resource");
+        model.addAttribute("resource", resource);
+        model.addAttribute("pageGroup", "resource");
+        model.addAttribute("pageId", "searchResource");
+        return "resource";
+
+
     }
 
     @RequestMapping(value = "/resource", method = RequestMethod.POST)
@@ -57,7 +106,7 @@ public class ResourceController extends ResourceControllerBase {
             this.portalService.save(re);
 
             // repull
-            re= this.portalService.findResourceEntityById(re.getResourceId());
+            re = this.portalService.findResourceEntityById(re.getResourceId());
 
             resource = this.load(re);
         }
@@ -67,9 +116,9 @@ public class ResourceController extends ResourceControllerBase {
         addNav(model, "resourceSearch");
         addPageAttributes(model, "Resource", "Resource");
         model.addAttribute("resource", resource);
-        model.addAttribute("pageGroup", "project");
-        model.addAttribute("pageId", "searchProject");
-        return "resource";
+        model.addAttribute("pageGroup", "resource");
+        model.addAttribute("pageId", "searchResource");
+        return "redirect:resourceSearch";
 
 
     }
@@ -77,7 +126,7 @@ public class ResourceController extends ResourceControllerBase {
     @RequestMapping(value = "/resourceDelete", method = RequestMethod.GET)
     public String resourceDeleteSubmit(@RequestParam(value = "resourceId", required = true) long resourceId,
                                        @RequestParam(value = "returnURL", required = false) String returnURL,
-                                       Model model){
+                                       Model model) {
 
 
         // pull original
@@ -92,8 +141,8 @@ public class ResourceController extends ResourceControllerBase {
 
 
         addPageAttributes(model, "Resource", "Resource");
-        model.addAttribute("pageGroup", "project");
-        model.addAttribute("pageId", "searchProject");
+        model.addAttribute("pageGroup", "resource");
+        model.addAttribute("pageId", "searchResource");
         return "resource";
 
 

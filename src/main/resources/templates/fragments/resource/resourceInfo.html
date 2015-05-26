@@ -4,7 +4,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
 </head>
 <body>
-<div id="resourceInfo" th:fragment="resourceInfo (resource,readonly)">
+<div id="resourceInfo" th:fragment="resourceInfo (resource,mode,targetURL)">
 
     <div class="portlet">
         <div class="portlet-heading default-bg">
@@ -19,10 +19,11 @@
         </div>
         <div id="resourceinfopanel" class="panel-collapse collapse in">
             <div class="portlet-body">
-                <form class="form" role="form" action="#" th:action="@{/resource}" th:object="${resource}"
+
+                <form class="form" role="form" action="#" th:action="@{${targetURL}}" th:object="${resource}"
                       method="post" th:if="${resource!=null}">
 
-                    <div th:replace="fragments/common/formButtons :: formButtons (readonly=${readonly} )"/>
+                    <div th:replace="fragments/common/formButtons :: formButtons (readonly='false' )"/>
                     <div class="row">
                         <input type="hidden" th:field="*{resourceId}"/>
 

@@ -5,55 +5,76 @@
 </head>
 <body>
 
-<div id="resourceTable" th:fragment="resourceTable (resources, tabIndex)">
+<div id="resourceTable" th:fragment="resourceTable (resources)">
 
-
-    <table class="table table-bordered table-striped table-hover tc-table footable" data-page-size="100"
-           th:if="${resources!=null}">
-        <thead>
-        <tr>
-            <th class="col-small left">actions</th>
-            <th class="col-small left" data-toggle="true">First Name</th>
-            <th class="col-small left" data-toggle="true">Last Name</th>
-            <th class="col-small left" data-toggle="true">Project Role</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="resource : ${resources}">
-            <td class="col-small left">
-                <div class="btn-group btn-group-sm ">
-                        <a href="" th:href="@{projectResourceDelete(projectResourceId=${resource.projectResourceId},returnURL='resourceSearch',tabIndex=${tabIndex})}" class="">
-                            remove
+    <div class="well white">
+        <table id="resourceDT" class="datatable table table-bordered table-striped table-hover tc-table footable"
+               th:if="${resources!=null}">
+            <thead>
+            <tr>
+                <th class="col-small left">actions</th>
+                <th class="col-small left" data-toggle="true">First Name</th>
+                <th class="col-small left" data-toggle="true">Last Name</th>
+                <th class="col-small left" data-toggle="true">Type</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+                <th class="col-small left">actions</th>
+                <th class="col-small left" data-toggle="true">First Name</th>
+                <th class="col-small left" data-toggle="true">Last Name</th>
+                <th class="col-small left" data-toggle="true">Type</th>
+            </tr>
+            </tfoot>
+            <tbody>
+            <tr th:each="resource : ${resources}">
+                <td class="col-small left">
+                    <div class="btn-group btn-group-sm ">
+                        <a href="" th:href="@{resource(resourceId=${resource.resourceId},returnURL='resourceSearch')}"
+                           class="">
+                            edit
                         </a>
+                        |
+                        <a href="" th:href="@{resource(resourceId=${resource.resourceId},returnURL='resourceSearch')}"
+                           class="">
+                            view
+                        </a>
+                        <!--|
+                        <a href="" th:href="@{resourceDelete(resourceId=${resource.resourceId},returnURL='resourceSearch')}"
+                           class="">
+                            delete
+                        </a>
+    -->
                     </div>
-            </td>
+                </td>
 
-            <td class="col-small left"><a href=""
-                                          th:href="@{resource(resourceId=${resource.resourceId},returnURL='resourceSearch')}"
-                                          th:text="${resource.firstName}"></a></td>
-            <td class="col-small left"><a href=""
-                                          th:href="@{resource(resourceId=${resource.resourceId},returnURL='resourceSearch')}"
-                                          th:text="${resource.lastName}"></a></td>
-            <td class="col-small left" th:text="${resource.resourceRole}"></td>
-        </tr>
-        </tbody>
-        <tfoot>
-        <tr>
-            <td colspan="7">
-                <ul class="hide-if-no-paging pagination pagination-centered pull-right"></ul>
-                <div class="clearfix"></div>
-            </td>
-        </tr>
-        </tfoot>
-    </table>
-    <div class="row" th:if="${resources==null}">
+                <td class="col-small left"><a href=""
+                                              th:href="@{resource(resourceId=${resource.resourceId},returnURL='resourceSearch')}"
+                                              th:text="${resource.firstName}"></a></td>
+                <td class="col-small left"><a href=""
+                                              th:href="@{resource(resourceId=${resource.resourceId},returnURL='resourceSearch')}"
+                                              th:text="${resource.lastName}"></a></td>
+                <td class="col-small left" th:text="${resource.type}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="7">
+                    <ul class="hide-if-no-paging pagination pagination-centered pull-right"></ul>
+                    <div class="clearfix"></div>
+                </td>
+            </tr>
+            </tfoot>
+        </table>
+        <div class="row" th:if="${resources==null}">
 
-        <div class="col-sm-6">
-            <div class="well bg-primary center">
-                <p>There are currently no resources associated with the project.</p>
+            <div class="col-sm-6">
+                <div class="well bg-primary center">
+                    <p>There are currently no resources associated with the project.</p>
+                </div>
             </div>
-        </div>
 
+        </div>
     </div>
 </div>
 </body>

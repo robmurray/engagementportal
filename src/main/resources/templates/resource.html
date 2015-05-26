@@ -19,7 +19,7 @@
 
     <div th:if="${resource!=null}">
 
-        <div th:replace="fragments/resource/resourceInfo :: resourceInfo (resource=${resource}, readonly='false' )"/>
+        <div th:replace="fragments/resource/resourceInfo :: resourceInfo (resource=${resource},mode=${mode},targetURL=${targetURL})"/>
 
     </div>
     <div class="row" th:if="${resource==null}">

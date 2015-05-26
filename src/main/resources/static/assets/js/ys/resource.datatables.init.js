@@ -6,12 +6,12 @@ $(document).ready(function () {
         tablet: 1024,
         phone : 480
     };
-    var tableElement = $('#SampleDT');
+    var tableElement = $('#resourceDT');
 
 
 
     var otable=tableElement.dataTable({
-        "order": [[ 2, "desc" ]],
+        "order": [[ 1, "desc" ]],
         "columnDefs": [
                     {
                         'targets' : [ 0 ],
@@ -35,15 +35,12 @@ $(document).ready(function () {
         }
     });
 
-$('#SampleDT').dataTable()
-   .columnFilter({aoColumns:[
-                   null,
-       		    { sSelector: "#customerFilter",type:"text" },
-   				{ sSelector: "#salesOrderFilter",type:"text"},
-   				{ sSelector: "#bookDateFilter", type:"text"},
-   				{ sSelector: "#typeFilter", type:"select", values : ["VPM","PNA","CSN","WLAN","ASPRO"]   },
-   				{ sSelector: "#statusFilter", type:"select", values : ["Complete","Scheduled","R and D Support","In Process","Post Support","Booked","Proposed","undefined"]   },
-   				{ sSelector: "#healthFilter", type:"select", values : ["good", "warning", "at risk"]   }
-   				]});
+    $('#resourceDT').dataTable()
+    .columnFilter({aoColumns:[
+                null,
+    		    { sSelector: "#firstNameFilter",type:"text" },
+				{ sSelector: "#lastNameFilter",type:"text"},
+				{ sSelector: "#typeFilter", type:"select", values : ["Account Team","Trainer","Technical","Sales","Project Manager"]   }
+	]});
 
-   });
+});

@@ -1,0 +1,53 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body>
+
+<div id="addProjectResource" th:fragment="addProjectResource (addableResources,resourceRoles, tabIndex, projectId)">
+
+    <div class="portlet-body">
+
+        <div class="row bg-light">
+            <form class="form" role="form" action="" th:action="@{/projectResourceAdd}" method="post">
+
+
+                    <input type="hidden" name="tabIndex" th:value="${tabIndex}"/>
+                    <input type="hidden" name="projectId" th:value="${projectId}"/>
+
+                    <div class="row">
+                        <div class="col-md-3">
+
+                            <div class="form-group">
+                                <label class="control-label">Resource </label>
+
+                                <select class="dd175 form-control" name="resourceId">
+                                    <option th:each="res : ${addableResources}"
+                                            th:value="${res.resourceId}"
+                                            th:text="${res.firstName+' ' +res.lastName}"></option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label class="control-label">Role</label>
+
+                                <select class="dd175 form-control" name="resourceRole">
+                                    <option th:each="resrole : *{resourceRoles}"
+                                            th:value="${resrole}"
+                                            th:text="${resrole}"></option>
+                                </select>
+                            </div>
+                        </div>
+
+                    </div>
+                <div th:replace="fragments/common/rowColSubmitButton :: rowColSubmitButton(label='Assign Project Resource')"/>
+
+            </form>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

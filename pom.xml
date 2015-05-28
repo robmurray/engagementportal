@@ -5,16 +5,35 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.ys.eportal</groupId>
-    <artifactId>eportal</artifactId>
+    <artifactId>engagement-portal</artifactId>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>services-common</module>
+        <module>em-services</module>
+        <module>um-services</module>
+        <module>um-ui</module>
+        <module>em-ui</module>
+        <module>eportal</module>
+        <module>ui-common</module>
+
+    </modules>
     <!--<packaging>war</packaging>-->
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
+
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.2.3.RELEASE</version>
     </parent>
 
+<!--
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.2.4.BUILD-SNAPSHOT</version>
+    </parent>
+
+-->
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -96,72 +115,23 @@
     </properties>
 
 
-    <build>
-        <plugins>
-<!--
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.4</version>
-                <configuration>
-                    <archive>
-                        <manifest>
-                            <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.ys.eportal.Application</mainClass>
-                        </manifest>
-                    </archive>
-                </configuration>
-            </plugin>
--->
-                        <plugin>
-                            <groupId>org.springframework.boot</groupId>
-                            <artifactId>spring-boot-maven-plugin</artifactId>
-
-                        </plugin>
-            <!--
-                        <plugin>
-                            <groupId>org.apache.tomcat.maven</groupId>
-                            <artifactId>tomcat7-maven-plugin</artifactId>
-                            <version>2.1</version>
-                            <configuration>
-                                <path>/${project.artifactId}</path>
-                                <port>9090</port>
-                                <systemProperties>
-                                </systemProperties>
-                            </configuration>
-                        </plugin>
-
-                        <plugin>
-                            <groupId>org.apache.maven.plugins</groupId>
-                            <artifactId>maven-dependency-plugin</artifactId>
-                            <version>2.3</version>
-                            <executions>
-                                <execution>
-                                    <phase>package</phase>
-                                    <goals><goal>copy</goal></goals>
-                                    <configuration>
-                                        <artifactItems>
-                                            <artifactItem>
-                                                <groupId>com.github.jsimone</groupId>
-                                                <artifactId>webapp-runner</artifactId>
-                                                <version>7.0.57.2</version>
-                                                <destFileName>webapp-runner.jar</destFileName>
-                                            </artifactItem>
-                                        </artifactItems>
-                                    </configuration>
-                                </execution>
-                            </executions>
-                        </plugin>
-            -->
-        </plugins>
-    </build>
 
     <repositories>
+<!--
+        <repository>
+            <id>spring-snapshots</id>
+            <name>Spring Snapshots</name>
+            <url>http://repo.spring.io/snapshot</url>
+            <snapshots>
+                <enabled>true</enabled>
+            </snapshots>
+        </repository>
+-->
         <repository>
             <id>spring-milestone</id>
             <url>https://repo.spring.io/libs-release</url>
         </repository>
+
     </repositories>
 
     <pluginRepositories>
@@ -171,5 +141,13 @@
         </pluginRepository>
     </pluginRepositories>
 
+<!--
+    <pluginRepositories>
+        <pluginRepository>
+            <id>spring-snapshots</id>
+            <url>http://repo.spring.io/snapshot</url>
+        </pluginRepository>
+    </pluginRepositories>
+-->
 
 </project>

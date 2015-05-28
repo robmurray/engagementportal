@@ -3,13 +3,13 @@
 
     <persistence-unit name="NewPersistenceUnit">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
-        <class>com.ys.eportal.infra.domain.Customer</class>
-        <class>com.ys.eportal.infra.domain.SalesOrder</class>
-        <class>com.ys.eportal.infra.domain.SalesOrderStatus</class>
-        <class>com.ys.eportal.infra.domain.ImportMaster</class>
-        <class>com.ys.eportal.infra.domain.ImportOracleObi</class>
-        <class>com.ys.eportal.infra.domain.ImportSalesforce</class>
-        <class>com.ys.eportal.infra.domain.ImportSharePoint</class>
+        <class>com.com.com.ys.em.infra.domain.Customer</class>
+        <class>com.com.com.ys.em.infra.domain.SalesOrder</class>
+        <class>com.com.com.ys.em.infra.domain.SalesOrderStatus</class>
+        <class>com.com.com.ys.em.infra.domain.ImportMaster</class>
+        <class>com.com.com.ys.em.infra.domain.ImportOracleObi</class>
+        <class>com.com.com.ys.em.infra.domain.ImportSalesforce</class>
+        <class>com.com.com.ys.em.infra.domain.ImportSharePoint</class>
         <properties>
             <property name="hibernate.connection.url" value="jdbc:mysql://localhost:3306/engagementportal"/>
             <property name="hibernate.connection.driver_class" value="com.mysql.jdbc.Driver"/>

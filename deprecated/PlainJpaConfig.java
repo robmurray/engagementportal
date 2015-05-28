@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.ys.eportal.infra;
+package com.ys.em.infra;
 
 
 import org.springframework.context.annotation.ComponentScan;
@@ -21,7 +21,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 
 @Configuration
-@ComponentScan(basePackages= "com.ys.eportal.infra.domain")
+@ComponentScan(basePackages= "com.com.ys.eportal.infra.domain")
 @Import(InfrastructureConfig.class)
 public class PlainJpaConfig {
 

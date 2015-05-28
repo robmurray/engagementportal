@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT -jar target/eportal-1.0-SNAPSHOT.jar
+web: java -Dserver.port=$PORT -jar eportal/target/eportal-1.0-SNAPSHOT.jar

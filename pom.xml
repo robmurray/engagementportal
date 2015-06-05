@@ -15,6 +15,7 @@
         <module>em-ui</module>
         <module>eportal</module>
         <module>ui-common</module>
+        <module>email-services</module>
 
     </modules>
     <!--<packaging>war</packaging>-->

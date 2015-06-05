@@ -60,6 +60,7 @@ public class ImportOracleObiStage extends AbstractDomainBase {
     @Basic
     private String endUserName;
 
+
     public ImportOracleObiStage() {
     }
 
@@ -138,6 +139,7 @@ public class ImportOracleObiStage extends AbstractDomainBase {
     public String getStCustomerName() {
         return stCustomerName;
     }
+
 
     public void setStCustomerName(String stCustomerName) {
         this.stCustomerName = stCustomerName;

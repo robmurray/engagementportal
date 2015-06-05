@@ -6,6 +6,7 @@ import com.ys.em.infra.domain.ImportMasterEntity;
 import org.apache.commons.csv.CSVFormat;
 import org.apache.commons.csv.CSVParser;
 import org.apache.commons.csv.CSVRecord;
+
 import org.apache.commons.io.input.BOMInputStream;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -13,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.math.BigDecimal;
@@ -30,6 +32,7 @@ public class MasterCSVImport {
 
     private static Logger logger = LoggerFactory.getLogger(MasterCSVImport.class);
     private static String DEFAULT_ENCODING = "utf-16le";
+
 
     boolean skipHeaderRow = true;
     boolean hasHeaderRow = true;
@@ -92,8 +95,8 @@ public class MasterCSVImport {
         this.encoding = encoding;
     }
 
-    public List<ImportMasterEntity> convert(MultipartFile uploadFile) throws CSVConversionFailureException {
 
+    public List<ImportMasterEntity> convert(MultipartFile uploadFile) throws CSVConversionFailureException {
         if (uploadFile == null) {
             throw new CSVConversionFailureException("CSV File is null");
         }
@@ -101,6 +104,19 @@ public class MasterCSVImport {
         if (uploadFile.isEmpty()) {
             throw new CSVConversionFailureException("CSV File is empty");
         }
+        InputStream is= null;
+        try {
+            is = uploadFile.getInputStream();
+        } catch (IOException e) {
+            logger.error(CONVERSION_FAIL_MSG, e);
+            throw new CSVConversionFailureException(CONVERSION_FAIL_MSG, e);
+        }
+
+        return this.convert(is);
+    }
+
+    public List<ImportMasterEntity> convert(InputStream uploadFileInputStream) throws CSVConversionFailureException {
+
 
         logger.info("encoding=" + this.encoding);
         logger.info("expected tokens=" + expectedTokens);
@@ -114,10 +130,12 @@ public class MasterCSVImport {
         Iterable<CSVRecord> records = null;
 
         try {
-            reader = new InputStreamReader(new BOMInputStream(uploadFile.getInputStream()), encoding);
+            reader = new InputStreamReader(new BOMInputStream(uploadFileInputStream), encoding);
             CSVFormat format = CSVFormat.EXCEL;
+
             format.withAllowMissingColumnNames(false);
-            format.withDelimiter(',');
+            //format.withDelimiter('\t');
+
             format.withIgnoreSurroundingSpaces(true);
             format.withIgnoreEmptyLines(true);
             parser = new CSVParser(reader, format);
@@ -171,7 +189,7 @@ public class MasterCSVImport {
 
 
         int index = 0;
-        long recordNumber =record.getRecordNumber();
+        long recordNumber = record.getRecordNumber();
         try {
             String classRegSent = StringUtils.stripToNull(record.get(index++));
 
@@ -264,61 +282,61 @@ public class MasterCSVImport {
 
             Integer daysToClose = ConversionUtils.convertDaysToInt(record.get(index++));
 
-            BigDecimal amount=null;
+            BigDecimal amount = null;
             if (this.anonymize) {
-                amount = new BigDecimal(recordNumber+1000);
+                amount = new BigDecimal(recordNumber + 1000);
                 index++;
-            }else{
-               amount = ConversionUtils.convertToBigDecimal(record.get(index++));
+            } else {
+                amount = ConversionUtils.convertToBigDecimal(record.get(index++));
             }
             String notes = "";
 
             if (!this.anonymize) {
                 notes = StringUtils.stripToNull(record.get(index++));
-            }else {
+            } else {
                 index++;
             }
             String location = StringUtils.stripToNull(record.get(index++));
             String region = StringUtils.stripToNull(record.get(index++));
             String modelGroup = StringUtils.stripToNull(record.get(index++));
 
-            String service ="service"+recordNumber;
+            String service = "service" + recordNumber;
             if (!this.anonymize) {
                 service = StringUtils.stripToNull(record.get(index++));
-            }else {
+            } else {
                 index++;
             }
 
-            String accountTeam="accountteam"+recordNumber;
+            String accountTeam = "accountteam" + recordNumber;
             if (!this.anonymize) {
-               accountTeam = StringUtils.stripToNull(record.get(index++));
-            }else {
+                accountTeam = StringUtils.stripToNull(record.get(index++));
+            } else {
                 index++;
             }
 
-            String remote ="remote"+recordNumber;
+            String remote = "remote" + recordNumber;
             if (!this.anonymize) {
-               remote = StringUtils.stripToNull(record.get(index++));
-            }else {
+                remote = StringUtils.stripToNull(record.get(index++));
+            } else {
                 index++;
             }
-            String onsite ="onsite"+recordNumber;
+            String onsite = "onsite" + recordNumber;
             if (!this.anonymize) {
-               onsite = StringUtils.stripToNull(record.get(index++));
-            }else {
+                onsite = StringUtils.stripToNull(record.get(index++));
+            } else {
                 index++;
             }
-            String equipmentList ="equipmentList"+recordNumber;
+            String equipmentList = "equipmentList" + recordNumber;
             if (!this.anonymize) {
                 equipmentList = StringUtils.stripToNull(record.get(index++));
-            }else {
+            } else {
                 index++;
             }
 
-            String shawdow = "shawdow"+recordNumber;
+            String shawdow = "shawdow" + recordNumber;
             if (!this.anonymize) {
-               shawdow = StringUtils.stripToNull(record.get(index++));
-            }else {
+                shawdow = StringUtils.stripToNull(record.get(index++));
+            } else {
                 index++;
             }
 

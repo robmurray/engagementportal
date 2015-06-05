@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -20,6 +22,7 @@ import java.util.List;
  */
 @Service
 public class ImportService extends ServicesBase {
+    public static final String DEFAULT_MODEL_GROUPS = "VPN,PNA,CSN,WLAN,ASPRO";
 
     private static Logger logger = LoggerFactory.getLogger(PortalService.class);
 
@@ -65,7 +68,7 @@ public class ImportService extends ServicesBase {
     @Autowired
     private SOImportMapper soImportMapper;
 
-    public ConversionResults<ImportOracleObiStage> importOracleOBICSVSalesOrder(MultipartFile file, UploadSalesOrder uploadSalesOrder) throws CSVConversionFailureException {
+    public ConversionResults<ImportOracleObiStage> importOracleOBICSVSalesOrder(MultipartFile file) throws CSVConversionFailureException {
         ImportControlEntity ice = new ImportControlEntity();
 
         if (file == null || file.isEmpty()) {
@@ -78,29 +81,30 @@ public class ImportService extends ServicesBase {
 
             return new ConversionResults();
         }
+        InputStream is = null;
+        try {
+            is = file.getInputStream();
+        } catch (IOException e) {
+            throw new CSVConversionFailureException("error aquiring input stream", e);
+        }
+
+        return this.importOracleOBICSVSalesOrder(is, DEFAULT_MODEL_GROUPS, file.getName());
+    }
+
+    public ConversionResults<ImportOracleObiStage> importOracleOBICSVSalesOrder(InputStream inputStream, String targetModelGroups, String fileName) throws CSVConversionFailureException {
+
         ConversionResults<ImportOracleObiStage> results = null;
         OracleOBISalesOrderCSVImport salesOrderConverter = new OracleOBISalesOrderCSVImport();
-
+        ImportControlEntity ice = new ImportControlEntity();
 
         try {
             // step 0 create import Control record
 
             // update import control
-            ice.setFileName(file.getName());
+            ice.setFileName(fileName);
             ice.setStatus(ImportControlStatus.BEGIN);
             ice.setEncoding(salesOrderConverter.getEncoding());
 
-/*
-            try {
-                ice.setImportFile(file.getBytes());
-            } catch (IOException e) {
-                // if there was an issue with the file we would never get this far
-                logger.error("unable to save csv file to stage", e);
-                ice.setStatus(ImportControlStatus.ERROR);
-                importControlRepository.save(ice);
-                throw new CSVConversionFailureException("unable to save csv file to stage",e);
-            }
-*/
             importControlRepository.save(ice);
 
 
@@ -109,7 +113,9 @@ public class ImportService extends ServicesBase {
             // step 1 csv to staging
 
             try {
-                results = salesOrderConverter.convert(file);
+
+                // copnvert to csv
+                results = salesOrderConverter.convert(inputStream);
                 results.setBatchId(ice.getImportControlId());
 
 
@@ -138,20 +144,13 @@ public class ImportService extends ServicesBase {
             List<ImportOracleObiStage> wrkList = this.oracleOBIStageRepository.findByImportControlId(ice.getImportControlId());
             HashSet<ImportOracleObiEntity> resultList = new HashSet<ImportOracleObiEntity>();
 
-            String modelgroupsToImport = "";
-            if (uploadSalesOrder != null) {
-                modelgroupsToImport = uploadSalesOrder.getModelgroups();
-                if (modelgroupsToImport == null) {
-                    modelgroupsToImport = "";
-                }
-            }
 
             for (ImportOracleObiStage stage : wrkList) {
 
                 try {
 
 
-                    if (stage == null || stage.getModelGroupCode() == null || !modelgroupsToImport.contains(stage.getModelGroupCode())) {
+                        if (stage == null || stage.getModelGroupCode() == null || (targetModelGroups != null && !targetModelGroups.contains(stage.getModelGroupCode()))) {
                         // only import model groups that we care about
                         continue;
                     }
@@ -215,7 +214,6 @@ public class ImportService extends ServicesBase {
                 ProjectEntity pe = new ProjectEntity();
 
 
-
                 // create or find customer
                 // @TODO which name to use st or bt
                 String customerName = entity.getBtCustomerName();
@@ -227,7 +225,7 @@ public class ImportService extends ServicesBase {
                     this.customerRepository.save(wrkCustomer);
                 }
 
-              //  pe.setName(wrkCustomer.getName());
+                //  pe.setName(wrkCustomer.getName());
                 //this.projectRepository.save(pe);
 
                 pe.setSalesOrders(new SalesOrderEntity());
@@ -257,7 +255,7 @@ public class ImportService extends ServicesBase {
                 pe.getSalesOrders().setImportControlId(entity.getImportControlId());
 
 
-                pe.addNotes(new ProjectNotesEntity(pe,"Sales Order imported on: "+new Date()));
+                pe.addNotes(new ProjectNotesEntity(pe, "Sales Order imported on: " + new Date()));
 
 
                 pList.add(pe);
@@ -270,7 +268,7 @@ public class ImportService extends ServicesBase {
             // add in default milestone
             // @TODO fix model
 
-            for(ProjectEntity p:pList) {
+            for (ProjectEntity p : pList) {
 
 
                 p.setProjectActivity(new HashSet<ProjectActivityEntity>());
@@ -328,11 +326,24 @@ public class ImportService extends ServicesBase {
 
     public void importMaster(MultipartFile file) throws CSVConversionFailureException {
 
+
         if (file == null || file.isEmpty()) {
             // nothing to do
             logger.info("csv file is empty. nothing to do");
             return;
         }
+
+        try {
+            this.importMaster(file.getInputStream());
+
+        } catch (IOException e) {
+            logger.error("CONVERSION_FAIL_MSG", e);
+            throw new CSVConversionFailureException("CONVERSION_FAIL_MSG", e);
+        }
+
+    }
+
+    public void importMaster(InputStream inputStream) throws CSVConversionFailureException {
         try {
             // STEP 1 - convert from CSV to objects
 
@@ -341,7 +352,7 @@ public class ImportService extends ServicesBase {
             // set anonymize on
             masterImporter.setAnonymize(true);
 
-            List<ImportMasterEntity> results = masterImporter.convert(file);
+            List<ImportMasterEntity> results = masterImporter.convert(inputStream);
 
             // STEP 2 - persist
             if (results != null && results.size() > 0) {
@@ -391,26 +402,26 @@ public class ImportService extends ServicesBase {
 
             // STEP 2.7
 
-            if(this.addTestData){
+            if (this.addTestData) {
                 List<ResourceEntity> resourceList = new ArrayList<ResourceEntity>();
 
                 resourceList.add(new ResourceEntity("Bob", "Murray", "Account Team"));
-                resourceList.add(new ResourceEntity("Bill","Murray","Account Team"));
-                resourceList.add(new ResourceEntity("Tammy","Smith","Account Team"));
-                resourceList.add(new ResourceEntity("Jill","Jones","Account Team"));
-                resourceList.add(new ResourceEntity("jose","Dodd","Account Team"));
+                resourceList.add(new ResourceEntity("Bill", "Murray", "Account Team"));
+                resourceList.add(new ResourceEntity("Tammy", "Smith", "Account Team"));
+                resourceList.add(new ResourceEntity("Jill", "Jones", "Account Team"));
+                resourceList.add(new ResourceEntity("jose", "Dodd", "Account Team"));
 
                 resourceList.add(new ResourceEntity("Tim", "Murray", "Technical"));
-                resourceList.add(new ResourceEntity("Gale","Murray","Technical"));
-                resourceList.add(new ResourceEntity("gill","Smith","Technical"));
-                resourceList.add(new ResourceEntity("Ted","Jones","Technical"));
-                resourceList.add(new ResourceEntity("Mark","Dodd","Technical"));
+                resourceList.add(new ResourceEntity("Gale", "Murray", "Technical"));
+                resourceList.add(new ResourceEntity("gill", "Smith", "Technical"));
+                resourceList.add(new ResourceEntity("Ted", "Jones", "Technical"));
+                resourceList.add(new ResourceEntity("Mark", "Dodd", "Technical"));
 
                 resourceList.add(new ResourceEntity("Tim", "Holden", "Trainer"));
-                resourceList.add(new ResourceEntity("helen","Murray","Trainer"));
-                resourceList.add(new ResourceEntity("Randy","Smith","Trainer"));
-                resourceList.add(new ResourceEntity("Sandy","Jones","Trainer"));
-                resourceList.add(new ResourceEntity("Sarah","Dodd","Trainer"));
+                resourceList.add(new ResourceEntity("helen", "Murray", "Trainer"));
+                resourceList.add(new ResourceEntity("Randy", "Smith", "Trainer"));
+                resourceList.add(new ResourceEntity("Sandy", "Jones", "Trainer"));
+                resourceList.add(new ResourceEntity("Sarah", "Dodd", "Trainer"));
 
                 this.resourceRepository.save(resourceList);
 
@@ -425,13 +436,13 @@ public class ImportService extends ServicesBase {
 
                 project = this.mapToProjectOrderEntity(wrkEnt);
                 this.projectRepository.save(project);
-                int count=0;
+                int count = 0;
 
-                if(this.addTestData) {
+                if (this.addTestData) {
                     Iterable<ResourceEntity> resourceList = this.resourceRepository.findAll();
                     ProjectResourceEntity pre = null;
-                    String role="";
-                    for(ResourceEntity resource:resourceList) {
+                    String role = "";
+                    for (ResourceEntity resource : resourceList) {
                         if (count < 6) {
                             role = Constants.Role.ACCOUNT;
                         } else if (count < 11) {
@@ -446,29 +457,28 @@ public class ImportService extends ServicesBase {
                     }
 
 
-                    this.projectNotesRepository.save(new ProjectNotesEntity(project,"The meeting was delayed ue to weather condition"));
-                    this.projectNotesRepository.save(new ProjectNotesEntity(project,"we will need more resources for the next phase"));
-                    this.projectNotesRepository.save(new ProjectNotesEntity(project,"The meeting went well"));
+                    this.projectNotesRepository.save(new ProjectNotesEntity(project, "The meeting was delayed ue to weather condition"));
+                    this.projectNotesRepository.save(new ProjectNotesEntity(project, "we will need more resources for the next phase"));
+                    this.projectNotesRepository.save(new ProjectNotesEntity(project, "The meeting went well"));
 
                 }
 
                 // add in milestones
                 // every project gets a standard set
                 List<ProjectActivityEntity> paeList = new ArrayList<ProjectActivityEntity>();
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.BOOK_DATE,wrkEnt.getBookDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.KICKOFF_DATE,wrkEnt.getKickoffMeetingDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.ONSITESTART_DATE,wrkEnt.getOnSiteStartDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.ONSITEEND_DATE,wrkEnt.getOnSiteEndDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.PLANNINGMEETING_DATE,wrkEnt.getPlanningMeetingDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.REVREC_DATE,wrkEnt.getReleaseForRevenueRecDate()));
-                paeList.add(new ProjectActivityEntity(project,Constants.Activities.SHIP_DATE,wrkEnt.getShipDate()));
+                paeList.add(new ProjectActivityEntity(project, Constants.Activities.BOOK_DATE, wrkEnt.getBookDate()));
+                paeList.add(new ProjectActivityEntity(project, Constants.Activities.KICKOFF_DATE, wrkEnt.getKickoffMeetingDate()));
+                paeList.add(new ProjectActivityEntity(project, Constants.Activities.ONSITESTART_DATE, wrkEnt.getOnSiteStartDate()));
+                paeList.add(new ProjectActivityEntity(project, Constants.Activities.ONSITEEND_DATE, wrkEnt.getOnSiteEndDate()));
+                paeList.add(new ProjectActivityEntity(project, Constants.Activities.PLANNINGMEETING_DATE, wrkEnt.getPlanningMeetingDate()));
+                paeList.add(new ProjectActivityEntity(project, Constants.Activities.REVREC_DATE, wrkEnt.getReleaseForRevenueRecDate()));
+                paeList.add(new ProjectActivityEntity(project, Constants.Activities.SHIP_DATE, wrkEnt.getShipDate()));
 
                 this.projectActivityRepository.save(paeList);
 
                 newso = this.mapToSalesOrder(wrkEnt);
                 newso.setProject(project);
                 this.salesOrderRepository.save(newso);
-
 
 
             }
@@ -524,7 +534,6 @@ public class ImportService extends ServicesBase {
         //soe.setEndUserName(String endUserName));
 
 
-
         return soe;
     }
 
@@ -560,7 +569,7 @@ public class ImportService extends ServicesBase {
 
 //        pe.setNotes(Set<ProjectNotesEntity> notes) {
         pe.setWaitTime(importMasterEntity.getWaitTime());
-  //      pe.setSalesOrders(SalesOrderEntity salesOrders) {
+        //      pe.setSalesOrders(SalesOrderEntity salesOrders) {
         //pe.setContact(importMasterEntity.getC
         pe.setLocation(importMasterEntity.getLocation());
         pe.setCredits(importMasterEntity.getCredits());

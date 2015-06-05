@@ -64,7 +64,7 @@ public class ImportExportController extends EportalBaseController {
                 //return this.soHandleFileUpload(file,uploadSalesOrder,bindingResult,model);
             }
 
-            results = this.importService.importOracleOBICSVSalesOrder(file, uploadSalesOrder);
+            results = this.importService.importOracleOBICSVSalesOrder(file);
 
             logger.debug("record to process: " + results.getNumRecordsToProcess());
             logger.debug("record in error: " + results.getNumRecordsInError());

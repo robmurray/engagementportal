@@ -1,5 +1,7 @@
 package com.ys.email;
 
+import com.sun.mail.util.MailSSLSocketFactory;
+import org.apache.log4j.Logger;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -15,7 +17,7 @@ import java.util.Properties;
 //@ImportResource({"classpath:META-INF/spring/integration/soifluke-imap-idle-config.xml"})
 @EnableScheduling
 public class ReceiverConfig {
-
+    private static Logger logger = Logger.getLogger(ReceiverConfig.class);
 
     @Bean
     public Properties javaPOP3MailProperties() {
@@ -44,6 +46,13 @@ public class ReceiverConfig {
         mailProperties.put("mail.imap.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         mailProperties.put("mail.imap.socketFactory.fallback", "false");
         mailProperties.put("mail.debug", "true");
+        try {
+            MailSSLSocketFactory socketFactory = new MailSSLSocketFactory();
+            socketFactory.setTrustAllHosts(true);
+            mailProperties.put("mail.imaps.ssl.socketFactory", socketFactory);
+        }catch(Exception e){
+            logger.error("Cannot configure MailS",e);
+        }
         return mailProperties;
     }
 

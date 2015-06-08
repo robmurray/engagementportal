@@ -188,9 +188,13 @@ public class IMAPSOImportService {
                             try {
                                 if(saveImportsOnFileSystem) {
                                     logger.debug("in save file mode. saving import file to file system");
-                                    File saveFile = new File(this.saveFileDirectory+Long.toString(new Date().getTime()));
-                                    part.saveFile(saveFile);
-
+                                    try {
+                                        File saveFile = new File(this.saveFileDirectory + Long.toString(new Date().getTime()));
+                                        part.saveFile(saveFile);
+                                    }catch(Exception e){
+                                        // just keep on trucking
+                                        logger.error("files system sve failed",e);
+                                    }
                                 }
 
                                 this.importService.importOracleOBICSVSalesOrder(part.getInputStream(),ImportService.DEFAULT_MODEL_GROUPS,fileName);

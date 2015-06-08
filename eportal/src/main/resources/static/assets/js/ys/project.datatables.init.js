@@ -42,7 +42,7 @@ $('#SampleDT').dataTable()
    				{ sSelector: "#salesOrderFilter",type:"text"},
    				{ sSelector: "#bookDateFilter", type:"text"},
    				{ sSelector: "#typeFilter", type:"select", values : ["VPM","PNA","CSN","WLAN","ASPRO"]   },
-   				{ sSelector: "#statusFilter", type:"select", values : ["Complete","Scheduled","R and D Support","In Process","Post Support","Booked","Proposed","undefined"]   },
+   				{ sSelector: "#statusFilter", type:"select", values : ["Complete","Scheduled","R and D Support","In Process","Post Support","Booked","Proposed","Imported"]   },
    				{ sSelector: "#healthFilter", type:"select", values : ["good", "warning", "at risk"]   }
    				]});
 

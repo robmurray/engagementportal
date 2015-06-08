@@ -23,7 +23,7 @@ public class Constants {
         public final static String WAIT_TIME_STANDARD = "standard";
         public final static String WAIT_TIME_RESOURCE = "resource";
         public final static String WAIT_TIME_CUSTOMER = "customer";
-        public final static String STATUS_NOTDEFINED = "imported";
+        public final static String STATUS_NOTDEFINED = "Imported";
         public final static String STATUS_COMPLETE = "Complete";
         public final static String STATUS_SCHEDULED = "Scheduled";
         public final static String STATUS_RANDSUPPORT = "R&D Support";

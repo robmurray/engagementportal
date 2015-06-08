@@ -67,7 +67,7 @@ public class ProjectEntity extends AbstractDomainBase {
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "status")
-    private String status = "undefined";
+    private String status = Constants.Projects.STATUS_NOTDEFINED;
 
     @Basic(fetch = FetchType.EAGER)
     @Column(name = "health")

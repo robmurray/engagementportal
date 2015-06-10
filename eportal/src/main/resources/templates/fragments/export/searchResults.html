@@ -6,80 +6,7 @@
 <body>
 
 <div id="searchResults" th:fragment="searchResults  (exports)">
-    <!--
-        <div class="well white">
 
-
-            <div class="row bg-light ">
-
-                <div class="col-md-4 ">
-                    <div class="form-group">
-                        <label class="control-label">Customer Name</label>
-
-                        <div class="input-group">
-                            <p id="customerFilter"></p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-4 ">
-                    <div class="form-group">
-                        <label class="control-label">Sales Order Number</label>
-
-                        <div class="input-group">
-                            <p id="salesOrderFilter"></p>
-                        </div>
-
-                    </div>
-                </div>
-
-                <div class="col-md-4 ">
-                    <div class="form-group">
-                        <label class="control-label">Project Book Date</label>
-
-                        <div class="input-group">
-                            <p id="bookDateFilter"></p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row bg-light ">
-                <div class="col-md-4 ">
-                    <div class="form-group">
-                        <label class="control-label">SO Model Group</label>
-
-                        <div class="input-group">
-                            <p id="typeFilter"></p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-4 ">
-                    <div class="form-group">
-                        <label class="control-label">Project Status</label>
-
-                        <div class="input-group">
-                            <p id="statusFilter"></p>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-md-4 ">
-                    <div class="form-group">
-                        <label class="control-label">Project Health</label>
-
-                        <div class="input-group">
-                            <p id="healthFilter"></p>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    -->
     <div class="well white">
         <table id="projectExportDT" class="datatable table table-hover table-striped table-bordered tc-table"
                th:if="${exports!=null}">
@@ -102,6 +29,7 @@
             </tr>
             </thead>
             <tfoot>
+            <tr>
                 <th>customer</th>
                 <th>Sale Order</th>
                 <th>Book Date</th>
@@ -115,6 +43,7 @@
                 <th>waitTime</th>
                 <th>location</th>
                 <th>modelGroup</th>
+            </tr>
             </tfoot>
             <tbody>
 

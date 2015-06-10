@@ -11,21 +11,19 @@ $(document).ready(function () {
 
 
     var otable=tableElement.dataTable({
-           "scrollX": true,
+        "scrollY": "350px",
+        "scrollX": "100%",
+        "scrollCollapse": true,
+        "paging": false,
         "dom": 'T<"clear">lfrtip',
          tableTools: {
              "sSwfPath": "assets/DataTables-1.10.7/extensions/TableTools/swf/copy_csv_xls_pdf.swf"
                 },
-        "order": [[ 1, "desc" ]],
-        /*"columnDefs": [
-                    {
-                        'targets' : [ 0 ],
-                        'sortable': false,
-        			}],
-*/
-       "autoWidth"        : false,
+        //"order": [[ 1, "desc" ]],
+       //"autoWidth"        : true,
        "aLengthMenu": [[-1,5, 10, 15, 25, 50, 100], ["all",5, 10, 15, 25, 50, 100]],
         "iDisplayLength" : -1,
+
         preDrawCallback: function () {
             // Initialize the responsive datatables helper once.
             if (!responsiveHelper) {
@@ -39,16 +37,5 @@ $(document).ready(function () {
             responsiveHelper.respond();
         }
     });
-/*
-$('#projectExportDT').dataTable()
-   .columnFilter({aoColumns:[
-                   null,
-       		    { sSelector: "#customerFilter",type:"text" },
-   				{ sSelector: "#salesOrderFilter",type:"text"},
-   				{ sSelector: "#bookDateFilter", type:"text"},
-   				{ sSelector: "#typeFilter", type:"select", values : ["VPM","PNA","CSN","WLAN","ASPRO"]   },
-   				{ sSelector: "#statusFilter", type:"select", values : ["Complete","Scheduled","R and D Support","In Process","Post Support","Booked","Proposed","Imported"]   },
-   				{ sSelector: "#healthFilter", type:"select", values : ["good", "warning", "at risk"]   }
-   				]});
-*/
+    //new $.fn.dataTable.FixedColumns( otable, {leftColumns: 2}  );
    });

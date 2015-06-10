@@ -84,3 +84,6 @@ input.search_init {
 select.search_init {
     color: #999999;
 }
+div.dataTables_scrollBody thead th, div.dataTables_scrollBody thead td {
+    line-height: 0; opacity:0.0; width: 0px; height:0px;
+}

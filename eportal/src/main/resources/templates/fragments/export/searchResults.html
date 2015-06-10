@@ -6,80 +6,80 @@
 <body>
 
 <div id="searchResults" th:fragment="searchResults  (exports)">
-<!--
-    <div class="well white">
+    <!--
+        <div class="well white">
 
 
-        <div class="row bg-light ">
+            <div class="row bg-light ">
 
-            <div class="col-md-4 ">
-                <div class="form-group">
-                    <label class="control-label">Customer Name</label>
+                <div class="col-md-4 ">
+                    <div class="form-group">
+                        <label class="control-label">Customer Name</label>
 
-                    <div class="input-group">
-                        <p id="customerFilter"></p>
+                        <div class="input-group">
+                            <p id="customerFilter"></p>
+                        </div>
+
                     </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="form-group">
+                        <label class="control-label">Sales Order Number</label>
 
+                        <div class="input-group">
+                            <p id="salesOrderFilter"></p>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="col-md-4 ">
+                    <div class="form-group">
+                        <label class="control-label">Project Book Date</label>
+
+                        <div class="input-group">
+                            <p id="bookDateFilter"></p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
-            <div class="col-md-4 ">
-                <div class="form-group">
-                    <label class="control-label">Sales Order Number</label>
 
-                    <div class="input-group">
-                        <p id="salesOrderFilter"></p>
+            <div class="row bg-light ">
+                <div class="col-md-4 ">
+                    <div class="form-group">
+                        <label class="control-label">SO Model Group</label>
+
+                        <div class="input-group">
+                            <p id="typeFilter"></p>
+                        </div>
+
                     </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="form-group">
+                        <label class="control-label">Project Status</label>
 
+                        <div class="input-group">
+                            <p id="statusFilter"></p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="col-md-4 ">
+                    <div class="form-group">
+                        <label class="control-label">Project Health</label>
+
+                        <div class="input-group">
+                            <p id="healthFilter"></p>
+                        </div>
+
+                    </div>
                 </div>
             </div>
 
-            <div class="col-md-4 ">
-                <div class="form-group">
-                    <label class="control-label">Project Book Date</label>
-
-                    <div class="input-group">
-                        <p id="bookDateFilter"></p>
-                    </div>
-
-                </div>
-            </div>
         </div>
-
-        <div class="row bg-light ">
-            <div class="col-md-4 ">
-                <div class="form-group">
-                    <label class="control-label">SO Model Group</label>
-
-                    <div class="input-group">
-                        <p id="typeFilter"></p>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-4 ">
-                <div class="form-group">
-                    <label class="control-label">Project Status</label>
-
-                    <div class="input-group">
-                        <p id="statusFilter"></p>
-                    </div>
-
-                </div>
-            </div>
-            <div class="col-md-4 ">
-                <div class="form-group">
-                    <label class="control-label">Project Health</label>
-
-                    <div class="input-group">
-                        <p id="healthFilter"></p>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-    </div>
--->
+    -->
     <div class="well white">
         <table id="projectExportDT" class="datatable table table-hover table-striped table-bordered tc-table"
                th:if="${exports!=null}">
@@ -92,16 +92,29 @@
                 <th data-hide="phone">Type</th>
                 <th data-hide="phone,tablet">Status</th>
                 <th data-hide="phone,tablet">Health</th>
+                <th data-hide="phone">credits</th>
+                <th data-hide="phone">service</th>
+                <th data-hide="phone">bookedToKickOff</th>
+                <th data-hide="phone">daysToClose</th>
+                <th data-hide="phone">waitTime</th>
+                <th data-hide="phone">location</th>
+                <th data-hide="phone">modelGroup</th>
             </tr>
-
             </thead>
             <tfoot>
-            <th>customer</th>
-            <th>Sale Order</th>
-            <th>Book Date</th>
-            <th>Type</th>
-            <th>Status</th>
-            <th>Health</th>
+                <th>customer</th>
+                <th>Sale Order</th>
+                <th>Book Date</th>
+                <th>Type</th>
+                <th>Status</th>
+                <th>Health</th>
+                <th>credits</th>
+                <th>service</th>
+                <th>bookedToKickOff</th>
+                <th>daysToClose</th>
+                <th>waitTime</th>
+                <th>location</th>
+                <th>modelGroup</th>
             </tfoot>
             <tbody>
 
@@ -116,6 +129,13 @@
                 <td class="col-small center"><span class="label"
                                                    th:classappend="'label-' + ${export.healthStatusDisplayClass}"
                                                    th:text="${export.health}"></span></td>
+                <td class="col-small left" th:text="${export.credits}"></td>
+                <td class="col-small left" th:text="${export.service}"></td>
+                <td class="col-small left" th:text="${export.bookedToKickOff}"></td>
+                <td class="col-small left" th:text="${export.daysToClose}"></td>
+                <td class="col-small left" th:text="${export.waitTime}"></td>
+                <td class="col-small left" th:text="${export.location}"></td>
+                <td class="col-small left" th:text="${export.modelGroup}"></td>
             </tr>
             </tbody>
 

@@ -6,7 +6,7 @@ $(document).ready(function () {
         tablet: 1024,
         phone : 480
     };
-    var tableElement = $('#SampleDT');
+    var tableElement = $('#projectExportDT');
 
 
 

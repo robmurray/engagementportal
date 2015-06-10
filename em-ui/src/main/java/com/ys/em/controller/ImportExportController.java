@@ -2,7 +2,12 @@ package com.ys.em.controller;
 
 
 import com.ys.em.infra.domain.ImportOracleObiStage;
+import com.ys.em.infra.domain.ProjectExportEntity;
 import com.ys.em.infra.domain.UploadSalesOrder;
+import com.ys.em.mapper.ProjectExportMapper;
+import com.ys.em.model.ProjectExport;
+import com.ys.em.model.ProjectSearchResults;
+import com.ys.em.service.ExportService;
 import com.ys.em.service.ImportService;
 import com.ys.em.service.converter.ConversionResults;
 import com.ys.em.model.ImportMasterStats;
@@ -19,6 +24,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 /**
  * Created by rob on 4/4/15.
  */
@@ -30,6 +39,11 @@ public class ImportExportController extends EportalBaseController {
     @Autowired
     private ImportService importService;
 
+    @Autowired
+    private ExportService exportService;
+
+    @Autowired
+    private ProjectExportMapper projectExportMapper;
 
     @RequestMapping(value = "/uploadSalesOrder", method = RequestMethod.GET)
     public String uploadSalesOrderForm(Model model) {
@@ -141,6 +155,11 @@ public class ImportExportController extends EportalBaseController {
 
         addPageAttributes(model, "Export Sales Order", "import master spreadsheet admin only");
 
+        // pull down the exoport record
+        Iterable<ProjectExportEntity> list =this.exportService.masterExport();
+        Iterable<ProjectExport> returnList = this.projectExportMapper.convert(list);
+
+        model.addAttribute("export",returnList);
         model.addAttribute("pageGroup", "importExport");
         model.addAttribute("pageId", "exportSalesOrders");
         return "exportSalesOrders";

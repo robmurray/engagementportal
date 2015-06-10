@@ -23,9 +23,12 @@ public class ExportService extends ServicesBase {
 
     private static Logger logger = LoggerFactory.getLogger(ExportService.class);
 
+    @Autowired
+    private ExportProjectRepository exportProjectRepository;
 
+    public Iterable<ProjectExportEntity> masterExport(){
 
-    public void masterExport(){
+        return this.exportProjectRepository.findAll();
 
     }
 

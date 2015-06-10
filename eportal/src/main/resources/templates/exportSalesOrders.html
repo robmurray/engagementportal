@@ -9,7 +9,28 @@
 <body>
 <div layout:fragment="content">
 
-    <div th:replace="fragments/pageNotImplemented :: pageNotImplemented"/>
+    <div class="portlet">
+        <div class="portlet-heading default-bg">
+            <div class="portlet-title">
+                <h4>Export</h4>
+            </div>
+            <div class="portlet-widgets">
+                <a data-toggle="collapse" data-parent="#accordion" href="#projectSearchResultsPanel"><i
+                        class="fa fa-chevron-down"></i></a>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+        <div id="projectSearchResultsPanel" class="panel-collapse collapse in">
+            <div class="portlet-body">
+
+                <div th:replace="fragments/export/searchResults :: searchResults (exports=${export})"/>
+
+            </div>
+        </div>
+
+    </div>
+
+
 
 </div>
 

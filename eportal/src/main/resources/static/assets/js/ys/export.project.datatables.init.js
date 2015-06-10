@@ -11,6 +11,7 @@ $(document).ready(function () {
 
 
     var otable=tableElement.dataTable({
+           "scrollX": true,
         "dom": 'T<"clear">lfrtip',
          tableTools: {
              "sSwfPath": "assets/DataTables-1.10.7/extensions/TableTools/swf/copy_csv_xls_pdf.swf"

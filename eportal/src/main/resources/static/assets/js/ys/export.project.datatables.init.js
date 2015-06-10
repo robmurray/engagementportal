@@ -15,13 +15,13 @@ $(document).ready(function () {
          tableTools: {
              "sSwfPath": "assets/DataTables-1.10.7/extensions/TableTools/swf/copy_csv_xls_pdf.swf"
                 },
-        "order": [[ 2, "desc" ]],
-        "columnDefs": [
+        "order": [[ 1, "desc" ]],
+        /*"columnDefs": [
                     {
                         'targets' : [ 0 ],
                         'sortable': false,
         			}],
-
+*/
        "autoWidth"        : false,
        "aLengthMenu": [[-1,5, 10, 15, 25, 50, 100], ["all",5, 10, 15, 25, 50, 100]],
         "iDisplayLength" : -1,
@@ -38,8 +38,8 @@ $(document).ready(function () {
             responsiveHelper.respond();
         }
     });
-
-$('#SampleDT').dataTable()
+/*
+$('#projectExportDT').dataTable()
    .columnFilter({aoColumns:[
                    null,
        		    { sSelector: "#customerFilter",type:"text" },
@@ -49,5 +49,5 @@ $('#SampleDT').dataTable()
    				{ sSelector: "#statusFilter", type:"select", values : ["Complete","Scheduled","R and D Support","In Process","Post Support","Booked","Proposed","Imported"]   },
    				{ sSelector: "#healthFilter", type:"select", values : ["good", "warning", "at risk"]   }
    				]});
-
+*/
    });

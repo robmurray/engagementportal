@@ -6,6 +6,7 @@
 <body>
 
 <div id="searchResults" th:fragment="searchResults  (exports)">
+<!--
     <div class="well white">
 
 
@@ -78,14 +79,13 @@
         </div>
 
     </div>
-
+-->
     <div class="well white">
         <table id="projectExportDT" class="datatable table table-hover table-striped table-bordered tc-table"
                th:if="${exports!=null}">
 
             <thead>
             <tr>
-                <th>Action</th>
                 <th data-class="expand">customer</th>
                 <th data-hide="phone,tablet">Sale Order</th>
                 <th data-hide="phone">Book Date</th>
@@ -96,7 +96,6 @@
 
             </thead>
             <tfoot>
-            <th>Action</th>
             <th>customer</th>
             <th>Sale Order</th>
             <th>Book Date</th>
@@ -107,25 +106,8 @@
             <tbody>
 
             <tr th:each="export : ${exports}" th:if="${exports != null}">
-                <td class="col-small left">
-                    <div class="btn-group btn-group-md ">
-                        <a href="" th:href="'project?projectId='+${export.projectId}" class=""
-                           data-placement="right" data-rel="tooltip" title="Edit project">
-                            edit
-                        </a>
-                        |
-                        <a href="" th:href="'project?projectId='+${export.projectId}" class=""
-                           data-placement="right" data-rel="tooltip" title="View project">
-                            view
-                        </a>
-                    </div>
-
-                </td>
                 <td class="col-small left" th:text="${export.customerName}"></td>
-                <td class="col-small left"><a href=""
-                                              th:href="'salesorder?salesorderId='+${export.salesOrderId}"
-                                              data-placement="left" data-rel="tooltip" title="View Sales Order"
-                                              th:text="${export.salesOrderNumber}"></a></td>
+                <td class="col-small left" th:text="${export.salesOrderNumber}"></td>
                 <div th:replace="fragments/common/tdDate :: tdDate(theDate=${export.bookedDate})"/>
                 <td class="col-small left" th:text="${export.modelGroup}"></td>
                 <td class="col-small center"><span class="label"

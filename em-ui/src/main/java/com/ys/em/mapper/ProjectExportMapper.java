@@ -30,11 +30,13 @@ public class ProjectExportMapper {
         mapperFactory = new DefaultMapperFactory.Builder().build();
         // map to/from
         mapperFactory.classMap(ProjectExportEntity.class, ProjectExport.class)
+                .field("name","customerName")
                 .byDefault()
                 .register();
 
         // map from/to
         mapperFactory.classMap(ProjectExport.class,ProjectExportEntity.class)
+                .field("customerName","name")
                 .byDefault()
                 .register();
 
